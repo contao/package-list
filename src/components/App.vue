@@ -10,6 +10,4 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../assets/styles/defaults";
-    @import "../assets/styles/layout";
 </style>

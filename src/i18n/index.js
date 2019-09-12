@@ -6,24 +6,11 @@ import store from '../store';
 
 const locales = {
     en: () => import('./en.json'),
-    de: () => import('./de.json'),
-    br: () => import('./br.json'),
-    cs: () => import('./cs.json'),
-    es: () => import('./es.json'),
-    fa: () => import('./fa.json'),
-    fr: () => import('./fr.json'),
-    ja: () => import('./ja.json'),
-    lv: () => import('./lv.json'),
-    nl: () => import('./nl.json'),
-    pl: () => import('./pl.json'),
-    ru: () => import('./ru.json'),
-    sr: () => import('./sr.json'),
-    zh: () => import('./zh.json'),
 };
 
 const i18n = {
     init() {
-        let userLang = window.localStorage.getItem('contao_manager_locale');
+        let userLang = window.localStorage.getItem('_locale');
 
         if (!userLang) {
             userLang = navigator.language || navigator.userLanguage;
@@ -33,7 +20,7 @@ const i18n = {
     },
 
     async switch(locale) {
-        window.localStorage.setItem('contao_manager_locale', locale);
+        window.localStorage.setItem('_locale', locale);
 
         this.load(locale);
     },
