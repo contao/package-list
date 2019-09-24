@@ -2,13 +2,13 @@
     <div class="popup-overlay" @click="clearCurrent()">
         <div ref="popup" :class="popupClass" @click.stop v-if="current">
             <div class="package-popup__headline">
-                <button class="package-popup__button package-popup__button--previous" :title="$t('ui.taskpopup.autoclose')" @click="popCurrent()" v-if="hasPrevious">
+                <button class="package-popup__button package-popup__button--previous" :title="$t('ui.package-details.previous')" @click="popCurrent()" v-if="hasPrevious">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0z" fill="none"/><path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
                     </svg>
                 </button>
                 {{ data.name }}
-                <button class="package-popup__button package-popup__button--close" :title="$t('ui.taskpopup.autoclose')" @click="clearCurrent()">
+                <button class="package-popup__button package-popup__button--close" :title="$t('ui.package-details.close')" @click="clearCurrent()">
                     <svg height="24" viewBox="0 0 24 24" width="24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                         <path d="M0 0h24v24H0z" fill="none"/>
@@ -16,74 +16,80 @@
                 </button>
             </div>
 
-            <div class="package-popup__summary">
-                <package-logo component-class="package-popup__icon" :src="metadata.logo"/>
-                <div class="package-popup__text">
-                    <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
-                    <p class="package-popup__authors" v-if="authors">
-                        von
-                        <template v-for="author in authors">
-                            <a class="package-popup__author" :href="author.homepage" target="_blank" rel="noreferrer noopener" v-if="author.homepage">{{ author.name }}</a>
-                            <span class="package-popup__author" v-else>{{ author.name }}</span>
+            <div class="package-popup__loader" v-if="!metadata.hasOwnProperty('name')">
+                <loader horizontal/>
+                <p>{{ $t('ui.package-details.loading') }}</p>
+            </div>
+            <template v-else>
+                <div class="package-popup__summary">
+                    <package-logo component-class="package-popup__icon" :src="metadata.logo"/>
+                    <div class="package-popup__text">
+                        <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
+                        <p class="package-popup__authors" v-if="authors">
+                            von
+                            <template v-for="(author, key) in authors">
+                                <a class="package-popup__author" :key="key" :href="author.homepage" target="_blank" rel="noreferrer noopener" v-if="author.homepage">{{ author.name }}</a>
+                                <span class="package-popup__author" :key="key" v-else>{{ author.name }}</span>
+                            </template>
+                        </p>
+                        <p class="package-popup__counts">
+                            <span class="package-popup__count package-popup__count--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat }}</span>
+                            <span class="package-popup__count package-popup__count--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
+                            <span class="package-popup__count package-popup__count--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
+                        </p>
+                    </div>
+                    <div class="package-popup__actions">
+                        <slot name="package-actions" :data="metadata"/>
+                    </div>
+                </div>
+
+                <ul class="package-popup__tabs">
+                    <details-tab :active="tab === ''" @click="tab = ''">Beschreibung</details-tab>
+                    <details-tab :active="tab === 'require'" :disabled="!metadata.require" :count="requireCount" @click="tab = 'require'">Abhängigkeiten</details-tab>
+                    <details-tab :active="tab === 'suggest'" highlight :disabled="!metadata.suggest" :count="suggestCount" @click="tab = 'suggest'">Empfehlungen</details-tab>
+                    <details-tab :active="tab === 'conflict'" :disabled="!metadata.conflict" :count="conflictCount" @click="tab = 'conflict'">Konflikte</details-tab>
+                </ul>
+                <div class="package-popup__tabcontent" v-if="tab === ''">
+                    <p>{{ metadata.description }}</p>
+                    <p class="package-popup__separator">Latest Package Details</p>
+                    <dl class="package-popup__info">
+                        <dt class="package-popup__info-title">Version</dt>
+                        <dd class="package-popup__info-text">{{ metadata.latest ? metadata.latest.version : '–' }}</dd>
+                        <dt class="package-popup__info-title">Released</dt>
+                        <dd class="package-popup__info-text">{{ metadata.latest ? new Date(metadata.latest.time).toLocaleString() : '–' }}</dd>
+                        <dt class="package-popup__info-title">License</dt>
+                        <dd class="package-popup__info-text">{{ license }}</dd>
+
+                        <dt class="package-popup__info-title">Downloads</dt>
+                        <dd class="package-popup__info-text">{{ (metadata.downloads || 0) | numberFormat }}</dd>
+                        <dt class="package-popup__info-title">Favers</dt>
+                        <dd class="package-popup__info-text">{{ metadata.favers || 0 | numberFormat }}</dd>
+                        <dt class="package-popup__info-title">Type</dt>
+                        <dd class="package-popup__info-text">{{ metadata.type || '–' }}</dd>
+                    </dl>
+                </div>
+                <div class="package-popup__tabcontent" v-if="tab === 'require'">
+                    <div class="package-popup__packagelist" v-if="metadata.require">
+                        <template v-for="(constraint, name) in metadata.require">
+                            <package-link :name="name" :key="name" :text="constraint"/>
                         </template>
-                    </p>
-                    <p class="package-popup__counts">
-                        <span class="package-popup__count package-popup__count--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat }}</span>
-                        <span class="package-popup__count package-popup__count--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
-                        <span class="package-popup__count package-popup__count--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
-                    </p>
+                    </div>
                 </div>
-                <div class="package-popup__actions">
-                    <slot name="package-actions" :data="metadata"/>
+                <div class="package-popup__tabcontent" v-if="tab === 'suggest'">
+                    <div class="package-popup__packagelist" v-if="metadata.suggest">
+                        <template v-for="(reason, name) in metadata.suggest">
+                            <package-link :name="name" :key="name" :text="reason" :installable="suggestInstallable && suggestInstallable(name)"/>
+                        </template>
+                    </div>
                 </div>
-            </div>
-
-            <ul class="package-popup__tabs">
-                <details-tab :active="tab === ''" @click="tab = ''">Beschreibung</details-tab>
-                <details-tab :active="tab === 'require'" :disabled="!metadata.require" :count="requireCount" @click="tab = 'require'">Abhängigkeiten</details-tab>
-                <details-tab :active="tab === 'suggest'" highlight :disabled="!metadata.suggest" :count="suggestCount" @click="tab = 'suggest'">Empfehlungen</details-tab>
-                <details-tab :active="tab === 'conflict'" :disabled="!metadata.conflict" :count="conflictCount" @click="tab = 'conflict'">Konflikte</details-tab>
-            </ul>
-            <div class="package-popup__tabcontent" v-if="tab === ''">
-                <p>{{ metadata.description }}</p>
-                <p class="package-popup__separator">Latest Package Details</p>
-                <dl class="package-popup__info">
-                    <dt class="package-popup__info-title">Version</dt>
-                    <dd class="package-popup__info-text">{{ metadata.latest ? metadata.latest.version : '–' }}</dd>
-                    <dt class="package-popup__info-title">Released</dt>
-                    <dd class="package-popup__info-text">{{ metadata.latest ? new Date(metadata.latest.time).toLocaleString() : '–' }}</dd>
-                    <dt class="package-popup__info-title">License</dt>
-                    <dd class="package-popup__info-text">{{ license }}</dd>
-
-                    <dt class="package-popup__info-title">Downloads</dt>
-                    <dd class="package-popup__info-text">{{ (metadata.downloads || 0) | numberFormat }}</dd>
-                    <dt class="package-popup__info-title">Favers</dt>
-                    <dd class="package-popup__info-text">{{ metadata.favers || 0 | numberFormat }}</dd>
-                    <dt class="package-popup__info-title">Type</dt>
-                    <dd class="package-popup__info-text">{{ metadata.type || '–' }}</dd>
-                </dl>
-            </div>
-            <div class="package-popup__tabcontent" v-if="tab === 'require'">
-                <div class="package-popup__packagelist" v-if="metadata.require">
-                    <template v-for="(constraint, name) in metadata.require">
-                        <package-link :name="name" :key="name" :text="constraint"/>
-                    </template>
+                <div class="package-popup__tabcontent" v-if="tab === 'conflict'">
+                    <div class="package-popup__packagelist" v-if="metadata.conflict">
+                        <template v-for="(constraint, name) in metadata.conflict">
+                            <package-link :name="name" :key="name" :text="constraint"/>
+                        </template>
+                    </div>
                 </div>
-            </div>
-            <div class="package-popup__tabcontent" v-if="tab === 'suggest'">
-                <div class="package-popup__packagelist" v-if="metadata.suggest">
-                    <template v-for="(reason, name) in metadata.suggest">
-                        <package-link :name="name" :key="name" :text="reason" :installable="suggestInstallable && suggestInstallable(name)"/>
-                    </template>
-                </div>
-            </div>
-            <div class="package-popup__tabcontent" v-if="tab === 'conflict'">
-                <div class="package-popup__packagelist" v-if="metadata.conflict">
-                    <template v-for="(constraint, name) in metadata.conflict">
-                        <package-link :name="name" :key="name" :text="constraint"/>
-                    </template>
-                </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>
@@ -95,11 +101,12 @@
     import PackageLogo from './Logo';
     import PackageLink from './Link';
     import DetailsTab from './Tab';
+    import Loader from './Loader';
 
     export default {
         mixins: [metadata],
 
-        components: { PackageLogo, DetailsTab, PackageLink },
+        components: { Loader, PackageLogo, DetailsTab, PackageLink },
 
         props: {
             suggestInstallable: Function,
@@ -174,6 +181,18 @@
         > * {
             flex-basis: auto;
             flex-grow: 1;
+        }
+
+        &__loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+
+            p {
+                margin: 1em;
+            }
         }
 
         &__headline {

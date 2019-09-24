@@ -16,5 +16,9 @@
     "ui.discover.sortFavers": "Rating",
     "ui.discover.sortFaversTitle": "Sort search results by rating",
     "ui.discover.detailsButton": "Details",
-    "ui.discover.latestPackages": "Latest and updated packages"
+    "ui.discover.latestPackages": "Latest and updated packages",
+
+    "ui.package-details.previous": "Previous Package Details",
+    "ui.package-details.close": "Close Package Details",
+    "ui.package-details.loading": "Loading …"
 }

@@ -75,12 +75,9 @@ export default {
                     return new Date(data.versions[prev].time) > new Date(data.versions[curr].time) ? prev : curr;
                 });
 
-                console.log(latest);
-
                 data = Object.assign(data, data.versions[latest]);
                 data.latest = { version: latest, time: data.versions[latest].time };
             } catch (err) {
-                console.log(err);
                 // Ignore
             }
 

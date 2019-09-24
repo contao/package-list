@@ -1,5 +1,13 @@
 <template>
-    <div class="loader">
+    <div class="loader" v-if="horizontal">
+        <div class="loader__item loader__item--20"></div>
+        <div class="loader__item loader__item--40"></div>
+        <div class="loader__item loader__item--60"></div>
+        <div class="loader__item loader__item--80"></div>
+        <div class="loader__item loader__item--100"></div>
+        <slot/>
+    </div>
+    <div class="loader" v-else>
         <div class="sk-circle">
             <div class="sk-circle1 sk-child"></div>
             <div class="sk-circle2 sk-child"></div>
@@ -14,12 +22,57 @@
             <div class="sk-circle11 sk-child"></div>
             <div class="sk-circle12 sk-child"></div>
         </div>
-        <slot></slot>
+        <slot/>
     </div>
 </template>
 
+<script>
+    export default {
+        props: {
+            horizontal: Boolean,
+        },
+    };
+</script>
+
 <style rel="stylesheet/scss" lang="scss">
     @import "../../assets/styles/defaults";
+
+    .loader {
+        &__item {
+            float: left;
+            width: 16px;
+            height: 16px;
+            margin-right: 1px;
+            background-color: $contao-color;
+            animation: loading 1.4s infinite ease-in-out both;
+
+            &--20 {
+                animation-delay: -0.64s;
+            }
+
+            &--40 {
+                animation-delay: -0.48s;
+            }
+
+            &--60 {
+                animation-delay: -0.32s;
+            }
+
+            &--80 {
+                animation-delay: -0.16s;
+            }
+
+            @keyframes loading {
+                0%, 90%, 100% { opacity: 0; }
+                20% { opacity: 1; }
+            }
+        }
+
+        &__text {
+            float: left;
+            width: 40px;
+        }
+    }
 
     .sk-circle {
         width: 25px;
