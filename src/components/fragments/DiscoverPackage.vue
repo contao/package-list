@@ -11,8 +11,9 @@
 
             <div class="discover-package__more">
                 <p class="discover-package__counts">
-                    <span class="discover-package__count discover-package__count--downloads">{{ data.downloads | numberFormat }}</span>
-                    <span class="discover-package__count discover-package__count--favers">{{ data.favers | numberFormat }}</span>
+                    <span class="discover-package__count discover-package__count--updated" v-if="data.updated">{{ data.updated | datimFormat }}</span>
+                    <span class="discover-package__count discover-package__count--downloads" v-if="data.downloads">{{ data.downloads | numberFormat }}</span>
+                    <span class="discover-package__count discover-package__count--favers" v-if="data.favers">{{ data.favers | numberFormat }}</span>
                 </p>
                 <div class="discover-package__actions">
                      <details-button small :name="data.name"/>
@@ -134,6 +135,7 @@
         }
 
         &__counts {
+            flex-grow: 1;
             margin-bottom: .5em;
 
             @include screen(600) {
@@ -149,6 +151,11 @@
             background-repeat: no-repeat;
             background-size: 15px 15px;
 
+            &--updated {
+                padding-left: 20px;
+                background-image: url("../../assets/images/updated.svg");
+            }
+
             &--downloads {
                 padding-left: 20px;
                 background-image: url("../../assets/images/downloads.svg");
@@ -161,7 +168,9 @@
         }
 
         &__actions {
+            flex-grow: 1;
             display: flex;
+            justify-content: flex-end;
             margin: 0 -4px .5em;
 
             > * {

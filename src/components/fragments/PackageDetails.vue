@@ -28,6 +28,7 @@
                         </template>
                     </p>
                     <p class="package-popup__counts">
+                        <span class="package-popup__count package-popup__count--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat }}</span>
                         <span class="package-popup__count package-popup__count--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
                         <span class="package-popup__count package-popup__count--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
                     </p>
@@ -240,6 +241,7 @@
         }
 
         &__summary {
+            overflow: hidden;
             flex-grow: 0;
             padding: 25px 35px;
         }
@@ -304,6 +306,11 @@
             background-position: 0 50%;
             background-repeat: no-repeat;
             background-size: 15px 15px;
+
+            &--updated {
+                padding-left: 18px;
+                background-image: url("../../assets/images/updated.svg");
+            }
 
             &--downloads {
                 padding-left: 20px;
