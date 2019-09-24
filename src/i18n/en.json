@@ -1,2 +1,20 @@
 {
+    "ui.app.loading": "Loading Package List …",
+    "ui.discover.loading": "Loading …",
+    "ui.discover.offline": "Could not fetch any results.",
+    "ui.discover.offlineExplain": "Check your internet connection and disable JavaScript blockers in your browser.",
+    "ui.discover.offlineButton": "Try again",
+    "ui.discover.searchPlaceholder": "Search Packages …",
+    "ui.discover.searching": "Searching for Contao packages matching <i>{query}</i> …",
+    "ui.discover.empty": "No results for <i>{query}</i>",
+    "ui.discover.more": "More Results",
+    "ui.discover.sortBy": "Sort by",
+    "ui.discover.sortLatest": "Updated",
+    "ui.discover.sortLatestTitle": "Sort search results by laste updated",
+    "ui.discover.sortDownloads": "Downloads",
+    "ui.discover.sortDownloadsTitle": "Sort search results by number of downloads",
+    "ui.discover.sortFavers": "Rating",
+    "ui.discover.sortFaversTitle": "Sort search results by rating",
+    "ui.discover.detailsButton": "Details",
+    "ui.discover.latestPackages": "Latest and updated packages"
 }
