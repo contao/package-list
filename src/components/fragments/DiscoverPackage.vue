@@ -12,7 +12,7 @@
 
             <div class="discover-package__more">
                 <p class="discover-package__counts">
-                    <span class="discover-package__count discover-package__count--updated" v-if="data.updated">{{ data.updated | datimFormat }}</span>
+                    <span class="discover-package__count discover-package__count--updated" v-if="data.updated">{{ data.updated | datimFormat(false, 'short') }}</span>
                     <span class="discover-package__count discover-package__count--downloads" v-if="data.downloads">{{ data.downloads | numberFormat }}</span>
                     <span class="discover-package__count discover-package__count--favers" v-if="data.favers">{{ data.favers | numberFormat }}</span>
                 </p>
@@ -245,7 +245,7 @@
             background-size: 15px 15px;
 
             &--updated {
-                padding-left: 20px;
+                padding-left: 18px;
                 background-image: url("../../assets/images/updated.svg");
             }
 

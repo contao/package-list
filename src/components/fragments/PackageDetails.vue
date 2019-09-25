@@ -34,7 +34,7 @@
                         </p>
                         <p class="package-popup__statistics">
                             <span class="package-popup__stats package-popup__stats--abandoned" :title="abandonedText" v-if="metadata.abandoned">{{ $t('ui.package.abandoned') }}</span>
-                            <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat }}</span>
+                            <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat(false) }}</span>
                             <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
                             <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
                         </p>
@@ -57,7 +57,7 @@
                         <dt class="package-popup__info-title">Version</dt>
                         <dd class="package-popup__info-text">{{ metadata.latest ? metadata.latest.version : '–' }}</dd>
                         <dt class="package-popup__info-title">Released</dt>
-                        <dd class="package-popup__info-text">{{ metadata.latest ? new Date(metadata.latest.time).toLocaleString() : '–' }}</dd>
+                        <dd class="package-popup__info-text">{{ metadata.latest ? metadata.latest.time : '–' | datimFormat }}</dd>
                         <dt class="package-popup__info-title">License</dt>
                         <dd class="package-popup__info-text">{{ license }}</dd>
 
