@@ -1,17 +1,17 @@
 export default {
     computed: {
         query: vm => vm.$route.query.q,
-        pages: vm => Number(vm.$route.query.pages) || 1,
+        pages: vm => Number(vm.$route.query.pages) || 0,
         sorting: vm => vm.$route.query.sort || '',
 
-        isSearching: vm => vm.query || vm.pages > 1 || vm.sorting,
+        isSearching: vm => vm.query || vm.pages || vm.sorting,
     },
 
     methods: {
         startSearch(q, pages = 1) {
             const query = { q };
 
-            if (pages > 1) {
+            if (pages) {
                 query.pages = pages;
             }
 
@@ -33,8 +33,12 @@ export default {
             }
         },
 
-        loadMore() {
+        loadMore(e) {
             this.startSearch(this.query, this.pages + 1);
+
+            if (e && e.target) {
+                e.target.blur();
+            }
         },
     },
 };

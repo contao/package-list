@@ -100,7 +100,7 @@ select {
     height: 38px;
     padding: 0;
     border: none;
-    background-color: $text-color;
+    background-color: $default-button;
     color: #fff;
     font-weight: $font-weight-bold;
     line-height: 38px;
@@ -113,8 +113,8 @@ select {
 
     &:hover,
     &:active {
-        background-color: darken($text-color, 5);
-        border-bottom: 1px solid darken($text-color, 10);
+        background-color: darken($default-button, 5);
+        border-bottom: 1px solid darken($default-button, 10);
     }
 
     &--inline {
@@ -195,7 +195,7 @@ select {
         //'power',
         //'run',
         //'save',
-        //'search',
+        'search',
         //'show',
         //'trash',
         //'unlock',

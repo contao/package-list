@@ -23,7 +23,7 @@
                 </discover-package>
             </div>
             <div class="package-search__more">
-                <button v-if="hasMore" @click="loadMore">{{ $t('ui.discover.more') }}</button>
+                <loading-button icon="search" :loading="searching" v-if="hasMore" @click="loadMore">{{ $t('ui.discover.more') }}</loading-button>
             </div>
         </template>
 
@@ -37,7 +37,7 @@
                 </discover-package>
             </div>
             <div class="package-search__more">
-                <button @click="loadMore">{{ $t('ui.discover.more') }}</button>
+                <button class="package-search__more-button" @click="openSearch()">{{ $t('ui.discover.more') }}</button>
             </div>
         </div>
 
@@ -55,10 +55,11 @@
     import Ads from './Ads';
     import SearchSorting from './SearchSorting';
     import SearchInput from './SearchInput';
+    import LoadingButton from './LoadingButton';
 
     export default {
         mixins: [search],
-        components: { SearchInput, SearchSorting, Ads, Loader, DiscoverPackage },
+        components: { LoadingButton, SearchInput, SearchSorting, Ads, Loader, DiscoverPackage },
 
         props: {
             wrapper: {
@@ -89,7 +90,7 @@
                     const response = await this.$store.dispatch('algolia/findPackages', {
                         sorting: this.sorting,
                         query: this.query,
-                        hitsPerPage: 6 * this.pages,
+                        hitsPerPage: 10 * (this.pages || 1),
                     });
 
                     this.hasMore = response.nbPages > 1;
@@ -121,6 +122,11 @@
                 await this.$store.dispatch('algolia/discover');
 
                 this.searching = false;
+            },
+
+            async openSearch() {
+                this.results = null;
+                await this.startSearch();
             }
         },
 
@@ -228,6 +234,11 @@
             text-align: center;
 
             button {
+                width: auto;
+                padding: 0 20px;
+            }
+
+            &-button {
                 display: inline-block;
                 margin: 0 auto;
                 padding: 0;
