@@ -1,14 +1,14 @@
 <template>
     <article class="discover-package">
         <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
-        <package-logo :class="{ 'discover-package__icon': true, 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
+        <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
         <div class="discover-package__details">
-            <h1 class="discover-package__headline">
+            <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }">
                 <span class="discover-package__title" v-html="title">{{ data.title }}</span>
                 <span class="discover-package__name" v-if="data.name !== data.title" style="display: none">{{ data.name }}</span>
             </h1>
 
-            <p class="discover-package__description" v-html="description">{{ data.description }}</p>
+            <p class="discover-package__description" :class="{ 'discover-package__description--fallback': !data.logo }" v-html="description">{{ data.description }}</p>
 
             <div class="discover-package__more">
                 <p class="discover-package__counts">
@@ -92,7 +92,8 @@
         }
 
         &__icon {
-            float: right;
+            position: absolute;
+            right: 20px;
             height: 42px;
             width: 42px;
             margin-left: 1em;
@@ -107,6 +108,7 @@
             }
 
             @include screen(600) {
+                position: initial;
                 display: block;
                 float: left;
                 width: 90px;
@@ -116,7 +118,8 @@
             }
 
             @include screen(1024) {
-                float: right;
+                position: absolute;
+                right: 20px;
                 height: 50px;
                 width: 50px;
                 margin-left: 1em;
@@ -128,6 +131,7 @@
             }
 
             @include screen(1200) {
+                position: initial;
                 display: block;
                 float: left;
                 width: 90px;
@@ -137,9 +141,41 @@
             }
         }
 
+        &__details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+
+            @include screen(600) {
+                min-height: 90px;
+            }
+        }
+
         &__headline {
             margin-bottom: .2em;
             line-height: 1;
+            margin-right: 50px;
+
+            &--fallback {
+                margin-right: 0;
+            }
+
+            @include screen(600) {
+                margin-right: 0;
+            }
+
+            @include screen(1024) {
+                margin-right: 60px;
+
+                &--fallback {
+                    margin-right: 0;
+                }
+            }
+
+            @include screen(1200) {
+                margin-right: 0;
+            }
 
             em {
                 background-color: $highlight-color;
@@ -153,14 +189,31 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             margin-bottom: .5em;
+            margin-right: 50px;
+
+            &--fallback {
+                margin-right: 0;
+            }
+
+            @include screen(600) {
+                margin-right: 0;
+            }
+
+            @include screen(1024) {
+                margin-right: 60px;
+
+                &--fallback {
+                    margin-right: 0;
+                }
+            }
+
+            @include screen(1200) {
+                margin-right: 0;
+            }
 
             em {
                 background-color: $highlight-color;
                 font-style: normal;
-            }
-
-            @include screen(600) {
-                min-height: 38px;
             }
         }
 
@@ -168,6 +221,8 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            align-items: flex-end;
+            flex-grow: 1;
             margin-bottom: -.5em;
             line-height: 28px;
         }
