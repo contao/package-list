@@ -133,7 +133,8 @@ select {
         font-weight: $font-weight-normal;
         border-radius: 1px;
 
-        &:before {
+        &:before,
+        > *:before {
             top: 3px !important;
             width: 15px !important;
             height: 15px !important;

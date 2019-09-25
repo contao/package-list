@@ -7,17 +7,16 @@
 
         <div class="package-link__actions">
             <details-button small :name="name"/>
-            <!--<install-button small :data="data" v-if="installable"/>-->
+            <slot/>
         </div>
     </article>
 </template>
 
 <script>
-    // import InstallButton from './InstallButton';
     import DetailsButton from './DetailsButton';
 
     export default {
-        components: { /*InstallButton,*/ DetailsButton },
+        components: { DetailsButton },
 
         props: {
             name: String,

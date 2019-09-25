@@ -72,21 +72,27 @@
                 <div class="package-popup__tabcontent" v-if="tab === 'require'">
                     <div class="package-popup__packagelist" v-if="metadata.require">
                         <template v-for="(constraint, name) in metadata.require">
-                            <package-link :name="name" :key="name" :text="constraint"/>
+                            <package-link :name="name" :key="name" :text="constraint">
+                                <slot name="require-actions" :name="name"/>
+                            </package-link>
                         </template>
                     </div>
                 </div>
                 <div class="package-popup__tabcontent" v-if="tab === 'suggest'">
                     <div class="package-popup__packagelist" v-if="metadata.suggest">
                         <template v-for="(reason, name) in metadata.suggest">
-                            <package-link :name="name" :key="name" :text="reason" :installable="suggestInstallable && suggestInstallable(name)"/>
+                            <package-link :name="name" :key="name" :text="reason">
+                                <slot name="suggest-actions" v-bind="{ name }"/>
+                            </package-link>
                         </template>
                     </div>
                 </div>
                 <div class="package-popup__tabcontent" v-if="tab === 'conflict'">
                     <div class="package-popup__packagelist" v-if="metadata.conflict">
                         <template v-for="(constraint, name) in metadata.conflict">
-                            <package-link :name="name" :key="name" :text="constraint"/>
+                            <package-link :name="name" :key="name" :text="constraint">
+                                <slot name="conflict-actions" :name="name"/>
+                            </package-link>
                         </template>
                     </div>
                 </div>
@@ -108,10 +114,6 @@
         mixins: [metadata],
 
         components: { Loader, PackageLogo, DetailsTab, PackageLink },
-
-        props: {
-            suggestInstallable: Function,
-        },
 
         data: () => ({
             tab: '',
@@ -265,6 +267,10 @@
             overflow: hidden;
             flex-grow: 0;
             padding: 25px 35px;
+
+            @include screen(600) {
+                display: flex;
+            }
         }
 
         &__icon {
@@ -286,13 +292,16 @@
                 display: block;
                 float: left;
                 width: 90px;
-                height: 90px;
+                height: auto;
                 margin-left: 0;
                 margin-right: 20px;
+                margin-bottom: -4px;
             }
         }
 
         &__text {
+            display: flex;
+            flex-direction: column;
             flex-grow: 1;
         }
 
@@ -302,6 +311,7 @@
         }
 
         &__authors {
+            flex-grow: 1;
             font-size: 13px;
             margin-bottom: .5em;
         }
@@ -357,6 +367,10 @@
             justify-content: flex-end;
             margin-left: 25px;
             text-align: center;
+
+            @include screen(600) {
+                min-width: 200px;
+            }
         }
 
         &__tabs {

@@ -87,7 +87,7 @@ export default {
                     hitsPerPage: 1,
                 });
 
-                data = Object.assign(data || {}, content.hits[0]);
+                data = Object.assign(data || {}, { supported: true }, content.hits[0]);
             } catch (err) {
                 return null;
             }
@@ -96,6 +96,7 @@ export default {
                 return null;
             }
 
+            delete data.versions;
             delete data.version;
             delete data.time;
             delete data.constraint;
@@ -154,7 +155,6 @@ export default {
 
             } catch (err) {
                 commit('setDiscover', null);
-                throw err;
             }
         },
     },

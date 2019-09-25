@@ -23,7 +23,7 @@
                 </discover-package>
             </div>
             <div class="package-search__more">
-                <loading-button icon="search" :loading="searching" v-if="hasMore" @click="loadMore">{{ $t('ui.discover.more') }}</loading-button>
+                <loading-button inline icon="search" :loading="searching" v-if="hasMore" @click="loadMore">{{ $t('ui.discover.more') }}</loading-button>
             </div>
         </template>
 
@@ -232,11 +232,6 @@
         &__more {
             margin: 10px 0 30px;
             text-align: center;
-
-            button {
-                width: auto;
-                padding: 0 20px;
-            }
 
             &-button {
                 display: inline-block;
