@@ -32,10 +32,11 @@
                                 <span class="package-popup__author" :key="key" v-else>{{ author.name }}</span>
                             </template>
                         </p>
-                        <p class="package-popup__counts">
-                            <span class="package-popup__count package-popup__count--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat }}</span>
-                            <span class="package-popup__count package-popup__count--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
-                            <span class="package-popup__count package-popup__count--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
+                        <p class="package-popup__statistics">
+                            <span class="package-popup__stats package-popup__stats--abandoned" :title="abandonedText" v-if="metadata.abandoned">{{ $t('ui.package.abandoned') }}</span>
+                            <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat }}</span>
+                            <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
+                            <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
                         </p>
                     </div>
                     <div class="package-popup__actions">
@@ -120,6 +121,7 @@
             ...mapGetters('packages/details', ['hasPrevious']),
 
             current: vm => vm.$route.query.p,
+            abandonedText: vm => vm.metadata.replacement ? vm.$t('ui.package.abandonedReplace', { replacement: vm.metadata.replacement }) : vm.$t('ui.package.abandonedText'),
 
             popupClass() {
                 return {
@@ -317,7 +319,7 @@
             }
         }
 
-        &__count {
+        &__stats {
             display: inline-block;
             margin-right: 15px;
             margin-top: .5em;
@@ -325,6 +327,13 @@
             background-position: 0 50%;
             background-repeat: no-repeat;
             background-size: 15px 15px;
+
+            &--abandoned {
+                padding: 2px 5px;
+                color: #fff;
+                font-weight: $font-weight-bold;
+                background: $red-button;
+            }
 
             &--updated {
                 padding-left: 18px;

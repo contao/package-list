@@ -15,7 +15,7 @@
             <button class="widget-button widget-button--inline widget-button--update" @click="getOnline">{{ $t('ui.discover.offlineButton') }}</button>
         </div>
 
-        <template v-else-if="query || pages > 1">
+        <template v-else-if="isSearching">
             <search-sorting/>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in results" :data="item" :title="item.title" :description="item.description" :logo="item.logo" :key="item.name">

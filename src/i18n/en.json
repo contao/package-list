@@ -18,6 +18,10 @@
     "ui.discover.detailsButton": "Details",
     "ui.discover.latestPackages": "Latest and updated packages",
 
+    "ui.package.abandoned": "abandoned",
+    "ui.package.abandonedText": "This package is marked as abandoned.",
+    "ui.package.abandonedReplace": "This package is marked as abandoned, please use \"{replacement}\" instead.",
+
     "ui.package-details.previous": "Previous Package Details",
     "ui.package-details.close": "Close Package Details",
     "ui.package-details.loading": "Loading …"

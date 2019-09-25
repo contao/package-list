@@ -1,5 +1,6 @@
 <template>
     <article class="discover-package">
+        <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
         <package-logo :class="{ 'discover-package__icon': true, 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
         <div class="discover-package__details">
             <h1 class="discover-package__headline">
@@ -38,6 +39,7 @@
         computed: {
             title: vm => vm.data._highlightResult ? vm.data._highlightResult.title.value : vm.data.title,
             description: vm => vm.data._highlightResult ? vm.data._highlightResult.description.value : vm.data.description,
+            abandonedText: vm => vm.data.replacement ? vm.$t('ui.package.abandonedReplace', { replacement: vm.data.replacement }) : vm.$t('ui.package.abandonedText'),
         },
     };
 </script>
@@ -46,12 +48,48 @@
     @import "../../assets/styles/defaults";
 
     .discover-package {
+        position: relative;
         overflow: hidden;
         margin-bottom: 14px;
         padding: 20px;
         background: #fff;
         border-bottom: 3px solid #ddd3bc;
         border-radius: 2px;
+
+        &__abandoned {
+            display: inline-block;
+            margin-bottom: 1em;
+            padding: 2px 5px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: $font-weight-bold;
+            background: $red-button;
+
+            @include screen(600) {
+                position: absolute;
+                top: 25px;
+                left: -30px;
+                padding: 2px 30px;
+                border-top: 1px solid darken($red-button, 10);
+                border-bottom: 1px solid darken($red-button, 20);
+                transform: rotateZ(-45deg);
+            }
+
+            @include screen(1024) {
+                position: initial;
+                padding: 2px 5px;
+                border: none;
+                transform: none;
+            }
+
+            @include screen(1200) {
+                position: absolute;
+                padding: 2px 30px;
+                border-top: 1px solid darken($red-button, 10);
+                border-bottom: 1px solid darken($red-button, 20);
+                transform: rotateZ(-45deg);
+            }
+        }
 
         &__icon {
             float: right;

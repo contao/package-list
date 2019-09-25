@@ -1,7 +1,7 @@
 export default {
     computed: {
         query: vm => vm.$route.query.q,
-        pages: vm => vm.$route.query.pages || 1,
+        pages: vm => Number(vm.$route.query.pages) || 1,
         sorting: vm => vm.$route.query.sort || '',
 
         isSearching: vm => vm.query || vm.pages > 1 || vm.sorting,
