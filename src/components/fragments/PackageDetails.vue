@@ -73,7 +73,7 @@
                     <div class="package-popup__packagelist" v-if="metadata.require">
                         <template v-for="(constraint, name) in metadata.require">
                             <package-link :name="name" :key="name" :text="constraint">
-                                <slot name="require-actions" :name="name"/>
+                                <slot name="require-actions" v-bind="{ name }"/>
                             </package-link>
                         </template>
                     </div>
@@ -91,7 +91,7 @@
                     <div class="package-popup__packagelist" v-if="metadata.conflict">
                         <template v-for="(constraint, name) in metadata.conflict">
                             <package-link :name="name" :key="name" :text="constraint">
-                                <slot name="conflict-actions" :name="name"/>
+                                <slot name="conflict-actions" v-bind="{ name }"/>
                             </package-link>
                         </template>
                     </div>
@@ -128,7 +128,6 @@
             popupClass() {
                 return {
                     'package-popup': true,
-                    'package-popup--fixed': !this.$refs.popup || this.$refs.popup.clientHeight < window.innerHeight,
                 };
             },
 
@@ -264,7 +263,6 @@
         }
 
         &__summary {
-            overflow: hidden;
             flex-grow: 0;
             padding: 25px 35px;
 
@@ -440,11 +438,13 @@
         }
 
         &__tabcontent {
+            position: relative;
             padding: 25px 35px;
+            overflow-y: auto;
             background: #f8f9fb;
 
-            @include screen(960) {
-                min-height: 450px;
+            @media (min-width: 960px) and (min-height: 700px) {
+                height: 450px;
             }
         }
 
@@ -484,15 +484,21 @@
         }
 
         @include screen(960) {
+            position: relative;
             display: block;
-            top: 50%;
+            top: 0;
             left: 50%;
             width: 750px;
             margin-left: -375px;
             height: auto;
-            transform: translateY(-50%);
             border-bottom: 2px solid #ddd3bc;
             border-radius: 2px;
+        }
+
+        @media (min-width: 960px) and (min-height: 700px) {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
         }
     }
 </style>

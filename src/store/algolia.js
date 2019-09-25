@@ -121,6 +121,8 @@ export default {
 
         async discover({ state, commit }) {
             try {
+                const d = new Date();
+                const today = `${d.getFullYear()}${d.getMonth()+1}${d.getDay()}`;
                 const content = await client.search([
                     {
                         indexName: 'v3_packages',
@@ -133,7 +135,7 @@ export default {
                         indexName: 'v3_ads',
                         params: {
                             hitsPerPage: 6,
-                            filters: `languages:${state.language}`,
+                            filters: `languages:${state.language} AND validFrom<=${today} AND validTo>=${today}`,
                         },
                     },
                 ]);
