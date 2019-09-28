@@ -64,11 +64,13 @@ export default {
                         return curr;
                     }
 
-                    if (curr.substr(0, 4) === 'dev-' && prev.substr(0, 4) !== 'dev-') {
+                    if ((curr.substr(0, 4) === 'dev-' || curr.substr(-4) === '-dev')
+                        && prev.substr(0, 4) !== 'dev-' && prev.substr(-4) !== '-dev') {
                         return prev;
                     }
 
-                    if (prev.substr(0, 4) === 'dev-' && curr.substr(0, 4) !== 'dev-') {
+                    if ((prev.substr(0, 4) === 'dev-' || prev.substr(-4) === '-dev')
+                        && curr.substr(0, 4) !== 'dev-' && curr.substr(-4) !== '-dev') {
                         return curr;
                     }
 
