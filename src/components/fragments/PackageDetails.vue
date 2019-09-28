@@ -48,29 +48,15 @@
                 </div>
 
                 <ul class="package-popup__tabs">
-                    <details-tab :active="tab === ''" @click="tab = ''">Beschreibung</details-tab>
-                    <details-tab :active="tab === 'require'" :disabled="!metadata.require" :count="requireCount" @click="tab = 'require'">Abhängigkeiten</details-tab>
-                    <details-tab :active="tab === 'suggest'" highlight :disabled="!metadata.suggest" :count="suggestCount" @click="tab = 'suggest'">Empfehlungen</details-tab>
-                    <details-tab :active="tab === 'conflict'" :disabled="!metadata.conflict" :count="conflictCount" @click="tab = 'conflict'">Konflikte</details-tab>
+                    <details-tab :active="tab === ''" @click="tab = ''">{{ $t('ui.package-details.tabDescription') }}</details-tab>
+                    <details-tab :active="tab === 'require'" :disabled="!metadata.require" :count="requireCount" @click="tab = 'require'">{{ $t('ui.package-details.tabRequire') }}</details-tab>
+                    <details-tab :active="tab === 'suggest'" highlight :disabled="!metadata.suggest" :count="suggestCount" @click="tab = 'suggest'">{{ $t('ui.package-details.tabSuggest') }}</details-tab>
+                    <details-tab :active="tab === 'conflict'" :disabled="!metadata.conflict" :count="conflictCount" @click="tab = 'conflict'">{{ $t('ui.package-details.tabConflict') }}</details-tab>
                 </ul>
                 <div class="package-popup__tabcontent" v-if="tab === ''">
-                    <p>{{ metadata.description }}</p>
-                    <p class="package-popup__separator">Latest Package Details</p>
-                    <dl class="package-popup__info">
-                        <dt class="package-popup__info-title">Version</dt>
-                        <dd class="package-popup__info-text">{{ metadata.latest ? metadata.latest.version : '–' }}</dd>
-                        <dt class="package-popup__info-title">Released</dt>
-                        <dd class="package-popup__info-text">{{ metadata.latest ? metadata.latest.time : '–' | datimFormat }}</dd>
-                        <dt class="package-popup__info-title">License</dt>
-                        <dd class="package-popup__info-text">{{ license }}</dd>
-
-                        <dt class="package-popup__info-title">Downloads</dt>
-                        <dd class="package-popup__info-text">{{ (metadata.downloads || 0) | numberFormat }}</dd>
-                        <dt class="package-popup__info-title">Favers</dt>
-                        <dd class="package-popup__info-text">{{ metadata.favers || 0 | numberFormat }}</dd>
-                        <dt class="package-popup__info-title">Type</dt>
-                        <dd class="package-popup__info-text">{{ metadata.type || '–' }}</dd>
-                    </dl>
+                    <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
+                    <p><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
+                    <p class="package-popup__description">{{ metadata.description }}</p>
                 </div>
                 <div class="package-popup__tabcontent" v-if="tab === 'require'">
                     <div class="package-popup__packagelist" v-if="metadata.require">
@@ -452,39 +438,9 @@
             }
         }
 
-        &__separator {
-            margin: 2em -35px 1em;
-            padding: 10px 35px;
-            font-weight: $font-weight-bold;
-            background: #fff;
-            border-top: 2px solid #e9eef1;
-            border-bottom: 1px solid #e9eef1;
-        }
-
-        &__info {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0 0 1em;
-            padding: 0;
-
-            &-title {
-                flex-grow: 1;
-                width: 13.33333333%;
-                margin: 0;
-                padding: 0;
-                font-weight: $font-weight-bold;
-
-                &:after {
-                    content: ":";
-                }
-            }
-
-            &-text {
-                flex-grow: 2;
-                width: 20%;
-                margin: 0;
-                padding: 0;
-            }
+        &__description {
+            margin: 1em 0;
+            white-space: pre-wrap;
         }
 
         @include screen(960) {
