@@ -364,13 +364,13 @@
         }
 
         &__actions {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            margin-left: 25px;
-            text-align: center;
+            margin-top: 1em;
 
             @include screen(600) {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                margin: 0 0 0 25px;
                 min-width: 200px;
             }
         }
