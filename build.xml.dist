@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<project name="Contao Manager" default="list" basedir=".">
+    <target name="list">
+        <echo message="Available commands:" />
+        <echo message="  phing prod  -  Builds production files" />
+        <echo message="  phing tx    -  Syncs language files with Transifex" />
+    </target>
+
+    <target name="prod" depends="build-prod">
+        <echo message="Contao Package List build complete" />
+    </target>
+
+    <target name="build-prod">
+        <echo message="Compiling UI files" />
+        <exec executable="npm" checkreturn="true">
+            <arg value="run" />
+            <arg value="build" />
+        </exec>
+    </target>
+
+    <target name="tx">
+        <echo message="Starting Transifex sync" />
+        <exec executable="tx" passthru="true">
+            <arg value="push" />
+            <arg value="-s" />
+        </exec>
+        <echo message="Waiting 10 seconds for sources to be parsed" />
+        <exec executable="sleep">
+            <arg value="10" />
+        </exec>
+        <exec executable="tx" passthru="true">
+            <arg value="pull" />
+            <arg value="--all" />
+            <arg value="--force" />
+            <arg value="--minimum-perc=50" />
+        </exec>
+    </target>
+</project>
