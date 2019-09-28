@@ -37,6 +37,7 @@
                             <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat(false) }}</span>
                             <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
                             <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
+                            <more :name="metadata.name" :homepage="metadata.homepage" :support="Object.assign({}, metadata.support)" :metadata="metadata.metadata" :hide-packagist="metadata.private"/>
                         </p>
                     </div>
                     <div class="package-popup__actions">
@@ -111,11 +112,12 @@
     import PackageLink from './Link';
     import DetailsTab from './Tab';
     import Loader from './Loader';
+    import More from './More';
 
     export default {
         mixins: [metadata],
 
-        components: { Loader, PackageLogo, DetailsTab, PackageLink },
+        components: { More, Loader, PackageLogo, DetailsTab, PackageLink },
 
         data: () => ({
             tab: '',
