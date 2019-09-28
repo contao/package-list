@@ -24,5 +24,6 @@
 
     "ui.package-details.previous": "Previous Package Details",
     "ui.package-details.close": "Close Package Details",
-    "ui.package-details.loading": "Loading …"
+    "ui.package-details.loading": "Loading …",
+    "ui.package-details.homepage": "Project Website"
 }

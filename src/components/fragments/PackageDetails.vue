@@ -40,7 +40,9 @@
                         </p>
                     </div>
                     <div class="package-popup__actions">
-                        <slot name="package-actions" :data="metadata"/>
+                        <slot name="package-actions" v-bind="{ data: metadata }">
+                            <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="metadata.homepage" v-if="metadata && metadata.homepage">{{ $t('ui.package-details.homepage') }}</a>
+                        </slot>
                     </div>
                 </div>
 
