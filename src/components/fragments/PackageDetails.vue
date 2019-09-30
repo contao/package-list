@@ -113,7 +113,7 @@
             ...mapGetters('packages/details', ['hasPrevious']),
 
             current: vm => vm.$route.query.p,
-            abandonedText: vm => vm.metadata.replacement ? vm.$t('ui.package.abandonedReplace', { replacement: vm.metadata.replacement }) : vm.$t('ui.package.abandonedText'),
+            abandonedText: vm => vm.metadata.abandoned === true ? vm.$t('ui.package.abandonedText') : vm.$t('ui.package.abandonedReplace', { replacement: vm.metadata.abandoned }),
 
             popupClass() {
                 return {

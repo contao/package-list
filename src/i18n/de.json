@@ -19,8 +19,8 @@
     "ui.discover.latestPackages": "Neuste und aktualisierte Erweiterungen",
 
     "ui.package.abandoned": "verwaist",
-    "ui.package.abandonedText": "Diese Erweiterung wurde als verwaist markiert.",
-    "ui.package.abandonedReplace": "Diese Erweiterung wurde als verwaist markiert, stattdessen sollte \"{replacement}\" verwendet werden.",
+    "ui.package.abandonedText": "Diese Erweiterung ist verwaist und wird nicht mehr gepflegt.",
+    "ui.package.abandonedReplace": "Diese Erweiterung ist verwaist und wird nicht mehr gepflegt. Der Autor empfiehlt stattdessen das Paket {replacement} zu verwenden.",
 
     "ui.package-details.previous": "Details der vorherigen Erweiterung",
     "ui.package-details.close": "Details der Erweiterung schließen",

@@ -3,11 +3,7 @@
         <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
         <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
         <div class="discover-package__details">
-            <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }">
-                <span class="discover-package__title" v-html="title">{{ data.title }}</span>
-                <span class="discover-package__name" v-if="data.name !== data.title" style="display: none">{{ data.name }}</span>
-            </h1>
-
+            <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }" :title="data.name !== data.title ? data.name : ''" v-html="title"></h1>
             <p class="discover-package__description" :class="{ 'discover-package__description--fallback': !data.logo }" v-html="description">{{ data.description }}</p>
 
             <div class="discover-package__more">
@@ -39,7 +35,7 @@
         computed: {
             title: vm => vm.data._highlightResult ? vm.data._highlightResult.title.value : vm.data.title,
             description: vm => vm.data._highlightResult ? vm.data._highlightResult.description.value : vm.data.description,
-            abandonedText: vm => vm.data.replacement ? vm.$t('ui.package.abandonedReplace', { replacement: vm.data.replacement }) : vm.$t('ui.package.abandonedText'),
+            abandonedText: vm => vm.data.abandoned === true ? vm.$t('ui.package.abandonedText') : vm.$t('ui.package.abandonedReplace', { replacement: vm.data.abandoned }),
         },
     };
 </script>
@@ -67,23 +63,8 @@
 
             @include screen(600) {
                 position: absolute;
-                top: 25px;
-                left: -30px;
-                padding: 2px 30px;
-                border-top: 1px solid darken($red-button, 10);
-                border-bottom: 1px solid darken($red-button, 20);
-                transform: rotateZ(-45deg);
-            }
-
-            @include screen(1024) {
-                position: initial;
-                padding: 2px 5px;
-                border: none;
-                transform: none;
-            }
-
-            @include screen(1200) {
-                position: absolute;
+                top: 20px;
+                left: -25px;
                 padding: 2px 30px;
                 border-top: 1px solid darken($red-button, 10);
                 border-bottom: 1px solid darken($red-button, 20);
@@ -145,7 +126,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
 
             @include screen(600) {
                 min-height: 90px;

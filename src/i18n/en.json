@@ -19,8 +19,8 @@
     "ui.discover.latestPackages": "Latest and updated extensions",
 
     "ui.package.abandoned": "abandoned",
-    "ui.package.abandonedText": "This extension is marked as abandoned.",
-    "ui.package.abandonedReplace": "This extension is marked as abandoned, please use \"{replacement}\" instead.",
+    "ui.package.abandonedText": "This package is abandoned and no longer maintained.",
+    "ui.package.abandonedReplace": "This package is abandoned and no longer maintained. The author suggests using the {replacement} package instead.",
 
     "ui.package-details.previous": "Previous Extension Details",
     "ui.package-details.close": "Close Extension Details",
