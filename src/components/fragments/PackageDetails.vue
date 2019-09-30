@@ -321,10 +321,11 @@
             display: inline-block;
             margin-right: 15px;
             margin-top: .5em;
+            padding-left: 18px;
             font-size: 13px;
             background-position: 0 50%;
             background-repeat: no-repeat;
-            background-size: 15px 15px;
+            background-size: 13px 13px;
 
             &--abandoned {
                 padding: 2px 5px;
@@ -334,17 +335,14 @@
             }
 
             &--updated {
-                padding-left: 18px;
                 background-image: url("../../assets/images/updated.svg");
             }
 
             &--downloads {
-                padding-left: 20px;
                 background-image: url("../../assets/images/downloads.svg");
             }
 
             &--favers {
-                padding-left: 18px;
                 background-image: url("../../assets/images/favers.svg");
             }
         }
