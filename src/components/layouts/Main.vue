@@ -2,7 +2,7 @@
     <div class="layout-main">
         <header class="layout-main__header" :class="{ 'layout-main__header--margin': !$slots.subheader }">
             <router-link to="/" class="layout-main__logo">
-                <img src="../../assets/images/contao-logo-corporate.svg"/>
+                <img src="../../assets/images/contao-logo-corporate.svg" alt="">
             </router-link>
         </header>
 
@@ -29,6 +29,8 @@
     @import "../../assets/styles/defaults";
 
     .layout-main {
+        overflow: hidden;
+
         &__logo {
             display: block;
             margin: 30px;
