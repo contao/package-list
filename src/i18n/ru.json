@@ -20,13 +20,14 @@
 
     "ui.package.abandoned": "Заброшенный",
     "ui.package.abandonedText": "Этот пакет отмечен как заброшенный и больше не поддерживается.",
-    "ui.package.abandonedReplace": "This package is abandoned and no longer maintained. The author suggests using the {replacement} package instead.",
+    "ui.package.abandonedReplace": "Этот пакет имеет статус заброшенного и больше не поддерживается. Автор предлагает вместо него использовать пакет {replacement}.",
 
     "ui.package-details.previous": "Детали предыдущего расширения",
     "ui.package-details.close": "Закрыть детали расширения",
     "ui.package-details.loading": "Загрузка...",
     "ui.package-details.tabDescription": "Описание",
     "ui.package-details.tabRequire": "Требования",
+    "ui.package-details.tabFeatures": "Features",
     "ui.package-details.tabSuggest": "Предложения",
     "ui.package-details.tabConflict": "Конфликты",
     "ui.package-details.latest": "Последняя версия",
