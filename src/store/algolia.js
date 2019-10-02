@@ -147,7 +147,7 @@ export default {
                 delete params.sorting;
             }
 
-            params.filters = `languages:${state.language}`;
+            params.filters = `languages:${state.language} AND dependency:false`;
 
             return await algolia(`v3_packages${suffix}`).search(params);
         },
@@ -161,7 +161,7 @@ export default {
                         indexName: 'v3_packages',
                         params: {
                             hitsPerPage: 6,
-                            filters: `languages:${state.language}`,
+                            filters: `languages:${state.language} AND dependency:false`,
                         },
                     },
                     {
