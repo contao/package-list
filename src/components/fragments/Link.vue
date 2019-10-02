@@ -1,27 +1,28 @@
 <template>
     <article class="package-link">
         <div class="package-link__details">
-            <p class="package-link__name">{{ name }}</p>
+            <p class="package-link__name" :title="name">{{ metadata && metadata.title || name }}</p>
             <p class="package-link__text">{{ text }}</p>
         </div>
 
         <div class="package-link__actions">
-            <details-button small :name="name"/>
             <slot/>
+            <details-button small :name="name"/>
         </div>
     </article>
 </template>
 
 <script>
     import DetailsButton from './DetailsButton';
+    import metadata from '../../mixins/metadata';
 
     export default {
+        mixins: [metadata],
         components: { DetailsButton },
 
         props: {
             name: String,
             text: String,
-            installable: Boolean,
         },
 
         computed: {

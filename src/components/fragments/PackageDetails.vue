@@ -48,43 +48,29 @@
                 </div>
 
                 <ul class="package-popup__tabs">
-                    <details-tab :active="tab === ''" @click="tab = ''">{{ $t('ui.package-details.tabDescription') }}</details-tab>
-                    <details-tab :active="tab === 'require'" :disabled="!metadata.require" :count="requireCount" @click="tab = 'require'">{{ $t('ui.package-details.tabRequire') }}</details-tab>
-                    <details-tab :active="tab === 'suggest'" highlight :disabled="!metadata.suggest" :count="suggestCount" @click="tab = 'suggest'">{{ $t('ui.package-details.tabSuggest') }}</details-tab>
-                    <details-tab :active="tab === 'conflict'" :disabled="!metadata.conflict" :count="conflictCount" @click="tab = 'conflict'">{{ $t('ui.package-details.tabConflict') }}</details-tab>
+                    <details-tab name="description" show-empty :current="tab" @tab="setTab"/>
+                    <details-tab name="features" highlight :current="tab" :links="metadata.features" @tab="setTab"/>
+                    <details-tab name="suggest" highlight :current="tab" :links="metadata.suggest" @tab="setTab"/>
+                    <details-tab name="require" show-empty :current="tab" :links="metadata.require" @tab="setTab"/>
+                    <details-tab name="conflict" :current="tab" :links="metadata.conflict" @tab="setTab"/>
                 </ul>
-                <div class="package-popup__tabcontent" v-if="tab === ''">
+                <details-content name="description" :current="tab">
                     <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
                     <p><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
                     <p class="package-popup__description">{{ metadata.description }}</p>
-                </div>
-                <div class="package-popup__tabcontent" v-if="tab === 'require'">
-                    <div class="package-popup__packagelist" v-if="metadata.require">
-                        <template v-for="(constraint, name) in metadata.require">
-                            <package-link :name="name" :key="name" :text="constraint">
-                                <slot name="require-actions" v-bind="{ name }"/>
-                            </package-link>
-                        </template>
-                    </div>
-                </div>
-                <div class="package-popup__tabcontent" v-if="tab === 'suggest'">
-                    <div class="package-popup__packagelist" v-if="metadata.suggest">
-                        <template v-for="(reason, name) in metadata.suggest">
-                            <package-link :name="name" :key="name" :text="reason">
-                                <slot name="suggest-actions" v-bind="{ name }"/>
-                            </package-link>
-                        </template>
-                    </div>
-                </div>
-                <div class="package-popup__tabcontent" v-if="tab === 'conflict'">
-                    <div class="package-popup__packagelist" v-if="metadata.conflict">
-                        <template v-for="(constraint, name) in metadata.conflict">
-                            <package-link :name="name" :key="name" :text="constraint">
-                                <slot name="conflict-actions" v-bind="{ name }"/>
-                            </package-link>
-                        </template>
-                    </div>
-                </div>
+                </details-content>
+                <details-content name="features" :current="tab" :links="metadata.features">
+                    <slot name="features-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                </details-content>
+                <details-content name="suggest" :current="tab" :links="metadata.suggest">
+                    <slot name="suggest-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                </details-content>
+                <details-content name="require" :current="tab" :links="metadata.require">
+                    <slot name="require-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                </details-content>
+                <details-content name="conflict" :current="tab" :links="metadata.conflict">
+                    <slot name="conflict-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                </details-content>
             </template>
         </div>
     </div>
@@ -95,18 +81,18 @@
     import metadata from '../../mixins/metadata';
 
     import PackageLogo from './Logo';
-    import PackageLink from './Link';
-    import DetailsTab from './Tab';
     import Loader from './Loader';
     import More from './More';
+    import DetailsTab from './DetailsTab';
+    import DetailsContent from './DetailsContent';
 
     export default {
         mixins: [metadata],
 
-        components: { More, Loader, PackageLogo, DetailsTab, PackageLink },
+        components: { More, Loader, PackageLogo, DetailsTab, DetailsContent },
 
         data: () => ({
-            tab: '',
+            tab: 'description',
         }),
 
         computed: {
@@ -122,6 +108,7 @@
             },
 
             requireCount: vm => vm.metadata.require ? Object.values(vm.metadata.require).length : 0,
+            featuresCount: vm => vm.metadata.features ? Object.values(vm.metadata.features).length : 0,
             suggestCount: vm => vm.metadata.suggest ? Object.values(vm.metadata.suggest).length : 0,
             conflictCount: vm => vm.metadata.conflict ? Object.values(vm.metadata.conflict).length : 0,
 
@@ -137,11 +124,15 @@
 
         methods: {
             ...mapMutations('packages/details', ['clearCurrent', 'popCurrent']),
+
+            setTab(name) {
+                this.tab = name;
+            },
         },
 
         watch: {
             current() {
-                this.tab = '';
+                this.tab = 'description';
             },
 
             exists(exists) {

@@ -27,6 +27,7 @@
     "ui.package-details.loading": "Loading …",
     "ui.package-details.tabDescription": "Description",
     "ui.package-details.tabRequire": "Requirements",
+    "ui.package-details.tabFeatures": "Features",
     "ui.package-details.tabSuggest": "Suggestions",
     "ui.package-details.tabConflict": "Conflicts",
     "ui.package-details.latest": "Latest version",

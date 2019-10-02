@@ -20,6 +20,9 @@ $red-button: #db5041;
 $orange-button: #db8c41;
 $blue-button: #6a8ca6;
 
+$hint-background: #e8c8bc;
+$hint-link: #bd2e20;
+
 
 @mixin screen($width) {
     @media (min-width: #{$width}px) {

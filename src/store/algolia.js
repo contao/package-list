@@ -12,6 +12,29 @@ const algolia = (name = 'v3_packages') => {
     return indexes[name];
 };
 
+const overrides = {
+    'contao/manager-bundle': {
+        title: 'Contao Open Source CMS',
+        description: 'Contao is an Open Source PHP Content Management System.',
+        homepage: 'https://contao.org',
+        logo: 'images/contao.svg',
+        support: {
+            docs: 'https://docs.contao.org',
+            forum: 'https://community.contao.org',
+            issues: 'https://github.com/contao/contao/issues',
+            source: 'https://github.com/contao/contao',
+        },
+        features: {
+            'contao/news-bundle': 'manage news entries in Contao.',
+            'contao/calendar-bundle': 'manage upcoming and past events in Contao.',
+            'contao/faq-bundle': 'manage questions and respective answers in Contao.',
+            'contao/comments-bundle': 'enhances Contao with general comments functionality.',
+            'contao/newsletter-bundle': 'manage newsletters and recipient lists and send them from the Contao back end.',
+            'contao/listing-bundle': 'a front end module that can list entries of an arbitrary database table with a customizable template.',
+        },
+    },
+};
+
 export default {
     namespaced: true,
 
@@ -80,7 +103,7 @@ export default {
                 data = Object.assign(data, data.versions[latest]);
                 data.latest = { version: latest, time: data.versions[latest].time };
             } catch (err) {
-                // Ignore
+                // ignore
             }
 
             try {
@@ -91,7 +114,11 @@ export default {
 
                 data = Object.assign(data || {}, { supported: true }, content.hits[0]);
             } catch (err) {
-                return null;
+                // ignore
+            }
+
+            if (overrides[name]) {
+                data = Object.assign(data || {}, overrides[name]);
             }
 
             if (!data) {
@@ -104,6 +131,10 @@ export default {
             delete data.constraint;
 
             commit('cache', { name, data: data });
+
+            if (data.features) {
+                commit('packages/pushFeatures', { [name]: Object.keys(data.features) }, { root: true });
+            }
 
             return data;
         },
