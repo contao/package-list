@@ -10,8 +10,8 @@
         </loader>
 
         <div v-else-if="offline || discover === null" class="package-search__status package-search__status--offline">
-            <p class="package-search__title">{{ 'ui.discover.offline' | translate }}</p>
-            <p class="package-search__explain">{{ 'ui.discover.offlineExplain' | translate }}</p>
+            <p class="package-search__title">{{ $t('ui.discover.offline') }}</p>
+            <p class="package-search__explain">{{ $t('ui.discover.offlineExplain') }}</p>
             <button class="widget-button widget-button--inline widget-button--update" @click="getOnline">{{ $t('ui.discover.offlineButton') }}</button>
         </div>
 
