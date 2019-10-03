@@ -2,39 +2,36 @@
     <section class="package-sorting">
         <label class="package-sorting__label">{{ $t('ui.discover.sortBy') }}</label>
         <ul class="package-sorting__group">
-            <li
-                v-for="(value, label) in sortOptions"
-                class="package-sorting__item"
-                :class="{ 'package-sorting__item--active': sorting === value }"
-                :title="$t(`ui.discover.sort${label}Title`)"
-                :key="value"
-                @click="sortBy(value)"
-            >
-                {{ $t(`ui.discover.sort${label}`) }}
-            </li>
+            <template v-for="(value, label) in sortOptions">
+                <li
+                    class="package-sorting__item"
+                    :class="{ 'package-sorting__item--active': sorting === value }"
+                    :title="$t(`ui.discover.sort${label}Title`)"
+                    :key="value"
+                    @click="sortBy(value)"
+                    v-if="value !== '' || query"
+                >
+                    {{ $t(`ui.discover.sort${label}`) }}
+                </li>
+            </template>
         </ul>
     </section>
 </template>
 
 <script>
+    import search from '../../mixins/search';
+
     export default {
+        mixins: [search],
+
         data: () => ({
             sortOptions: {
-                'Latest': '',
+                'Relevance': '',
+                'Latest': 'latest',
                 'Downloads': 'downloads',
                 'Favers': 'favers',
             },
         }),
-
-        computed: {
-            sorting: vm => vm.$route.query.sort || '',
-        },
-
-        methods: {
-            sortBy(sort) {
-                this.$router.push({ query: Object.assign({}, this.$route.query, { sort })});
-            },
-        },
     };
 </script>
 

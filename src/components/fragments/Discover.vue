@@ -18,7 +18,7 @@
         <template v-else-if="isSearching">
             <search-sorting/>
             <div class="package-search__results">
-                <discover-package class="package-search__item" v-for="item in results" :data="item" :title="item.title" :description="item.description" :logo="item.logo" :key="item.name">
+                <discover-package class="package-search__item" v-for="item in results" :data="item" :key="item.name">
                     <slot name="package-actions" :data="item"/>
                 </discover-package>
             </div>
@@ -32,7 +32,7 @@
 
             <h2 class="package-search__headline">{{ $t('ui.discover.latestPackages') }}</h2>
             <div class="package-search__results">
-                <discover-package class="package-search__item" v-for="item in discover.updated" :data="item" :title="item.title" :description="item.description" :logo="item.logo" :key="item.name">
+                <discover-package class="package-search__item" v-for="item in discover.updated" :data="item" :key="item.name">
                     <slot name="package-actions" :data="item"/>
                 </discover-package>
             </div>
@@ -90,7 +90,7 @@
                     const response = await this.$store.dispatch('algolia/findPackages', {
                         sorting: this.sorting,
                         query: this.query,
-                        hitsPerPage: 10 * (this.pages || 1),
+                        hitsPerPage: 10 * this.pages,
                     });
 
                     this.hasMore = response.nbPages > 1;
@@ -126,7 +126,7 @@
 
             async openSearch() {
                 this.results = null;
-                await this.startSearch();
+                await this.sortBy('latest');
             }
         },
 
@@ -146,11 +146,8 @@
         },
 
         created() {
-            if (this.pages) {
-                const query = this.$route.query;
-                delete query.pages;
-
-                this.$router.replace({ query, append: true });
+            if (this.$route.query && !this.$route.query.q && !this.$route.query.p) {
+                this.$router.replace({ query: {}, append: true });
             }
 
             this.$watch(this.$i18n.locale, () => {

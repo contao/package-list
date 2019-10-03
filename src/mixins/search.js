@@ -1,10 +1,10 @@
 export default {
     computed: {
         query: vm => vm.$route.query.q,
-        pages: vm => Number(vm.$route.query.pages) || 0,
+        pages: vm => Number(vm.$route.query.pages) || 1,
         sorting: vm => vm.$route.query.sort || '',
 
-        isSearching: vm => vm.query || vm.pages || vm.sorting,
+        isSearching: vm => vm.query || vm.pages > 1 || vm.sorting,
     },
 
     methods: {
@@ -15,7 +15,7 @@ export default {
                 query.pages = pages;
             }
 
-            if (this.sorting) {
+            if (this.sorting && this.query === q) {
                 query.sort = this.sorting;
             }
 
@@ -31,6 +31,10 @@ export default {
             if (e && e.target) {
                 e.target.blur();
             }
+        },
+
+        sortBy(sort) {
+            this.$router.push({ query: Object.assign({}, this.$route.query, { sort })});
         },
 
         loadMore(e) {

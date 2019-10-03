@@ -148,7 +148,7 @@ export default {
                 const today = `${d.getFullYear()}${d.getMonth()+1}${d.getDay()}`;
                 const content = await client.search([
                     {
-                        indexName: 'v3_packages',
+                        indexName: 'v3_packages_latest',
                         params: {
                             hitsPerPage: 6,
                             filters: `languages:${state.language} AND dependency:false`,
