@@ -14,16 +14,6 @@ const algolia = (name = 'v3_packages') => {
 
 const overrides = {
     'contao/manager-bundle': {
-        title: 'Contao Open Source CMS',
-        description: 'Contao is an Open Source PHP Content Management System.',
-        homepage: 'https://contao.org',
-        logo: 'images/contao.svg',
-        support: {
-            docs: 'https://docs.contao.org',
-            forum: 'https://community.contao.org',
-            issues: 'https://github.com/contao/contao/issues',
-            source: 'https://github.com/contao/contao',
-        },
         features: {
             'contao/news-bundle': 'manage news entries in Contao.',
             'contao/calendar-bundle': 'manage upcoming and past events in Contao.',
