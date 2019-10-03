@@ -27,7 +27,7 @@
     "ui.package-details.loading": "Загрузка...",
     "ui.package-details.tabDescription": "Описание",
     "ui.package-details.tabRequire": "Требования",
-    "ui.package-details.tabFeatures": "Features",
+    "ui.package-details.tabFeatures": "Особенности",
     "ui.package-details.tabSuggest": "Предложения",
     "ui.package-details.tabConflict": "Конфликты",
     "ui.package-details.latest": "Последняя версия",
