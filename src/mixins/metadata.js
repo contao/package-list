@@ -13,9 +13,6 @@ export default {
                     {},
                     this.data,
                     metadata,
-                    {
-                        metadata: `https://github.com/contao/package-metadata/tree/master/meta/${this.data.name}/${this.$i18n.locale()}.yml`
-                    }
                 );
             } else {
                 this.metadata = null;
