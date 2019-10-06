@@ -14,14 +14,14 @@ const algolia = (name = 'v3_packages') => {
 
 const overrides = {
     'contao/manager-bundle': {
-        features: {
-            'contao/news-bundle': 'manage news entries in Contao.',
-            'contao/calendar-bundle': 'manage upcoming and past events in Contao.',
-            'contao/faq-bundle': 'manage questions and respective answers in Contao.',
-            'contao/comments-bundle': 'enhances Contao with general comments functionality.',
-            'contao/newsletter-bundle': 'manage newsletters and recipient lists and send them from the Contao back end.',
-            'contao/listing-bundle': 'a front end module that can list entries of an arbitrary database table with a customizable template.',
-        },
+        features: [
+            'contao/news-bundle',
+            'contao/calendar-bundle',
+            'contao/faq-bundle',
+            'contao/comments-bundle',
+            'contao/newsletter-bundle',
+            'contao/listing-bundle',
+        ],
     },
 };
 
@@ -123,7 +123,7 @@ export default {
             commit('cache', { name, data: data });
 
             if (data.features) {
-                commit('packages/pushFeatures', { [name]: Object.keys(data.features) }, { root: true });
+                commit('packages/pushFeatures', { [name]: data.features }, { root: true });
             }
 
             return data;
