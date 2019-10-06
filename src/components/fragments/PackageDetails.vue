@@ -34,6 +34,7 @@
                         </p>
                         <p class="package-popup__statistics">
                             <span class="package-popup__stats package-popup__stats--abandoned" :title="abandonedText" v-if="metadata.abandoned">{{ $t('ui.package.abandoned') }}</span>
+                            <span class="package-popup__stats package-popup__stats--proprietary" :title="$t('ui.package.proprietaryText')" v-if="metadata.private">{{ $t('ui.package.proprietaryTitle') }}</span>
                             <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat(false) }}</span>
                             <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
                             <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
@@ -42,7 +43,7 @@
                     </div>
                     <div class="package-popup__actions">
                         <slot name="package-actions" v-bind="{ data: metadata }">
-                            <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="metadata.homepage" v-if="metadata && metadata.homepage">{{ $t('ui.package-details.homepage') }}</a>
+                            <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="metadata.homepage" v-if="metadata && metadata.homepage">{{ $t('ui.package.homepage') }}</a>
                         </slot>
                     </div>
                 </div>
@@ -51,7 +52,7 @@
                     <details-tab name="description" show-empty :current="tab" @tab="setTab"/>
                     <details-tab name="features" highlight :current="tab" :links="metadata.features" @tab="setTab"/>
                     <details-tab name="suggest" highlight :current="tab" :links="metadata.suggest" @tab="setTab"/>
-                    <details-tab name="require" show-empty :current="tab" :links="metadata.require" @tab="setTab"/>
+                    <details-tab name="require" :show-empty="!metadata.private" :current="tab" :links="metadata.require" @tab="setTab"/>
                     <details-tab name="conflict" :current="tab" :links="metadata.conflict" @tab="setTab"/>
                 </ul>
                 <details-content name="description" :current="tab">
@@ -323,6 +324,10 @@
                 color: #fff;
                 font-weight: $font-weight-bold;
                 background: $red-button;
+            }
+
+            &--proprietary {
+                background-image: url("../../assets/images/proprietary.svg");
             }
 
             &--updated {

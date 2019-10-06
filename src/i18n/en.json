@@ -20,6 +20,9 @@
     "ui.discover.detailsButton": "Details",
     "ui.discover.latestPackages": "Latest and updated extensions",
 
+    "ui.package.homepage": "Project Website",
+    "ui.package.proprietaryTitle": "Proprietary Package!",
+    "ui.package.proprietaryText": "Please visit the website for more information.",
     "ui.package.abandoned": "abandoned",
     "ui.package.abandonedText": "This package is abandoned and no longer maintained.",
     "ui.package.abandonedReplace": "This package is abandoned and no longer maintained. The author suggests using the {replacement} package instead.",
@@ -35,7 +38,6 @@
     "ui.package-details.latest": "Latest version",
     "ui.package-details.released": "released on",
     "ui.package-details.license": "License(s)",
-    "ui.package-details.homepage": "Project Website",
     "ui.package-details.more": "More",
     "ui.package-details.packagist": "Package Details",
     "ui.package-details.metadata": "Edit Metadata",

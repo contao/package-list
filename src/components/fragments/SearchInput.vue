@@ -38,7 +38,7 @@
     @import "../../assets/styles/defaults";
 
     .search-bar {
-        margin: 0 0 45px;
+        margin: 30px 0 45px;
         padding: 20px 0;
         background: #e5dfcf;
         border-bottom: 1px solid #dcd8cc;

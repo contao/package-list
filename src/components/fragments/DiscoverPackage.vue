@@ -8,6 +8,7 @@
 
             <div class="discover-package__more">
                 <p class="discover-package__counts">
+                    <span class="discover-package__count discover-package__count--proprietary" :title="$t('ui.package.proprietaryText')" v-if="data.private">{{ $t('ui.package.proprietaryTitle') }}</span>
                     <span class="discover-package__count discover-package__count--updated" v-if="data.updated">{{ data.updated | datimFormat(false, 'short') }}</span>
                     <span class="discover-package__count discover-package__count--downloads" v-if="data.downloads">{{ data.downloads | numberFormat }}</span>
                     <span class="discover-package__count discover-package__count--favers" v-if="data.favers">{{ data.favers | numberFormat }}</span>
@@ -224,6 +225,10 @@
             background-position: 0 50%;
             background-repeat: no-repeat;
             background-size: 13px 13px;
+
+            &--proprietary {
+                background-image: url("../../assets/images/proprietary.svg");
+            }
 
             &--updated {
                 background-image: url("../../assets/images/updated.svg");

@@ -29,7 +29,7 @@
                 const items = [];
 
                 if (this.homepage) {
-                    items.push({ label: this.$t('ui.package-details.homepage'), href: this.homepage, target: '_blank' });
+                    items.push({ label: this.$t('ui.package.homepage'), href: this.homepage, target: '_blank' });
                 }
 
                 if (this.name && !this.hidePackagist) {
@@ -95,6 +95,7 @@
             padding: 0 0 5px;
             background: transparent;
             color: $link-color;
+            font-size: 13px;
             font-weight: $font-weight-normal;
             line-height: inherit;
             border: none;
