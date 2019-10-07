@@ -266,13 +266,14 @@
             img {
                 width: 100%;
                 height: auto;
+                max-height: 100%;
             }
 
             @include screen(600) {
                 display: block;
                 float: left;
                 width: 90px;
-                height: auto;
+                height: 90px;
                 margin-left: 0;
                 margin-right: 20px;
                 margin-bottom: -4px;

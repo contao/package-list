@@ -88,6 +88,7 @@
             img {
                 width: 100%;
                 height: auto;
+                max-height: 100%;
             }
 
             @include screen(600) {
