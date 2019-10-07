@@ -21,8 +21,8 @@
     "ui.discover.latestPackages": "Latest and updated extensions",
 
     "ui.package.homepage": "Project Website",
-    "ui.package.proprietaryTitle": "Proprietary Package!",
-    "ui.package.proprietaryText": "Please visit the website for more information.",
+    "ui.package.private": "Private Package",
+    "ui.package.privateTitle": "Private packages are only available from the vendor (e.g. as a ZIP download). Please visit the website for more information.",
     "ui.package.abandoned": "abandoned",
     "ui.package.abandonedText": "This package is abandoned and no longer maintained.",
     "ui.package.abandonedReplace": "This package is abandoned and no longer maintained. The author suggests using the {replacement} package instead.",

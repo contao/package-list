@@ -70,7 +70,9 @@ export default {
 
             try {
                 data = (await Http.get(`https://packagist.org/packages/${name}.json`)).data.package;
+                // noinspection JSPrimitiveTypeWrapperUsage
                 data.downloads = data.downloads.total;
+                // noinspection JSPrimitiveTypeWrapperUsage
                 data.dependency = true;
 
                 const latest = Object.keys(data.versions).reduce((prev, curr) => {
@@ -94,7 +96,11 @@ export default {
                 data = Object.assign(data, data.versions[latest]);
                 data.latest = { version: latest, time: data.versions[latest].time };
             } catch (err) {
-                // ignore
+                try {
+                    data = (await Http.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data;
+                } catch (err) {
+                    // ignore
+                }
             }
 
             try {
@@ -103,7 +109,7 @@ export default {
                     hitsPerPage: 1,
                 });
 
-                data = Object.assign(data || {}, { supported: true }, content.hits[0]);
+                data = Object.assign(data || {}, content.hits[0]);
             } catch (err) {
                 // ignore
             }

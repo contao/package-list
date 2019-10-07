@@ -34,7 +34,7 @@
                         </p>
                         <p class="package-popup__statistics">
                             <span class="package-popup__stats package-popup__stats--abandoned" :title="abandonedText" v-if="metadata.abandoned">{{ $t('ui.package.abandoned') }}</span>
-                            <span class="package-popup__stats package-popup__stats--proprietary" :title="$t('ui.package.proprietaryText')" v-if="metadata.private">{{ $t('ui.package.proprietaryTitle') }}</span>
+                            <span class="package-popup__stats package-popup__stats--private" :title="$t('ui.package.privateTitle')" v-if="metadata.private">{{ $t('ui.package.private') }}</span>
                             <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat(false) }}</span>
                             <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
                             <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <ul class="package-popup__tabs" v-if="!metadata.private">
+                <ul class="package-popup__tabs">
                     <details-tab name="description" show-empty :current="tab" :links="false" @tab="setTab"/>
                     <details-tab name="features" highlight :current="tab" :links="metadata.features" @tab="setTab"/>
                     <details-tab name="suggest" highlight :current="tab" :links="metadata.suggest" @tab="setTab"/>
@@ -57,7 +57,7 @@
                 </ul>
                 <details-content name="description" :current="tab">
                     <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
-                    <p><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
+                    <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
                     <p class="package-popup__description">{{ metadata.description }}</p>
                 </details-content>
                 <details-content name="features" :current="tab" :links="metadata.features">
@@ -327,8 +327,10 @@
                 cursor: help;
             }
 
-            &--proprietary {
-                background-image: url("../../assets/images/proprietary.svg");
+            &--private {
+                padding-left: 20px;
+                background-image: url("../../assets/images/private.svg");
+                background-size: 15px 15px;
             }
 
             &--updated {
@@ -385,7 +387,7 @@
             &--active {
                 font-weight: $font-weight-bold;
                 background: #f8f9fb;
-                border-bottom-color: transparent;
+                border-bottom: 1px solid #f8f9fb;
             }
 
             button {
