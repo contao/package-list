@@ -48,12 +48,12 @@
                     </div>
                 </div>
 
-                <ul class="package-popup__tabs">
+                <ul class="package-popup__tabs" v-if="!metadata.private">
                     <details-tab name="description" show-empty :current="tab" @tab="setTab"/>
                     <details-tab name="features" highlight :current="tab" :links="metadata.features" @tab="setTab"/>
                     <details-tab name="suggest" highlight :current="tab" :links="metadata.suggest" @tab="setTab"/>
-                    <details-tab name="require" :show-empty="!metadata.private" :current="tab" :links="metadata.require" @tab="setTab"/>
-                    <details-tab name="conflict" :current="tab" :links="metadata.conflict" @tab="setTab"/>
+                    <details-tab name="require" show-empty :current="tab" :links="metadata.require" @tab="setTab"/>
+                    <details-tab name="conflict" show-empty :current="tab" :links="metadata.conflict" @tab="setTab"/>
                 </ul>
                 <details-content name="description" :current="tab">
                     <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
