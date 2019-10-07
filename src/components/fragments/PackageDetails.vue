@@ -109,7 +109,7 @@
             },
 
             requireCount: vm => vm.metadata.require ? Object.values(vm.metadata.require).length : 0,
-            featuresCount: vm => vm.metadata.features ? Object.values(vm.metadata.features).length : 0,
+            featuresCount: vm => vm.metadata.features ? vm.metadata.features.length : 0,
             suggestCount: vm => vm.metadata.suggest ? Object.values(vm.metadata.suggest).length : 0,
             conflictCount: vm => vm.metadata.conflict ? Object.values(vm.metadata.conflict).length : 0,
 
@@ -144,7 +144,7 @@
         },
 
         activated() {
-            this.tab = '';
+            this.tab = 'description';
         },
     };
 </script>

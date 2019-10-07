@@ -18,13 +18,17 @@
             current: String,
             showEmpty: Boolean,
             highlight: Boolean,
-            links: [Object, Boolean],
+            links: [Object, Array, Boolean],
         },
 
         computed: {
             count() {
                 if (!this.links) {
                     return 0;
+                }
+
+                if (this.links instanceof Array) {
+                    return this.links.length;
                 }
 
                 return Object.values(this.links).length;
