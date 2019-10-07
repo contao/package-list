@@ -49,7 +49,7 @@
                 </div>
 
                 <ul class="package-popup__tabs" v-if="!metadata.private">
-                    <details-tab name="description" show-empty :current="tab" @tab="setTab"/>
+                    <details-tab name="description" show-empty :current="tab" :links="false" @tab="setTab"/>
                     <details-tab name="features" highlight :current="tab" :links="metadata.features" @tab="setTab"/>
                     <details-tab name="suggest" highlight :current="tab" :links="metadata.suggest" @tab="setTab"/>
                     <details-tab name="require" show-empty :current="tab" :links="metadata.require" @tab="setTab"/>
