@@ -71,6 +71,7 @@ export default {
             try {
                 data = (await Http.get(`https://packagist.org/packages/${name}.json`)).data.package;
                 data.downloads = data.downloads.total;
+                data.dependency = true;
 
                 const latest = Object.keys(data.versions).reduce((prev, curr) => {
                     if (prev === undefined) {
