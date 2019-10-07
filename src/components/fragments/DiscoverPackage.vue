@@ -61,6 +61,7 @@
             font-size: 12px;
             font-weight: $font-weight-bold;
             background: $red-button;
+            cursor: help;
 
             @include screen(600) {
                 position: absolute;

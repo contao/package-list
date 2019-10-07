@@ -324,6 +324,7 @@
                 color: #fff;
                 font-weight: $font-weight-bold;
                 background: $red-button;
+                cursor: help;
             }
 
             &--proprietary {
