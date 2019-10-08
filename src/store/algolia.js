@@ -57,81 +57,91 @@ export default {
     },
 
     actions: {
-        async getPackage({ state, commit }, name) {
+        getPackage({ state, commit }, name) {
             if (!name || !name.includes('/')) {
-                return null;
+                return new Promise(resolve => resolve(null));
             }
 
             if (Object.keys(state.metadata).includes(name)) {
                 return state.metadata[name];
             }
 
-            let data = null;
+            const data = new Promise(async (resolve) => {
+                let data = null;
 
-            try {
-                data = (await Http.get(`https://packagist.org/packages/${name}.json`)).data.package;
-                // noinspection JSPrimitiveTypeWrapperUsage
-                data.downloads = data.downloads.total;
-                // noinspection JSPrimitiveTypeWrapperUsage
-                data.dependency = true;
-
-                const latest = Object.keys(data.versions).reduce((prev, curr) => {
-                    if (prev === undefined) {
-                        return curr;
-                    }
-
-                    if ((curr.substr(0, 4) === 'dev-' || curr.substr(-4) === '-dev')
-                        && prev.substr(0, 4) !== 'dev-' && prev.substr(-4) !== '-dev') {
-                        return prev;
-                    }
-
-                    if ((prev.substr(0, 4) === 'dev-' || prev.substr(-4) === '-dev')
-                        && curr.substr(0, 4) !== 'dev-' && curr.substr(-4) !== '-dev') {
-                        return curr;
-                    }
-
-                    return new Date(data.versions[prev].time) > new Date(data.versions[curr].time) ? prev : curr;
-                });
-
-                data = Object.assign(data, data.versions[latest]);
-                data.latest = { version: latest, time: data.versions[latest].time };
-            } catch (err) {
                 try {
-                    data = (await Http.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data;
+                    const content = await algolia().search({
+                        filters: `name:"${name}" AND languages:${state.language}`,
+                        hitsPerPage: 1,
+                    });
+
+                    if (content.nbHits > 0) {
+                        data = content.hits[0];
+                    }
                 } catch (err) {
                     // ignore
                 }
-            }
 
-            try {
-                const content = await algolia().search({
-                    filters: `name:"${name}" AND languages:${state.language}`,
-                    hitsPerPage: 1,
-                });
+                try {
+                    if (data && data.private) {
+                        data = Object.assign({}, (await Http.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data, data || {});
+                    } else {
+                        let pkg = (await Http.get(`https://packagist.org/packages/${name}.json`)).data.package;
 
-                data = Object.assign(data || {}, content.hits[0]);
-            } catch (err) {
-                // ignore
-            }
+                        // noinspection JSPrimitiveTypeWrapperUsage
+                        pkg.downloads = pkg.downloads.total;
+                        // noinspection JSPrimitiveTypeWrapperUsage
+                        pkg.dependency = true;
 
-            if (overrides[name]) {
-                data = Object.assign(data || {}, overrides[name]);
-            }
+                        const latest = Object.keys(pkg.versions).reduce((prev, curr) => {
+                            if (prev === undefined) {
+                                return curr;
+                            }
 
-            if (!data) {
-                return null;
-            }
+                            if ((curr.substr(0, 4) === 'dev-' || curr.substr(-4) === '-dev')
+                                && prev.substr(0, 4) !== 'dev-' && prev.substr(-4) !== '-dev') {
+                                return prev;
+                            }
 
-            delete data.versions;
-            delete data.version;
-            delete data.time;
-            delete data.constraint;
+                            if ((prev.substr(0, 4) === 'dev-' || prev.substr(-4) === '-dev')
+                                && curr.substr(0, 4) !== 'dev-' && curr.substr(-4) !== '-dev') {
+                                return curr;
+                            }
 
-            commit('cache', { name, data: data });
+                            return new Date(pkg.versions[prev].time) > new Date(pkg.versions[curr].time) ? prev : curr;
+                        });
 
-            if (data.features) {
-                commit('packages/pushFeatures', { [name]: data.features }, { root: true });
-            }
+                        pkg = Object.assign(pkg, pkg.versions[latest]);
+                        pkg.latest = { version: latest, time: pkg.versions[latest].time };
+
+                        data = Object.assign({}, pkg, data || {});
+                    }
+                } catch (err) {
+                    // ignore
+                }
+
+                if (overrides[name]) {
+                    data = Object.assign(data || {}, overrides[name]);
+                }
+
+                if (!data) {
+                    resolve(null);
+                    return;
+                }
+
+                delete data.versions;
+                delete data.version;
+                delete data.time;
+                delete data.constraint;
+
+                if (data.features) {
+                    commit('packages/pushFeatures', { [name]: data.features }, { root: true });
+                }
+
+                resolve(data);
+            });
+
+            commit('cache', { name, data });
 
             return data;
         },
