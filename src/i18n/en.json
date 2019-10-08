@@ -1,4 +1,5 @@
 {
+    "ui.app.title": "Contao Extensions",
     "ui.app.loading": "Loading Extension List …",
     "ui.discover.loading": "Loading …",
     "ui.discover.offline": "Could not fetch any results.",
@@ -19,6 +20,8 @@
     "ui.discover.sortFaversTitle": "Sort search results by rating",
     "ui.discover.detailsButton": "Details",
     "ui.discover.latestPackages": "Latest and updated extensions",
+    "ui.discover.faversPackages": "Top rated extensions",
+    "ui.discover.downloadsPackages": "Most downloaded extensions",
 
     "ui.package.homepage": "Project Website",
     "ui.package.private": "Private Package",

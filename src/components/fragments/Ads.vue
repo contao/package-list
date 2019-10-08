@@ -64,12 +64,21 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
     @import "~tiny-slider/dist/tiny-slider.css";
 
+    a {
+        display: block;
+        cursor: pointer;
+        margin-bottom: -3px;
+    }
+
     img {
         width: 100%;
     }
 
     .container {
         position: relative;
+        margin: 59px 0 69px;
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
     }
 
     .button {

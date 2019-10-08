@@ -162,8 +162,15 @@ export default {
         async discover({ state, commit }) {
             try {
                 const d = new Date();
-                const today = `${d.getFullYear()}${d.getMonth()+1}${d.getDay()}`;
+                const today = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2, '0')}${String(d.getDay()).padStart(2, '0')}`;
                 const content = await client.search([
+                    {
+                        indexName: 'v3_ads',
+                        params: {
+                            hitsPerPage: 6,
+                            filters: `languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
+                        },
+                    },
                     {
                         indexName: 'v3_packages_latest',
                         params: {
@@ -172,15 +179,22 @@ export default {
                         },
                     },
                     {
-                        indexName: 'v3_ads',
+                        indexName: 'v3_packages_downloads',
                         params: {
-                            hitsPerPage: 6,
-                            filters: `languages:${state.language} AND validFrom<=${today} AND validTo>=${today}`,
+                            hitsPerPage: 4,
+                            filters: `languages:${state.language} AND dependency:false`,
+                        },
+                    },
+                    {
+                        indexName: 'v3_packages_favers',
+                        params: {
+                            hitsPerPage: 4,
+                            filters: `languages:${state.language} AND dependency:false`,
                         },
                     },
                 ]);
 
-                const items = Array.from(content.results[1].hits);
+                const items = Array.from(content.results[0].hits);
                 const ads = [];
 
                 // Randomly sort ads
@@ -191,8 +205,10 @@ export default {
                 }
 
                 commit('setDiscover', {
-                    updated: content.results[0].hits,
                     ads,
+                    latest: content.results[1].hits,
+                    downloads: content.results[2].hits,
+                    favers: content.results[3].hits,
                 });
 
             } catch (err) {

@@ -16,7 +16,7 @@
         </div>
 
         <template v-else-if="isSearching">
-            <search-sorting/>
+            <search-sorting v-if="!query"/>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in results" :data="item" :key="item.name">
                     <slot name="package-actions" :data="item"/>
@@ -32,12 +32,32 @@
 
             <h2 class="package-search__headline">{{ $t('ui.discover.latestPackages') }}</h2>
             <div class="package-search__results">
-                <discover-package class="package-search__item" v-for="item in discover.updated" :data="item" :key="item.name">
+                <discover-package class="package-search__item" v-for="item in discover.latest" :data="item" :key="item.name">
                     <slot name="package-actions" :data="item"/>
                 </discover-package>
             </div>
             <div class="package-search__more">
-                <button class="package-search__more-button" @click="openSearch()">{{ $t('ui.discover.more') }}</button>
+                <button class="package-search__more-button" @click="openSearch('latest')">{{ $t('ui.discover.more') }}</button>
+            </div>
+
+            <h2 class="package-search__headline">{{ $t('ui.discover.faversPackages') }}</h2>
+            <div class="package-search__results">
+                <discover-package class="package-search__item" v-for="item in discover.favers" :data="item" :key="item.name">
+                    <slot name="package-actions" :data="item"/>
+                </discover-package>
+            </div>
+            <div class="package-search__more">
+                <button class="package-search__more-button" @click="openSearch('favers')">{{ $t('ui.discover.more') }}</button>
+            </div>
+
+            <h2 class="package-search__headline">{{ $t('ui.discover.downloadsPackages') }}</h2>
+            <div class="package-search__results">
+                <discover-package class="package-search__item" v-for="item in discover.downloads" :data="item" :key="item.name">
+                    <slot name="package-actions" :data="item"/>
+                </discover-package>
+            </div>
+            <div class="package-search__more">
+                <button class="package-search__more-button" @click="openSearch('downloads')">{{ $t('ui.discover.more') }}</button>
             </div>
         </div>
 
@@ -87,11 +107,17 @@
                 this.offline = false;
 
                 try {
-                    const response = await this.$store.dispatch('algolia/findPackages', {
-                        sorting: this.sorting,
-                        query: this.query,
+                    const params = {
                         hitsPerPage: 10 * this.pages,
-                    });
+                    };
+
+                    if (this.query) {
+                        params.query = this.query;
+                    } else if (this.sorting) {
+                        params.sorting = this.sorting;
+                    }
+
+                    const response = await this.$store.dispatch('algolia/findPackages', params);
 
                     this.hasMore = response.nbPages > 1;
 
@@ -124,9 +150,9 @@
                 this.searching = false;
             },
 
-            async openSearch() {
+            async openSearch(sort) {
                 this.results = null;
-                await this.sortBy('latest');
+                await this.sortBy(sort);
             }
         },
 

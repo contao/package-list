@@ -28,6 +28,12 @@
         },
 
         async created() {
+            document.title = this.$t('ui.app.title');
+
+            this.$watch(this.$i18n.locale, () => {
+                document.title = this.$t('ui.app.title');
+            });
+
             await this.$store.dispatch('algolia/discover');
 
             const network = document.createElement('script');

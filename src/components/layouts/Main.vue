@@ -1,9 +1,12 @@
 <template>
     <div class="layout-main">
         <header class="layout-main__header" :class="{ 'layout-main__header--margin': !$slots.subheader }">
-            <router-link to="/" class="layout-main__logo">
-                <img src="../../assets/images/contao-logo-corporate.svg" alt="">
-            </router-link>
+            <div class="layout-main__content">
+                <router-link to="/" class="layout-main__logo">
+                    <img src="../../assets/images/logo.svg" alt="">
+                    <p>{{ $t('ui.app.title') }}</p>
+                </router-link>
+            </div>
         </header>
 
         <slot name="subheader"/>
@@ -32,14 +35,30 @@
         overflow: hidden;
 
         &__logo {
-            display: block;
-            margin: 30px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            text-align: left;
+            text-decoration: none !important;
+
+            img {
+                width: 60px;
+                height: 60px;
+            }
+
+            p {
+                overflow: hidden;
+                margin-left: 20px;
+                font-size: 24px;
+                font-weight: $font-weight-light;
+                color: $text-color;
+                line-height: 1.2;
+            }
         }
 
         &__content,
         footer {
-            position: relative;
             margin: 0 20px;
 
             @include screen(1024) {
@@ -49,6 +68,26 @@
 
             @include screen(1200) {
                 max-width: 1180px;
+            }
+        }
+
+        @include screen(600) {
+            &__logo {
+                p {
+                    font-size: 30px;
+                }
+            }
+        }
+
+        @include screen(1024) {
+            &__logo {
+                float: left;
+                height: 86px;
+                margin: 30px 0 0 0;
+            }
+
+            .search-bar__inside {
+                margin: 0 0 0 auto;
             }
         }
     }

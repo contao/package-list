@@ -29,8 +29,8 @@
             sortOptions: {
                 'Relevance': '',
                 'Latest': 'latest',
-                'Downloads': 'downloads',
                 'Favers': 'favers',
+                'Downloads': 'downloads',
             },
         }),
     };
