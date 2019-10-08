@@ -1,12 +1,13 @@
 <template>
-    <div class="container" v-if="ads && ads.length">
+    <div class="container" v-if="ads && ads.length > 1">
         <div ref="controls">
             <button class="button prev">Prev</button>
             <button class="button next">Next</button>
         </div>
         <div ref="slider">
             <div v-for="ad in ads" :key="ad.objectID">
-                <a :href="ad.url" :title="ad.title" target="_blank" rel="noreferrer noopener"><img :src="ad.image" alt=""></a>
+                <a :title="ad.title" @click.stop="setCurrent(ad.package)" v-if="ad.package"><img :src="ad.image" alt=""></a>
+                <a :href="ad.url" :title="ad.title" target="_blank" rel="noreferrer noopener" v-else><img :src="ad.image" alt=""></a>
             </div>
         </div>
     </div>
@@ -14,7 +15,7 @@
 
 <script>
     import { tns } from 'tiny-slider/src/tiny-slider';
-    import { mapState } from 'vuex';
+    import { mapState, mapMutations } from 'vuex';
 
     export default {
         data: () => ({
@@ -26,6 +27,8 @@
         },
 
         methods: {
+            ...mapMutations('packages/details', ['setCurrent']),
+
             initSlider() {
                 if (this.$refs.slider && this.$refs.controls) {
                     this.slider = tns({
