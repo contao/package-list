@@ -302,6 +302,7 @@
             margin-right: 2px;
 
             &:after {
+                color: $text-color;
                 content: ", ";
             }
 

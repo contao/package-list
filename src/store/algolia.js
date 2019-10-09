@@ -23,7 +23,6 @@ const randomizeAds = (hits, limit = 6) => {
         items.splice(ri, 1);
     }
 
-    console.log('randomize', hits, ads);
     return ads;
 };
 

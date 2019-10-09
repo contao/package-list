@@ -83,11 +83,15 @@
             &__logo {
                 float: left;
                 height: 86px;
-                margin: 30px 0 0 0;
+                margin: 0;
             }
 
-            .search-bar__inside {
-                margin: 0 0 0 auto;
+            .search-bar {
+                margin-top: 0;
+
+                &__inside {
+                    margin: 0 0 0 auto;
+                }
             }
         }
     }
