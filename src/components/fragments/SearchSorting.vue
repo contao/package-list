@@ -9,7 +9,6 @@
                     :title="$t(`ui.discover.sort${label}Title`)"
                     :key="value"
                     @click="sortBy(value)"
-                    v-if="value !== '' || query"
                 >
                     {{ $t(`ui.discover.sort${label}`) }}
                 </li>
@@ -27,7 +26,6 @@
         data: () => ({
             open: false,
             sortOptions: {
-                'Relevance': '',
                 'Latest': 'latest',
                 'Favers': 'favers',
                 'Downloads': 'downloads',

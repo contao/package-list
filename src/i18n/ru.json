@@ -1,4 +1,5 @@
 {
+    "ui.app.title": "Contao Extensions",
     "ui.app.loading": "Загрузка списка расширений...",
     "ui.discover.loading": "Загрузка...",
     "ui.discover.offline": "Не удалось получить результаты.",
@@ -17,7 +18,12 @@
     "ui.discover.sortFaversTitle": "Сортировать результаты поиска по рейтингу",
     "ui.discover.detailsButton": "Сведения",
     "ui.discover.latestPackages": "Последние и обновленные расширения",
+    "ui.discover.faversPackages": "Top rated extensions",
+    "ui.discover.downloadsPackages": "Most downloaded extensions",
 
+    "ui.package.homepage": "Веб-сайт проекта",
+    "ui.package.private": "Private Package",
+    "ui.package.privateTitle": "Private packages are only available from the vendor (e.g. as a ZIP download). Please visit the website for more information.",
     "ui.package.abandoned": "Заброшенный",
     "ui.package.abandonedText": "Этот пакет отмечен как заброшенный и больше не поддерживается.",
     "ui.package.abandonedReplace": "Этот пакет имеет статус заброшенного и больше не поддерживается. Автор предлагает вместо него использовать пакет {replacement}.",
@@ -33,7 +39,6 @@
     "ui.package-details.latest": "Последняя версия",
     "ui.package-details.released": "выпущен",
     "ui.package-details.license": "Лицензия",
-    "ui.package-details.homepage": "Веб-сайт проекта",
     "ui.package-details.more": "Еще",
     "ui.package-details.packagist": "Сведения о пакете",
     "ui.package-details.metadata": "Редактировать метаданные",

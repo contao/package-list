@@ -10,8 +10,6 @@
     "ui.discover.empty": "No results for <i>{query}</i>",
     "ui.discover.more": "More Results",
     "ui.discover.sortBy": "Sort by",
-    "ui.discover.sortRelevance": "Relevance",
-    "ui.discover.sortRelevanceTitle": "Sort search results by keyword relevance",
     "ui.discover.sortLatest": "Updated",
     "ui.discover.sortLatestTitle": "Sort search results by last updated",
     "ui.discover.sortDownloads": "Downloads",
