@@ -12,6 +12,21 @@ const algolia = (name = 'v3_packages') => {
     return indexes[name];
 };
 
+const randomizeAds = (hits, limit = 6) => {
+    const items = Array.from(hits);
+    const ads = [];
+
+    // Randomly sort ads
+    while(items.length > 0 && ads.length < limit) {
+        let ri = Math.floor(Math.random() * items.length);
+        ads.push(items[ri]);
+        items.splice(ri, 1);
+    }
+
+    console.log('randomize', hits, ads);
+    return ads;
+};
+
 const overrides = {
     'contao/manager-bundle': {
         features: [
@@ -165,13 +180,6 @@ export default {
                 const today = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2, '0')}${String(d.getDay()).padStart(2, '0')}`;
                 const content = await client.search([
                     {
-                        indexName: 'v3_ads',
-                        params: {
-                            hitsPerPage: 6,
-                            filters: `languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
-                        },
-                    },
-                    {
                         indexName: 'v3_packages_latest',
                         params: {
                             hitsPerPage: 6,
@@ -192,23 +200,27 @@ export default {
                             filters: `languages:${state.language} AND dependency:false`,
                         },
                     },
+                    {
+                        indexName: 'v3_ads',
+                        params: {
+                            hitsPerPage: 6,
+                            filters: `paid:true AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
+                        },
+                    },
+                    {
+                        indexName: 'v3_ads',
+                        params: {
+                            hitsPerPage: 100,
+                            filters: `paid:false AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
+                        },
+                    },
                 ]);
 
-                const items = Array.from(content.results[0].hits);
-                const ads = [];
-
-                // Randomly sort ads
-                while(items.length > 0) {
-                    let ri = Math.floor(Math.random() * items.length);
-                    ads.push(items[ri]);
-                    items.splice(ri, 1);
-                }
-
                 commit('setDiscover', {
-                    ads,
-                    latest: content.results[1].hits,
-                    downloads: content.results[2].hits,
-                    favers: content.results[3].hits,
+                    latest: content.results[0].hits,
+                    downloads: content.results[1].hits,
+                    favers: content.results[2].hits,
+                    ads: randomizeAds(Array.from(content.results[3].hits).concat(randomizeAds(content.results[4].hits, 6 - content.results[3].nbHits))),
                 });
 
             } catch (err) {
