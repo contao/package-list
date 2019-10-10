@@ -1,5 +1,5 @@
 {
-    "ui.app.title": "Contao Extensions",
+    "ui.app.title": "Contao機能拡張",
     "ui.app.loading": "機能拡張の一覧を読み込み中...",
     "ui.discover.loading": "読み込み中…",
     "ui.discover.offline": "何も結果を取得できませんでした。",
@@ -18,12 +18,12 @@
     "ui.discover.sortFaversTitle": "検索結果を評価で並べ替え",
     "ui.discover.detailsButton": "詳細",
     "ui.discover.latestPackages": "最新と更新された機能拡張",
-    "ui.discover.faversPackages": "Top rated extensions",
-    "ui.discover.downloadsPackages": "Most downloaded extensions",
+    "ui.discover.faversPackages": "最上位のレートの機能拡張",
+    "ui.discover.downloadsPackages": "もっともダウンロードされた機能拡張",
 
     "ui.package.homepage": "プロジェクトのウェブサイト",
-    "ui.package.private": "Private Package",
-    "ui.package.privateTitle": "Private packages are only available from the vendor (e.g. as a ZIP download). Please visit the website for more information.",
+    "ui.package.private": "私的なパッケージ",
+    "ui.package.privateTitle": "私的なパッケージはベンダーからだけ(例えば、ZIPのダウンロードで)入手できます。詳細はウェブサイトを参照してください。",
     "ui.package.abandoned": "放棄",
     "ui.package.abandonedText": "このパッケージは放棄され、もう保守されていません。",
     "ui.package.abandonedReplace": "このパッケージは放棄され、もう保守されていません。代わりに{replacement}パッケージの使用を作者は推奨しています。",
