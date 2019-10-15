@@ -10,6 +10,17 @@
         <echo message="Contao Package List build complete" />
     </target>
 
+    <target name="deploy" depends="build-prod">
+        <echo message="Deploying to extensions.contao.org" />
+        <exec executable="rsync" checkreturn="true">
+            <arg value="-av" />
+            <arg value="--delete" />
+            <arg value="./dist/*" />
+            <arg value="packages@w1.vhost.io:/srv/home/packages/public/" />
+        </exec>
+        <delete dir="dist" />
+    </target>
+
     <target name="build-prod">
         <echo message="Compiling UI files" />
         <exec executable="npm" checkreturn="true">
