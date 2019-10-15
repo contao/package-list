@@ -53,7 +53,6 @@
                 font-size: 24px;
                 font-weight: $font-weight-light;
                 color: $text-color;
-                line-height: 1.2;
             }
         }
 
