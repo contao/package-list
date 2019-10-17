@@ -28,7 +28,7 @@ const i18n = {
         Vue.i18n.fallback('en');
         await this.load('en');
 
-        const userLang = localStorage.getItem('contao_manager_locale');
+        const userLang = localStorage.getItem('_locale');
 
         if (userLang && locales[userLang]) {
             return this.load(userLang);
