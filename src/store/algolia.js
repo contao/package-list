@@ -203,14 +203,14 @@ export default {
                         indexName: 'v3_ads',
                         params: {
                             hitsPerPage: 6,
-                            filters: `paid:true AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
+                            filters: `primary:true AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
                         },
                     },
                     {
                         indexName: 'v3_ads',
                         params: {
                             hitsPerPage: 100,
-                            filters: `paid:false AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
+                            filters: `primary:false AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
                         },
                     },
                 ]);
