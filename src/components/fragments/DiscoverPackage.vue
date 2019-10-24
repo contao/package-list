@@ -131,6 +131,7 @@
             justify-content: space-between;
 
             @include screen(600) {
+                height: 100%;
                 min-height: 90px;
             }
         }
