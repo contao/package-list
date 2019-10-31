@@ -37,6 +37,7 @@
                         items: 1,
                         slideBy: 'page',
                         autoplay: true,
+                        autoplayTimeout: 10000,
                         nav: false,
                         autoplayButtonOutput: false,
                         responsive: {
