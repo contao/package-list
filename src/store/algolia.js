@@ -1,5 +1,6 @@
 import { Http } from 'vue-resource';
 import algoliasearch from 'algoliasearch';
+import semver from 'semver';
 
 const client = algoliasearch('60DW2LJW0P', '13718a23f4e436f7e7614340bd87d913');
 const indexes = {};
@@ -114,26 +115,25 @@ export default {
                             versions = pkg.versions;
                         }
 
-                        const latest = Object.keys(versions).reduce((prev, curr) => {
-                            if (prev === undefined) {
-                                return curr;
-                            }
+                        const latest = Object.values(versions).filter(
+                            pkg => pkg.version.substr(0, 4) !== 'dev-' && 'contao/core-bundle' in pkg.require,
+                        ).sort(
+                            (a, b) => {
+                                const v1 = semver.coerce(a.version_normalized, { loose: true });
+                                const v2 = semver.coerce(b.version_normalized, { loose: true });
 
-                            if ((curr.substr(0, 4) === 'dev-' || curr.substr(-4) === '-dev')
-                                && prev.substr(0, 4) !== 'dev-' && prev.substr(-4) !== '-dev') {
-                                return prev;
-                            }
+                                const result = semver.compare(v1, v2);
 
-                            if ((prev.substr(0, 4) === 'dev-' || prev.substr(-4) === '-dev')
-                                && curr.substr(0, 4) !== 'dev-' && curr.substr(-4) !== '-dev') {
-                                return curr;
-                            }
+                                if (result === 0) {
+                                    return new Date(a.time) > new Date(b.time) ? 1 : -1;
+                                }
 
-                            return new Date(pkg.versions[prev].time) > new Date(pkg.versions[curr].time) ? prev : curr;
-                        });
+                                return result;
+                            },
+                        ).pop();
 
-                        pkg = Object.assign(pkg, versions[latest]);
-                        pkg.latest = { version: latest, time: versions[latest].time };
+                        pkg = Object.assign(pkg, latest);
+                        pkg.latest = { version: latest.version, time: latest.time };
 
                         data = Object.assign({}, pkg, data || {});
                     }
