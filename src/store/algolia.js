@@ -101,13 +101,20 @@ export default {
                         data = Object.assign({}, (await Http.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data, data || {});
                     } else {
                         let pkg = (await Http.get(`https://packagist.org/packages/${name}.json`)).data.package;
+                        let versions;
 
                         // noinspection JSPrimitiveTypeWrapperUsage
                         pkg.downloads = pkg.downloads.total;
                         // noinspection JSPrimitiveTypeWrapperUsage
                         pkg.dependency = true;
 
-                        const latest = Object.keys(pkg.versions).reduce((prev, curr) => {
+                        try {
+                            versions = (await Http.get(`https://repo.packagist.org/p/${name}.json`)).data.packages[name];
+                        } catch (err) {
+                            versions = pkg.versions;
+                        }
+
+                        const latest = Object.keys(versions).reduce((prev, curr) => {
                             if (prev === undefined) {
                                 return curr;
                             }
@@ -125,8 +132,8 @@ export default {
                             return new Date(pkg.versions[prev].time) > new Date(pkg.versions[curr].time) ? prev : curr;
                         });
 
-                        pkg = Object.assign(pkg, pkg.versions[latest]);
-                        pkg.latest = { version: latest, time: pkg.versions[latest].time };
+                        pkg = Object.assign(pkg, versions[latest]);
+                        pkg.latest = { version: latest, time: versions[latest].time };
 
                         data = Object.assign({}, pkg, data || {});
                     }
