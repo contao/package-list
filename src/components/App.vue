@@ -37,7 +37,7 @@
             await this.$store.dispatch('algolia/discover');
 
             const network = document.createElement('script');
-            network.src = 'https://contao.org/files/js/network.js';
+            network.src = 'https://contao.org/files/js/network.min.js';
             network.onload = () => {
                 setTimeout(() => {
                     this.initializing = false;
