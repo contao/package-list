@@ -68,7 +68,7 @@ export default {
             state.discover = data;
 
             state.ads = data ? data.ads : [];
-        }
+        },
     },
 
     actions: {
@@ -115,9 +115,21 @@ export default {
                             versions = pkg.versions;
                         }
 
-                        const latest = Object.values(versions).filter(
-                            pkg => pkg.version.substr(0, 4) !== 'dev-' && 'contao/core-bundle' in pkg.require,
-                        ).sort(
+                        let latest = Object.values(versions).filter(
+                            pkg => pkg.version.substr(0, 4) !== 'dev-' && pkg.version.substr(-4) !== '-dev' && pkg.require && 'contao/core-bundle' in pkg.require,
+                        );
+
+                        if (!latest.length) {
+                            latest = Object.values(versions).filter(
+                                pkg => pkg.version.substr(0, 4) !== 'dev-' && pkg.version.substr(-4) !== '-dev',
+                            );
+                        }
+
+                        if (!latest.length) {
+                            latest = Object.values(versions);
+                        }
+
+                        latest = latest.sort(
                             (a, b) => {
                                 const v1 = semver.coerce(a.version_normalized, { loose: true });
                                 const v2 = semver.coerce(b.version_normalized, { loose: true });
@@ -138,7 +150,7 @@ export default {
                         data = Object.assign({}, pkg, data || {});
                     }
                 } catch (err) {
-                    // ignore
+                    console.error('Error fetching metadata for '+name, err);
                 }
 
                 if (overrides[name]) {
