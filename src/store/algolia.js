@@ -27,19 +27,6 @@ const randomizeAds = (hits, limit = 6) => {
     return ads;
 };
 
-const overrides = {
-    'contao/manager-bundle': {
-        features: [
-            'contao/news-bundle',
-            'contao/calendar-bundle',
-            'contao/faq-bundle',
-            'contao/comments-bundle',
-            'contao/newsletter-bundle',
-            'contao/listing-bundle',
-        ],
-    },
-};
-
 export default {
     namespaced: true,
 
@@ -153,10 +140,6 @@ export default {
                     console.error('Error fetching metadata for '+name, err);
                 }
 
-                if (overrides[name]) {
-                    data = Object.assign(data || {}, overrides[name]);
-                }
-
                 if (!data) {
                     resolve(null);
                     return;
@@ -166,10 +149,6 @@ export default {
                 delete data.version;
                 delete data.time;
                 delete data.constraint;
-
-                if (data.features) {
-                    commit('packages/pushFeatures', { [name]: data.features }, { root: true });
-                }
 
                 resolve(data);
             });
