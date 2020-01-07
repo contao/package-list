@@ -22,3 +22,6 @@ i18n.init().then(() => {
 
     $vue.$mount('#app');
 });
+
+const imagesCtx = require.context('../packages/', true, /\.(png|jpg|jpeg|gif|svg|webp)$/);
+imagesCtx.keys().forEach(imagesCtx);
