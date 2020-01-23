@@ -55,6 +55,7 @@
                     <details-tab name="suggest" highlight :current="tab" :links="metadata.suggest" @tab="setTab"/>
                     <details-tab name="require" show-empty :current="tab" :links="metadata.require" @tab="setTab"/>
                     <details-tab name="conflict" show-empty :current="tab" :links="metadata.conflict" @tab="setTab"/>
+                    <details-tab name="dependents" :current="tab" :links="dependents" @tab="setTab" v-if="dependents"/>
                 </ul>
                 <details-content name="description" :current="tab">
                     <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
@@ -72,6 +73,9 @@
                 </details-content>
                 <details-content name="conflict" :current="tab" :links="metadata.conflict">
                     <slot name="conflict-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                </details-content>
+                <details-content name="dependents" :current="tab" :links="dependents" v-if="dependents">
+                    <slot name="dependents-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
                 </details-content>
             </template>
         </div>
@@ -97,6 +101,9 @@
             filterFeatures: {
                 type: Function,
                 default: features => features,
+            },
+            dependents: {
+                type: Object,
             },
         },
 
