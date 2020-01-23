@@ -1,8 +1,6 @@
 
 export default {
     'contao/manager-bundle': [
-        'contao/core-bundle',
-        'contao/installation-bundle',
         'contao/news-bundle',
         'contao/calendar-bundle',
         'contao/faq-bundle',
