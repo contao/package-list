@@ -2,9 +2,13 @@
     <div class="package-popup__tabcontent" v-show="current === name">
         <slot>
             <div class="package-popup__packagelist" v-if="links">
-                <package-link :name="name" :key="name" :text="text" v-for="(text, name) in iterableLinks">
-                    <slot name="actions" v-bind="{ name }"/>
-                </package-link>
+                <template v-for="(text, name) in iterableLinks">
+                    <slot name="links" v-bind="{ name, text }">
+                        <package-link :name="name" :key="name" :text="text">
+                            <slot name="actions" v-bind="{ name }"/>
+                        </package-link>
+                    </slot>
+                </template>
             </div>
         </slot>
     </div>

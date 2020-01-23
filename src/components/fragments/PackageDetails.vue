@@ -22,6 +22,7 @@
             </div>
             <template v-else>
                 <div class="package-popup__summary">
+                    <!--suppress HtmlUnknownTarget -->
                     <package-logo component-class="package-popup__icon" :src="metadata.logo"/>
                     <div class="package-popup__text">
                         <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
@@ -50,7 +51,7 @@
 
                 <ul class="package-popup__tabs">
                     <details-tab name="description" show-empty :current="tab" :links="false" @tab="setTab"/>
-                    <details-tab name="features" highlight :current="tab" :links="metadata.features" @tab="setTab"/>
+                    <details-tab name="features" highlight :current="tab" :links="filterFeatures(metadata.features)" @tab="setTab" v-if="metadata.features"/>
                     <details-tab name="suggest" highlight :current="tab" :links="metadata.suggest" @tab="setTab"/>
                     <details-tab name="require" show-empty :current="tab" :links="metadata.require" @tab="setTab"/>
                     <details-tab name="conflict" show-empty :current="tab" :links="metadata.conflict" @tab="setTab"/>
@@ -60,7 +61,7 @@
                     <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
                     <p class="package-popup__description">{{ metadata.description }}</p>
                 </details-content>
-                <details-content name="features" :current="tab" :links="metadata.features">
+                <details-content name="features" :current="tab" :links="filterFeatures(metadata.features)" v-if="metadata.features">
                     <slot name="features-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
                 </details-content>
                 <details-content name="suggest" :current="tab" :links="metadata.suggest">
@@ -91,6 +92,13 @@
         mixins: [metadata],
 
         components: { More, Loader, PackageLogo, DetailsTab, DetailsContent },
+
+        props: {
+            filterFeatures: {
+                type: Function,
+                default: features => features,
+            },
+        },
 
         data: () => ({
             tab: 'description',
