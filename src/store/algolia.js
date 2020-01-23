@@ -1,6 +1,7 @@
 import { Http } from 'vue-resource';
 import algoliasearch from 'algoliasearch';
 import semver from 'semver';
+import features from './packages/features';
 
 const client = algoliasearch('60DW2LJW0P', '13718a23f4e436f7e7614340bd87d913');
 const indexes = {};
@@ -149,6 +150,10 @@ export default {
                 delete data.version;
                 delete data.time;
                 delete data.constraint;
+
+                if (features[data.name]) {
+                    data.features = features[data.name];
+                }
 
                 resolve(data);
             });
