@@ -369,7 +369,7 @@
             @include screen(600) {
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
+                justify-content: space-between;
                 margin: 0 0 0 25px;
                 min-width: 200px;
             }
