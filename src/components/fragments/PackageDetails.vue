@@ -50,31 +50,62 @@
                 </div>
 
                 <ul class="package-popup__tabs">
-                    <details-tab name="description" show-empty :current="tab" :links="false" @tab="setTab"/>
-                    <details-tab name="features" highlight :current="tab" :links="filterFeatures(metadata.features)" @tab="setTab" v-if="metadata.features"/>
-                    <details-tab name="suggest" highlight :current="tab" :links="metadata.suggest" @tab="setTab"/>
-                    <details-tab name="require" show-empty :current="tab" :links="metadata.require" @tab="setTab"/>
-                    <details-tab name="conflict" show-empty :current="tab" :links="metadata.conflict" @tab="setTab"/>
-                    <details-tab name="dependents" :current="tab" :links="dependents" @tab="setTab" v-if="dependents"/>
+                    <details-tab
+                        show-empty
+                        :links="false"
+                        :active="tab === ''"
+                        @click="setTab('')"
+                    >{{ $t('ui.package-details.tabDescription') }}</details-tab>
+                    <details-tab
+                        highlight
+                        :links="filterFeatures(metadata.features)"
+                        :active="tab === 'features'"
+                        @click="setTab('features')"
+                        v-if="metadata.features"
+                    >{{ $t('ui.package-details.tabFeatures') }}</details-tab>
+                    <details-tab
+                        highlight
+                        :active="tab === 'suggest'"
+                        :links="metadata.suggest"
+                        @click="setTab('suggest')"
+                    >{{ $t('ui.package-details.tabSuggest') }}</details-tab>
+                    <details-tab
+                        show-empty
+                        :active="tab === 'require'"
+                        :links="metadata.require"
+                        @click="setTab('require')"
+                    >{{ $t('ui.package-details.tabRequire') }}</details-tab>
+                    <details-tab
+                        show-empty
+                        :active="tab === 'conflict'"
+                        :links="metadata.conflict"
+                        @click="setTab('conflict')"
+                    >{{ $t('ui.package-details.tabConflict') }}</details-tab>
+                    <details-tab
+                        :active="tab === 'dependents'"
+                        :links="dependents"
+                        @click="setTab('dependents')"
+                        v-if="dependents"
+                    >{{ $t('ui.package-details.tabDependents') }}</details-tab>
                 </ul>
-                <details-content name="description" :current="tab">
+                <details-content v-show="tab === ''">
                     <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
                     <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
                     <p class="package-popup__description">{{ metadata.description }}</p>
                 </details-content>
-                <details-content name="features" :current="tab" :links="filterFeatures(metadata.features)" v-if="metadata.features">
+                <details-content v-show="tab === 'features'" :links="filterFeatures(metadata.features)" v-if="metadata.features">
                     <slot name="features-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
                 </details-content>
-                <details-content name="suggest" :current="tab" :links="metadata.suggest">
+                <details-content v-show="tab === 'suggest'" :links="metadata.suggest">
                     <slot name="suggest-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
                 </details-content>
-                <details-content name="require" :current="tab" :links="metadata.require">
+                <details-content v-show="tab === 'require'" :links="metadata.require">
                     <slot name="require-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
                 </details-content>
-                <details-content name="conflict" :current="tab" :links="metadata.conflict">
+                <details-content v-show="tab === 'conflict'" :links="metadata.conflict">
                     <slot name="conflict-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
                 </details-content>
-                <details-content name="dependents" :current="tab" :links="dependents" v-if="dependents">
+                <details-content v-show="tab === 'dependents'" :links="dependents" v-if="dependents">
                     <slot name="dependents-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
                 </details-content>
             </template>
@@ -107,14 +138,11 @@
             },
         },
 
-        data: () => ({
-            tab: 'description',
-        }),
-
         computed: {
             ...mapGetters('packages/details', ['hasPrevious']),
 
             current: vm => vm.$route.query.p,
+            tab: vm => String(vm.$route.hash).substr(1),
             abandonedText: vm => vm.metadata.abandoned === true ? vm.$t('ui.package.abandonedText') : vm.$t('ui.package.abandonedReplace', { replacement: vm.metadata.abandoned }),
 
             popupClass() {
@@ -142,13 +170,28 @@
             ...mapMutations('packages/details', ['clearCurrent', 'popCurrent']),
 
             setTab(name) {
-                this.tab = name;
+                this.$router.replace({ query: this.$route.query, hash: name, append: true });
+            },
+
+            updatePage() {
+                let title = this.$t('ui.app.title');
+                let description = '';
+
+                if (this.metadata && this.metadata.title) {
+                    title = `${this.metadata.title} (${this.current}) - ${title}`;
+                    description = this.metadata.description;
+                } else if (this.current) {
+                    title = `${this.current} - ${title}`;
+                }
+
+                document.title = title;
+                this.description.setAttribute('content', description);
             },
         },
 
         watch: {
             current() {
-                this.tab = 'description';
+                this.updatePage();
             },
 
             exists(exists) {
@@ -156,10 +199,23 @@
                     this.clearCurrent();
                 }
             },
+
+            metadata() {
+                this.updatePage();
+            },
+        },
+
+        created() {
+            this.description = document.head.querySelector('meta[name="description"]');
         },
 
         activated() {
-            this.tab = 'description';
+            this.updatePage();
+        },
+
+        deactivated() {
+            document.title = this.$t('ui.app.title');
+            this.description.setAttribute('content', '');
         },
     };
 </script>

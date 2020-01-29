@@ -8,7 +8,7 @@
         </div>
         <template v-else>
             <router-view :class="!!currentPackage ? 'blur-in' : 'blur-out'"/>
-            <package-details v-if="!!currentPackage"/>
+            <keep-alive><package-details v-if="!!currentPackage"/></keep-alive>
         </template>
     </div>
 </template>

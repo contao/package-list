@@ -1,5 +1,5 @@
 <template>
-    <div class="package-popup__tabcontent" v-show="current === name">
+    <div class="package-popup__tabcontent">
         <slot>
             <div class="package-popup__packagelist" v-if="links">
                 <template v-for="(text, name) in iterableLinks">
@@ -21,8 +21,6 @@
         components: { PackageLink },
 
         props: {
-            name: String,
-            current: String,
             links: [Object, Array],
         },
 

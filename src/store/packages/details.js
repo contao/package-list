@@ -31,14 +31,8 @@ export default {
         },
 
         popCurrent(state) {
-            const query = Object.assign({}, state.router.currentRoute.query);
-
-            if (state.previous.length) {
-                state.router.push({ query: Object.assign(query, { p: state.previous.pop() }), append: true });
-            } else {
-                delete query.p;
-                state.router.push({ query, append: true });
-            }
+            state.previous.pop();
+            state.router.go(-1);
         },
 
         setRouter(state, router) {
