@@ -207,13 +207,10 @@
 
         created() {
             this.description = document.head.querySelector('meta[name="description"]');
-        },
-
-        activated() {
             this.updatePage();
         },
 
-        deactivated() {
+        destroyed() {
             document.title = this.$t('ui.app.title');
             this.description.setAttribute('content', '');
         },
