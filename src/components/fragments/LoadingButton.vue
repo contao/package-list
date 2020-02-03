@@ -4,6 +4,8 @@
         :class="buttonClass"
         :disabled="disabled || loading"
         @click="click"
+        @mouseover="e => $emit('mouseover', e)"
+        @mouseout="e => $emit('mouseout', e)"
     >
         <span :class="slotClass"><slot/></span>
         <loader v-show="loading"/>
