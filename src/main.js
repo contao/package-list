@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 
+import bootstrap from './bootstrap';
 import router from './router';
 import store from './store';
 import i18n from './i18n';
@@ -10,18 +11,7 @@ import App from './components/App';
 
 Vue.use(VueResource);
 
-i18n.init().then(() => {
-    /* eslint-disable no-new */
-    const $vue = new Vue({
-        router,
-        store,
-        render: h => h(App),
-    });
-
-    $vue.$store.commit('packages/details/setRouter', router);
-
-    $vue.$mount('#app');
-});
+bootstrap(Vue, App, router, store, i18n);
 
 const imagesCtx = require.context('../packages/', true, /\.(png|jpg|jpeg|gif|svg|webp)$/);
 imagesCtx.keys().forEach(imagesCtx);
