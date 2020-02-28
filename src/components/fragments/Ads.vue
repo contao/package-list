@@ -49,7 +49,7 @@
     .container {
         position: relative;
         margin: 59px 0 69px;
-        background: rgba(0, 0, 0, 0.2);
+        background: #FFF;
         box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
     }
 </style>
