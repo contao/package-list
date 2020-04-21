@@ -22,7 +22,5 @@ export default async function(Vue, App, router, store, i18n) {
         render: h => h(App),
     });
 
-    $vue.$store.commit('packages/details/setRouter', router);
-
     $vue.$mount('#app');
 }

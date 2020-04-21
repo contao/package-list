@@ -6,10 +6,11 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 import algolia from './algolia';
+import modals from './modals';
 import packages from './packages';
 
 const store = new Vuex.Store({
-    modules: { algolia, packages },
+    modules: { algolia, modals, packages },
 });
 
 export default store;

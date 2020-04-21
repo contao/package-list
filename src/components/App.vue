@@ -7,24 +7,24 @@
             </div>
         </div>
         <template v-else>
-            <router-view :class="!!currentPackage ? 'blur-in' : 'blur-out'"/>
-            <package-details v-if="!!currentPackage"/>
+            <router-view :class="hasModal ? 'blur-in' : 'blur-out'"/>
+            <component :is="currentModal" v-if="hasModal"/>
         </template>
     </div>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     import PackageDetails from './fragments/PackageDetails';
 
     export default {
-        components: { PackageDetails },
-
         data: () => ({
             initializing: true,
         }),
 
         computed: {
-            currentPackage: vm => vm.$route.query.p,
+            ...mapGetters('modals', ['hasModal', 'currentModal']),
         },
 
         async created() {
@@ -45,6 +45,10 @@
             };
 
             document.body.appendChild(network);
+        },
+
+        mounted() {
+            this.$store.dispatch('packages/details/init', { vue: this, component: PackageDetails });
         },
     };
 </script>
