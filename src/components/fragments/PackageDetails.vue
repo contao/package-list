@@ -140,6 +140,7 @@
         },
 
         data: () => ({
+            appTitle: '',
             links: [],
         }),
 
@@ -179,12 +180,12 @@
             },
 
             updatePage() {
-                let title = `${this.current} - ${this.$t('ui.app.title')}`;
+                let title = `${this.current} - ${this.appTitle}`;
                 let description = '';
 
                 if (this.metadata) {
                     if (this.metadata.title) {
-                        title = `${this.metadata.title} (${this.current}) - ${this.$t('ui.app.title')}`;
+                        title = `${this.metadata.title} (${this.current}) - ${this.appTitle}`;
                     }
 
                     description = this.metadata.description || '';
@@ -227,6 +228,10 @@
             },
         },
 
+        created() {
+            this.appTitle = document.title;
+        },
+
         mounted() {
             document.head.querySelector('meta[name="robots"]').setAttribute('content', 'index,follow');
 
@@ -239,7 +244,7 @@
         },
 
         beforeDestroy() {
-            document.title = this.$t('ui.app.title');
+            document.title = this.appTitle;
 
             document.head.querySelector('meta[name="description"]').setAttribute('content', '');
             document.head.querySelector('meta[name="robots"]').setAttribute('content', 'noindex,follow');
