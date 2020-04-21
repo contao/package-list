@@ -115,6 +115,7 @@
 
 <script>
     import { mapGetters, mapMutations } from 'vuex';
+    import locales from '../../i18n/locales';
     import metadata from '../../mixins/metadata';
 
     import PackageLogo from './Logo';
@@ -137,6 +138,10 @@
                 type: Object,
             },
         },
+
+        data: () => ({
+            links: [],
+        }),
 
         computed: {
             ...mapGetters('packages/details', ['hasPrevious']),
@@ -174,18 +179,35 @@
             },
 
             updatePage() {
-                let title = this.$t('ui.app.title');
+                let title = `${this.current} - ${this.$t('ui.app.title')}`;
                 let description = '';
 
-                if (this.metadata && this.metadata.title) {
-                    title = `${this.metadata.title} (${this.current}) - ${title}`;
-                    description = this.metadata.description;
-                } else if (this.current) {
-                    title = `${this.current} - ${title}`;
+                if (this.metadata) {
+                    if (this.metadata.title) {
+                        title = `${this.metadata.title} (${this.current}) - ${this.$t('ui.app.title')}`;
+                    }
+
+                    description = this.metadata.description || '';
                 }
 
                 document.title = title;
-                this.description.setAttribute('content', description);
+                document.head.querySelector('meta[name="description"]').setAttribute('content', description);
+            },
+
+            addLink(query, rel, hrefLang = null) {
+                const href = new URL(location.pathname, location);
+                href.search = query;
+
+                const link = document.createElement('link');
+                link.setAttribute('rel', rel);
+                link.setAttribute('href', href.toString());
+
+                if (hrefLang) {
+                    link.setAttribute('hrefLang', hrefLang);
+                }
+
+                document.head.appendChild(link);
+                this.links.push(link);
             },
         },
 
@@ -205,14 +227,26 @@
             },
         },
 
-        created() {
-            this.description = document.head.querySelector('meta[name="description"]');
+        mounted() {
+            document.head.querySelector('meta[name="robots"]').setAttribute('content', 'index,follow');
+
             this.updatePage();
+            this.addLink(`?p=${this.current}&_locale=${this.$i18n.locale()}`, 'canonical');
+
+            Object.keys(locales).forEach((locale) => {
+                this.addLink(`?p=${this.current}&_locale=${locale}`, 'alternate', locale);
+            });
         },
 
-        destroyed() {
+        beforeDestroy() {
             document.title = this.$t('ui.app.title');
-            this.description.setAttribute('content', '');
+
+            document.head.querySelector('meta[name="description"]').setAttribute('content', '');
+            document.head.querySelector('meta[name="robots"]').setAttribute('content', 'noindex,follow');
+
+            this.links.forEach((link) => {
+                document.head.removeChild(link);
+            });
         },
     };
 </script>

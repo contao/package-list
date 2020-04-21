@@ -1,7 +1,7 @@
 <template>
     <div class="link-more" v-if="linkItems.length">
         <button @click="toggle">{{ $t('ui.package-details.more') }}</button>
-        <div class="link-more__menu" ref="menu" v-show="visible" tabindex="-1" @blur="close" @click="close">
+        <div class="link-more__menu" ref="menu" v-if="visible" tabindex="-1" @blur="close" @click="close">
             <link-menu :items="linkItems" color="contao"/>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <template>
     <figure :class="computedClass">
-        <img :src="src" alt="" v-if="src">
+        <!--suppress HtmlUnknownTarget -->
+        <img :src="src" loading="lazy" alt="" v-if="src">
         <img src="../../assets/images/placeholder.png" alt="" v-else>
     </figure>
 </template>
