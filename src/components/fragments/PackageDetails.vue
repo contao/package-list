@@ -247,7 +247,7 @@
             document.title = this.appTitle;
 
             document.head.querySelector('meta[name="description"]').setAttribute('content', '');
-            document.head.querySelector('meta[name="robots"]').setAttribute('content', 'noindex,follow');
+            // document.head.querySelector('meta[name="robots"]').setAttribute('content', 'noindex,follow');
 
             this.links.forEach((link) => {
                 document.head.removeChild(link);
