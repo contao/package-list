@@ -15,6 +15,12 @@
             <button class="widget-button widget-button--inline widget-button--update" @click="getOnline">{{ $t('ui.discover.offlineButton') }}</button>
         </div>
 
+        <div v-else-if="isSearching && !Object.keys(results).length" class="package-search__status package-search__status--empty">
+            <i18n tag="p" path="ui.discover.empty" class="package-search__title">
+                <template #query><i>{{ query }}</i></template>
+            </i18n>
+        </div>
+
         <template v-else-if="isSearching">
             <search-sorting v-if="!query"/>
             <div class="package-search__results">

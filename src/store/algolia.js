@@ -172,6 +172,8 @@ export default {
             }
 
             params.filters = `languages:${state.language} AND dependency:false`;
+            params.highlightPreTag = '%%';
+            params.highlightPostTag = '%%';
 
             return await algolia(`v3_packages${suffix}`).search(params);
         },

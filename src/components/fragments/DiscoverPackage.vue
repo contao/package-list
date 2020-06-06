@@ -3,8 +3,18 @@
         <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
         <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
         <div class="discover-package__details">
-            <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }" :title="data.name !== data.title ? data.name : ''" v-html="title"></h1>
-            <p class="discover-package__description" :class="{ 'discover-package__description--fallback': !data.logo }" v-html="description">{{ data.description }}</p>
+            <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }" :title="data.name !== data.title ? data.name : ''">
+                <template v-for="(fragment, i) in title.split('%%')">
+                    <em :key="i" v-if="i % 2">{{ fragment }}</em>
+                    <template v-else>{{ fragment }}</template>
+                </template>
+            </h1>
+            <p class="discover-package__description" :class="{ 'discover-package__description--fallback': !data.logo }">
+                <template v-for="(fragment, i) in description.split('%%')">
+                    <em :key="i" v-if="i % 2">{{ fragment }}</em>
+                    <template v-else>{{ fragment }}</template>
+                </template>
+            </p>
 
             <div class="discover-package__more">
                 <p class="discover-package__counts">
