@@ -235,7 +235,7 @@
             document.head.querySelector('meta[name="robots"]').setAttribute('content', 'index,follow');
 
             this.updatePage();
-            this.addLink(`?p=${this.current}&_locale=${this.$i18n.locale()}`, 'canonical');
+            this.addLink(`?p=${this.current}&_locale=${this.$i18n.locale}`, 'canonical');
 
             Object.keys(locales).forEach((locale) => {
                 this.addLink(`?p=${this.current}&_locale=${locale}`, 'alternate', locale);

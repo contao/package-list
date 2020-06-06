@@ -19,6 +19,7 @@ export default async function(Vue, App, router, store, i18n) {
     const $vue = new Vue({
         router,
         store,
+        i18n: i18n.plugin,
         render: h => h(App),
     });
 
