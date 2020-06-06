@@ -26,7 +26,7 @@
     "ui.package.privateTitle": "Private packages are only available from the vendor (e.g. as a ZIP download). Please visit the website for more information.",
     "ui.package.abandoned": "dismesso",
     "ui.package.abandonedText": "Questo pacchetto è abbandonato e non è più mantenuto.",
-    "ui.package.abandonedReplace": "Questo pacchetto è contrassegnato come dismesso, si prega di utilizzare invece \"{replacement}\".",
+    "ui.package.abandonedReplace": "This package is abandoned and no longer maintained. The author suggests using the {replacement} package instead.",
 
     "ui.package-details.previous": "Dettagli estensione precedente",
     "ui.package-details.close": "Chiudi dettagli estensione",
