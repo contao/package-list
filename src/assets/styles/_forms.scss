@@ -123,6 +123,10 @@ select {
         padding: 0 20px;
     }
 
+    &--transparent {
+        background: transparent;
+    }
+
     &--small {
         height: 28px;
         width: auto !important;
@@ -185,23 +189,9 @@ select {
 
     $iconSelector: '.icon-selector';
     $icons: (
-        //'add',
-        //'check',
-        //'edit',
-        //'gear',
-        //'hide',
         'details',
         'link',
-        //'lock',
-        //'power',
-        //'run',
-        //'save',
         'search',
-        //'show',
-        //'trash',
-        //'unlock',
-        //'update',
-        //'upload',
     ) !default;
 
     @each $buttonIcon in $icons {
@@ -224,6 +214,15 @@ select {
             background-repeat: no-repeat;
             background-size: 20px 20px;
             content:"";
+        }
+    }
+
+    &:empty {
+        min-width: auto;
+        padding: 0 10px;
+
+        &:before {
+            margin-right: 0;
         }
     }
 
