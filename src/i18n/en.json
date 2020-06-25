@@ -40,6 +40,7 @@
     "ui.package-details.linkReplaces": "replaces",
     "ui.package-details.linkProvides": "provides",
     "ui.package-details.linkConflicts": "conflicts",
+    "ui.package-details.funding": "Fund package maintenance!",
     "ui.package-details.latest": "Latest version",
     "ui.package-details.released": "released on",
     "ui.package-details.license": "License(s)",
