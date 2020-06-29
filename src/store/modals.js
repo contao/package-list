@@ -9,7 +9,7 @@ export default {
         hasModal: state => Object.values(state.modals).reduce((accu, modals) => (accu + Object.values(modals).length), 0) > 0,
 
         currentModal(state) {
-            const prios = Object.keys(state.modals).sort((a, b) => (a - b));
+            const prios = Object.keys(state.modals).sort((a, b) => (b - a));
 
             for (const prio of prios) {
                 const modals = Object.values(state.modals[prio]);
