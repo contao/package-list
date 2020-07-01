@@ -1,6 +1,7 @@
 <template>
-    <button
-        :type="submit ? 'submit' : 'button'"
+    <component
+        :is="href ? 'a' : 'button'"
+        :type="href ? null : (submit ? 'submit' : 'button')"
         :class="buttonClass"
         :disabled="disabled || loading"
         @click="click"
@@ -9,7 +10,7 @@
     >
         <span :class="slotClass"><slot/></span>
         <loader v-show="loading"/>
-    </button>
+    </component>
 </template>
 
 <script>
@@ -19,6 +20,7 @@
         components: { Loader },
 
         props: {
+            href: String,
             color: String,
             icon: String,
             inline: Boolean,
@@ -33,6 +35,7 @@
                 'widget-button': true,
                 'widget-button--inline': vm.inline,
                 [`widget-button--${vm.color}`]: vm.color,
+                'disabled': vm.href && (vm.loading || vm.disabled),
             }),
 
             slotClass: vm => ({
