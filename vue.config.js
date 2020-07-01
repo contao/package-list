@@ -1,5 +1,4 @@
 const SriPlugin = require('webpack-subresource-integrity');
-const SshWebpackPlugin = require('ssh-webpack-plugin');
 
 module.exports = {
     productionSourceMap: false,
@@ -99,19 +98,6 @@ module.exports = {
                 ],
             },
         };
-
-        if (process.env.NODE_ENV === 'production') {
-            config.plugins.push(new SshWebpackPlugin({
-                host: 'w1.vhost.io',
-                port: 22,
-                username: 'packages',
-                privateKey: require('fs')
-                    .readFileSync(require('path').join(require('os').homedir(), '.ssh/id_rsa')),
-                from: 'dist',
-                to: '/srv/home/packages/public',
-                // cover: false,
-            }));
-        }
 
         return config;
     },

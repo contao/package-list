@@ -32,7 +32,6 @@
     "image-webpack-loader": "^6.0.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^7.3.1",
-    "ssh-webpack-plugin": "^0.1.8",
     "vue-cli-plugin-webpack-bundle-analyzer": "^2.0.0",
     "vue-template-compiler": "^2.6.11",
     "webpack-subresource-integrity": "^1.4.1"
