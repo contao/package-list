@@ -21,7 +21,8 @@
                 </vueper-slide>
             </vueper-slides>
         </div>
-        <div class="link" v-if="$i18n.locale === 'de'"><a href="https://contao.org/de/anzeigen-erweiterungsliste.html" target="_blank">Anzeigen in der Erweiterungsliste</a></div>
+        <div class="link" v-if="$i18n.locale === 'de'"><a href="https://contao.org/de/anzeigen-erweiterungsliste.html" target="_blank">{{ $t('ui.discover.advertisement') }}</a></div>
+        <div class="link" v-else><a href="https://contao.org/en/extension-ads.html" target="_blank">{{ $t('ui.discover.advertisement') }}</a></div>
     </div>
 </template>
 

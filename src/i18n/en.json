@@ -1,6 +1,7 @@
 {
     "ui.app.title": "Contao Extensions",
     "ui.app.loading": "Loading Extension List …",
+    "ui.discover.advertisement": "Advertisement in the extension list",
     "ui.discover.loading": "Loading …",
     "ui.discover.offline": "Could not fetch any results.",
     "ui.discover.offlineExplain": "Check your internet connection and disable JavaScript blockers in your browser.",
