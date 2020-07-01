@@ -1,6 +1,7 @@
 {
     "ui.app.title": "Contao Extensies",
     "ui.app.loading": "Extensie Lijst laden …",
+    "ui.discover.advertisement": "Advertisement in the extension list",
     "ui.discover.loading": "Bezig met laden ...",
     "ui.discover.offline": "Kon geen resultaten ophalen.",
     "ui.discover.offlineExplain": "Controleer uw internetverbinding en schakel JavaScript blokkers uit in uw browser.",
@@ -40,6 +41,7 @@
     "ui.package-details.linkReplaces": "replaces",
     "ui.package-details.linkProvides": "provides",
     "ui.package-details.linkConflicts": "conflicts",
+    "ui.package-details.funding": "Fund package maintenance!",
     "ui.package-details.latest": "Laatste versie",
     "ui.package-details.released": "uitgebracht op",
     "ui.package-details.license": "Licentie(s)",

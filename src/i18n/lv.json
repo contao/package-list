@@ -1,6 +1,7 @@
 {
     "ui.app.title": "Contao paplašinājumi",
     "ui.app.loading": "Ielādē paplašinājumu sarakstu ...",
+    "ui.discover.advertisement": "Advertisement in the extension list",
     "ui.discover.loading": "Ielādē ...",
     "ui.discover.offline": "Nevarēja iegūt nekādus rezultātus.",
     "ui.discover.offlineExplain": "Pārbaudiet savu interneta savienojumu un atspējojiet JavaScript bloķētājus savā pārlūkprogrammā.",
@@ -40,6 +41,7 @@
     "ui.package-details.linkReplaces": "replaces",
     "ui.package-details.linkProvides": "provides",
     "ui.package-details.linkConflicts": "conflicts",
+    "ui.package-details.funding": "Fund package maintenance!",
     "ui.package-details.latest": "Jaunākā versija",
     "ui.package-details.released": "izlaists",
     "ui.package-details.license": "Licence(s)",

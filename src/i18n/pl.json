@@ -1,6 +1,7 @@
 {
     "ui.app.title": "Rozszerzenia Contao",
     "ui.app.loading": "Ładowanie listy rozszerzeń …",
+    "ui.discover.advertisement": "Advertisement in the extension list",
     "ui.discover.loading": "Ładowanie …",
     "ui.discover.offline": "Nie znaleziono żadnych wyników.",
     "ui.discover.offlineExplain": "Sprawdź swoje połączenie internetowe i wyłącz narzędzia blokujące JavaScript w przeglądarce.",
@@ -40,6 +41,7 @@
     "ui.package-details.linkReplaces": "zastępuje",
     "ui.package-details.linkProvides": "dostarcza",
     "ui.package-details.linkConflicts": "koliduje",
+    "ui.package-details.funding": "Fund package maintenance!",
     "ui.package-details.latest": "Ostatnia wersja",
     "ui.package-details.released": "data wydania",
     "ui.package-details.license": "Licencje",

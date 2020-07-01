@@ -1,6 +1,7 @@
 {
     "ui.app.title": "Contao проширења",
     "ui.app.loading": "Учитавам листу проширења...",
+    "ui.discover.advertisement": "Advertisement in the extension list",
     "ui.discover.loading": "Учитавам ...",
     "ui.discover.offline": "Нема пронађених резултата.",
     "ui.discover.offlineExplain": "Проверите вашу интернет конекцију и искључите блокаду JavaScript-а у вашем прегледачу.",
@@ -40,6 +41,7 @@
     "ui.package-details.linkReplaces": "мења",
     "ui.package-details.linkProvides": "пружа",
     "ui.package-details.linkConflicts": "сукобљава се са",
+    "ui.package-details.funding": "Fund package maintenance!",
     "ui.package-details.latest": "Последња верзија",
     "ui.package-details.released": "објављено",
     "ui.package-details.license": "Лиценца(е)",

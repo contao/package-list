@@ -1,6 +1,7 @@
 {
     "ui.app.title": "Extensiones Contao",
     "ui.app.loading": "Cargando lista de extensiones ...",
+    "ui.discover.advertisement": "Advertisement in the extension list",
     "ui.discover.loading": "Cargando ...",
     "ui.discover.offline": "No se pudo obtener ningún resultado.",
     "ui.discover.offlineExplain": "Verifique su conexión a Internet y desactive los bloqueadores de JavaScript en su navegador.",
@@ -40,6 +41,7 @@
     "ui.package-details.linkReplaces": "replaces",
     "ui.package-details.linkProvides": "provides",
     "ui.package-details.linkConflicts": "conflicts",
+    "ui.package-details.funding": "Fund package maintenance!",
     "ui.package-details.latest": "Última versión",
     "ui.package-details.released": "publicado el",
     "ui.package-details.license": "Licencia(s)",

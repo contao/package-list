@@ -1,6 +1,7 @@
 {
     "ui.app.title": "افزونه‌های کنتائو",
     "ui.app.loading": "بارگذاری لیست افزونه...",
+    "ui.discover.advertisement": "Advertisement in the extension list",
     "ui.discover.loading": "بارگذاری ...",
     "ui.discover.offline": "Could not fetch any results.",
     "ui.discover.offlineExplain": "Check your internet connection and disable JavaScript blockers in your browser.",
@@ -40,6 +41,7 @@
     "ui.package-details.linkReplaces": "جایگزین می‌کند",
     "ui.package-details.linkProvides": "فراهم می‌کند",
     "ui.package-details.linkConflicts": "ناسازگار است",
+    "ui.package-details.funding": "Fund package maintenance!",
     "ui.package-details.latest": "آخرین نسخه",
     "ui.package-details.released": "منتشر شده در",
     "ui.package-details.license": "مجوز(ها)",
