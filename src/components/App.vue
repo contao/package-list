@@ -1,13 +1,13 @@
 <template>
     <div id="app">
         <div v-if="initializing" class="view-init">
-            <div class="view-init__cell">
+            <div class="view-init__cell animate-initializing">
                 <img src="../assets/images/logo.svg" width="300" height="100" alt="Contao Logo">
                 <p class="view-init__message">{{ $t('ui.app.loading') }}</p>
             </div>
         </div>
         <template v-else>
-            <router-view :class="hasModal ? 'blur-in' : 'blur-out'"/>
+            <router-view :class="hasModal ? 'animate-blur-in' : 'animate-blur-out'"/>
             <component :is="currentModal" v-if="hasModal"/>
         </template>
     </div>
@@ -56,6 +56,7 @@
 <style rel="stylesheet/scss" lang="scss">
     @import "../assets/styles/defaults";
     @import "../assets/styles/layout";
+    @import "../assets/styles/animations";
 
     .view-init {
         display: table;
@@ -67,35 +68,10 @@
             font-size: 1.5em;
             text-align: center;
             vertical-align: middle;
-            animation: initializing 1s linear infinite;
 
             p {
                 margin-top: 2em;
             }
-        }
-    }
-
-    .blur-in {
-        z-index: -1;
-        opacity: 0.5;
-        filter: blur(4px);
-        transition: opacity .5s, filter .5s;
-    }
-
-    .blur-out {
-        opacity: 1;
-        transition: opacity .5s;
-    }
-
-    @keyframes initializing {
-        0% {
-            opacity: 0.5;
-        }
-        50% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0.5;
         }
     }
 </style>

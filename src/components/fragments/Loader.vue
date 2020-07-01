@@ -1,5 +1,5 @@
 <template>
-    <div class="loader" v-if="horizontal">
+    <div class="loader" @transitionend.stop v-if="horizontal">
         <div class="loader__item loader__item--20"></div>
         <div class="loader__item loader__item--40"></div>
         <div class="loader__item loader__item--60"></div>
@@ -7,7 +7,7 @@
         <div class="loader__item loader__item--100"></div>
         <slot/>
     </div>
-    <div class="loader" v-else>
+    <div class="loader" @transitionend.stop v-else>
         <div class="sk-circle">
             <div class="sk-circle1 sk-child"></div>
             <div class="sk-circle2 sk-child"></div>
