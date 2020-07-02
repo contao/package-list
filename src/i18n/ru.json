@@ -45,6 +45,7 @@
     "ui.package-details.latest": "Последняя версия",
     "ui.package-details.released": "выпуск от",
     "ui.package-details.license": "Лицензия",
+    "ui.package-details.authors": "from",
     "ui.package-details.more": "Еще",
     "ui.package-details.packagist": "Сведения о пакете",
     "ui.package-details.metadata": "Редактировать метаданные",

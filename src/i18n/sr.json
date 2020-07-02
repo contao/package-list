@@ -45,6 +45,7 @@
     "ui.package-details.latest": "Последња верзија",
     "ui.package-details.released": "објављено",
     "ui.package-details.license": "Лиценца(е)",
+    "ui.package-details.authors": "from",
     "ui.package-details.more": "Детаљније",
     "ui.package-details.packagist": "Детаљи пакета",
     "ui.package-details.metadata": "Уреди мета податке",

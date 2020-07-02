@@ -45,6 +45,7 @@
     "ui.package-details.latest": "最新版",
     "ui.package-details.released": "リリース日",
     "ui.package-details.license": "ライセンス",
+    "ui.package-details.authors": "from",
     "ui.package-details.more": "詳細",
     "ui.package-details.packagist": "パッケージの詳細",
     "ui.package-details.metadata": "メタデータを編集",

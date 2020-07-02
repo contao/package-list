@@ -45,6 +45,7 @@
     "ui.package-details.latest": "Jaunākā versija",
     "ui.package-details.released": "izlaists",
     "ui.package-details.license": "Licence(s)",
+    "ui.package-details.authors": "from",
     "ui.package-details.more": "Vairāk",
     "ui.package-details.packagist": "Pakotnes informācija",
     "ui.package-details.metadata": "Rediģēt metadatus",

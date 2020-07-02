@@ -45,6 +45,7 @@
     "ui.package-details.latest": "آخرین نسخه",
     "ui.package-details.released": "منتشر شده در",
     "ui.package-details.license": "مجوز(ها)",
+    "ui.package-details.authors": "from",
     "ui.package-details.more": "بیشتر",
     "ui.package-details.packagist": "جژئیات بسته",
     "ui.package-details.metadata": "ویرایش اطلاعات متا",

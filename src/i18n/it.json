@@ -45,6 +45,7 @@
     "ui.package-details.latest": "Ultima versione",
     "ui.package-details.released": "rilasciato il",
     "ui.package-details.license": "Licenza",
+    "ui.package-details.authors": "from",
     "ui.package-details.more": "Altro",
     "ui.package-details.packagist": "Dettagli del pacchetto",
     "ui.package-details.metadata": "Modifica metadati",

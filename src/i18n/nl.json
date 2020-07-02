@@ -45,6 +45,7 @@
     "ui.package-details.latest": "Laatste versie",
     "ui.package-details.released": "uitgebracht op",
     "ui.package-details.license": "Licentie(s)",
+    "ui.package-details.authors": "from",
     "ui.package-details.more": "Meer",
     "ui.package-details.packagist": "Details bundel",
     "ui.package-details.metadata": "Bewerk Metadata",

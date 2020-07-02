@@ -27,7 +27,7 @@
                 <div class="package-popup__text">
                     <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
                     <p class="package-popup__authors" v-if="authors">
-                        von
+                        {{ $t('ui.package-details.authors' )}}
                         <template v-for="(author, key) in authors">
                             <a class="package-popup__author" :key="key" :href="author.homepage" target="_blank" rel="noreferrer noopener" v-if="author.homepage">{{ author.name }}</a>
                             <span class="package-popup__author" :key="key" v-else>{{ author.name }}</span>
