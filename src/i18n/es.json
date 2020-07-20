@@ -7,7 +7,7 @@
     "ui.discover.offlineExplain": "Verifique su conexión a Internet y desactive los bloqueadores de JavaScript en su navegador.",
     "ui.discover.offlineButton": "Inténtelo de nuevo",
     "ui.discover.searchPlaceholder": "Buscar extenciones ...",
-    "ui.discover.empty": "No hay resultados para {query}",
+    "ui.discover.empty": "No results for {query}",
     "ui.discover.more": "Más resultados",
     "ui.discover.sortBy": "Ordenar por",
     "ui.discover.sortLatest": "Actualizado",
