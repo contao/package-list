@@ -468,24 +468,12 @@
             }
         }
 
-        &__funding {
-            position: relative;
-            margin: -10px -20px 20px;
-            padding: 8px 20px 8px 50px;
-            font-weight: $font-weight-medium;
-            font-size: 12px;
-            line-height: 1.8;
-            background: $hint-background url('../../assets/images/funding.svg') 20px 7px no-repeat;
-            background-size: 23px 23px;
+        &__installed {
+            margin-top: 1em;
+        }
 
-            a {
-                display: inline-block;
-                margin-left: 15px;
-                padding-left: 16px;
-                color: $hint-link;
-                background: url("../../assets/images/link-funding.svg") 0 50% no-repeat;
-                background-size: 13px 13px;
-            }
+        &__funding {
+            margin: 0 0 20px;
         }
 
         &__tabs {
