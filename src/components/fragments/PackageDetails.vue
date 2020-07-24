@@ -34,7 +34,6 @@
                         </template>
                     </p>
                     <p class="package-popup__statistics">
-                        <span class="package-popup__stats package-popup__stats--abandoned" :title="abandonedText" v-if="metadata.abandoned">{{ $t('ui.package.abandoned') }}</span>
                         <span class="package-popup__stats package-popup__stats--private" :title="$t('ui.package.privateTitle')" v-if="metadata.private">{{ $t('ui.package.private') }}</span>
                         <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat(false) }}</span>
                         <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
@@ -88,6 +87,12 @@
                 >{{ $t('ui.package-details.tabDependents') }}</details-tab>
             </ul>
             <details-content v-show="tab === ''">
+                <div class="package-popup__abandoned" v-if="metadata.abandoned">
+                    <template v-if="metadata.abandoned === true">{{ $t('ui.package.abandonedText') }}</template>
+                    <i18n :tag="false" path="ui.package.abandonedReplace">
+                        <template #replacement><router-link :to="{ query: { p: metadata.abandoned } }">{{ metadata.abandoned }}</router-link></template>
+                    </i18n>
+                </div>
                 <package-funding class="package-popup__funding" :items="metadata.funding" v-if="metadata.funding"/>
                 <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
                 <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
@@ -150,7 +155,6 @@
             ...mapGetters('packages/details', ['hasPrevious']),
 
             tab: vm => String(vm.$route.hash).substr(1),
-            abandonedText: vm => vm.metadata.abandoned === true ? vm.$t('ui.package.abandonedText') : vm.$t('ui.package.abandonedReplace', { replacement: vm.metadata.abandoned }),
 
             popupClass() {
                 return {
@@ -429,14 +433,6 @@
             background-repeat: no-repeat;
             background-size: 13px 13px;
 
-            &--abandoned {
-                padding: 2px 5px;
-                color: #fff;
-                font-weight: $font-weight-bold;
-                background: $red-button;
-                cursor: help;
-            }
-
             &--private {
                 padding-left: 20px;
                 background-image: url("../../assets/images/private.svg");
@@ -470,6 +466,17 @@
 
         &__installed {
             margin-top: 1em;
+        }
+
+        &__abandoned {
+            margin: 0 0 20px;
+            padding: 10px 20px 10px 50px;
+            font-weight: $font-weight-medium;
+            font-size: 12px;
+            line-height: 1.8;
+            background: rgba($hint-background, .3) url('../../assets/images/hint.svg') 15px 15px no-repeat;
+            background-size: 23px 23px;
+            border: 1px solid $hint-link;
         }
 
         &__funding {
