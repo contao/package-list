@@ -56,7 +56,7 @@
                 >{{ $t('ui.package-details.tabDescription') }}</details-tab>
                 <details-tab
                     highlight
-                    :links="filterFeatures(metadata.features)"
+                    :links="metadata.features"
                     :active="tab === 'features'"
                     @click="setTab('features')"
                     v-if="metadata.features"
@@ -98,7 +98,7 @@
                 <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
                 <p class="package-popup__description">{{ metadata.description }}</p>
             </details-content>
-            <details-content v-show="tab === 'features'" :links="filterFeatures(metadata.features)" v-if="metadata.features">
+            <details-content v-show="tab === 'features'" :links="metadata.features" v-if="metadata.features">
                 <slot name="features-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
             </details-content>
             <details-content v-show="tab === 'suggest'" :links="metadata.suggest">
@@ -136,10 +136,6 @@
         components: { Popup, More, Loader, PackageLogo, PackageFunding, DetailsTab, DetailsContent },
 
         props: {
-            filterFeatures: {
-                type: Function,
-                default: features => features,
-            },
             dependents: {
                 type: Object,
             },
