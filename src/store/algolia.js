@@ -138,6 +138,7 @@ export default {
                         data = Object.assign({}, pkg, data || {});
                     }
                 } catch (err) {
+                    // eslint-disable-next-line
                     console.error('Error fetching metadata for '+name, err);
                 }
 

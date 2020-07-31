@@ -20,7 +20,7 @@ export default {
 
     getters: {
         hasPrevious(state) {
-            // noinspection JSUnusedLocalSymbols
+            // eslint-disable-next-line
             const current = state.current;
             const position = findStatePosition(state.keys);
 
