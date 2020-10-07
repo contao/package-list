@@ -44,6 +44,7 @@
                 <div class="package-popup__actions">
                     <slot name="package-actions" v-bind="{ data: metadata }">
                         <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="metadata.homepage" v-if="metadata && metadata.homepage">{{ $t('ui.package.homepage') }}</a>
+                        <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="`https://packagist.org/packages/${data.name}`" v-else-if="!metadata.private">{{ $t('ui.package-details.packagist') }}</a>
                     </slot>
                 </div>
             </div>
