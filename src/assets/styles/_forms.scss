@@ -215,6 +215,12 @@ select {
             background-size: 20px 20px;
             content:"";
         }
+
+        &:empty {
+            &:before {
+                margin-right: 0 !important;
+            }
+        }
     }
 
     &:empty {
@@ -222,7 +228,7 @@ select {
         padding: 0 10px;
 
         &:before {
-            margin-right: 0;
+            margin-right: 0 !important;
         }
     }
 
