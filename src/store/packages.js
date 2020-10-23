@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import details from './packages/details';
 
 export default {
@@ -11,7 +9,11 @@ export default {
 
     actions: {
         async metadata({ dispatch }, name) {
-            return dispatch('algolia/getPackage', name, { root: true });
+            let metadata = await dispatch('algolia/getPackage', name, { root: true });
+
+            delete metadata.versions;
+
+            return metadata;
         },
     },
 };

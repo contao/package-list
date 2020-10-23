@@ -48,6 +48,10 @@ export default {
             state.metadata[name] = data;
         },
 
+        uncache(state, name) {
+            delete state.metadata[name];
+        },
+
         reset(state) {
             state.metadata = {};
         },
@@ -90,6 +94,7 @@ export default {
                         data = Object.assign({}, (await Http.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data, data || {});
                     } else {
                         let pkg = (await Http.get(`https://packagist.org/packages/${name}.json`)).data.package;
+                        let versionsData;
                         let versions;
 
                         // noinspection JSPrimitiveTypeWrapperUsage
@@ -98,26 +103,26 @@ export default {
                         pkg.dependency = true;
 
                         try {
-                            versions = (await Http.get(`https://repo.packagist.org/p/${name}.json`)).data.packages[name];
+                            versionsData = (await Http.get(`https://repo.packagist.org/p/${name}.json`)).data.packages[name];
                         } catch (err) {
-                            versions = pkg.versions;
+                            versionsData = pkg.versions;
                         }
 
-                        let latest = Object.values(versions).filter(
+                        versions = Object.values(versionsData).filter(
                             pkg => pkg.version.substr(0, 4) !== 'dev-' && pkg.version.substr(-4) !== '-dev' && pkg.require && 'contao/core-bundle' in pkg.require,
                         );
 
-                        if (!latest.length) {
-                            latest = Object.values(versions).filter(
+                        if (!versions.length) {
+                            versions = Object.values(versionsData).filter(
                                 pkg => pkg.version.substr(0, 4) !== 'dev-' && pkg.version.substr(-4) !== '-dev',
                             );
                         }
 
-                        if (!latest.length) {
-                            latest = Object.values(versions);
+                        if (!versions.length) {
+                            versions = Object.values(versionsData);
                         }
 
-                        latest = latest.sort(
+                        versions = versions.sort(
                             (a, b) => {
                                 const v1 = semver.coerce(a.version_normalized, { loose: true });
                                 const v2 = semver.coerce(b.version_normalized, { loose: true });
@@ -130,12 +135,14 @@ export default {
 
                                 return result;
                             },
-                        ).pop();
+                        );
+
+                        const latest = versions[versions.length - 1];
 
                         pkg = Object.assign(pkg, latest);
                         pkg.latest = { version: latest.version, time: latest.time };
 
-                        data = Object.assign({}, pkg, data || {});
+                        data = Object.assign({}, pkg, data || {}, { versions });
                     }
                 } catch (err) {
                     // eslint-disable-next-line
@@ -147,7 +154,6 @@ export default {
                     return;
                 }
 
-                delete data.versions;
                 delete data.version;
                 delete data.time;
                 delete data.constraint;

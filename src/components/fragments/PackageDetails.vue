@@ -95,6 +95,7 @@
                     </i18n>
                 </div>
                 <package-funding class="package-popup__funding" :items="metadata.funding" v-if="metadata.funding"/>
+                <slot name="package-update"/>
                 <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
                 <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
                 <p class="package-popup__description">{{ metadata.description }}</p>
