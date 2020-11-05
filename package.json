@@ -14,10 +14,10 @@
     "algoliasearch": "^3.35.1",
     "semver": "^6.3.0",
     "vue": "^2.6.11",
-    "vue-i18n": "^8.18.2",
+    "vue-i18n": "^8.22.1",
     "vue-resource": "^1.5.1",
     "vue-router": "^2.8.1",
-    "vueperslides": "^2.8.6",
+    "vueperslides": "^2.11.0",
     "vuex": "^2.5.0"
   },
   "devDependencies": {
@@ -34,7 +34,7 @@
     "sass-loader": "^7.3.1",
     "vue-cli-plugin-webpack-bundle-analyzer": "^2.0.0",
     "vue-template-compiler": "^2.6.11",
-    "webpack-subresource-integrity": "^1.4.1"
+    "webpack-subresource-integrity": "^1.5.2"
   },
   "eslintConfig": {
     "root": true,
