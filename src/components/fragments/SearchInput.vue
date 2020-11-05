@@ -2,7 +2,7 @@
     <section class="search-bar">
         <div class="layout-main__content">
             <div class="search-bar__inside">
-                <input class="search-bar__input" ref="search" id="search" type="text" :placeholder="$t('ui.discover.searchPlaceholder')" autocomplete="off" :value="query" @input="searchInput" @keypress.esc.prevent="stopSearch">
+                <input class="search-bar__input" ref="search" id="search" type="text" :placeholder="$t('ui.discover.searchPlaceholder', { count: extensionCount })" autocomplete="off" :value="query" @input="searchInput" @keypress.esc.prevent="stopSearch">
                 <button class="search-bar__button search-bar__button--stop" @click="stopSearch" v-if="query">
                     <svg height="24" viewBox="0 0 24 24" width="24" fill="#737373" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                 </button>
@@ -15,16 +15,32 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
     import search from '../../mixins/search';
 
     export default {
         mixins: [search],
 
+        data: () => ({
+            extensionCount: ''
+        }),
+
         methods: {
+            ...mapActions('algolia', ['findPackages']),
+
             searchInput(e) {
                 this.startSearch(e.target.value);
             },
         },
+
+        async mounted () {
+            this.extensionCount = (await this.findPackages({
+                hitsPerPage: 0,
+                attributesToRetrieve: null,
+                attributesToHighlight: null,
+                analytics: false
+            })).nbHits;
+        }
     };
 </script>
 

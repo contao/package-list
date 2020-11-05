@@ -6,7 +6,7 @@
     "ui.discover.offline": "Konnte keine Ergebnisse laden.",
     "ui.discover.offlineExplain": "Prüfe deine Internet-Verbindung und deaktiviere alle JavaScript-Blocker.",
     "ui.discover.offlineButton": "Erneut versuchen",
-    "ui.discover.searchPlaceholder": "Erweiterungen suchen …",
+    "ui.discover.searchPlaceholder": "{count} Erweiterungen durchsuchen …",
     "ui.discover.empty": "Keine Ergebnisse für {query}",
     "ui.discover.more": "Mehr Resultate",
     "ui.discover.sortBy": "Sortieren nach",
