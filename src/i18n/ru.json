@@ -6,7 +6,7 @@
     "ui.discover.offline": "Не удалось получить результаты.",
     "ui.discover.offlineExplain": "Проверьте подключение к сети Интернет и отключите блокировку JavaScript в своем браузере.",
     "ui.discover.offlineButton": "Попробовать еще раз",
-    "ui.discover.searchPlaceholder": "Поиск расширений...",
+    "ui.discover.searchPlaceholder": "Поиск в {count} расширениях...",
     "ui.discover.empty": "Нет результатов для {query}",
     "ui.discover.more": "Другие результаты",
     "ui.discover.sortBy": "Сортировать по",

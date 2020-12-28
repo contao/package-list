@@ -6,7 +6,7 @@
     "ui.discover.offline": "何も結果を取得できませんでした。",
     "ui.discover.offlineExplain": "Internet接続を確認し、ブラウザーのJavaScriptのブロッカーを無効にしてください。",
     "ui.discover.offlineButton": "再実行",
-    "ui.discover.searchPlaceholder": "機能拡張を検索中...",
+    "ui.discover.searchPlaceholder": "{count}の機能拡張から検索中...",
     "ui.discover.empty": "{query}の結果はありません。",
     "ui.discover.more": "さらに結果を表示",
     "ui.discover.sortBy": "並べ替え",
