@@ -22,7 +22,6 @@
         <template v-else>
 
             <div class="package-popup__summary">
-                <!--suppress HtmlUnknownTarget -->
                 <package-logo component-class="package-popup__icon" :src="metadata.logo"/>
                 <div class="package-popup__text">
                     <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
