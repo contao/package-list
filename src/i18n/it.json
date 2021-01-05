@@ -6,7 +6,7 @@
     "ui.discover.offline": "Non è stato possibile ottenere alcun risultato.",
     "ui.discover.offlineExplain": "Controlla la tua connessione internet e disabilita i blocchi JavaScript nel tuo browser.",
     "ui.discover.offlineButton": "Riprova",
-    "ui.discover.searchPlaceholder": "Cerca estensioni...",
+    "ui.discover.searchPlaceholder": "Cerca in {conti} estensioni ...",
     "ui.discover.empty": "Nessun risultato per {query}",
     "ui.discover.more": "Ulteriori risultati",
     "ui.discover.sortBy": "Ordina per",
