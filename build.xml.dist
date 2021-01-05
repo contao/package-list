@@ -16,7 +16,7 @@
             <arg value="-av" />
             <arg value="--delete" />
             <arg value="./dist/*" />
-            <arg value="packages@w1.vhost.io:/srv/home/packages/public/" />
+            <arg value="packages@w1.hostingwerk.de:/srv/home/packages/public/" />
         </exec>
         <delete dir="dist" />
     </target>
