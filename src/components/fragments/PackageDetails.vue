@@ -89,7 +89,7 @@
             <details-content v-show="tab === ''">
                 <div class="package-popup__abandoned" v-if="metadata.abandoned">
                     <template v-if="metadata.abandoned === true">{{ $t('ui.package.abandonedText') }}</template>
-                    <i18n :tag="false" path="ui.package.abandonedReplace">
+                    <i18n v-else :tag="false" path="ui.package.abandonedReplace">
                         <template #replacement><router-link :to="{ query: { p: metadata.abandoned } }">{{ metadata.abandoned }}</router-link></template>
                     </i18n>
                 </div>
@@ -471,7 +471,7 @@
             font-weight: $font-weight-medium;
             font-size: 12px;
             line-height: 1.8;
-            background: rgba($hint-background, .3) url('../../assets/images/hint.svg') 15px 15px no-repeat;
+            background: rgba($hint-background, .3) url('../../assets/images/hint.svg') 15px center no-repeat;
             background-size: 23px 23px;
             border: 1px solid $hint-link;
         }
