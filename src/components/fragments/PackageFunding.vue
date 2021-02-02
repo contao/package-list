@@ -51,5 +51,14 @@
         color: $funding-color;
         background: url("../../assets/images/link-funding.svg") 0 50% no-repeat;
         background-size: 13px 13px;
+
+        &:after {
+            content: "|";
+            margin: 0 10px;
+        }
+
+        &:last-child:after {
+            content: none;
+        }
     }
 </style>
