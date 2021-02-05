@@ -38,10 +38,12 @@
 
                 if (this.support) {
                     Object.keys(this.support).forEach((key) => {
+                        const label = this.$te(`ui.package-details.support_${key}`) ? this.$t(`ui.package-details.support_${key}`) : key;
+
                         if (key === 'email') {
-                            items.push({ label: this.$t(`ui.package-details.support_${key}`), href: `mailto:${this.support[key]}` });
+                            items.push({ label, href: `mailto:${this.support[key]}` });
                         } else {
-                            items.push({ label: this.$t(`ui.package-details.support_${key}`), href: this.support[key], target: '_blank' });
+                            items.push({ label, href: this.support[key], target: '_blank' });
                         }
                     });
                 }
