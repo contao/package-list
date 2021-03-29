@@ -1,5 +1,5 @@
 <template>
-    <ul :class="'link-menu' + (color ? ' link-menu--'+color : '')">
+    <ul :class="cssClass">
         <li v-for="(item, k) in items" :key="k" class="link-menu__item"><a class="link-menu__action" :href="item.href" :target="item.target" @click="event => click(event, item)">{{ item.label }}</a></li>
     </ul>
 </template>
@@ -12,6 +12,17 @@
                 required: true,
             },
             color: String,
+            align: String,
+            valign: String,
+        },
+
+        computed: {
+            cssClass: vm => ({
+                'link-menu': true,
+                [`link-menu--${vm.color}`]: !!vm.color,
+                [`link-menu--align-${vm.align}`]: !!vm.align,
+                [`link-menu--valign-${vm.valign}`]: !!vm.valign,
+            }),
         },
 
         methods: {
@@ -56,11 +67,50 @@
             content: "";
         }
 
+        &--align-left {
+            left: 0;
+            right: auto;
+
+            &:before {
+                left: 17px;
+                right: auto;
+            }
+        }
+
+        &--align-right {
+            left: auto;
+            right: 0;
+
+            &:before {
+                left: auto;
+                right: 17px;
+            }
+        }
+
+        &--valign-top {
+            bottom: 0;
+            border-top: none;
+            border-bottom: 3px solid $text-color;
+            box-shadow: $shadow-color 0 0 2px;
+
+            &:before {
+                top: auto;
+                bottom: -7px;
+                border-width: 4px 3.5px 0 3.5px;
+                border-color: $text-color transparent transparent transparent;
+            }
+        }
+
         &--contao {
             border-color: $contao-color;
 
             &:before {
                 border-bottom-color: $contao-color;
+            }
+
+            &.link-menu--valign-top:before {
+                border-bottom-color: transparent;
+                border-top-color: $contao-color;
             }
         }
 
@@ -70,6 +120,11 @@
             &:before {
                 border-bottom-color: $green-button;
             }
+
+            &.link-menu--valign-top:before {
+                border-bottom-color: transparent;
+                border-top-color: $green-button;
+            }
         }
 
         &--alert {
@@ -77,6 +132,11 @@
 
             &:before {
                 border-bottom-color: $red-button;
+            }
+
+            &.link-menu--valign-top:before {
+                border-bottom-color: transparent;
+                border-top-color: $red-button;
             }
         }
 
