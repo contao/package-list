@@ -103,7 +103,29 @@ export default {
                         pkg.dependency = true;
 
                         try {
-                            versionsData = (await Http.get(`https://repo.packagist.org/p/${name}.json`)).data.packages[name];
+                            const versions = (await Http.get(`https://repo.packagist.org/p2/${name}.json`)).data.packages[name];
+
+                            // Data is minified in Composer 2, see https://github.com/composer/metadata-minifier/
+                            versionsData = [];
+                            let expandedVersion = null;
+                            Object.values(versions).forEach((versionData) => {
+                                if (!expandedVersion) {
+                                    expandedVersion = versionData;
+                                    versionsData.push(expandedVersion);
+                                    return;
+                                }
+
+                                // add any changes from the previous version to the expanded one
+                                Object.keys(versionData).forEach((key) => {
+                                    if (versionData[key] === '__unset') {
+                                        delete expandedVersion[key];
+                                    } else {
+                                        expandedVersion[key] = versionData[key];
+                                    }
+                                });
+
+                                versionsData.push(expandedVersion);
+                            });
                         } catch (err) {
                             versionsData = pkg.versions;
                         }
