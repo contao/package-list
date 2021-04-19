@@ -1,6 +1,6 @@
 import { Http } from 'vue-resource';
 import algoliasearch from 'algoliasearch';
-import semver from 'semver';
+import { coerce, compare } from 'semver';
 import features from './packages/features';
 
 const client = algoliasearch('60DW2LJW0P', '13718a23f4e436f7e7614340bd87d913');
@@ -146,10 +146,10 @@ export default {
 
                         versions = versions.sort(
                             (a, b) => {
-                                const v1 = semver.coerce(a.version_normalized, { loose: true });
-                                const v2 = semver.coerce(b.version_normalized, { loose: true });
+                                const v1 = coerce(a.version_normalized, { loose: true });
+                                const v2 = coerce(b.version_normalized, { loose: true });
 
-                                const result = semver.compare(v1, v2);
+                                const result = compare(v1, v2);
 
                                 if (result === 0) {
                                     return new Date(a.time) > new Date(b.time) ? 1 : -1;
