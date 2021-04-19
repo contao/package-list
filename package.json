@@ -24,7 +24,6 @@
     "@vue/cli-plugin-babel": "^3.12.1",
     "@vue/cli-plugin-eslint": "^3.12.1",
     "@vue/cli-service": "^3.12.1",
-    "app-manifest-loader": "^2.4.1",
     "babel-eslint": "^10.1.0",
     "bin-exec-loader": "^2.0.0",
     "eslint": "^5.16.0",
@@ -34,6 +33,7 @@
     "sass-loader": "^7.3.1",
     "vue-cli-plugin-webpack-bundle-analyzer": "^2.0.0",
     "vue-template-compiler": "^2.6.11",
+    "webpack-pwa-manifest": "^4.3.0",
     "webpack-subresource-integrity": "^1.5.2"
   },
   "eslintConfig": {

@@ -1,4 +1,6 @@
 const SriPlugin = require('webpack-subresource-integrity');
+const WebpackPwaManifest = require('webpack-pwa-manifest')
+const path = require('path');
 
 module.exports = {
     productionSourceMap: false,
@@ -21,23 +23,28 @@ module.exports = {
                     hashFuncNames: ['sha384'],
                     enabled: process.env.NODE_ENV === 'production',
                 }),
+                new WebpackPwaManifest({
+                    name: 'Contao Extensions',
+                    background_color: '#ffffff',
+                    theme_color: '#ffffff',
+                    orientation: 'omit',
+                    publicPath: '',
+                    icons: [
+                        {
+                            src: path.resolve('src/assets/icons/android-chrome-192x192.png'),
+                            size: '192x192',
+                            destination: 'icons',
+                        },
+                        {
+                            src: path.resolve('src/assets/icons/android-chrome-512x512.png'),
+                            size: '512x512',
+                            destination: 'icons',
+                        },
+                    ],
+                }),
             ],
             module: {
                 rules: [
-                    {
-                        test: /(site\.webmanifest|browserconfig\.xml)$/,
-                        use: [
-                            {
-                                loader: "file-loader",
-                                options: {
-                                    name: "icons/[name].[hash:8].[ext]",
-                                },
-                            },
-                            {
-                                loader: "app-manifest-loader",
-                            },
-                        ]
-                    },
                     {
                         test: /icons\/[^/]+.(png|jpe?g|gif|webp|svg|ico)(\?.*)?$/,
                         use: [
