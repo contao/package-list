@@ -94,7 +94,7 @@ export default {
                         data = Object.assign({}, (await Http.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data, data || {});
                     } else {
                         let pkg = (await Http.get(`https://packagist.org/packages/${name}.json`)).data.package;
-                        let versionsData;
+                        let versionsData = [];
                         let versions;
 
                         // noinspection JSPrimitiveTypeWrapperUsage
@@ -106,12 +106,11 @@ export default {
                             const versions = (await Http.get(`https://repo.packagist.org/p2/${name}.json`)).data.packages[name];
 
                             // Data is minified in Composer 2, see https://github.com/composer/metadata-minifier/
-                            versionsData = [];
                             let expandedVersion = null;
                             Object.values(versions).forEach((versionData) => {
                                 if (!expandedVersion) {
                                     expandedVersion = versionData;
-                                    versionsData.push(expandedVersion);
+                                    versionsData.push(JSON.parse(JSON.stringify(expandedVersion)));
                                     return;
                                 }
 
@@ -124,24 +123,24 @@ export default {
                                     }
                                 });
 
-                                versionsData.push(expandedVersion);
+                                versionsData.push(JSON.parse(JSON.stringify(expandedVersion)));
                             });
                         } catch (err) {
-                            versionsData = pkg.versions;
+                            versionsData = Object.values(pkg.versions);
                         }
 
-                        versions = Object.values(versionsData).filter(
+                        versions = versionsData.filter(
                             pkg => pkg.version.substr(0, 4) !== 'dev-' && pkg.version.substr(-4) !== '-dev' && pkg.require && 'contao/core-bundle' in pkg.require,
                         );
 
                         if (!versions.length) {
-                            versions = Object.values(versionsData).filter(
+                            versions = versionsData.filter(
                                 pkg => pkg.version.substr(0, 4) !== 'dev-' && pkg.version.substr(-4) !== '-dev',
                             );
                         }
 
                         if (!versions.length) {
-                            versions = Object.values(versionsData);
+                            versions = versionsData;
                         }
 
                         versions = versions.sort(
