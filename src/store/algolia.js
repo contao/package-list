@@ -14,18 +14,18 @@ const algolia = (name = 'v3_packages') => {
     return indexes[name];
 };
 
-const randomizeAds = (hits, limit = 6) => {
+const randomizeHits = (hits, limit = 6) => {
     const items = Array.from(hits);
-    const ads = [];
+    const result = [];
 
-    // Randomly sort ads
-    while(items.length > 0 && ads.length < limit) {
+    // Randomly sort hits
+    while(items.length > 0 && result.length < limit) {
         let ri = Math.floor(Math.random() * items.length);
-        ads.push(items[ri]);
+        result.push(items[ri]);
         items.splice(ri, 1);
     }
 
-    return ads;
+    return result;
 };
 
 export default {
@@ -36,6 +36,7 @@ export default {
         metadata: {},
         discover: null,
         ads: [],
+        news: [],
     },
 
     mutations: {
@@ -60,6 +61,7 @@ export default {
             state.discover = data;
 
             state.ads = data ? data.ads : [];
+            state.news = data ? data.news : [];
         },
     },
 
@@ -236,14 +238,21 @@ export default {
                         indexName: 'v3_ads',
                         params: {
                             hitsPerPage: 6,
-                            filters: `primary:true AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
+                            filters: `position:primary AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
                         },
                     },
                     {
                         indexName: 'v3_ads',
                         params: {
                             hitsPerPage: 100,
-                            filters: `primary:false AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
+                            filters: `position:secondary AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
+                        },
+                    },
+                    {
+                        indexName: 'v3_ads',
+                        params: {
+                            hitsPerPage: 100,
+                            filters: `position:subheader AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
                         },
                     },
                 ]);
@@ -252,7 +261,8 @@ export default {
                     latest: content.results[0].hits,
                     downloads: content.results[1].hits,
                     favers: content.results[2].hits,
-                    ads: randomizeAds(Array.from(content.results[3].hits).concat(randomizeAds(content.results[4].hits, 6 - content.results[3].nbHits))),
+                    ads: randomizeHits(Array.from(content.results[3].hits).concat(randomizeHits(content.results[4].hits, 6 - content.results[3].nbHits))),
+                    news: randomizeHits(Array.from(content.results[5].hits)),
                 });
 
             } catch (err) {

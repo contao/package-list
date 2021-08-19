@@ -1,7 +1,7 @@
 <template>
     <component :is="wrapper">
 
-        <template #subheader>
+        <template #search>
             <search-input/>
         </template>
 
