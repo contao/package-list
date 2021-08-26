@@ -195,13 +195,15 @@ export default {
 
         async findPackages({ state }, params) {
             let suffix = '';
+            let filter = 'dependency:false';
 
             if (params.hasOwnProperty('sorting')) {
                 suffix = params.sorting ? `_${params.sorting}` : '';
+                filter = 'discoverable:true';
                 delete params.sorting;
             }
 
-            params.filters = `languages:${state.language} AND dependency:false`;
+            params.filters = `languages:${state.language} AND ${filter}`;
             params.highlightPreTag = '%%';
             params.highlightPostTag = '%%';
 
@@ -217,21 +219,21 @@ export default {
                         indexName: 'v3_packages_latest',
                         params: {
                             hitsPerPage: 6,
-                            filters: `languages:${state.language} AND dependency:false`,
+                            filters: `languages:${state.language} AND discoverable:true`,
                         },
                     },
                     {
                         indexName: 'v3_packages_downloads',
                         params: {
                             hitsPerPage: 4,
-                            filters: `languages:${state.language} AND dependency:false`,
+                            filters: `languages:${state.language} AND discoverable:true`,
                         },
                     },
                     {
                         indexName: 'v3_packages_favers',
                         params: {
                             hitsPerPage: 4,
-                            filters: `languages:${state.language} AND dependency:false`,
+                            filters: `languages:${state.language} AND discoverable:true`,
                         },
                     },
                     {
