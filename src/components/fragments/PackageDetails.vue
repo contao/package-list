@@ -393,11 +393,16 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+
+            @include screen(600) {
+                width: 200px;
+            }
         }
 
         &__title {
             margin: 0;
             line-height: 1.4;
+            overflow-wrap: break-word;
         }
 
         &__authors {

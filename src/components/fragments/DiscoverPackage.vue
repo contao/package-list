@@ -150,6 +150,7 @@
             margin-bottom: .2em;
             line-height: 1;
             margin-right: 50px;
+            overflow-wrap: break-word;
 
             &--fallback {
                 margin-right: 0;
