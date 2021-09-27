@@ -6,7 +6,7 @@
     "ui.discover.offline": "Nemůžu načíst žádné výsledky.",
     "ui.discover.offlineExplain": "Zkontrolujte prosím Vaše internetové připojení a deaktivujte blokování JavaScriptu ve Vašem prohlížeči.",
     "ui.discover.offlineButton": "Zkusit znovu",
-    "ui.discover.searchPlaceholder": "Prohledat seznam rozšíření...",
+    "ui.discover.searchPlaceholder": "Search in {count} extensions …",
     "ui.discover.empty": "Žádné výsledky pro {query}",
     "ui.discover.more": "Více výsledků",
     "ui.discover.sortBy": "Seřadit podle",

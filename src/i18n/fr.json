@@ -6,7 +6,7 @@
     "ui.discover.offline": "Impossible de récupérer des résultats.",
     "ui.discover.offlineExplain": "Vérifiez votre connexion Internet et désactivez les bloqueurs JavaScript dans votre navigateur.",
     "ui.discover.offlineButton": "Réessayer",
-    "ui.discover.searchPlaceholder": "Rechercher des extensions…",
+    "ui.discover.searchPlaceholder": "Search in {count} extensions …",
     "ui.discover.empty": "Pas de résultats pour {query}",
     "ui.discover.more": "Plus de résulats",
     "ui.discover.sortBy": "Trier par",

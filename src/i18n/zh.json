@@ -6,7 +6,7 @@
     "ui.discover.offline": "无法获取任何结果",
     "ui.discover.offlineExplain": "检查网络连接并在浏览器中禁用JavaScript拦截器。",
     "ui.discover.offlineButton": "重试",
-    "ui.discover.searchPlaceholder": "搜索扩展 …",
+    "ui.discover.searchPlaceholder": "Search in {count} extensions …",
     "ui.discover.empty": "No results for {query}",
     "ui.discover.more": "更多",
     "ui.discover.sortBy": "排序",
