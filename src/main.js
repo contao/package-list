@@ -13,5 +13,8 @@ Vue.use(VueResource);
 
 bootstrap(Vue, App, router, store, i18n);
 
-const imagesCtx = require.context('../packages/', true, /\.(png|jpg|jpeg|gif|svg|webp)$/);
-imagesCtx.keys().forEach(imagesCtx);
+const packagesCtx = require.context('../packages/', true, /\.(png|jpg|jpeg|gif|svg|webp)$/);
+packagesCtx.keys().forEach(packagesCtx);
+
+const newsCtx = require.context('../news/', true, /\.(png|jpg|jpeg|gif|svg|webp)$/);
+newsCtx.keys().forEach(newsCtx);

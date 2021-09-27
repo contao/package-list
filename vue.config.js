@@ -60,7 +60,7 @@ module.exports = {
                         ]
                     },
                     {
-                        test: /packages\/[^/]+.(png|jpe?g|gif|webp)(\?.*)?$/,
+                        test: /packages\/[^/]+\.(png|jpe?g|gif|webp)(\?.*)?$/,
                         use: [
                             {
                                 loader: "file-loader",
@@ -89,12 +89,26 @@ module.exports = {
                         ],
                     },
                     {
-                        test: /packages\/[^/]+.svg(\?.*)?$/,
+                        test: /packages\/[^/]+\.svg(\?.*)?$/,
                         use: [
                             {
                                 loader: "file-loader",
                                 options: {
                                     name: "packages/[hash].[ext]",
+                                },
+                            },
+                            {
+                                loader: "image-webpack-loader",
+                            },
+                        ],
+                    },
+                    {
+                        test: /news\/[^/]+\.(png|jpe?g|gif|webp)(\?.*)?$/,
+                        use: [
+                            {
+                                loader: "file-loader",
+                                options: {
+                                    name: "news/[hash].[ext]",
                                 },
                             },
                             {
