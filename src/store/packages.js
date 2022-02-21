@@ -11,7 +11,9 @@ export default {
         async metadata({ dispatch }, name) {
             let metadata = await dispatch('algolia/getPackage', name, { root: true });
 
-            delete metadata.versions;
+            if (metadata && metadata.versions) {
+                delete metadata.versions;
+            }
 
             return metadata;
         },
