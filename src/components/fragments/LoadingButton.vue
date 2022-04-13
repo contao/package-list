@@ -1,7 +1,8 @@
 <template>
     <component
-        :is="href ? 'a' : 'button'"
-        :type="href ? null : (submit ? 'submit' : 'button')"
+        :is="link ? 'a' : 'button'"
+        :type="link ? null : (submit ? 'submit' : 'button')"
+        :href="link"
         :class="buttonClass"
         :disabled="disabled || loading"
         @click="click"
@@ -21,6 +22,7 @@
 
         props: {
             href: String,
+            to: [String, Object],
             color: String,
             icon: String,
             inline: Boolean,
@@ -35,18 +37,20 @@
                 'widget-button': true,
                 'widget-button--inline': vm.inline,
                 [`widget-button--${vm.color}`]: vm.color,
-                'disabled': vm.href && (vm.loading || vm.disabled),
+                'disabled': vm.link && (vm.loading || vm.disabled),
             }),
 
             slotClass: vm => ({
                 loading: vm.loading,
                 [`widget-button--${vm.icon}`]: vm.icon,
             }),
+
+            link: vm => vm.href || (vm.to && vm.$router.resolve(vm.to).href) || null,
         },
 
         methods: {
             click(e) {
-                if (!this.submit) {
+                if (!this.submit && !this.link) {
                     e.preventDefault();
                     this.$emit('click', e);
                 }
