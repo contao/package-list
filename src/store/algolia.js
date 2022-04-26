@@ -263,8 +263,8 @@ export default {
                     latest: content.results[0].hits,
                     downloads: content.results[1].hits,
                     favers: content.results[2].hits,
-                    ads: randomizeHits(Array.from(content.results[3].hits).concat(randomizeHits(content.results[4].hits, 6 - content.results[3].nbHits))),
-                    news: randomizeHits(Array.from(content.results[5].hits)),
+                    ads: randomizeHits(content.results[3].hits).concat(randomizeHits(content.results[4].hits, 6 - content.results[3].nbHits)),
+                    news: randomizeHits(content.results[5].hits),
                 });
 
             } catch (err) {
