@@ -213,7 +213,7 @@ export default {
         async discover({ state, commit }) {
             try {
                 const d = new Date();
-                const today = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2, '0')}${String(d.getDay()).padStart(2, '0')}`;
+                const today = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
                 const content = await client.search([
                     {
                         indexName: 'v3_packages_latest',
