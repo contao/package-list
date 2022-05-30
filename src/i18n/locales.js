@@ -18,5 +18,6 @@ export default {
     pt: 'Português (Portuguese)',
     ru: 'Русский (Russian)',
     sr: 'српски језик (Serbian)',
+    sv: 'svenska (Swedish)',
     zh: '中文 (Chinese)',
 };
