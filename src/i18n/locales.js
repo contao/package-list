@@ -2,6 +2,10 @@
 // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 // Order by language code
 
+// WARNING: do not move this file, its path is used by contao/package-metadata
+// to know what languages to add to the indexer
+// @see https://github.com/contao/package-metadata/blob/main/indexer/src/Command/IndexCommand.php#L289
+
 export default {
     en: 'English',
     de: 'Deutsch (German)',
