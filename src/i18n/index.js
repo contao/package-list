@@ -21,6 +21,7 @@ const locales = {
     ru: () => import('./ru.json'),
     sr: () => import('./sr.json'),
     sv: () => import('./sv.json'),
+    tr: () => import('./tr.json'),
     zh: () => import('./zh.json'),
 };
 
