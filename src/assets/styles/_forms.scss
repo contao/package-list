@@ -246,4 +246,10 @@ select {
 
 label {
     padding: 0;
+
+    .widget--required &:after {
+        margin-left: 2px;
+        content: "*";
+        color: $red-button;
+    }
 }
