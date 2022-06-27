@@ -127,6 +127,19 @@
             }
         }
 
+        &--warning {
+            border-color: $orange-button;
+
+            &:before {
+                border-bottom-color: $orange-button;
+            }
+
+            &.link-menu--valign-top:before {
+                border-bottom-color: transparent;
+                border-top-color: $orange-button;
+            }
+        }
+
         &--alert {
             border-color: $red-button;
 
