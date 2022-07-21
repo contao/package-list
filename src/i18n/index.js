@@ -3,6 +3,7 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 
 import store from '../store';
+import { setLocale as setDatimLocale } from '../filters/datimFormat'
 
 const locales = {
     en: () => import('./en.json'),
@@ -31,6 +32,7 @@ const i18n = new VueI18n();
 
 const setLocale = (locale) => {
     i18n.locale = locale;
+    setDatimLocale(locale);
     store.commit('algolia/setLanguage', locale);
     document.querySelector('html').setAttribute('lang', locale);
 };

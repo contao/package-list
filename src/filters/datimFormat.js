@@ -1,4 +1,10 @@
 
+let locale = undefined;
+
+export function setLocale(value) {
+    locale = value;
+}
+
 export default (value, timeStyle = 'short', dateStyle = 'medium') => {
     if (!value) {
         return '';
@@ -11,12 +17,12 @@ export default (value, timeStyle = 'short', dateStyle = 'medium') => {
     }
 
     if (!timeStyle) {
-        return date.toLocaleDateString(undefined, { dateStyle });
+        return date.toLocaleDateString(locale, { dateStyle });
     }
 
     if (!dateStyle) {
-        return date.toLocaleTimeString(undefined, { timeStyle });
+        return date.toLocaleTimeString(locale, { timeStyle });
     }
 
-    return date.toLocaleString(undefined, { dateStyle, timeStyle });
+    return date.toLocaleString(locale, { dateStyle, timeStyle });
 };
