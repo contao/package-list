@@ -6,7 +6,7 @@
     &__error {
         display: none;
         position: absolute;
-        bottom: 0;
+        bottom: -6px;
         left: 0;
         right: 0;
         margin: 0;
@@ -65,8 +65,12 @@ select {
         background-color: #f9f9f9;
     }
 
-    .widget.valid & {
-        border-color: $green-button
+    .widget--validate &:not(:placeholder-shown):valid {
+        border-color: $green-button;
+    }
+
+    .widget--validate &:not(:placeholder-shown):invalid {
+        border-color: $red-button;
     }
 
     .widget--error & {
