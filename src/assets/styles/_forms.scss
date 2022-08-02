@@ -191,6 +191,16 @@ select {
         }
     }
 
+    &--funding {
+        background-color: $funding-color;
+
+        &:hover,
+        &:active {
+            background-color: darken($funding-color, 5);
+            border-bottom: 1px solid darken($funding-color, 10);
+        }
+    }
+
     $iconSelector: '.icon-selector';
     $icons: (
         'details',
