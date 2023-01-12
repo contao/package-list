@@ -16,6 +16,7 @@
         border-radius: 2px;
         transform: translateY(100%);
         z-index: 10;
+        white-space: pre-line;
 
         &:after, &:before {
             bottom: 100%;
