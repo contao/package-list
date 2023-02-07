@@ -33,10 +33,10 @@
 </template>
 
 <script>
-    import PackageLogo from './Logo';
-    import DetailsButton from './DetailsButton';
+import PackageLogo from './Logo';
+import DetailsButton from './DetailsButton';
 
-    export default {
+export default {
         components: { PackageLogo, DetailsButton },
 
         props: {
@@ -96,13 +96,15 @@
             }
 
             img {
+                position: absolute;
                 width: 100%;
                 height: auto;
                 max-height: 100%;
             }
 
             @include screen(600) {
-                position: initial;
+                position: relative;
+                right: auto;
                 display: block;
                 float: left;
                 width: 90px;
@@ -125,7 +127,8 @@
             }
 
             @include screen(1200) {
-                position: initial;
+                position: relative;
+                right: auto;
                 display: block;
                 float: left;
                 width: 90px;
