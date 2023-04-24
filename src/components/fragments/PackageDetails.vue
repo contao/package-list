@@ -137,6 +137,9 @@
         components: { Popup, More, Loader, PackageLogo, PackageFunding, DetailsTab, DetailsContent },
 
         props: {
+            local: {
+                type: Object,
+            },
             dependents: {
                 type: Object,
             },
@@ -166,9 +169,7 @@
 
             exists: vm => /*vm.installed[vm.current] || */vm.metadata,
 
-            data() {
-                return { name: this.current };
-            },
+            data: vm => vm.local || { name: this.current },
 
             authors: vm => (vm.metadata.authors && vm.metadata.authors.length) ? vm.metadata.authors.filter(a => !!a.name) : null,
             license: vm => vm.metadata.license ? (vm.metadata.license instanceof Array ? vm.metadata.license.join(', ') : vm.metadata.license) : '–',
