@@ -6,7 +6,7 @@ export default {
     methods: {
         async loadMetadata() {
             this.metadata = {};
-            const metadata = await this.$store.dispatch('packages/metadata', this.data.name);
+            const metadata = await this.$store.dispatch('packages/metadata', this.data);
 
             if (metadata) {
                 this.metadata = Object.assign(
