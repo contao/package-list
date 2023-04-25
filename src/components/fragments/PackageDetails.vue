@@ -169,7 +169,7 @@
 
             exists: vm => /*vm.installed[vm.current] || */vm.metadata,
 
-            data: vm => vm.local || { name: this.current },
+            data: vm => vm.local || { name: vm.current },
 
             authors: vm => (vm.metadata.authors && vm.metadata.authors.length) ? vm.metadata.authors.filter(a => !!a.name) : null,
             license: vm => vm.metadata.license ? (vm.metadata.license instanceof Array ? vm.metadata.license.join(', ') : vm.metadata.license) : '–',
