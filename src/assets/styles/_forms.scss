@@ -63,7 +63,7 @@ select {
 
     &:focus {
         outline: none;
-        background-color: #f9f9f9;
+        background-color: $focus-color;
     }
 
     .widget--validate &:not(:placeholder-shown):valid {
