@@ -10,6 +10,8 @@
     "ui.discover.empty": "{query} ile eşleşen bir sonuç bulunamadı",
     "ui.discover.more": "Diğer sonuçlar",
     "ui.discover.sortBy": "Sıralama",
+    "ui.discover.sortReleased": "Released",
+    "ui.discover.sortReleasedTitle": "Sort results by release date",
     "ui.discover.sortLatest": "Güncellendi",
     "ui.discover.sortLatestTitle": "Arama sonuçları son güncellemeye göre sıralansın",
     "ui.discover.sortDownloads": "İndirmeler",

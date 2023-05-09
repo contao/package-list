@@ -10,6 +10,8 @@
     "ui.discover.empty": "{query}の結果はありません。",
     "ui.discover.more": "さらに結果を表示",
     "ui.discover.sortBy": "並べ替え",
+    "ui.discover.sortReleased": "Released",
+    "ui.discover.sortReleasedTitle": "Sort results by release date",
     "ui.discover.sortLatest": "更新日時",
     "ui.discover.sortLatestTitle": "検索結果を更新日時で並べ替え",
     "ui.discover.sortDownloads": "ダウンロード",

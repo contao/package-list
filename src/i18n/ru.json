@@ -10,6 +10,8 @@
     "ui.discover.empty": "Нет результатов для {query}",
     "ui.discover.more": "Другие результаты",
     "ui.discover.sortBy": "Сортировать по",
+    "ui.discover.sortReleased": "Released",
+    "ui.discover.sortReleasedTitle": "Sort results by release date",
     "ui.discover.sortLatest": "Обновлено",
     "ui.discover.sortLatestTitle": "Сортировать результаты поиска по последнему обновлению",
     "ui.discover.sortDownloads": "Загрузки",

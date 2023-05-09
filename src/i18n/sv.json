@@ -10,6 +10,8 @@
     "ui.discover.empty": "Inga resultat för {query}",
     "ui.discover.more": "Fler resultat",
     "ui.discover.sortBy": "Sortera efter",
+    "ui.discover.sortReleased": "Released",
+    "ui.discover.sortReleasedTitle": "Sort results by release date",
     "ui.discover.sortLatest": "Uppdaterad",
     "ui.discover.sortLatestTitle": "Sortera sökresultat efter senast uppdaterade",
     "ui.discover.sortDownloads": "Nedladdningar",

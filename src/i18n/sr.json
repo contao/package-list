@@ -10,6 +10,8 @@
     "ui.discover.empty": "Нема резултата за {query}",
     "ui.discover.more": "Више резултата",
     "ui.discover.sortBy": "Сортирај по",
+    "ui.discover.sortReleased": "Released",
+    "ui.discover.sortReleasedTitle": "Sort results by release date",
     "ui.discover.sortLatest": "Ажурирано",
     "ui.discover.sortLatestTitle": "Сортирај резултате претраге према последњем ажурирању",
     "ui.discover.sortDownloads": "Преузимања",

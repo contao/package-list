@@ -10,6 +10,8 @@
     "ui.discover.empty": "Nav rezultātu {query}",
     "ui.discover.more": "Vairāk rezultātu",
     "ui.discover.sortBy": "Kārtot pēc",
+    "ui.discover.sortReleased": "Released",
+    "ui.discover.sortReleasedTitle": "Sort results by release date",
     "ui.discover.sortLatest": "Atjaunināts",
     "ui.discover.sortLatestTitle": "Kārtot meklēšanas rezultātus pēc pēdējiem atjauninājumiem",
     "ui.discover.sortDownloads": "Lejupielādes",

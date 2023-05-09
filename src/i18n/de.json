@@ -10,6 +10,8 @@
     "ui.discover.empty": "Keine Ergebnisse für {query}",
     "ui.discover.more": "Mehr Resultate",
     "ui.discover.sortBy": "Sortieren nach",
+    "ui.discover.sortReleased": "Veröffentlicht",
+    "ui.discover.sortReleasedTitle": "Ergebnisse nach der Veröffentlichung sortieren",
     "ui.discover.sortLatest": "Aktualisiert",
     "ui.discover.sortLatestTitle": "Ergebnisse nach der letzten Aktualisierung sortieren",
     "ui.discover.sortDownloads": "Downloads",

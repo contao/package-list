@@ -10,6 +10,8 @@
     "ui.discover.empty": "No results for {query}",
     "ui.discover.more": "更多",
     "ui.discover.sortBy": "排序",
+    "ui.discover.sortReleased": "Released",
+    "ui.discover.sortReleasedTitle": "Sort results by release date",
     "ui.discover.sortLatest": "已更新",
     "ui.discover.sortLatestTitle": "基于上次更新对搜索结果进行排序",
     "ui.discover.sortDownloads": "下载",

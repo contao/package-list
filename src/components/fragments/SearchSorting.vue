@@ -26,6 +26,7 @@
         data: () => ({
             open: false,
             sortOptions: {
+                'Released': 'released',
                 'Latest': 'latest',
                 'Favers': 'favers',
                 'Downloads': 'downloads',
