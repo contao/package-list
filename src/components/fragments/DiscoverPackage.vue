@@ -72,6 +72,7 @@ export default {
             font-weight: $font-weight-bold;
             background: $red-button;
             cursor: help;
+            z-index: 10;
 
             @include screen(600) {
                 position: absolute;
