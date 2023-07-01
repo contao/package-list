@@ -52,12 +52,25 @@
         }
 
         &__group {
+            position: relative;
             display: inline-flex;
             flex-direction: column;
             margin: 0;
-            padding: 0;
+            padding: 0 15px 0 0;
             list-style-type: none;
             text-align: left;
+
+            &:after {
+                content: "";
+                position: absolute;
+                top: .8em;
+                right: 0;
+                width: 0;
+                height: 0;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid #535353;
+            }
         }
 
         &__item {
@@ -87,6 +100,11 @@
             &__group {
                 flex-direction: row;
                 justify-content: flex-end;
+                padding: 0;
+
+                &:after {
+                    content: none;
+                }
             }
 
             &__item {
