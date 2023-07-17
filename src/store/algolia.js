@@ -203,6 +203,11 @@ export default {
                 delete params.sorting;
             }
 
+            if (params.hasOwnProperty('type')) {
+                filter = `type:${params.type}`;
+                delete params.type;
+            }
+
             params.filters = `languages:${state.language} AND ${filter}`;
             params.highlightPreTag = '%%';
             params.highlightPostTag = '%%';
