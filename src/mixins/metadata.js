@@ -5,6 +5,11 @@ export default {
 
     methods: {
         async loadMetadata() {
+            if (!this.data) {
+                this.metadata = null;
+                return;
+            }
+
             this.metadata = {};
             const metadata = await this.$store.dispatch('packages/metadata', this.data);
 
