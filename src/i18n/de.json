@@ -42,7 +42,7 @@
     "ui.package-details.linkRequires": "benötigt",
     "ui.package-details.linkReplaces": "ersetzt",
     "ui.package-details.linkProvides": "liefert",
-    "ui.package-details.linkConflicts": "kollidiert mit",
+    "ui.package-details.linkConflicts": "inkompatibel mit",
     "ui.package-details.funding": "Weiterentwicklung finanzieren!",
     "ui.package-details.latest": "Neuste Version",
     "ui.package-details.released": "veröffentlicht am",
