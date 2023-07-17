@@ -2,7 +2,7 @@
     <component :is="wrapper">
 
         <template #search>
-            <search-input/>
+            <search-input :placeholder="$tc('ui.discover.searchPlaceholder', extensionCount)" class="package-search__input"/>
         </template>
 
         <loader v-if="searching && !results" class="package-search__status package-search__status--loader">
@@ -96,6 +96,7 @@
         data: () => ({
             offline: false,
             searching: false,
+            extensionCount: 0,
 
             results: null,
             hasMore: false,
@@ -189,7 +190,16 @@
             });
         },
 
-        mounted() {
+        async mounted() {
+            this.$store.dispatch('algolia/findPackages', {
+                hitsPerPage: 0,
+                attributesToRetrieve: null,
+                attributesToHighlight: null,
+                analytics: false
+            }).then((result) => {
+                this.extensionCount = result.nbHits;
+            }, () => {});
+
             if (this.isSearching) {
                 this.searchPackages();
             }
@@ -202,6 +212,11 @@
 
     .package-search {
         position: relative;
+
+        &__input {
+            max-width: 400px;
+            margin: 0 20px;
+        }
 
         &__headline {
             font-size: 18px;

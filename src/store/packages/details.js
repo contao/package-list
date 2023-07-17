@@ -70,7 +70,7 @@ export default {
             state.packages.push(packageName);
 
             if (state.packages.length === 1) {
-                $vue.$store.commit('modals/open', {id: 'package-details', component})
+                $vue.$store.commit('modals/open', { id: 'package-details', component })
             }
         },
     },
