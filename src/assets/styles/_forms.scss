@@ -256,6 +256,7 @@ select {
         background-color: $border-color !important;
         border-color: $border-color !important;
         cursor: not-allowed;
+        pointer-events: none;
     }
 }
 
