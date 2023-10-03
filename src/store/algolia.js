@@ -95,7 +95,7 @@ export default {
                     if (data && data.private) {
                         data = Object.assign({}, (await Http.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data, data || {});
                     } else {
-                        let pkg = (await Http.get(`https://packagist.org/packages/${name}.json`)).data.package;
+                        let pkg = (await Http.get(`https://packagist.org/packages/${ name }.json`)).data.package;
                         let versionsData = [];
                         let versions;
 
@@ -105,7 +105,7 @@ export default {
                         pkg.dependency = true;
 
                         try {
-                            const versions = (await Http.get(`https://repo.packagist.org/p2/${name}.json`)).data.packages[name];
+                            const versions = (await Http.get(`https://repo.packagist.org/p2/${ name }.json`)).data.packages[name];
 
                             // Data is minified in Composer 2, see https://github.com/composer/metadata-minifier/
                             let expandedVersion = null;
@@ -145,6 +145,10 @@ export default {
                             versions = versionsData;
                         }
 
+                        if (!versions || !versions.length) {
+                            versions = [];
+                        }
+
                         versions = versions.sort(
                             (a, b) => {
                                 const v1 = coerce(a.version_normalized, { loose: true });
@@ -160,10 +164,12 @@ export default {
                             },
                         );
 
-                        const latest = versions[versions.length - 1];
+                        if (versions.length) {
+                            const latest = versions[versions.length - 1];
 
-                        pkg = Object.assign(pkg, latest);
-                        pkg.latest = { version: latest.version, time: latest.time };
+                            pkg = Object.assign(pkg, latest);
+                            pkg.latest = { version: latest.version, time: latest.time };
+                        }
 
                         data = Object.assign({}, pkg, data || {}, { versions });
                     }
