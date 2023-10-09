@@ -91,6 +91,10 @@
             wrapper: {
                 required: true,
             },
+            hideThemes: {
+                type: Boolean,
+                default: false,
+            }
         },
 
         data: () => ({
@@ -117,6 +121,10 @@
                     const params = {
                         hitsPerPage: 10 * this.pages,
                     };
+
+                    if (this.hideThemes) {
+                        params.facetFilters = ['type:-contao-theme'];
+                    }
 
                     if (this.query) {
                         params.query = this.query;
@@ -191,12 +199,18 @@
         },
 
         async mounted() {
-            this.$store.dispatch('algolia/findPackages', {
+            const params = {
                 hitsPerPage: 0,
                 attributesToRetrieve: null,
                 attributesToHighlight: null,
                 analytics: false
-            }).then((result) => {
+            };
+
+            if (this.hideThemes) {
+                params.facetFilters = ['type:-contao-theme'];
+            }
+
+            this.$store.dispatch('algolia/findPackages', params).then((result) => {
                 this.extensionCount = result.nbHits;
             }, () => {});
 
