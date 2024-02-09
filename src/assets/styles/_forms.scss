@@ -257,6 +257,10 @@ select {
         border-color: $border-color !important;
         cursor: not-allowed;
     }
+
+    &.disabled {
+        pointer-events: none;
+    }
 }
 
 label {
