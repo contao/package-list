@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import PackageLink from './Link';
+    import PackageLink from './PackageLink';
 
     export default {
         components: { PackageLink },

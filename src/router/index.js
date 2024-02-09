@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Discover from '../components/routes/Discover';
+import DiscoverRoute from '../components/routes/DiscoverRoute';
 
 Vue.use(Router);
 
@@ -9,7 +9,7 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            component: Discover,
+            component: DiscoverRoute,
             props: true,
         },
         { path: '*', redirect: '/' },

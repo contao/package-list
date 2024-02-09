@@ -1,5 +1,5 @@
 <template>
-    <popup :popup-class="popupClass" @clear="clearCurrent()">
+    <popup-overlay :popup-class="popupClass" @clear="clearCurrent()">
         <div class="package-popup__headline">
             <button class="package-popup__button package-popup__button--previous" :title="$t('ui.package-details.previous')" @click="$router.go(-1)" v-if="hasPrevious">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="package-popup__loader" v-if="!metadata || !metadata.hasOwnProperty('name')">
-            <loader horizontal/>
+            <loading-spinner horizontal/>
             <p>{{ $t('ui.package-details.loading') }}</p>
         </div>
         <template v-else>
@@ -37,7 +37,7 @@
                         <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat(false) }}</span>
                         <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
                         <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
-                        <more :name="metadata.name" :homepage="metadata.homepage" :support="Object.assign({}, metadata.support)" :metadata="metadata.metadata" :hide-packagist="metadata.private"/>
+                        <more-links :name="metadata.name" :homepage="metadata.homepage" :support="Object.assign({}, metadata.support)" :metadata="metadata.metadata" :hide-packagist="metadata.private"/>
                     </p>
                 </div>
                 <div class="package-popup__actions">
@@ -115,7 +115,7 @@
                 <slot name="dependents-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
             </details-content>
         </template>
-    </popup>
+    </popup-overlay>
 </template>
 
 <script>
@@ -123,18 +123,18 @@
     import locales from '../../i18n/locales';
     import metadata from '../../mixins/metadata';
 
-    import PackageLogo from './Logo';
-    import Loader from './Loader';
-    import More from './More';
+    import PackageLogo from './PackageLogo';
+    import LoadingSpinner from './LoadingSpinner';
+    import MoreLinks from './MoreLinks';
     import DetailsTab from './DetailsTab';
     import DetailsContent from './DetailsContent';
-    import Popup from "./Popup";
+    import PopupOverlay from "./PopupOverlay";
     import PackageFunding from './PackageFunding';
 
     export default {
         mixins: [metadata],
 
-        components: { Popup, More, Loader, PackageLogo, PackageFunding, DetailsTab, DetailsContent },
+        components: { PopupOverlay, MoreLinks, LoadingSpinner, PackageLogo, PackageFunding, DetailsTab, DetailsContent },
 
         props: {
             local: {

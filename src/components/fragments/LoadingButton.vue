@@ -10,15 +10,15 @@
         @mouseout="e => $emit('mouseout', e)"
     >
         <span :class="slotClass"><slot/></span>
-        <loader v-show="loading"/>
+        <loading-spinner v-show="loading"/>
     </component>
 </template>
 
 <script>
-    import Loader from './Loader';
+    import LoadingSpinner from './LoadingSpinner';
 
     export default {
-        components: { Loader },
+        components: { LoadingSpinner },
 
         props: {
             href: String,

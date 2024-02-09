@@ -75,7 +75,7 @@ export default {
                 return state.metadata[name];
             }
 
-            const data = new Promise(async (resolve) => {
+            const data = (async () => {
                 let data = null;
 
                 try {
@@ -179,8 +179,7 @@ export default {
                 }
 
                 if (!data) {
-                    resolve(null);
-                    return;
+                    return null;
                 }
 
                 delete data.version;
@@ -191,8 +190,8 @@ export default {
                     data.features = features[data.name];
                 }
 
-                resolve(data);
-            });
+                return data;
+            })();
 
             commit('cache', { name, data });
 
@@ -203,13 +202,13 @@ export default {
             let suffix = '';
             let filter = 'dependency:false';
 
-            if (params.hasOwnProperty('sorting')) {
+            if (params.sorting) {
                 suffix = params.sorting ? `_${params.sorting}` : '';
                 filter = 'discoverable:true';
                 delete params.sorting;
             }
 
-            if (params.hasOwnProperty('type')) {
+            if (params.type) {
                 filter = `type:${params.type}`;
                 delete params.type;
             }

@@ -5,9 +5,9 @@
             <search-input :placeholder="$tc('ui.discover.searchPlaceholder', extensionCount)" class="package-search__input"/>
         </template>
 
-        <loader v-if="searching && !results" class="package-search__status package-search__status--loader">
+        <loading-spinner v-if="searching && !results" class="package-search__status package-search__status--loader">
             <p class="package-search__title">{{ $t('ui.discover.loading') }}</p>
-        </loader>
+        </loading-spinner>
 
         <div v-else-if="offline || discover === null" class="package-search__status package-search__status--offline">
             <p class="package-search__title">{{ $t('ui.discover.offline') }}</p>
@@ -34,7 +34,7 @@
         </template>
 
         <div v-else>
-            <ads v-if="discover.ads.length"/>
+            <ad-banner v-if="discover.ads.length"/>
 
             <h2 class="package-search__headline">{{ $t('ui.discover.latestPackages') }}</h2>
             <div class="package-search__results">
@@ -77,15 +77,15 @@
     import search from '../../mixins/search';
 
     import DiscoverPackage from './DiscoverPackage';
-    import Loader from './Loader';
-    import Ads from './Ads';
+    import LoadingSpinner from './LoadingSpinner';
+    import AdBanner from './AdBanner';
     import SearchSorting from './SearchSorting';
     import SearchInput from './SearchInput';
     import LoadingButton from './LoadingButton';
 
     export default {
         mixins: [search],
-        components: { LoadingButton, SearchInput, SearchSorting, Ads, Loader, DiscoverPackage },
+        components: { LoadingButton, SearchInput, SearchSorting, AdBanner, LoadingSpinner, DiscoverPackage },
 
         props: {
             wrapper: {

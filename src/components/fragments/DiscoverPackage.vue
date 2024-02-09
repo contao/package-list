@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import PackageLogo from './Logo';
+import PackageLogo from './PackageLogo';
 import DetailsButton from './DetailsButton';
 
 export default {

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import FooterFragment from '../fragments/Footer';
+    import FooterFragment from '../fragments/FooterFragment';
 
     export default {
         components: { FooterFragment },
