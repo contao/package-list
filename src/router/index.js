@@ -10,7 +10,6 @@ const router = new Router({
         {
             path: '/',
             component: DiscoverRoute,
-            props: true,
         },
         { path: '*', redirect: '/' },
     ],

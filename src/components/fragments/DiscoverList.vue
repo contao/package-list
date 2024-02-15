@@ -187,10 +187,6 @@
         },
 
         created() {
-            if (this.$route.query && !this.$route.query.q && !this.$route.query.p) {
-                this.$router.replace({ query: {}, append: true });
-            }
-
             this.$watch(this.$i18n.locale, () => {
                 if (this.isSearching) {
                     this.searchPackages();
