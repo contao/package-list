@@ -57,11 +57,11 @@ export default {
     .discover-package {
         position: relative;
         overflow: hidden;
-        margin-bottom: 14px;
         padding: 20px;
-        background: #fff;
-        border-bottom: 3px solid #ddd3bc;
-        border-radius: 2px;
+        background: var(--tiles-bg);
+        border: 1px solid var(--tiles-bdr);
+        border-radius: 12px;
+        text-align: center;
 
         &__abandoned {
             display: inline-block;
@@ -70,7 +70,7 @@ export default {
             color: #fff;
             font-size: 12px;
             font-weight: $font-weight-bold;
-            background: $red-button;
+            background: var(--btn-alert);
             cursor: help;
             z-index: 10;
 
@@ -79,63 +79,29 @@ export default {
                 top: 20px;
                 left: -25px;
                 padding: 2px 30px;
-                border-top: 1px solid darken($red-button, 10);
-                border-bottom: 1px solid darken($red-button, 20);
+                border-top: 1px solid var(--btn-alert-active);
                 transform: rotateZ(-45deg);
             }
         }
 
         &__icon {
-            position: absolute;
-            right: 20px;
-            height: 42px;
-            width: 42px;
-            margin-left: 1em;
+            border-radius: 6px;
+            height: 60px;
+            width: 60px;
+            background: #f1f1f1;
+            margin: 0 auto 10px;
 
-            &--fallback {
-                display: none;
+            > figure {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
             }
 
             img {
-                position: absolute;
-                width: 100%;
+                width: 50px;
                 height: auto;
                 max-height: 100%;
-            }
-
-            @include screen(600) {
-                position: relative;
-                right: auto;
-                display: block;
-                float: left;
-                width: 90px;
-                height: 90px;
-                margin-left: 0;
-                margin-right: 20px;
-            }
-
-            @include screen(1024) {
-                position: absolute;
-                right: 20px;
-                height: 50px;
-                width: 50px;
-                margin-left: 1em;
-                margin-right: 0;
-
-                &--fallback {
-                    display: none;
-                }
-            }
-
-            @include screen(1200) {
-                position: relative;
-                right: auto;
-                display: block;
-                float: left;
-                width: 90px;
-                height: 90px;
-                margin-left: 0;
-                margin-right: 20px;
             }
         }
 
@@ -143,41 +109,16 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-
-            @include screen(600) {
-                height: 100%;
-                min-height: 90px;
-            }
         }
 
         &__headline {
             margin-bottom: .2em;
             line-height: 1;
-            margin-right: 50px;
             overflow-wrap: break-word;
 
-            &--fallback {
-                margin-right: 0;
-            }
-
-            @include screen(600) {
-                margin-right: 0;
-            }
-
-            @include screen(1024) {
-                margin-right: 60px;
-
-                &--fallback {
-                    margin-right: 0;
-                }
-            }
-
-            @include screen(1200) {
-                margin-right: 0;
-            }
-
             em {
-                background-color: $highlight-color;
+                background-color: var(--highlight-bg);
+                color: var(--highlight-color);
                 font-style: normal;
             }
         }
@@ -188,39 +129,17 @@ export default {
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             margin-bottom: .5em;
-            margin-right: 50px;
-
-            &--fallback {
-                margin-right: 0;
-            }
-
-            @include screen(600) {
-                margin-right: 0;
-            }
-
-            @include screen(1024) {
-                margin-right: 60px;
-
-                &--fallback {
-                    margin-right: 0;
-                }
-            }
-
-            @include screen(1200) {
-                margin-right: 0;
-            }
 
             em {
-                background-color: $highlight-color;
+                background-color: var(--highlight-bg);
+                color: var(--highlight-color);
                 font-style: normal;
             }
         }
 
         &__more {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-end;
+            flex-direction: column;
             flex-grow: 1;
             margin-bottom: -.5em;
             line-height: 28px;
@@ -228,6 +147,7 @@ export default {
 
         &__counts {
             flex-grow: 1;
+            justify-content: flex-start;
             margin-bottom: .5em;
 
             @include screen(600) {
@@ -245,33 +165,67 @@ export default {
             background-size: 13px 13px;
 
             &--private {
-                background-image: url("../../assets/images/private.svg");
+                background-image: var(--svg--private);
             }
 
             &--updated {
-                background-image: url("../../assets/images/updated.svg");
+                background-image: var(--svg--updated);
             }
 
             &--downloads {
-                background-image: url("../../assets/images/downloads.svg");
+                background-image: var(--svg--downloads);
             }
 
             &--favers {
-                background-image: url("../../assets/images/favers.svg");
+                background-image: var(--svg--favers);
             }
         }
 
         &__actions {
             flex-grow: 1;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             margin: 0 -4px .5em;
 
             > * {
                 margin: 0 4px;
             }
+        }
 
-            @include screen(600) {
+        @include screen(600) {
+            text-align: initial;
+            display: flex;
+            padding: 0;
+
+            &__icon {
+                width: 130px;
+                height: 100%;
+                min-height: 130px;
+                margin: 0;
+                border-radius: 0;
+
+                img {
+                    width: 110px;
+                }
+            }
+
+            &__details {
+                padding: 20px;
+                height: 100%;
+                min-height: 90px;
+                flex: 1;
+            }
+
+            &__more {
+                flex-direction: row;
+            }
+
+            &__counts {
+                margin-bottom: 0;
+            }
+
+            &__actions {
+                justify-content: end;
                 margin-bottom: 0;
             }
         }

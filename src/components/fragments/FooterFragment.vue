@@ -72,13 +72,13 @@
         padding: 15px 0;
         font-size: 12px;
         text-align: center;
-        border-top: 1px solid #eee;
+        border-top: 1px solid #eee; // ToDo:
 
         &--main {
             width: auto;
             margin-top: 52px !important;
             padding: 20px 0;
-            border-top: 1px solid #bbbbbb;
+            border-top: 1px solid var(--footer-bdr);
         }
 
         &:before {
@@ -107,7 +107,7 @@
                 border: none;
 
                 &:hover {
-                    color: #000;
+                    color: var(--black);
                 }
             }
 
@@ -122,11 +122,11 @@
                 text-align: left;
                 list-style-type: none;
                 white-space: nowrap;
-                background: #fff;
-                border-bottom: 3px solid $contao-color;
+                background: var(--white); // ToDo: maybe another background
+                border-bottom: 3px solid var(--contao);
                 transform: translateX(-50%);
                 z-index: 100;
-                box-shadow: $shadow-color 0 -1px 2px;
+                box-shadow: $shadow-color 0 -1px 2px; // ToDo:
 
                 &:after {
                     position: absolute;
@@ -137,7 +137,7 @@
                     margin-left: -4px;
                     border-style: solid;
                     border-width: 4px 3.5px 0 3.5px;
-                    border-color: $contao-color transparent transparent transparent;
+                    border-color: var(--contao) transparent transparent transparent;
                     content: "";
                 }
             }
@@ -147,7 +147,7 @@
                 width: 50%;
                 margin: 0;
                 padding: 0;
-                border-top: 1px solid #e5dfd0;
+                border-top: 1px solid #e5dfd0; // ToDo:
 
                 a {
                     display: block;
@@ -161,7 +161,7 @@
                     }
 
                     &:hover {
-                        color: #000;
+                        color: #000; // ToDo:
                         text-decoration: none;
                     }
                 }

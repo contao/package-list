@@ -48,6 +48,7 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
     img {
         width: 100%;
+        aspect-ratio: 2; // For aligning images that are slightly smaller e.g. "0.1-Theme"
     }
 
     .ads {
@@ -62,7 +63,7 @@
             padding-left: 16px;
             font-size: .8em;
             color: inherit;
-            background: url("../../assets/images/link-blank.svg") left center no-repeat;
+            background: var(--svg--link-blank) left center no-repeat;
             background-size: 13px 13px;
         }
     }
@@ -70,6 +71,8 @@
     .container {
         position: relative;
         background: #FFF;
-        box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--ad-shadow);
+        border-radius: 12px;
+        overflow: hidden;
     }
 </style>

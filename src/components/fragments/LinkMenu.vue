@@ -48,11 +48,11 @@
         text-align: center;
         list-style-type: none;
         white-space: nowrap;
-        background: #fff;
-        border-top: 3px solid $text-color;
+        background: #fff; // ToDo:
+        border-top: 3px solid var(--text);
         //transform: translateX(-50%);
         z-index: 100;
-        box-shadow: $shadow-color 0 1px 2px;
+        box-shadow: $shadow-color 0 1px 2px; // ToDo:
 
         &:before {
             position: absolute;
@@ -63,7 +63,7 @@
             margin-left: -4px;
             border-style: solid;
             border-width: 0 3.5px 4px 3.5px;
-            border-color: transparent transparent $text-color transparent;
+            border-color: transparent transparent var(--text) transparent;
             content: "";
         }
 
@@ -90,66 +90,67 @@
         &--valign-top {
             bottom: 0;
             border-top: none;
-            border-bottom: 3px solid $text-color;
-            box-shadow: $shadow-color 0 0 2px;
+            border-bottom: 3px solid var(--text);
+            box-shadow: $shadow-color 0 0 2px; // ToDo:
 
             &:before {
                 top: auto;
                 bottom: -7px;
                 border-width: 4px 3.5px 0 3.5px;
-                border-color: $text-color transparent transparent transparent;
+                border-color: var(--text) transparent transparent transparent; // ToDo:
             }
         }
 
+        // ToDo: Use Mixin for convenience
         &--contao {
-            border-color: $contao-color;
+            border-color: var(--contao);
 
             &:before {
-                border-bottom-color: $contao-color;
+                border-bottom-color: var(--contao);
             }
 
             &.link-menu--valign-top:before {
                 border-bottom-color: transparent;
-                border-top-color: $contao-color;
+                border-top-color: var(--contao);
             }
         }
 
         &--primary {
-            border-color: $green-button;
+            border-color: var(--btn-primary);
 
             &:before {
-                border-bottom-color: $green-button;
+                border-bottom-color: var(--btn-primary);
             }
 
             &.link-menu--valign-top:before {
                 border-bottom-color: transparent;
-                border-top-color: $green-button;
+                border-top-color: var(--btn-primary);
             }
         }
 
         &--warning {
-            border-color: $orange-button;
+            border-color: var(--btn-warning);
 
             &:before {
-                border-bottom-color: $orange-button;
+                border-bottom-color: var(--btn-warning);
             }
 
             &.link-menu--valign-top:before {
                 border-bottom-color: transparent;
-                border-top-color: $orange-button;
+                border-top-color: var(--btn-warning);
             }
         }
 
         &--alert {
-            border-color: $red-button;
+            border-color: var(--btn-alert);
 
             &:before {
-                border-bottom-color: $red-button;
+                border-bottom-color: var(--btn-alert);
             }
 
             &.link-menu--valign-top:before {
                 border-bottom-color: transparent;
-                border-top-color: $red-button;
+                border-top-color: var(--btn-alert);
             }
         }
 
@@ -157,7 +158,7 @@
             margin: 0;
             padding: 0;
             display: block;
-            border-top: 1px solid #e5dfd0;
+            border-top: 1px solid #e5dfd0; // ToDo
 
             &:first-child {
                 border-top: none;
@@ -168,11 +169,11 @@
             display: block;
             margin: 0;
             padding: 10px 20px;
-            color: $text-color;
+            color: var(--text);
             cursor: pointer;
 
             &:hover {
-                color: #000;
+                color: #000; // ToDo:
                 text-decoration: none;
             }
         }

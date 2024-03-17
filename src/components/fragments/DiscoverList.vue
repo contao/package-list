@@ -234,17 +234,12 @@
             margin: 30px 0 10px;
         }
 
-        @include screen(1024) {
-            &__results {
-                display: flex;
-                flex-wrap: wrap;
-                margin: 0 -8px;
-            }
+        &__results {
+            display: grid;
+            gap: 20px;
 
-            &__item {
-                flex-basis: calc(50% - 16px);
-                margin-left: 8px;
-                margin-right: 8px;
+            @include screen(1024) {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 

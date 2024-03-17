@@ -32,12 +32,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #e9eef1;
         }
     }
     svg {
         width: 80%;
         height: 80%;
-        fill: #babec1;
+        fill: #babec1; //ToDo:
     }
 </style>

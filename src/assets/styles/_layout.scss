@@ -26,7 +26,7 @@ html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    background: #ebe6db;
+    background: var(--body-bg);
     overflow-y: hidden;
 }
 
@@ -45,6 +45,10 @@ legend {
     -webkit-padding-end: 0;
 }
 
+figure {
+  line-height: 0;
+}
+
 /*
 img, svg, iframe {
     display: block;
@@ -60,7 +64,7 @@ img, svg {
 
 body, input, textarea, button {
     font: $font-weight-normal 14px/1.4 $font-sans-serif;
-    color: $text-color;
+    color: var(--text);;
 }
 
 strong {
@@ -81,8 +85,8 @@ select, input, textarea {
     }*/
 
     &:disabled {
-        color: $text-color;
-        -webkit-text-fill-color: $text-color;
+        color: var(--text);;
+        -webkit-text-fill-color: var(--text);;
         cursor: text;
     }
 
@@ -124,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    color: $link-color;
+    color: var(--link);
     text-decoration: none;
 
     &:hover {

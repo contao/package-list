@@ -11,8 +11,8 @@
         right: 0;
         margin: 0;
         padding: 4px 10px;
-        color: #fff;
-        background: $red-button;
+        color: var(--clr-btn);
+        background: var(--btn-error);
         border-radius: 2px;
         transform: translateY(100%);
         z-index: 10;
@@ -30,13 +30,13 @@
         }
 
         &:after {
-            border-bottom-color: $red-button;
+            border-bottom-color: var(--btn-alert);
             border-width: 3px;
             margin-left: -3px;
         }
 
         &:before {
-            border-bottom-color: $red-button;
+            border-bottom-color: var(--btn-alert);
             border-width: 5px;
             margin-left: -5px;
         }
@@ -54,28 +54,28 @@ select {
     position: relative;
     width: 100%;
     height: 38px;
-    padding: 0 10px 0 10px;
-    background: #fff;
-    border: 1px solid $border-color;
-    border-radius: 2px;
-    color: $text-color;
+    padding: 0 20px;
+    background: var(--form-bg);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text);
     appearance: none;
 
     &:focus {
         outline: none;
-        background-color: $focus-color;
+        background-color: var(--focus);
     }
 
     .widget--validate &:not(:placeholder-shown):valid {
-        border-color: $green-button;
+        border-color: var(--btn-primary);
     }
 
     .widget--validate &:not(:placeholder-shown):invalid {
-        border-color: $red-button;
+        border-color: var(--btn-alert);
     }
 
     .widget--error & {
-        border-color: $red-button;
+        border-color: var(--btn-alert);
         animation: input-error .15s linear 3;
     }
 }
@@ -93,7 +93,7 @@ select {
         height: 0;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        border-top: 6px solid $border-color;
+        border-top: 6px solid var(--border);
         content: "";
         pointer-events: none;
     }
@@ -105,21 +105,19 @@ select {
     height: 38px;
     padding: 0;
     border: none;
-    background-color: $default-button;
-    color: #fff;
+    background-color: var(--btn);
+    color: var(--clr-btn);
     font-weight: $font-weight-bold;
     line-height: 38px;
     text-decoration: none;
     text-align: center;
     white-space: nowrap;
     cursor: pointer;
-    border-bottom: 1px solid inherit;
     border-radius: 2px;
 
     &:hover,
     &:active {
-        background-color: darken($default-button, 5);
-        border-bottom: 1px solid darken($default-button, 10);
+        background-color: var(--btn-active);
     }
 
     &--inline {
@@ -152,54 +150,14 @@ select {
         }
     }
 
-    &--primary {
-        background-color: $green-button;
-
-        &:hover,
-        &:active {
-            background-color: darken($green-button, 5);
-            border-bottom: 1px solid darken($green-button, 10);
-        }
-    }
-
-    &--warning {
-        background-color: $orange-button;
-
-        &:hover,
-        &:active {
-            background-color: darken($orange-button, 5);
-            border-bottom: 1px solid darken($orange-button, 10);
-        }
-    }
-
-    &--alert {
-        background-color: $red-button;
-
-        &:hover,
-        &:active {
-            background-color: darken($red-button, 5);
-            border-bottom: 1px solid darken($red-button, 10);
-        }
-    }
-
-    &--info {
-        background-color: $blue-button;
-
-        &:hover,
-        &:active {
-            background-color: darken($blue-button, 5);
-            border-bottom: 1px solid darken($blue-button, 10);
-        }
-    }
-
-    &--funding {
-        background-color: $funding-color;
-
-        &:hover,
-        &:active {
-            background-color: darken($funding-color, 5);
-            border-bottom: 1px solid darken($funding-color, 10);
-        }
+    // Button-colors
+    @each $variation in (
+      'primary', 'warning', 'alert', 'info', 'funding'
+    ) {
+      &--#{$variation} {
+        --btn: var(--btn-#{$variation});
+        --btn-active: var(--btn-#{$variation}-active)
+      }
     }
 
     $iconSelector: '.icon-selector';
@@ -253,8 +211,8 @@ select {
 
     &:disabled,
     &.disabled {
-        background-color: $border-color !important;
-        border-color: $border-color !important;
+        background-color: var(--border) !important;
+        border-color: var(--border) !important;
         cursor: not-allowed;
     }
 
@@ -269,6 +227,6 @@ label {
     .widget--required &:after {
         margin-left: 2px;
         content: "*";
-        color: $red-button;
+        color: var(--btn-alert);
     }
 }

@@ -69,7 +69,7 @@
                 height: 0;
                 border-left: 5px solid transparent;
                 border-right: 5px solid transparent;
-                border-top: 5px solid #535353;
+                border-top: 5px solid #535353; //ToDo:
             }
         }
 
@@ -82,7 +82,7 @@
             border-bottom: 2px solid transparent;
 
             &:hover {
-                color: $link-color;
+                color: var(--link);
             }
 
             &--open {
@@ -91,8 +91,8 @@
 
             &--active {
                 display: inline;
-                color: $link-color;
-                border-bottom: 2px solid $link-color;
+                color: var(--link);
+                border-bottom: 2px solid var(--link);
             }
         }
 
