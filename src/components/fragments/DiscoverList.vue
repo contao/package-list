@@ -237,6 +237,7 @@
         &__results {
             display: grid;
             gap: 20px;
+            margin-bottom: 20px;
 
             @include screen(1024) {
                 grid-template-columns: repeat(2, 1fr);

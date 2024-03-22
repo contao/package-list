@@ -54,14 +54,15 @@ export default {
 <style rel="stylesheet/scss" lang="scss">
     @import "../../assets/styles/defaults";
 
+    $discover-package-padding: 16px;
+
     .discover-package {
         position: relative;
         overflow: hidden;
-        padding: 20px;
+        padding: $discover-package-padding;
         background: var(--tiles-bg);
         border: 1px solid var(--tiles-bdr);
-        border-radius: 12px;
-        text-align: center;
+        border-radius: 14px;
 
         &__abandoned {
             display: inline-block;
@@ -88,8 +89,10 @@ export default {
             border-radius: 6px;
             height: 60px;
             width: 60px;
-            background: #f1f1f1;
+            background: #f7f7f7;
             margin: 0 auto 10px;
+            position: absolute;
+            right: $discover-package-padding;
 
             > figure {
                 display: flex;
@@ -99,8 +102,9 @@ export default {
             }
 
             img {
+                border-radius: 4px;
                 width: 50px;
-                height: auto;
+                height: 50px;
                 max-height: 100%;
             }
         }
@@ -109,12 +113,15 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+
+            min-height: 96px;
         }
 
         &__headline {
             margin-bottom: .2em;
             line-height: 1;
             overflow-wrap: break-word;
+            margin-right: 70px;
 
             em {
                 background-color: var(--highlight-bg);
@@ -128,7 +135,8 @@ export default {
             overflow: hidden;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            margin-bottom: .5em;
+            margin-bottom: 1em;
+            margin-right: 70px;
 
             em {
                 background-color: var(--highlight-bg);
@@ -139,20 +147,17 @@ export default {
 
         &__more {
             display: flex;
-            flex-direction: column;
+            flex-flow: row wrap;
+            align-items: flex-end;
             flex-grow: 1;
-            margin-bottom: -.5em;
+            gap: 4px;
+
             line-height: 28px;
         }
 
         &__counts {
             flex-grow: 1;
             justify-content: flex-start;
-            margin-bottom: .5em;
-
-            @include screen(600) {
-                margin-bottom: 0;
-            }
         }
 
         &__count {
@@ -184,12 +189,7 @@ export default {
         &__actions {
             flex-grow: 1;
             display: flex;
-            justify-content: center;
-            margin: 0 -4px .5em;
-
-            > * {
-                margin: 0 4px;
-            }
+            justify-content: flex-end;
         }
 
         @include screen(600) {
@@ -204,29 +204,33 @@ export default {
                 margin: 0;
                 border-radius: 0;
 
+                position: revert;
+                right: revert;
+
                 img {
                     width: 110px;
+                    height: 110px;
                 }
             }
 
             &__details {
-                padding: 20px;
+                padding: $discover-package-padding;
                 height: 100%;
                 min-height: 90px;
                 flex: 1;
+            }
+
+            &__headline,
+            &__description {
+                margin-right: 0;
             }
 
             &__more {
                 flex-direction: row;
             }
 
-            &__counts {
-                margin-bottom: 0;
-            }
-
             &__actions {
                 justify-content: end;
-                margin-bottom: 0;
             }
         }
     }

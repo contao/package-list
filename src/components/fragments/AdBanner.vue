@@ -72,7 +72,7 @@
         position: relative;
         background: #FFF;
         box-shadow: var(--ad-shadow);
-        border-radius: 12px;
+        border-radius: 14px;
         overflow: hidden;
     }
 </style>
