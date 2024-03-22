@@ -75,7 +75,6 @@
 
             setColorMode(colorMode) {
                 document.documentElement.setAttribute('data-theme', colorMode);
-                console.log(colorMode)
                 localStorage.setItem("theme", colorMode);
             },
 

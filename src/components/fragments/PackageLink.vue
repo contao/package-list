@@ -40,7 +40,7 @@
         width: 100%;
         padding-bottom: 4px;
         margin-bottom: 4px;
-        border-bottom: 1px solid #e9eef1;
+        border-bottom: 1px solid #e9eef1; //ToDo:
 
         &:last-child {
             padding-bottom: 0;
