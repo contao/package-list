@@ -56,17 +56,14 @@ $footer-border: #bbbbbb;
   --funding: #{$funding-color};
   --funding-rgb: #{red($funding-color) green($funding-color) blue($funding-color)};
 
-
   --white: #fff;
   --black: #000;
-
 
   --form-bg: #fff;
   --border: #{$border-color};
   --border--light: #{$border-light-color};
 
   --focus: #{$focus-color};
-
 
   --clr-btn: #fff;
   --btn: #{$default-button};
@@ -99,45 +96,43 @@ $footer-border: #bbbbbb;
 }
 
 // Dark-mode
-@media (prefers-color-scheme: dark) {
+html[data-theme=dark] {
+  --text: #ddd;
+  --link: #{$link-color};
+  --body-bg: #121416;
+
+  --tiles-bg: #212227;
+  --tiles-bdr: #303236;
+  --highlight-bg: #f47c00;
+  --highlight-color: #fff;
+
+  --ad-shadow: none;
+
+  --white: #000;
+  --black: #fff;
+
+  --form-bg: #151619;
+  --border: #44464b;
+
+  --focus: #1e2024;
+
+  --btn-info: #101012;
+  --btn-info-active: #{darken(#101012, 5)};
+
+  --header-bg: #1b1d21;
+  --header-bdr: #1b1d21;
+
+  --footer-bdr: #414448;
+
+  --svg--link-blank: url('/src/assets/images/link-blank--dark.svg');
+  --svg--private: url('/src/assets/images/private--dark.svg');
+  --svg--updated: url('/src/assets/images/updated--dark.svg');
+  --svg--downloads: url('/src/assets/images/downloads--dark.svg');
+  --svg--favers: url('/src/assets/images/favers--dark.svg');
 
   #contao-network {
     background: #292c32 !important;
     color: #ddd !important;
-  }
-
-  :root {
-    --text: #ddd;
-    --link: #{$link-color};
-
-    --body-bg: #121416;
-
-    --highlight-bg: #f47c00;
-    --highlight-color: #fff;
-
-    --form-bg: #151619;
-    --border: #44464b;
-
-    --focus: #1e2024;
-
-    --ad-shadow: none;
-
-    --white: #000;
-    --black: #fff;
-
-    --tiles-bg: #212227;
-    --tiles-bdr: #303236;
-
-    --header-bg: #1b1d21;
-    --header-bdr: #1b1d21;
-
-    --footer-bdr: #414448;
-
-    --svg--link-blank: url('/src/assets/images/link-blank--dark.svg');
-    --svg--private: url('/src/assets/images/private--dark.svg');
-    --svg--updated: url('/src/assets/images/updated--dark.svg');
-    --svg--downloads: url('/src/assets/images/downloads--dark.svg');
-    --svg--favers: url('/src/assets/images/favers--dark.svg');
   }
 }
 

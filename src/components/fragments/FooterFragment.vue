@@ -8,6 +8,15 @@
                 </li>
             </ul>
         </div>
+        <div class="dark-mode-select">
+            <select
+                @change="setColorMode($event.target.value)"
+                v-model="colorMode"
+            >
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
     </footer>
 </template>
 
@@ -20,8 +29,13 @@
             display: String,
         },
 
+        created () {
+            this.colorMode = this.getColorMode()
+        },
+
         data: () => ({
             visible: false,
+            colorMode: 'light'
         }),
 
         computed: {
@@ -57,6 +71,22 @@
                 } else {
                     this.open();
                 }
+            },
+
+            setColorMode(colorMode) {
+                document.documentElement.setAttribute('data-theme', colorMode);
+                console.log(colorMode)
+                localStorage.setItem("theme", colorMode);
+            },
+
+            getColorMode() {
+                const storedTheme = localStorage.getItem("theme");
+
+                if (storedTheme) {
+                    return storedTheme;
+                }
+
+                return window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
             },
         },
     };
