@@ -50,25 +50,18 @@
 
         mounted() {
             this.$store.dispatch('packages/details/init', { vue: this, component: PackageDetails });
-
-            const colorMode = this.getColorMode();
-            this.setColorMode(colorMode);
+            this.initColorMode();
         },
 
         methods: {
-            setColorMode(colorMode) {
-                document.documentElement.setAttribute('data-theme', colorMode);
-                localStorage.setItem("theme", colorMode);
-            },
+            initColorMode() {
+                this.colorMode = localStorage.getItem("theme")
 
-            getColorMode() {
-                const storedTheme = localStorage.getItem("theme");
-
-                if (storedTheme) {
-                    return storedTheme;
+                if (!this.colorMode) {
+                    this.colorMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
                 }
 
-                return window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', this.colorMode);
             },
         },
     };

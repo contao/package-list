@@ -1,21 +1,14 @@
 <template>
     <footer :class="'fragment-footer' + (display ? (' fragment-footer--'+display) : '')">
-        <div class="fragment-footer__language">
-            <button @click="toggle">{{ languageOptions[currentLanguage] }}</button>
-            <ul class="link-more__menu" ref="menu" v-show="visible" tabindex="-1" @blur="close" @click="close">
-                <li v-for="(label, code) in languageOptions" :key="code">
-                    <a :class="{ active: code === currentLanguage }" @click="updateLanguage(code)" @touchstart.stop="">{{ label }}</a>
-                </li>
-            </ul>
-        </div>
-        <div class="dark-mode-select">
-            <select
-                @change="setColorMode($event.target.value)"
-                v-model="colorMode"
-            >
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-            </select>
+        <div class="fragment-footer__settings">
+            <div class="fragment-footer__language">
+                <button @click="toggle">{{ languageOptions[currentLanguage] }}</button>
+                <ul class="link-more__menu" ref="menu" v-show="visible" tabindex="-1" @blur="close" @click="close">
+                    <li v-for="(label, code) in languageOptions" :key="code">
+                        <a :class="{ active: code === currentLanguage }" @click="updateLanguage(code)" @touchstart.stop="">{{ label }}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </footer>
 </template>
@@ -23,19 +16,17 @@
 <script>
     import i18n from '../../i18n';
     import locales from '../../i18n/locales';
+    import ThemeToggle from './ThemeToggle.vue';
 
     export default {
+        components: { ThemeToggle },
+
         props: {
             display: String,
         },
 
-        created () {
-            this.colorMode = this.getColorMode()
-        },
-
         data: () => ({
             visible: false,
-            colorMode: 'light'
         }),
 
         computed: {
@@ -72,21 +63,6 @@
                     this.open();
                 }
             },
-
-            setColorMode(colorMode) {
-                document.documentElement.setAttribute('data-theme', colorMode);
-                localStorage.setItem("theme", colorMode);
-            },
-
-            getColorMode() {
-                const storedTheme = localStorage.getItem("theme");
-
-                if (storedTheme) {
-                    return storedTheme;
-                }
-
-                return window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
-            },
         },
     };
 </script>
@@ -116,16 +92,21 @@
             clear: both
         }
 
+        &__settings {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
         &__language {
             position: relative;
             display: inline-block;
-            margin-left: 5px;
 
             button {
                 width: auto;
                 height: auto;
                 padding: 0 0 0 25px;
-                margin-top: 10px !important;
                 background: transparent;
                 color: $text-color;
                 font-size: 12px;
@@ -134,6 +115,7 @@
                 background: url(../../assets/images/language.svg) left center no-repeat;
                 background-size: 20px 20px;
                 border: none;
+                cursor: pointer;
 
                 &:hover {
                     color: var(--black);
@@ -145,22 +127,22 @@
                 display: block;
                 width: 350px;
                 left: 50%;
-                bottom: 30px;
+                bottom: 25px;
                 margin: 0;
-                padding: 0;
+                padding: 3px 3px 0;
                 text-align: left;
                 list-style-type: none;
                 white-space: nowrap;
-                background: var(--white); // ToDo: maybe another background
-                border-bottom: 3px solid var(--contao);
+                background: var(--form-bg);
+                border: 1px solid var(--tiles-bdr);
+                border-bottom: 2px solid var(--contao);
                 transform: translateX(-50%);
                 z-index: 100;
-                box-shadow: $shadow-color 0 -1px 2px; // ToDo:
 
                 &:after {
                     position: absolute;
                     left: 50%;
-                    bottom: -7px;
+                    bottom: -6px;
                     width: 0;
                     height: 0;
                     margin-left: -4px;
@@ -174,30 +156,26 @@
             li {
                 float: left;
                 width: 50%;
-                margin: 0;
+                margin: 0 0 3px;
                 padding: 0;
-                border-top: 1px solid #e5dfd0; // ToDo:
 
                 a {
                     display: block;
                     margin: 0;
-                    padding: 5px 10px;
-                    color: $text-color;
+                    padding: 5px;
+                    color: var(--text);
                     cursor: pointer;
 
                     &.active {
                         font-weight: $font-weight-bold;
                     }
 
+                    &.active,
                     &:hover {
-                        color: #000; // ToDo:
+                        color: var(--text);
+                        background: var(--focus); // ToDo:
                         text-decoration: none;
                     }
-                }
-
-                &:first-child,
-                &:nth-child(2) {
-                    border-top: none;
                 }
             }
         }
@@ -206,8 +184,8 @@
             &--boxed,
             &--main {
                 .fragment-footer {
-                    &__language button {
-                        margin-top: 0 !important;
+                    &__settings {
+                        margin-top: 0;
                     }
                 }
             }

@@ -7,13 +7,11 @@
   "homepage": "https://github.com/contao/package-list",
   "scripts": {
     "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
-    "watch": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve --watch",
     "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "algoliasearch": "^3.35.1",
-    "bootstrap-icons": "^1.11.3",
     "core-js": "^3.8.3",
     "semver": "^6.3.0",
     "vue": "^2.6.11",
