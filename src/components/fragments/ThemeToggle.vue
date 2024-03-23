@@ -3,7 +3,7 @@
         <button @click="toggle" ref="themeToggle">{{ themeOptions[getColorMode()] }}</button>
         <ul class="link-more__menu" ref="menu" v-show="visible" tabindex="-1" @blur="close" @click="close">
             <li v-for="(label, code) in themeOptions" :key="code">
-                <a :class="{ active: code === getColorMode() }" @click="setColorMode(code)" @touchstart.stop="">{{ label }}</a>
+                <a :class="[ 'theme_icon is--'+ code, { active: code === getColorMode() }]" @click="setColorMode(code)" @touchstart.stop="">{{ label }}</a>
             </li>
         </ul>
     </div>
@@ -68,19 +68,21 @@
     @import "../../assets/styles/defaults";
 
     :root {
-        --theme-toggle-bg: #ecd21f radial-gradient(#ecd21f 35%, #ff9b00);
+        --toggle-light: #ecd21f radial-gradient(#ecd21f 35%, #ff9b00);
+        --toggle-dark: #666 linear-gradient(123deg, #fff 0%, #666 40%, #444 50%);
+        --theme-toggle: var(--toggle-light);
     }
 
     html[data-theme=dark] {
-        --theme-toggle-bg: #666 linear-gradient(123deg, #fff 0%, #666 40%, #444 50%);
+        --theme-toggle: var(--toggle-dark);
     }
 
     .theme-switch {
         position: relative;
         display: inline-block;
-        margin-left: 5px;
 
         button {
+            position: relative;
             width: auto;
             height: auto;
             padding: 0 0 0 25px;
@@ -102,7 +104,7 @@
                 bottom: 0;
                 left: 0;
                 width: 20px;
-                background: var(--theme-toggle-bg);
+                background: var(--theme-toggle);
                 box-shadow: 0 0 1px var(--text);
                 border-radius: 50%;
                 content: "";
@@ -145,7 +147,8 @@
             padding: 0;
 
             a {
-                display: block;
+                display: flex;
+                align-items: center;
                 margin: 0;
                 padding: 5px;
                 color: var(--text);
@@ -163,6 +166,25 @@
                 }
             }
         }
+    }
+
+    .theme_icon {
+        position: relative;
+        padding-left: 25px;
+        gap: 5px;
+
+        &:before {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: var(--theme-icon);
+            box-shadow: 0 0 1px var(--text);
+            border-radius: 50%;
+            content: "";
+        }
+
+        &.is--light { --theme-icon: var(--toggle-light); }
+        &.is--dark { --theme-icon: var(--toggle-dark); }
     }
 
 </style>

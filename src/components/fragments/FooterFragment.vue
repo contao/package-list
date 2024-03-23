@@ -96,6 +96,7 @@
         &__settings {
             margin-top: 10px;
             display: flex;
+            flex-flow: column;
             justify-content: center;
             gap: 10px;
         }
@@ -186,6 +187,7 @@
             &--main {
                 .fragment-footer {
                     &__settings {
+                        flex-flow: row;
                         margin-top: 0;
                     }
                 }
