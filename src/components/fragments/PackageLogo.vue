@@ -13,34 +13,34 @@
 </template>
 
 <script>
-export default {
-    props: {
-        src: String,
-        componentClass: String,
-    },
+    export default {
+        props: {
+            src: String,
+            componentClass: String,
+        },
 
-    computed: {
-        computedClass: vm => ({
-            'package-logo--fallback': !vm.src,
-            [vm.componentClass]: true,
-            [`${vm.componentClass}--fallback`]: !vm.src,
-        }),
-    },
-};
+        computed: {
+            computedClass: vm => ({
+                'package-logo--fallback': !vm.src,
+                [vm.componentClass]: true,
+                [`${vm.componentClass}--fallback`]: !vm.src,
+            }),
+        },
+    };
 </script>
 
 <style lang="scss" scoped>
-.package-logo {
-    &--fallback {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .package-logo {
+        &--fallback {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
-}
 
-svg {
-    width: 80%;
-    height: 80%;
-    fill: #ccc;
-}
+    svg {
+        width: 80%;
+        height: 80%;
+        fill: #ccc;
+    }
 </style>
