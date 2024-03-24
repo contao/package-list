@@ -226,6 +226,10 @@
         &__input {
             max-width: 400px;
             margin: 0 20px;
+
+            @include screen(1024) {
+                margin-right: 0;
+            }
         }
 
         &__headline {
