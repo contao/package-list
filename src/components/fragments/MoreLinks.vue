@@ -66,7 +66,7 @@
                 this.$refs.menu.blur();
                 setTimeout(() => {
                     this.visible = false;
-                }, 300);
+                }, 60000);
             },
 
             toggle() {

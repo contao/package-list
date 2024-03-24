@@ -48,11 +48,11 @@
         text-align: center;
         list-style-type: none;
         white-space: nowrap;
-        background: #fff;
+        background: var(--form-bg);
         border-top: 3px solid var(--text);
         //transform: translateX(-50%);
         z-index: 100;
-        box-shadow: var(--shadow) 0 1px 2px;
+        box-shadow: 0 0 1px var(--shadow);
 
         &:before {
             position: absolute;
@@ -167,7 +167,8 @@
             cursor: pointer;
 
             &:hover {
-                color: var(--black);
+                color: var(--text);
+                background: var(--focus);
                 text-decoration: none;
             }
         }
