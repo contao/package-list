@@ -157,7 +157,7 @@
         }
 
         .sk-circle .sk-child:before {
-            background-color: #fff; // ToDo:
+            background-color: #fff;
         }
     }
 </style>

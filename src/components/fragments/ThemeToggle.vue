@@ -161,7 +161,7 @@
                 &.active,
                 &:hover {
                     color: var(--text);
-                    background: var(--focus); // ToDo:
+                    background: var(--focus);
                     text-decoration: none;
                 }
             }

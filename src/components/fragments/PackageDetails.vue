@@ -269,7 +269,7 @@
         justify-content: flex-start;
         width: 100%;
         height: 100%;
-        background: #ffffff; // ToDo:
+        background: var(--popup-bg);
         z-index: 10;
         opacity: 1;
 
@@ -295,8 +295,8 @@
             flex-grow: 0;
             flex-shrink: 1;
             padding: 7px 30px 6px;
-            background: var(--contao);
-            color: #fff; // ToDo?
+            background: var(--popup-hl-bg);
+            color: #fff;
             font-size: 18px;
             font-weight: $font-weight-normal;
             line-height: 1.5;
@@ -340,16 +340,13 @@
 
             &:hover {
                 background-color: darken($contao-color, 5);
-                //border-color: darken($contao-color, 10);
 
                 .package-popup__headline--complete & {
                     background-color: var(--btn-primary-active);
-                    //border-color: darken($green-button, 10);
                 }
 
                 .package-popup__headline--error & {
                     background-color: var(--btn-alert);
-                    //border-color: darken($red-button, 10);
                 }
             }
         }
@@ -438,20 +435,20 @@
 
             &--private {
                 padding-left: 20px;
-                background-image: url("../../assets/images/private.svg");
+                background-image: var(--svg--private);
                 background-size: 15px 15px;
             }
 
             &--updated {
-                background-image: url("../../assets/images/updated.svg");
+                background-image: var(--svg--updated);
             }
 
             &--downloads {
-                background-image: url("../../assets/images/downloads.svg");
+                background-image: var(--svg--downloads);
             }
 
             &--favers {
-                background-image: url("../../assets/images/favers.svg");
+                background-image: var(--svg--favers);
             }
         }
 
@@ -478,7 +475,7 @@
             font-weight: $font-weight-medium;
             font-size: 12px;
             line-height: 1.8;
-            background: rgba(var(--hint-rgb), .3) url('../../assets/images/hint.svg') 15px center no-repeat;
+            background: rgba(var(--hint-rgb), .3) url('../../assets/images/hint.svg') 15px 50% no-repeat;
             background-size: 23px 23px;
             border: 1px solid var(--hint-link);
         }
@@ -505,9 +502,9 @@
             height: 39px;
             line-height: 39px;
             text-align: center;
-            border-top: 1px solid #e9eef1; // ToDo:
-            border-right: 1px solid #e9eef1; // ToDo:
-            border-bottom: 1px solid #e9eef1; // ToDo:
+            border-top: 1px solid var(--border--light);
+            border-right: 1px solid var(--border--light);
+            border-bottom: 1px solid var(--border--light);
 
             &:last-child {
                 border-right: none;
@@ -515,8 +512,8 @@
 
             &--active {
                 font-weight: $font-weight-bold;
-                background: #f8f9fb; // ToDo:
-                border-bottom: 1px solid #f8f9fb; // ToDo:
+                background: var(--tab-content);
+                border-bottom: 1px solid var(--tab-content);
             }
 
             button {
@@ -544,7 +541,7 @@
             padding: 2px 5px;
             font-size: 10px;
             font-weight: $font-weight-medium;
-            background: #e9eef1; // ToDo:
+            background: var(--border--light);
             border-radius: 40%;
 
             &--highlight {
@@ -557,7 +554,7 @@
             position: relative;
             padding: 25px 35px;
             overflow-y: auto;
-            background: #f8f9fb; // ToDo:
+            background: var(--tab-content);
 
             @media (min-width: 960px) and (min-height: 700px) {
                 height: 450px;
