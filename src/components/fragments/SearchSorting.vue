@@ -69,7 +69,7 @@
                 height: 0;
                 border-left: 5px solid transparent;
                 border-right: 5px solid transparent;
-                border-top: 5px solid #535353; //ToDo:
+                border-top: 5px solid #777;
             }
         }
 

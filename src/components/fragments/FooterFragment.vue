@@ -78,7 +78,7 @@
         padding: 15px 0;
         font-size: 12px;
         text-align: center;
-        border-top: 1px solid #eee; // ToDo:
+        border-top: 1px solid #eee;
 
         &--main {
             width: auto;

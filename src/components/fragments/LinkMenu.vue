@@ -48,11 +48,11 @@
         text-align: center;
         list-style-type: none;
         white-space: nowrap;
-        background: #fff; // ToDo:
+        background: #fff;
         border-top: 3px solid var(--text);
         //transform: translateX(-50%);
         z-index: 100;
-        box-shadow: $shadow-color 0 1px 2px; // ToDo:
+        box-shadow: var(--shadow) 0 1px 2px;
 
         &:before {
             position: absolute;
@@ -91,17 +91,16 @@
             bottom: 0;
             border-top: none;
             border-bottom: 3px solid var(--text);
-            box-shadow: $shadow-color 0 0 2px; // ToDo:
+            box-shadow: var(--shadow) 0 0 2px;
 
             &:before {
                 top: auto;
                 bottom: -7px;
                 border-width: 4px 3.5px 0 3.5px;
-                border-color: var(--text) transparent transparent transparent; // ToDo:
+                border-color: var(--text) transparent transparent transparent;
             }
         }
 
-        // ToDo: Use Mixin for convenience
         &--contao {
             border-color: var(--contao);
 
@@ -158,11 +157,6 @@
             margin: 0;
             padding: 0;
             display: block;
-            border-top: 1px solid #e5dfd0; // ToDo
-
-            &:first-child {
-                border-top: none;
-            }
         }
 
         &__action {
@@ -173,7 +167,7 @@
             cursor: pointer;
 
             &:hover {
-                color: #000; // ToDo:
+                color: var(--black);
                 text-decoration: none;
             }
         }

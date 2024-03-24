@@ -22,7 +22,7 @@
         <template v-else>
 
             <div class="package-popup__summary">
-                <package-logo component-class="package-popup__icon" :src="metadata.logo"/>
+                <package-logo class="package-popup__logo" component-class="package-popup__icon" :src="metadata.logo"/>
                 <div class="package-popup__text">
                     <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
                     <p class="package-popup__authors" v-if="authors">
@@ -360,30 +360,42 @@
             }
         }
 
-        &__icon {
+        &__logo {
+            border-radius: 6px;
             float: right;
-            height: 42px;
-            width: 42px;
+            height: 60px;
+            width: 60px;
             margin-left: 1em;
+            background: #f7f7f7;
+
+            @include screen(600) {
+                display: block;
+                float: left;
+                width: 110px;
+                height: 110px;
+                margin: 0 16px 0 0;
+            }
+        }
+
+        &__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
 
             &--fallback {
                 display: none;
             }
 
             img {
-                width: 100%;
-                height: auto;
+                width: 50px;
+                height: 50px;
                 max-height: 100%;
-            }
 
-            @include screen(600) {
-                display: block;
-                float: left;
-                width: 90px;
-                height: 90px;
-                margin-left: 0;
-                margin-right: 20px;
-                margin-bottom: -4px;
+                @include screen(600) {
+                    width: 90px;
+                    height: 90px;
+                }
             }
         }
 
