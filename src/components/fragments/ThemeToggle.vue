@@ -48,13 +48,11 @@
     @import "../../assets/styles/defaults";
 
     :root {
-        --toggle-light: #ecd21f radial-gradient(#ecd21f 35%, #ff9b00);
-        --toggle-dark: #666 linear-gradient(123deg, #fff 0%, #666 40%, #444 50%);
-        --theme-toggle: var(--toggle-light);
+        --icon-color-scheme: url(../../assets/images/color_scheme--dark.svg)
     }
 
     html[data-theme=dark] {
-        --theme-toggle: var(--toggle-dark);
+        --icon-color-scheme: url(../../assets/images/color_scheme.svg)
     }
 
     .theme-switch {
@@ -62,32 +60,21 @@
         display: inline-block;
 
         button {
-            position: relative;
             width: auto;
             height: auto;
-            padding: 0 0 0 25px;
+            padding: 0 0 0 24px;
             background: transparent;
             color: $text-color;
             font-size: 12px;
             font-weight: $font-weight-normal;
             line-height: 20px;
+            background: var(--icon-color-scheme) left center no-repeat;
+            background-size: 20px 20px;
             border: none;
             cursor: pointer;
 
             &:hover {
                 color: var(--black);
-            }
-
-            &:before {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                width: 20px;
-                background: var(--theme-toggle);
-                box-shadow: 0 0 1px var(--text);
-                border-radius: 50%;
-                content: "";
             }
         }
     }
