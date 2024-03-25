@@ -113,7 +113,7 @@ select {
     text-align: center;
     white-space: nowrap;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 5px;
 
     &:hover,
     &:active {
@@ -138,7 +138,6 @@ select {
         font-size: 13px;
         line-height: 28px;
         font-weight: $font-weight-normal;
-        border-radius: 1px;
 
         &:before,
         > *:before {

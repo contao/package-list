@@ -586,8 +586,8 @@
             width: 750px;
             margin-left: -375px;
             height: auto;
-            border-bottom: 2px solid var(--tiles-bdr);
-            border-radius: 2px;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         @media (min-width: 960px) and (min-height: 700px) {
