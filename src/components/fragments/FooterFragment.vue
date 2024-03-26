@@ -78,13 +78,12 @@
         padding: 15px 0;
         font-size: 12px;
         text-align: center;
-        border-top: 1px solid #eee;
+        border-top: 1px solid var(--footer-bdr);
 
         &--main {
             width: auto;
             margin-top: 52px !important;
             padding: 20px 0;
-            border-top: 1px solid var(--footer-bdr);
         }
 
         &:before {
