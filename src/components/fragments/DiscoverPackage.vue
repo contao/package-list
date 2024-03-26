@@ -106,6 +106,7 @@ export default {
                 width: 50px;
                 height: 50px;
                 max-height: 100%;
+                object-fit: contain;
             }
         }
 
