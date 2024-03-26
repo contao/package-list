@@ -191,6 +191,7 @@ export default {
             flex-grow: 1;
             display: flex;
             justify-content: flex-end;
+            gap: 8px;
         }
 
         @include screen(600) {
