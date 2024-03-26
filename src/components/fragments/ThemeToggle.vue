@@ -13,8 +13,8 @@
         computed: {
             themeOptions() {
                 return {
-                    light: 'Light',
-                    dark: 'Dark'
+                    light: 'Dark Mode',
+                    dark: 'Light Mode'
                 }
             },
         },
@@ -48,11 +48,11 @@
     @import "../../assets/styles/defaults";
 
     :root {
-        --icon-color-scheme: url(../../assets/images/color_scheme--dark.svg)
+        --icon-color-scheme: url(../../assets/images/color_scheme.svg)
     }
 
     html[data-theme=dark] {
-        --icon-color-scheme: url(../../assets/images/color_scheme.svg)
+        --icon-color-scheme: url(../../assets/images/color_scheme--dark.svg)
     }
 
     .theme-switch {
