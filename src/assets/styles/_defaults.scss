@@ -91,11 +91,11 @@ $footer-border: #bbbbbb;
   --header-bdr: #{$header-border};
   --footer-bdr: #{$footer-border};
 
-  --svg--link-blank: url('/src/assets/images/link-blank.svg');
-  --svg--private: url('/src/assets/images/private.svg');
-  --svg--updated: url('/src/assets/images/updated.svg');
-  --svg--downloads: url('/src/assets/images/downloads.svg');
-  --svg--favers: url('/src/assets/images/favers.svg');
+  --svg--link-blank: url('/../contao-package-list/src/assets/images/link-blank--dark.svg');
+  --svg--private: url('/../contao-package-list/src/assets/images/private--dark.svg');
+  --svg--updated: url('/../contao-package-list/src/assets/images/updated--dark.svg');
+  --svg--downloads: url('/../contao-package-list/src/assets/images/downloads--dark.svg');
+  --svg--favers: url('/../contao-package-list/src/assets/images/favers--dark.svg');
 }
 
 // Dark-mode
@@ -133,11 +133,11 @@ html[data-theme=dark] {
   --header-bdr: #1b1d21;
   --footer-bdr: #414448;
 
-  --svg--link-blank: url('/src/assets/images/link-blank--dark.svg');
-  --svg--private: url('/src/assets/images/private--dark.svg');
-  --svg--updated: url('/src/assets/images/updated--dark.svg');
-  --svg--downloads: url('/src/assets/images/downloads--dark.svg');
-  --svg--favers: url('/src/assets/images/favers--dark.svg');
+  --svg--link-blank: url('/../contao-package-list/src/assets/images/link-blank--dark.svg');
+  --svg--private: url('/../contao-package-list/src/assets/images/private--dark.svg');
+  --svg--updated: url('/../contao-package-list/src/assets/images/updated--dark.svg');
+  --svg--downloads: url('/../contao-package-list/src/assets/images/downloads--dark.svg');
+  --svg--favers: url('/../contao-package-list/src/assets/images/favers--dark.svg');
 
   #contao-network {
     background: #292c32 !important;
