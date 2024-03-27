@@ -66,7 +66,7 @@
                 this.$refs.menu.blur();
                 setTimeout(() => {
                     this.visible = false;
-                }, 300);
+                }, 60000);
             },
 
             toggle() {
@@ -96,7 +96,7 @@
             height: auto;
             padding: 0 0 5px;
             background: transparent;
-            color: $link-color;
+            color: var(--link);
             font-size: 13px;
             font-weight: $font-weight-normal;
             line-height: inherit;

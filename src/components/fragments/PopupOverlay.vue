@@ -25,11 +25,9 @@
 
     .popup-overlay {
         position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        inset: 0;
         z-index: 1000;
+        background: var(--popup-overlay-bg);
 
         @include screen(960) {
             padding: 20px 0;

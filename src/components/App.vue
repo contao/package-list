@@ -21,6 +21,7 @@
     export default {
         data: () => ({
             initializing: true,
+            colorMode: 'light'
         }),
 
         computed: {
@@ -49,6 +50,19 @@
 
         mounted() {
             this.$store.dispatch('packages/details/init', { vue: this, component: PackageDetails });
+            this.initColorMode();
+        },
+
+        methods: {
+            initColorMode() {
+                this.colorMode = localStorage.getItem("theme")
+
+                if (!this.colorMode) {
+                    this.colorMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
+                }
+
+                document.documentElement.setAttribute('data-theme', this.colorMode);
+            },
         },
     };
 </script>
