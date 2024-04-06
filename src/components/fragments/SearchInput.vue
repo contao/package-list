@@ -38,6 +38,7 @@
         &__input {
             height: 50px !important;
             padding-right: 45px !important;
+            border-radius: 50px !important;
         }
 
         &__button {
