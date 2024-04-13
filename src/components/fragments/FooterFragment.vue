@@ -113,7 +113,7 @@
                 font-size: 12px;
                 font-weight: $font-weight-normal;
                 line-height: 20px;
-                background: url(../../assets/images/language.svg) left center no-repeat;
+                background: var(--svg--language) left center no-repeat;
                 background-size: 20px 20px;
                 border: none;
                 cursor: pointer;
