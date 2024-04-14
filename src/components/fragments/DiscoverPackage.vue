@@ -219,6 +219,7 @@ export default {
                 padding: $discover-package-padding;
                 height: 100%;
                 min-height: 90px;
+                max-width: calc(100% - 130px);
                 flex: 1;
             }
 
