@@ -64,7 +64,7 @@
             height: auto;
             padding: 0 0 0 24px;
             background: transparent;
-            color: $text-color;
+            color: var(--text);
             font-size: 12px;
             font-weight: $font-weight-normal;
             line-height: 20px;
