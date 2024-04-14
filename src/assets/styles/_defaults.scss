@@ -83,9 +83,9 @@ $footer-border: #bbbbbb;
   --btn-funding: #{$funding-color};
   --btn-funding-active: #{darken($funding-color, 5)};
 
-  --hint-bg: #{#e8c8bc};
-  --hint-rgb: #{red(#e8c8bc), green(#e8c8bc), blue(#e8c8bc)};
-  --hint-link: #{#bd2e20};
+  --hint-bg: #{$hint-background};
+  --hint-rgb: #{red($hint-background), green($hint-background), blue($hint-background)};
+  --hint-link: #{$hint-link};
 
   --header-bg: #{$header-bg};
   --header-bdr: #{$header-border};
