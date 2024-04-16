@@ -91,7 +91,7 @@
             bottom: 0;
             border-top: none;
             border-bottom: 3px solid var(--text);
-            box-shadow: var(--shadow) 0 0 2px;
+            box-shadow: 0 0 2px var(--shadow);
 
             &:before {
                 top: auto;
