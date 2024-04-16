@@ -104,6 +104,7 @@ html[data-theme=dark] {
   --text: #ddd;
   --link: #{$link-color};
   --body-bg: #0f0f11;
+  --link-footer: #fff;
 
   --tiles-bg: #212227;
   --tiles-bdr: #303236;
@@ -128,8 +129,8 @@ html[data-theme=dark] {
   --border--light: #2e2e34;
   --focus: #1e2024;
 
-  --btn-info: #101012;
-  --btn-info-active: #{darken(#101012, 5)};
+  --btn-info: #25455f;
+  --btn-info-active: #253846;
 
   --hint-rgb: 57, 9, 20;
 
