@@ -70,7 +70,7 @@
 
     .container {
         position: relative;
-        background: #FFF;
+        background: var(--popup-bg);
         box-shadow: var(--ad-shadow);
         border-radius: 14px;
         overflow: hidden;
