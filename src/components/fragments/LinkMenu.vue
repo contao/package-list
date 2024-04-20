@@ -50,7 +50,7 @@
         white-space: nowrap;
         background: var(--form-bg);
         border-top: 3px solid var(--text);
-        //transform: translateX(-50%);
+        border-radius: 5px;
         z-index: 100;
         box-shadow: 0 0 1px var(--shadow);
 
@@ -171,6 +171,14 @@
                 background: var(--focus);
                 text-decoration: none;
             }
+        }
+
+        &__item:first-child .link-menu__action {
+            border-radius: 5px 5px 0 0;
+        }
+
+        &__item:last-child .link-menu__action {
+            border-radius: 0 0 5px 5px;
         }
     }
 </style>

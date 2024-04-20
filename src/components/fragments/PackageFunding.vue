@@ -39,6 +39,7 @@
         background: rgba(var(--funding-rgb), .025) url('../../assets/images/funding.svg') 15px 50% no-repeat;
         background-size: 23px 23px;
         border: 1px solid rgba(var(--funding-rgb), .5);
+        border-radius: 6px;
     }
 
     span {

@@ -321,7 +321,7 @@
             padding: 4px;
             background: none;
             border: 1px solid transparent;
-            border-radius: 1px;
+            border-radius: 5px;
             cursor: pointer;
 
             &--previous {
@@ -491,6 +491,7 @@
             background: rgba(var(--hint-rgb), .3) url('../../assets/images/hint.svg') 15px 50% no-repeat;
             background-size: 23px 23px;
             border: 1px solid var(--hint-link);
+            border-radius: 6px;
         }
 
         &__funding {
