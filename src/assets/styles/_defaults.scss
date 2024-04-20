@@ -6,90 +6,60 @@ $font-weight-normal: 300;
 $font-weight-medium: 400;
 $font-weight-bold: 600;
 
-$text-color: #535353;
-$link-color: #f47c00;
-$highlight-color: #535353;
-
-$body-background: #ebe6db;
-$highlight-background: #ffff00;
-$tiles-background: #fff;
-
-$border-color: #cccccc;
-$border-light-color: #e9eef1;
-$shadow-color: #ccbfa2;
-$footer-link: #2a7887;
-$contao-color: #f47c00;
-$funding-color: #ea4aaa;
-$focus-color: #f9f9f9;
-
-$default-button: #737373;
-$green-button: #31a64b;
-$red-button: #db5041;
-$orange-button: #db8c41;
-$blue-button: #6a8ca6;
-
-$hint-background: #e8c8bc;
-$hint-link: #bd2e20;
-
-$header-bg: #e5dfcf;
-$header-border: #dcd8cc;
-
-$footer-border: #bbbbbb;
-
 // Custom properties
 :root {
-  --text: #{$text-color};
-  --link: #{$link-color};
-  --body-bg: #{$body-background};
-  --link-footer: #{$footer-link};
+  --text: #535353;
+  --link: #f47c00;
+  --body-bg: #ebe6db;
+  --link-footer: #2a7887;
 
-  --tiles-bg: #{$tiles-background};
+  --tiles-bg: #fff;
   --tiles-bdr: #ddd3bc;
 
-  --popup-hl-bg: #{$contao-color};
+  --popup-hl-bg: #f47c00;
   --popup-bg: #fff;
   --popup-header: #fff;
   --popup-overlay-bg: rgba(235,230,219,.35);
   --tab-content: #f8f9fb;
 
-  --highlight-bg: #{$highlight-background};
-  --highlight-color: #{$highlight-color};
+  --highlight-bg: #ffff00;
+  --highlight-color: #535353;
 
-  --shadow: #{$shadow-color};
-  --contao: #{$contao-color};
+  --shadow: #ccbfa2;
+  --contao: #f47c00;
 
   --ad-shadow: #{0 1px 5px 1px rgba(0, 0, 0, 0.2)};
 
   --black: #000;
-  --funding: #{$funding-color};
-  --funding-rgb: #{red($funding-color), green($funding-color), blue($funding-color)};
+  --funding: #ea4aaa;
+  --funding-rgb: #{red(#ea4aaa), green(#ea4aaa), blue(#ea4aaa)};
 
   --form-bg: #fff;
-  --border: #{$border-color};
-  --border--light: #{$border-light-color};
-  --focus: #{$focus-color};
+  --border: #cccccc;
+  --border--light: #e9eef1;
+  --focus: #f9f9f9;
 
   --clr-btn: #fff;
-  --btn: #{$default-button};
-  --btn-active: #{darken($default-button, 5)};
-  --btn-primary: #{$green-button};
-  --btn-primary-active: #{darken($green-button, 5)};
-  --btn-warning: #{$orange-button};
-  --btn-warning-active: #{darken($orange-button, 5)};
-  --btn-alert: #{$red-button};
-  --btn-alert-active: #{darken($red-button, 5)};
-  --btn-info: #{$blue-button};
-  --btn-info-active: #{darken($blue-button, 5)};
-  --btn-funding: #{$funding-color};
-  --btn-funding-active: #{darken($funding-color, 5)};
+  --btn: #737373;
+  --btn-active: #{darken(#737373, 5)};
+  --btn-primary: #31a64b;
+  --btn-primary-active: #{darken(#31a64b, 5)};
+  --btn-warning: #db8c41;
+  --btn-warning-active: #{darken(#db8c41, 5)};
+  --btn-alert: #db5041;
+  --btn-alert-active: #{darken(#db5041, 5)};
+  --btn-info: #6a8ca6;
+  --btn-info-active: #{darken(#6a8ca6, 5)};
+  --btn-funding: #ea4aaa;
+  --btn-funding-active: #{darken(#ea4aaa, 5)};
 
-  --hint-bg: #{$hint-background};
-  --hint-rgb: #{red($hint-background), green($hint-background), blue($hint-background)};
-  --hint-link: #{$hint-link};
+  --hint-bg: #e8c8bc;
+  --hint-rgb: #{red(#e8c8bc), green(#e8c8bc), blue(#e8c8bc)};
+  --hint-link: #bd2e20;
 
-  --header-bg: #{$header-bg};
-  --header-bdr: #{$header-border};
-  --footer-bdr: #{$footer-border};
+  --header-bg: #e5dfcf;
+  --header-bdr: #dcd8cc;
+  --footer-bdr: #dcd8cc;
 
   --svg--link-blank: url(~@/assets/images/link-blank.svg);
   --svg--private: url(~@/assets/images/private.svg);
@@ -103,7 +73,7 @@ $footer-border: #bbbbbb;
 // Dark-mode
 html[data-color-scheme=dark] {
   --text: #ddd;
-  --link: #{$link-color};
+  --link: #f47c00;
   --body-bg: #0f0f11;
   --link-footer: #fff;
 

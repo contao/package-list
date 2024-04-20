@@ -339,7 +339,7 @@
             }
 
             &:hover {
-                background-color: darken($contao-color, 5);
+                background-color: darken(#f47c00, 5);
 
                 .package-popup__headline--complete & {
                     background-color: var(--btn-primary-active);
