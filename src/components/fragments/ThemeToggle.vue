@@ -1,13 +1,14 @@
 <template>
     <div class="theme-switch">
-        <button @click="toggleColorMode" ref="themeToggle">{{ themeOptions[getColorMode()] }}</button>
+        <button @click="toggle" :title="$t('ui.app.colorLightTitle')" v-if="colorScheme === 'dark'">{{ $t('ui.app.colorLight') }}</button>
+        <button @click="toggle" :title="$t('ui.app.colorDarkTitle')" v-else>{{ $t('ui.app.colorDark') }}</button>
     </div>
 </template>
 
 <script>
     export default {
         data: () => ({
-            visible: false,
+            colorScheme: 'light',
         }),
 
         computed: {
@@ -20,40 +21,46 @@
         },
 
         methods: {
-            toggleColorMode() {
-                this.setColorMode(this.getColorMode() === 'dark' ? 'light' : 'dark')
-            },
+            prefersDark () {
+                const prefersDark = localStorage.getItem('contao--prefers-dark');
 
-            setColorMode(colorMode) {
-                document.documentElement.setAttribute('data-theme', colorMode);
-                localStorage.setItem("theme", colorMode);
-
-                this.$refs.themeToggle.innerText = this.themeOptions[colorMode]
-            },
-
-            getColorMode() {
-                const storedTheme = localStorage.getItem("theme");
-
-                if (storedTheme) {
-                    return storedTheme;
+                if (null === prefersDark) {
+                    return !!window.matchMedia('(prefers-color-scheme: dark)').matches;
                 }
 
-                return window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
+                return prefersDark === 'true';
             },
+
+            setColorScheme () {
+                document.documentElement.dataset.colorScheme = this.colorScheme = this.prefersDark() ? 'dark' : 'light';
+            },
+
+            toggle () {
+                const isDark = !this.prefersDark();
+
+                if (isDark === window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    localStorage.removeItem('contao--prefers-dark');
+                } else {
+                    localStorage.setItem('contao--prefers-dark', String(isDark));
+                }
+
+                this.setColorScheme();
+            }
+        },
+
+        mounted () {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', this.setColorScheme);
+            this.setColorScheme();
+        },
+
+        unmounted () {
+            window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', this.setColorScheme)
         },
     };
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
     @import "../../assets/styles/defaults";
-
-    :root {
-        --icon-color-scheme: url(~@/assets/images/color_scheme.svg)
-    }
-
-    html[data-theme=dark] {
-        --icon-color-scheme: url(~@/assets/images/color_scheme--dark.svg)
-    }
 
     .theme-switch {
         position: relative;
@@ -68,7 +75,7 @@
             font-size: 12px;
             font-weight: $font-weight-normal;
             line-height: 20px;
-            background: var(--icon-color-scheme) left center no-repeat;
+            background: var(--svg--color-scheme) left center no-repeat;
             background-size: 20px 20px;
             border: none;
             cursor: pointer;

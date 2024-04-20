@@ -97,10 +97,11 @@ $footer-border: #bbbbbb;
   --svg--downloads: url(~@/assets/images/downloads.svg);
   --svg--favers: url(~@/assets/images/favers.svg);
   --svg--language: url(~@/assets/images/language.svg);
+  --svg--color-scheme: url(~@/assets/images/color_scheme.svg);
 }
 
 // Dark-mode
-html[data-theme=dark] {
+html[data-color-scheme=dark] {
   --text: #ddd;
   --link: #{$link-color};
   --body-bg: #0f0f11;
@@ -146,6 +147,7 @@ html[data-theme=dark] {
   --svg--downloads: url(~@/assets/images/downloads--dark.svg);
   --svg--favers: url(~@/assets/images/favers--dark.svg);
   --svg--language: url(~@/assets/images/language--dark.svg);
+  --svg--color-scheme: url(~@/assets/images/color_scheme--dark.svg);
 
   #contao-network {
     background: #292c32 !important;
