@@ -14,7 +14,9 @@
 
         methods: {
             clearCurrent(event) {
-                if (this.$refs.popup && !this.$refs.popup.contains(event.target)) {
+                // Clicking the details link of a new package removes the button from the DOM,
+                // so the event target would not be in the popup anymore
+                if (this.$refs.popup && !this.$refs.popup.contains(event.target) && document.body.contains(event.target)) {
                     this.$emit('clear');
                 }
             },
