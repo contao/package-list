@@ -54,14 +54,15 @@ export default {
 <style rel="stylesheet/scss" lang="scss">
     @import "../../assets/styles/defaults";
 
+    $discover-package-padding: 16px;
+
     .discover-package {
         position: relative;
         overflow: hidden;
-        margin-bottom: 14px;
-        padding: 20px;
-        background: #fff;
-        border-bottom: 3px solid #ddd3bc;
-        border-radius: 2px;
+        padding: $discover-package-padding;
+        background: var(--tiles-bg);
+        border: 1px solid var(--tiles-bdr);
+        border-radius: 14px;
 
         &__abandoned {
             display: inline-block;
@@ -70,7 +71,7 @@ export default {
             color: #fff;
             font-size: 12px;
             font-weight: $font-weight-bold;
-            background: $red-button;
+            background: var(--btn-alert);
             cursor: help;
             z-index: 10;
 
@@ -79,63 +80,33 @@ export default {
                 top: 20px;
                 left: -25px;
                 padding: 2px 30px;
-                border-top: 1px solid darken($red-button, 10);
-                border-bottom: 1px solid darken($red-button, 20);
+                border-top: 1px solid var(--btn-alert-active);
                 transform: rotateZ(-45deg);
             }
         }
 
         &__icon {
+            border-radius: 6px;
+            height: 60px;
+            width: 60px;
+            background: #f7f7f7;
+            margin: 0 auto 10px;
             position: absolute;
-            right: 20px;
-            height: 42px;
-            width: 42px;
-            margin-left: 1em;
+            right: $discover-package-padding;
 
-            &--fallback {
-                display: none;
+            > figure {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
             }
 
             img {
-                position: absolute;
-                width: 100%;
-                height: auto;
-                max-height: 100%;
-            }
-
-            @include screen(600) {
-                position: relative;
-                right: auto;
-                display: block;
-                float: left;
-                width: 90px;
-                height: 90px;
-                margin-left: 0;
-                margin-right: 20px;
-            }
-
-            @include screen(1024) {
-                position: absolute;
-                right: 20px;
-                height: 50px;
+                border-radius: 4px;
                 width: 50px;
-                margin-left: 1em;
-                margin-right: 0;
-
-                &--fallback {
-                    display: none;
-                }
-            }
-
-            @include screen(1200) {
-                position: relative;
-                right: auto;
-                display: block;
-                float: left;
-                width: 90px;
-                height: 90px;
-                margin-left: 0;
-                margin-right: 20px;
+                height: 50px;
+                max-height: 100%;
+                object-fit: contain;
             }
         }
 
@@ -144,40 +115,18 @@ export default {
             flex-direction: column;
             justify-content: space-between;
 
-            @include screen(600) {
-                height: 100%;
-                min-height: 90px;
-            }
+            min-height: 96px;
         }
 
         &__headline {
             margin-bottom: .2em;
             line-height: 1;
-            margin-right: 50px;
             overflow-wrap: break-word;
-
-            &--fallback {
-                margin-right: 0;
-            }
-
-            @include screen(600) {
-                margin-right: 0;
-            }
-
-            @include screen(1024) {
-                margin-right: 60px;
-
-                &--fallback {
-                    margin-right: 0;
-                }
-            }
-
-            @include screen(1200) {
-                margin-right: 0;
-            }
+            margin-right: 70px;
 
             em {
-                background-color: $highlight-color;
+                background-color: var(--highlight-bg);
+                color: var(--highlight-color);
                 font-style: normal;
             }
         }
@@ -187,52 +136,29 @@ export default {
             overflow: hidden;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            margin-bottom: .5em;
-            margin-right: 50px;
-
-            &--fallback {
-                margin-right: 0;
-            }
-
-            @include screen(600) {
-                margin-right: 0;
-            }
-
-            @include screen(1024) {
-                margin-right: 60px;
-
-                &--fallback {
-                    margin-right: 0;
-                }
-            }
-
-            @include screen(1200) {
-                margin-right: 0;
-            }
+            margin-bottom: 1em;
+            margin-right: 70px;
 
             em {
-                background-color: $highlight-color;
+                background-color: var(--highlight-bg);
+                color: var(--highlight-color);
                 font-style: normal;
             }
         }
 
         &__more {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            flex-flow: row wrap;
             align-items: flex-end;
             flex-grow: 1;
-            margin-bottom: -.5em;
+            gap: 4px;
+
             line-height: 28px;
         }
 
         &__counts {
             flex-grow: 1;
-            margin-bottom: .5em;
-
-            @include screen(600) {
-                margin-bottom: 0;
-            }
+            justify-content: flex-start;
         }
 
         &__count {
@@ -245,19 +171,19 @@ export default {
             background-size: 13px 13px;
 
             &--private {
-                background-image: url("../../assets/images/private.svg");
+                background-image: var(--svg--private);
             }
 
             &--updated {
-                background-image: url("../../assets/images/updated.svg");
+                background-image: var(--svg--updated);
             }
 
             &--downloads {
-                background-image: url("../../assets/images/downloads.svg");
+                background-image: var(--svg--downloads);
             }
 
             &--favers {
-                background-image: url("../../assets/images/favers.svg");
+                background-image: var(--svg--favers);
             }
         }
 
@@ -265,14 +191,49 @@ export default {
             flex-grow: 1;
             display: flex;
             justify-content: flex-end;
-            margin: 0 -4px .5em;
+            gap: 8px;
+        }
 
-            > * {
-                margin: 0 4px;
+        @include screen(600) {
+            text-align: initial;
+            display: flex;
+            padding: 0;
+
+            &__icon {
+                width: 130px;
+                height: 100%;
+                min-height: 130px;
+                margin: 0;
+                border-radius: 0;
+
+                position: revert;
+                right: revert;
+
+                img {
+                    width: 110px;
+                    height: 110px;
+                }
             }
 
-            @include screen(600) {
-                margin-bottom: 0;
+            &__details {
+                padding: $discover-package-padding;
+                height: 100%;
+                min-height: 90px;
+                max-width: calc(100% - 130px);
+                flex: 1;
+            }
+
+            &__headline,
+            &__description {
+                margin-right: 0;
+            }
+
+            &__more {
+                flex-direction: row;
+            }
+
+            &__actions {
+                justify-content: end;
             }
         }
     }

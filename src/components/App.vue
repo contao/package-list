@@ -27,6 +27,18 @@
             ...mapGetters('modals', ['hasModal', 'currentModal']),
         },
 
+        methods: {
+            initColorMode() {
+                let prefersDark = localStorage.getItem('contao--prefers-dark');
+
+                if (null === prefersDark) {
+                    prefersDark = String(window.matchMedia('(prefers-color-scheme: dark)').matches);
+                }
+
+                document.documentElement.dataset.colorScheme = prefersDark === 'true' ? 'dark' : 'light';
+            },
+        },
+
         async created() {
             document.title = this.$t('ui.app.title');
 
@@ -49,6 +61,7 @@
 
         mounted() {
             this.$store.dispatch('packages/details/init', { vue: this, component: PackageDetails });
+            this.initColorMode();
         },
     };
 </script>

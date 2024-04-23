@@ -37,13 +37,14 @@
 
         &__input {
             height: 50px !important;
-            padding-right: 40px !important;
+            padding-right: 45px !important;
+            border-radius: 50px !important;
         }
 
         &__button {
             position: absolute;
             top: 0;
-            right: 0;
+            right: 5px;
             display: flex;
             align-items: center;
             width: 38px;

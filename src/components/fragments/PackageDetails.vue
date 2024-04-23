@@ -22,7 +22,7 @@
         <template v-else>
 
             <div class="package-popup__summary">
-                <package-logo component-class="package-popup__icon" :src="metadata.logo"/>
+                <package-logo class="package-popup__logo" component-class="package-popup__icon" :src="metadata.logo"/>
                 <div class="package-popup__text">
                     <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
                     <p class="package-popup__authors" v-if="authors">
@@ -269,7 +269,7 @@
         justify-content: flex-start;
         width: 100%;
         height: 100%;
-        background: #ffffff;
+        background: var(--popup-bg);
         z-index: 10;
         opacity: 1;
 
@@ -295,7 +295,7 @@
             flex-grow: 0;
             flex-shrink: 1;
             padding: 7px 30px 6px;
-            background: $contao-color;
+            background: var(--popup-hl-bg);
             color: #fff;
             font-size: 18px;
             font-weight: $font-weight-normal;
@@ -304,11 +304,11 @@
             border-radius: 2px 2px 0 0;
 
             &--complete {
-                background-color: $green-button;
+                background-color: var(--btn-primary);
             }
 
             &--error {
-                background-color: $red-button;
+                background-color: var(--btn-alert);
             }
         }
 
@@ -321,7 +321,7 @@
             padding: 4px;
             background: none;
             border: 1px solid transparent;
-            border-radius: 1px;
+            border-radius: 5px;
             cursor: pointer;
 
             &--previous {
@@ -339,17 +339,14 @@
             }
 
             &:hover {
-                background-color: darken($contao-color, 5);
-                border-color: darken($contao-color, 10);
+                background-color: darken(#f47c00, 5);
 
                 .package-popup__headline--complete & {
-                    background-color: darken($green-button, 5);
-                    border-color: darken($green-button, 10);
+                    background-color: var(--btn-primary-active);
                 }
 
                 .package-popup__headline--error & {
-                    background-color: $red-button;
-                    border-color: darken($red-button, 10);
+                    background-color: var(--btn-alert);
                 }
             }
         }
@@ -363,30 +360,43 @@
             }
         }
 
-        &__icon {
+        &__logo {
+            border-radius: 6px;
             float: right;
-            height: 42px;
-            width: 42px;
+            height: 60px;
+            width: 60px;
             margin-left: 1em;
+            background: #f7f7f7;
+
+            @include screen(600) {
+                display: block;
+                float: left;
+                width: 110px;
+                height: 110px;
+                margin: 0 16px 0 0;
+            }
+        }
+
+        &__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
 
             &--fallback {
                 display: none;
             }
 
             img {
-                width: 100%;
-                height: auto;
+                width: 50px;
+                height: 50px;
                 max-height: 100%;
-            }
+                object-fit: contain;
 
-            @include screen(600) {
-                display: block;
-                float: left;
-                width: 90px;
-                height: 90px;
-                margin-left: 0;
-                margin-right: 20px;
-                margin-bottom: -4px;
+                @include screen(600) {
+                    width: 90px;
+                    height: 90px;
+                }
             }
         }
 
@@ -417,7 +427,7 @@
             margin-right: 2px;
 
             &:after {
-                color: $text-color;
+                color: var(--text);
                 content: ", ";
             }
 
@@ -438,20 +448,20 @@
 
             &--private {
                 padding-left: 20px;
-                background-image: url("../../assets/images/private.svg");
+                background-image: var(--svg--private);
                 background-size: 15px 15px;
             }
 
             &--updated {
-                background-image: url("../../assets/images/updated.svg");
+                background-image: var(--svg--updated);
             }
 
             &--downloads {
-                background-image: url("../../assets/images/downloads.svg");
+                background-image: var(--svg--downloads);
             }
 
             &--favers {
-                background-image: url("../../assets/images/favers.svg");
+                background-image: var(--svg--favers);
             }
         }
 
@@ -478,9 +488,10 @@
             font-weight: $font-weight-medium;
             font-size: 12px;
             line-height: 1.8;
-            background: rgba($hint-background, .3) url('../../assets/images/hint.svg') 15px center no-repeat;
+            background: rgba(var(--hint-rgb), .3) url('../../assets/images/hint.svg') 15px 50% no-repeat;
             background-size: 23px 23px;
-            border: 1px solid $hint-link;
+            border: 1px solid var(--hint-link);
+            border-radius: 6px;
         }
 
         &__funding {
@@ -505,9 +516,9 @@
             height: 39px;
             line-height: 39px;
             text-align: center;
-            border-top: 1px solid #e9eef1;
-            border-right: 1px solid #e9eef1;
-            border-bottom: 1px solid #e9eef1;
+            border-top: 1px solid var(--border--light);
+            border-right: 1px solid var(--border--light);
+            border-bottom: 1px solid var(--border--light);
 
             &:last-child {
                 border-right: none;
@@ -515,8 +526,8 @@
 
             &--active {
                 font-weight: $font-weight-bold;
-                background: #f8f9fb;
-                border-bottom: 1px solid #f8f9fb;
+                background: var(--tab-content);
+                border-bottom: 1px solid var(--tab-content);
             }
 
             button {
@@ -530,7 +541,7 @@
                 outline: none;
 
                 &:disabled {
-                    color: $border-color !important;
+                    color: var(--border) !important;
                     cursor: not-allowed;
                 }
             }
@@ -544,12 +555,12 @@
             padding: 2px 5px;
             font-size: 10px;
             font-weight: $font-weight-medium;
-            background: #e9eef1;
+            background: var(--border--light);
             border-radius: 40%;
 
             &--highlight {
-                color: #fff;
-                background: $green-button;
+                color: var(--clr-btn);
+                background: var(--btn-primary);
             }
         }
 
@@ -557,7 +568,7 @@
             position: relative;
             padding: 25px 35px;
             overflow-y: auto;
-            background: #f8f9fb;
+            background: var(--tab-content);
 
             @media (min-width: 960px) and (min-height: 700px) {
                 height: 450px;
@@ -577,8 +588,8 @@
             width: 750px;
             margin-left: -375px;
             height: auto;
-            border-bottom: 2px solid #ddd3bc;
-            border-radius: 2px;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         @media (min-width: 960px) and (min-height: 700px) {

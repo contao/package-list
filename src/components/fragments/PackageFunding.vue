@@ -36,9 +36,10 @@
         font-weight: $font-weight-medium;
         font-size: 12px;
         line-height: 1.8;
-        background: rgba($funding-color, .025) url('../../assets/images/funding.svg') 15px 50% no-repeat;
+        background: rgba(var(--funding-rgb), .025) url('../../assets/images/funding.svg') 15px 50% no-repeat;
         background-size: 23px 23px;
-        border: 1px solid rgba($funding-color, .5);
+        border: 1px solid rgba(var(--funding-rgb), .5);
+        border-radius: 6px;
     }
 
     span {
@@ -48,7 +49,7 @@
     a {
         display: inline-block;
         padding-left: 16px;
-        color: $funding-color;
+        color: var(--funding);
         background: url("../../assets/images/link-funding.svg") 0 50% no-repeat;
         background-size: 13px 13px;
 

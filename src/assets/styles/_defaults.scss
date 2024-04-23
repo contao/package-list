@@ -6,26 +6,124 @@ $font-weight-normal: 300;
 $font-weight-medium: 400;
 $font-weight-bold: 600;
 
-$text-color: #535353;
-$link-color: #f47c00;
-$highlight-color: #ffff00;
-$border-color: #cccccc;
-$border-light-color: #e9eef1;
-$shadow-color: #ccbfa2;
-$footer-link: #2a7887;
-$contao-color: #f47c00;
-$funding-color: #ea4aaa;
-$focus-color: #f9f9f9;
+// Custom properties
+:root {
+  --text: #535353;
+  --link: #f47c00;
+  --body-bg: #ebe6db;
+  --link-footer: #2a7887;
 
-$default-button: #737373;
-$green-button: #31a64b;
-$red-button: #db5041;
-$orange-button: #db8c41;
-$blue-button: #6a8ca6;
+  --tiles-bg: #fff;
+  --tiles-bdr: #ddd3bc;
 
-$hint-background: #e8c8bc;
-$hint-link: #bd2e20;
+  --popup-hl-bg: #f47c00;
+  --popup-bg: #fff;
+  --popup-header: #fff;
+  --popup-overlay-bg: rgba(235,230,219,.35);
+  --tab-content: #f8f9fb;
 
+  --highlight-bg: #ffff00;
+  --highlight-color: #535353;
+
+  --shadow: #ccbfa2;
+  --contao: #f47c00;
+
+  --ad-shadow: #{0 1px 5px 1px rgba(0, 0, 0, 0.2)};
+
+  --black: #000;
+  --funding: #ea4aaa;
+  --funding-rgb: #{red(#ea4aaa), green(#ea4aaa), blue(#ea4aaa)};
+
+  --form-bg: #fff;
+  --border: #cccccc;
+  --border--light: #e9eef1;
+  --focus: #f9f9f9;
+
+  --clr-btn: #fff;
+  --btn: #737373;
+  --btn-active: #{darken(#737373, 5)};
+  --btn-primary: #31a64b;
+  --btn-primary-active: #{darken(#31a64b, 5)};
+  --btn-warning: #db8c41;
+  --btn-warning-active: #{darken(#db8c41, 5)};
+  --btn-alert: #db5041;
+  --btn-alert-active: #{darken(#db5041, 5)};
+  --btn-info: #6a8ca6;
+  --btn-info-active: #{darken(#6a8ca6, 5)};
+  --btn-funding: #ea4aaa;
+  --btn-funding-active: #{darken(#ea4aaa, 5)};
+
+  --hint-bg: #e8c8bc;
+  --hint-rgb: #{red(#e8c8bc), green(#e8c8bc), blue(#e8c8bc)};
+  --hint-link: #bd2e20;
+
+  --header-bg: #e5dfcf;
+  --header-bdr: #dcd8cc;
+  --footer-bdr: #bbbbbb;
+
+  --svg--link-blank: url(~@/assets/images/link-blank.svg);
+  --svg--private: url(~@/assets/images/private.svg);
+  --svg--updated: url(~@/assets/images/updated.svg);
+  --svg--downloads: url(~@/assets/images/downloads.svg);
+  --svg--favers: url(~@/assets/images/favers.svg);
+  --svg--language: url(~@/assets/images/language.svg);
+  --svg--color-scheme: url(~@/assets/images/color_scheme.svg);
+}
+
+// Dark-mode
+html[data-color-scheme=dark] {
+  --text: #ddd;
+  --link: #f47c00;
+  --body-bg: #0f0f11;
+  --link-footer: #fff;
+
+  --tiles-bg: #212227;
+  --tiles-bdr: #303236;
+
+  --popup-hl-bg: #292c32;
+  --popup-bg: #1b1d21;
+  --popup-overlay-bg: rgba(0,0,0,.35);
+  --tab-content: #212227;
+
+  --highlight-bg: #f47c00;
+  --highlight-color: #fff;
+
+  --shadow: transparent;
+
+  --ad-shadow: none;
+
+  --btn: #3c3f4c;
+  --btn-active: #25272f;
+
+  --black: #fff;
+
+  --form-bg: #151619;
+  --border: #44464b;
+  --border--light: #2e2e34;
+  --focus: #1e2024;
+
+  --btn-info: #25455f;
+  --btn-info-active: #253846;
+
+  --hint-rgb: 57, 9, 20;
+
+  --header-bg: #1b1d21;
+  --header-bdr: #1b1d21;
+  --footer-bdr: #414448;
+
+  --svg--link-blank: url(~@/assets/images/link-blank--dark.svg);
+  --svg--private: url(~@/assets/images/private--dark.svg);
+  --svg--updated: url(~@/assets/images/updated--dark.svg);
+  --svg--downloads: url(~@/assets/images/downloads--dark.svg);
+  --svg--favers: url(~@/assets/images/favers--dark.svg);
+  --svg--language: url(~@/assets/images/language--dark.svg);
+  --svg--color-scheme: url(~@/assets/images/color_scheme--dark.svg);
+
+  #contao-network {
+    background: #292c32 !important;
+    color: #ddd !important;
+  }
+}
 
 @mixin screen($width) {
     @media (min-width: #{$width}px) {

@@ -43,7 +43,7 @@
             width: 16px;
             height: 16px;
             margin-right: 1px;
-            background-color: $contao-color;
+            background-color: var(--contao);
             animation: loading 1.4s infinite ease-in-out both;
 
             &--20 {
@@ -92,7 +92,7 @@
         margin: 0 auto;
         width: 15%;
         height: 15%;
-        background-color: $text-color;
+        background-color: var(--text);
         border-radius: 100%;
         animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
     }
