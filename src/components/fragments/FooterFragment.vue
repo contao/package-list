@@ -1,7 +1,7 @@
 <template>
     <footer :class="'fragment-footer' + (display ? (' fragment-footer--'+display) : '')">
         <div class="fragment-footer__settings">
-            <div class="fragment-footer__language">
+            <div ref="languages" class="fragment-footer__language">
                 <button :title="$t('ui.app.language')" @click="toggle">{{ languageOptions[currentLanguage] }}</button>
                 <ul class="link-more__menu" ref="menu" v-show="visible" tabindex="-1" @blur="close" @click="close">
                     <li v-for="(label, code) in languageOptions" :key="code">
@@ -47,14 +47,18 @@
 
             open() {
                 this.visible = true;
-                this.$nextTick(() => this.$refs.menu.focus());
+                window.addEventListener('click', this.closeOutside)
             },
 
             close() {
-                this.$refs.menu.blur();
-                setTimeout(() => {
-                    this.visible = false;
-                }, 300);
+                this.visible = false;
+                window.removeEventListener('click', this.closeOutside)
+            },
+
+            closeOutside(event) {
+                if (this.$refs.languages && !this.$refs.languages.contains(event.target)) {
+                    this.close();
+                }
             },
 
             toggle() {

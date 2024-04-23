@@ -1,6 +1,6 @@
 <template>
-    <div class="popup-overlay" @click="clearCurrent()">
-        <div ref="popup" :class="popupClass" @click.stop>
+    <div class="popup-overlay" @click="clearCurrent">
+        <div ref="popup" :class="popupClass">
             <slot/>
         </div>
     </div>
@@ -13,8 +13,10 @@
         },
 
         methods: {
-            clearCurrent() {
-                this.$emit('clear');
+            clearCurrent(event) {
+                if (this.$refs.popup && !this.$refs.popup.contains(event.target)) {
+                    this.$emit('clear');
+                }
             },
         },
     };
