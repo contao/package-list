@@ -36,6 +36,7 @@
 
     .package-link {
         display: flex;
+        column-gap: 8px;
         justify-content: space-between;
         width: 100%;
         padding-bottom: 4px;
