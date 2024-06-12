@@ -301,7 +301,6 @@
             font-weight: $font-weight-normal;
             line-height: 1.5;
             text-align: center;
-            border-radius: 2px 2px 0 0;
 
             &--complete {
                 background-color: var(--btn-primary);
@@ -373,7 +372,7 @@
                 float: left;
                 width: 110px;
                 height: 110px;
-                margin: 0 16px 0 0;
+                margin: -10px 16px 0 -10px;
             }
         }
 
@@ -474,7 +473,7 @@
             @include screen(600) {
                 justify-content: space-between;
                 margin: 0 0 0 25px;
-                min-width: 200px;
+                width: 200px;
             }
         }
 
@@ -499,38 +498,50 @@
         }
 
         &__tabs {
+            flex-shrink: 0;
             flex-grow: 0;
-            clear: both;
+            position: relative;
             display: flex;
-            flex-wrap: wrap;
-            width: 100%;
+            height: 40px;
+            min-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
             margin: 0;
-            padding: 0;
+            padding: 0 5px;
             list-style-type: none;
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: auto 0 0;
+                height: 1px;
+                background: var(--border--light);
+                z-index: -1;
+            }
         }
 
         &__tab {
+            position: relative;
+            top: 1px;
             flex-grow: 1;
-            margin: 0;
+            margin: 0 2px;
             padding: 0;
             height: 39px;
             line-height: 39px;
             text-align: center;
-            border-top: 1px solid var(--border--light);
-            border-right: 1px solid var(--border--light);
-            border-bottom: 1px solid var(--border--light);
-
-            &:last-child {
-                border-right: none;
-            }
+            border: 1px solid var(--border--light);
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
 
             &--active {
-                font-weight: $font-weight-bold;
                 background: var(--tab-content);
                 border-bottom: 1px solid var(--tab-content);
             }
 
             button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 width: 100%;
                 height: 100%;
                 margin: 0;
@@ -589,7 +600,14 @@
             margin-left: -375px;
             height: auto;
             border-radius: 8px;
-            overflow: hidden;
+
+            &__headline {
+                border-radius: 8px 8px 0 0;
+            }
+
+            &__tabcontent {
+                border-radius: 0 0 8px 8px;
+            }
         }
 
         @media (min-width: 960px) and (min-height: 700px) {

@@ -161,8 +161,9 @@
 
         &__action {
             display: block;
-            margin: 0;
-            padding: 10px 20px;
+            margin: 2px;
+            border-radius: 5px;
+            padding: 8px 16px;
             color: var(--text);
             cursor: pointer;
 
@@ -171,14 +172,6 @@
                 background: var(--focus);
                 text-decoration: none;
             }
-        }
-
-        &__item:first-child .link-menu__action {
-            border-radius: 5px 5px 0 0;
-        }
-
-        &__item:last-child .link-menu__action {
-            border-radius: 0 0 5px 5px;
         }
     }
 </style>

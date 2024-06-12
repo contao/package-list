@@ -99,6 +99,7 @@ export default {
                 align-items: center;
                 justify-content: center;
                 height: 100%;
+                max-height: 140px;
             }
 
             img {
@@ -210,8 +211,8 @@ export default {
                 right: revert;
 
                 img {
-                    width: 110px;
-                    height: 110px;
+                    width: 100px;
+                    height: 100px;
                 }
             }
 
