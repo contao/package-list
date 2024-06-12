@@ -46,13 +46,17 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+    @import "../../assets/styles/defaults";
+
     img {
         width: 100%;
         aspect-ratio: 2; // For aligning images that are slightly smaller e.g. "0.1-Theme"
     }
 
     .ads {
-        margin: 59px 0 69px;
+        @include screen(1200) {
+            margin: 59px 0 69px;
+        }
     }
 
     .link {

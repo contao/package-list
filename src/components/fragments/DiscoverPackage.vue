@@ -102,7 +102,8 @@ export default {
                 max-height: 140px;
             }
 
-            img {
+            img,
+            svg {
                 border-radius: 4px;
                 width: 50px;
                 height: 50px;
@@ -213,6 +214,11 @@ export default {
                 img {
                     width: 100px;
                     height: 100px;
+                }
+
+                svg {
+                    width: 90px;
+                    height: 90px;
                 }
             }
 

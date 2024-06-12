@@ -19,8 +19,8 @@
         computed: {
             computedClass: vm => ({
                 'package-logo--fallback': !vm.src,
-                [vm.componentClass]: true,
-                [`${vm.componentClass}--fallback`]: !vm.src,
+                [vm.componentClass]: !!vm.componentClass,
+                [`${vm.componentClass}--fallback`]: !!vm.componentClass && !vm.src,
             }),
         },
     };
@@ -36,8 +36,8 @@
     }
 
     svg {
-        width: 80%;
-        height: 80%;
+        width: 80px;
+        height: 80px;
         fill: #ccc;
     }
 </style>
