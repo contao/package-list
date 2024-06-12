@@ -1,5 +1,5 @@
 import { Http } from 'vue-resource';
-import algoliasearch from 'algoliasearch';
+import algoliasearch from 'algoliasearch/lite';
 import { coerce, compare } from 'semver';
 import features from './packages/features';
 
@@ -79,7 +79,7 @@ export default {
                 let data = null;
 
                 try {
-                    const content = await algolia().search({
+                    const content = await algolia().search('', {
                         filters: `name:"${name}" AND languages:${state.language}`,
                         hitsPerPage: 1,
                     });
@@ -217,7 +217,7 @@ export default {
             params.highlightPreTag = '%%';
             params.highlightPostTag = '%%';
 
-            return await algolia(`v3_packages${suffix}`).search(params);
+            return await algolia(`v3_packages${suffix}`).search('', params);
         },
 
         async discover({ state, commit }) {
