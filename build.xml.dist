@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Contao Manager" default="list" basedir=".">
+<project name="Contao Package List" default="list" basedir=".">
     <target name="list">
         <echo message="Available commands:" />
         <echo message="  phing prod  -  Builds production files" />
