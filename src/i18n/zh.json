@@ -1,6 +1,11 @@
 {
     "ui.app.title": "Contao 扩展",
     "ui.app.loading": "扩展列表加载中 …",
+    "ui.app.language": "Switch language for the Contao Manager",
+    "ui.app.colorDark": "Dark Mode",
+    "ui.app.colorDarkTitle": "Switch color scheme to dark",
+    "ui.app.colorLight": "Light Mode",
+    "ui.app.colorLightTitle": "Switch color scheme to light",
     "ui.discover.advertisement": "Advertisement in the extension list",
     "ui.discover.loading": "加载 …",
     "ui.discover.offline": "无法获取任何结果",

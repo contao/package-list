@@ -1,6 +1,11 @@
 {
     "ui.app.title": "Contao eklentileri",
     "ui.app.loading": "Eklenti listesi yükleniyor…",
+    "ui.app.language": "Switch language for the Contao Manager",
+    "ui.app.colorDark": "Dark Mode",
+    "ui.app.colorDarkTitle": "Switch color scheme to dark",
+    "ui.app.colorLight": "Light Mode",
+    "ui.app.colorLightTitle": "Switch color scheme to light",
     "ui.discover.advertisement": "Eklenti listesinde duyuru",
     "ui.discover.loading": "Yükleniyor…",
     "ui.discover.offline": "Herhangi bir sonuç alınamadı.",

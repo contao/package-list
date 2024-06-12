@@ -1,6 +1,11 @@
 {
     "ui.app.title": "Extensions Contao",
     "ui.app.loading": "Chargement de la liste des extensions…",
+    "ui.app.language": "Switch language for the Contao Manager",
+    "ui.app.colorDark": "Dark Mode",
+    "ui.app.colorDarkTitle": "Switch color scheme to dark",
+    "ui.app.colorLight": "Light Mode",
+    "ui.app.colorLightTitle": "Switch color scheme to light",
     "ui.discover.advertisement": "Publicité dans la liste des extensions",
     "ui.discover.loading": "Chargement…",
     "ui.discover.offline": "Impossible de récupérer des résultats.",
