@@ -52,6 +52,7 @@ $font-weight-bold: 600;
   --btn-info-active: #{darken(#6a8ca6, 5)};
   --btn-funding: #ea4aaa;
   --btn-funding-active: #{darken(#ea4aaa, 5)};
+  --btn-disabled: #ccc;
 
   --hint-bg: #e8c8bc;
   --hint-rgb: #{red(#e8c8bc), green(#e8c8bc), blue(#e8c8bc)};
@@ -104,6 +105,8 @@ html[data-color-scheme=dark] {
 
   --btn-info: #25455f;
   --btn-info-active: #253846;
+  --btn-disabled: #151517;
+  --opacity-disabled: 0.5;
 
   --hint-rgb: 57, 9, 20;
 

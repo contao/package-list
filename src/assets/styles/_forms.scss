@@ -210,9 +210,10 @@ select {
 
     &:disabled,
     &.disabled {
-        background-color: var(--border) !important;
-        border-color: var(--border) !important;
+        background-color: var(--btn-disabled) !important;
+        border-color: var(--btn-disabled) !important;
         cursor: not-allowed;
+        opacity: var(--opacity-disabled, 1);
     }
 
     &.disabled {
