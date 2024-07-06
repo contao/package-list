@@ -47,45 +47,47 @@
                     </slot>
                 </div>
             </div>
-            <ul class="package-popup__tabs">
-                <details-tab
-                    show-empty
-                    :links="false"
-                    :active="tab === ''"
-                    @click="setTab('')"
-                >{{ $t('ui.package-details.tabDescription') }}</details-tab>
-                <details-tab
-                    highlight
-                    :links="metadata.features"
-                    :active="tab === 'features'"
-                    @click="setTab('features')"
-                    v-if="metadata.features"
-                >{{ $t('ui.package-details.tabFeatures') }}</details-tab>
-                <details-tab
-                    highlight
-                    :active="tab === 'suggest'"
-                    :links="metadata.suggest"
-                    @click="setTab('suggest')"
-                >{{ $t('ui.package-details.tabSuggest') }}</details-tab>
-                <details-tab
-                    show-empty
-                    :active="tab === 'require'"
-                    :links="metadata.require"
-                    @click="setTab('require')"
-                >{{ $t('ui.package-details.tabRequire') }}</details-tab>
-                <details-tab
-                    show-empty
-                    :active="tab === 'conflict'"
-                    :links="metadata.conflict"
-                    @click="setTab('conflict')"
-                >{{ $t('ui.package-details.tabConflict') }}</details-tab>
-                <details-tab
-                    :active="tab === 'dependents'"
-                    :links="dependents"
-                    @click="setTab('dependents')"
-                    v-if="dependents"
-                >{{ $t('ui.package-details.tabDependents') }}</details-tab>
-            </ul>
+            <div class="package-popup__tabs">
+                <ul class="package-popup__tabs-list">
+                    <details-tab
+                        show-empty
+                        :links="false"
+                        :active="tab === ''"
+                        @click="setTab('')"
+                    >{{ $t('ui.package-details.tabDescription') }}</details-tab>
+                    <details-tab
+                        highlight
+                        :links="metadata.features"
+                        :active="tab === 'features'"
+                        @click="setTab('features')"
+                        v-if="metadata.features"
+                    >{{ $t('ui.package-details.tabFeatures') }}</details-tab>
+                    <details-tab
+                        highlight
+                        :active="tab === 'suggest'"
+                        :links="metadata.suggest"
+                        @click="setTab('suggest')"
+                    >{{ $t('ui.package-details.tabSuggest') }}</details-tab>
+                    <details-tab
+                        show-empty
+                        :active="tab === 'require'"
+                        :links="metadata.require"
+                        @click="setTab('require')"
+                    >{{ $t('ui.package-details.tabRequire') }}</details-tab>
+                    <details-tab
+                        show-empty
+                        :active="tab === 'conflict'"
+                        :links="metadata.conflict"
+                        @click="setTab('conflict')"
+                    >{{ $t('ui.package-details.tabConflict') }}</details-tab>
+                    <details-tab
+                        :active="tab === 'dependents'"
+                        :links="dependents"
+                        @click="setTab('dependents')"
+                        v-if="dependents"
+                    >{{ $t('ui.package-details.tabDependents') }}</details-tab>
+                </ul>
+            </div>
             <details-content v-show="tab === ''">
                 <div class="package-popup__abandoned" v-if="metadata.abandoned">
                     <template v-if="metadata.abandoned === true">{{ $t('ui.package.abandonedText') }}</template>
@@ -498,16 +500,39 @@
         }
 
         &__tabs {
+            position: relative;
+            flex-grow: revert;
+
+            &::before,
+            &::after {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                bottom: 1px;
+                width: 7px;
+                background: linear-gradient(-90deg, transparent 0, var(--popup-bg) 100%);
+                z-index: 1;
+            }
+
+            &::after {
+                background: linear-gradient(90deg, transparent 0, var(--popup-bg) 100%);
+                right: 0;
+            }
+        }
+
+        &__tabs-list {
             flex-shrink: 0;
             flex-grow: 0;
-            position: relative;
             display: flex;
+            column-gap: 4px;
             height: 40px;
             min-width: 100%;
             overflow-x: auto;
+            scrollbar-width: none;
             overflow-y: hidden;
             margin: 0;
-            padding: 0 5px;
+            padding: 0 7px;
             list-style-type: none;
 
             &::after {
@@ -524,7 +549,6 @@
             position: relative;
             top: 1px;
             flex-grow: 1;
-            margin: 0 2px;
             padding: 0;
             height: 39px;
             line-height: 39px;
