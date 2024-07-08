@@ -511,12 +511,13 @@
                 top: 0;
                 bottom: 1px;
                 width: 7px;
-                background: linear-gradient(-90deg, transparent 0, var(--popup-bg) 100%);
+                background: linear-gradient(-90deg, transparent 0, var(--popup-bg) 50%);
                 z-index: 1;
+                pointer-events: none;
             }
 
             &::after {
-                background: linear-gradient(90deg, transparent 0, var(--popup-bg) 100%);
+                background: linear-gradient(90deg, transparent 0, var(--popup-bg) 50%);
                 right: 0;
             }
         }
