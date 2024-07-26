@@ -3,12 +3,17 @@
         <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
         <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
         <div class="discover-package__details">
-            <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }" :title="data.name !== data.title ? data.name : ''">
-                <template v-for="(fragment, i) in title.split('%%')">
-                    <em :key="i" v-if="i % 2">{{ fragment }}</em>
-                    <template v-else>{{ fragment }}</template>
-                </template>
-            </h1>
+            <div class="discover-package__headline-container">
+                <ul class="discover-package__versions" :title="$t('ui.package.contao_versions') + ' ' + data.contaoVersions" :class="{ 'discover-package__versions--fallback': !data.logo }">
+                    <li class="discover-package__version" v-for="(version, i) in data.contaoVersions" :key="i">{{ version }}</li>
+                </ul>
+                <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }" :title="data.name !== data.title ? data.name : ''">
+                    <template v-for="(fragment, i) in title.split('%%')">
+                        <em :key="i" v-if="i % 2">{{ fragment }}</em>
+                        <template v-else>{{ fragment }}</template>
+                    </template>
+                </h1>
+            </div>
             <p class="discover-package__description" :class="{ 'discover-package__description--fallback': !data.logo }">
                 <template v-for="(fragment, i) in description.split('%%')">
                     <em :key="i" v-if="i % 2">{{ fragment }}</em>
@@ -133,6 +138,28 @@ export default {
             }
         }
 
+        &__versions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            list-style: none;
+            margin: 5px 0;
+            padding: 0;
+        }
+
+        &__version {
+            display: inline-flex;
+            justify-content: center;
+            padding: 3px 5px;
+            border-radius: 6px;
+            line-height: 1;
+            min-width: 40px;
+            font-size: 13px;
+            color: #fff;
+            background: var(--badge-bg);
+            pointer-events: none;
+        }
+
         &__description {
             display: -webkit-box;
             overflow: hidden;
@@ -196,6 +223,13 @@ export default {
             gap: 8px;
         }
 
+        @media (max-width: 599.98px) {
+            &__headline-container {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+        }
+
         @include screen(600) {
             text-align: initial;
             display: flex;
@@ -228,6 +262,11 @@ export default {
                 min-height: 90px;
                 max-width: calc(100% - 130px);
                 flex: 1;
+            }
+
+            &__versions {
+                float: right;
+                margin: 0 0 0 16px;
             }
 
             &__headline,

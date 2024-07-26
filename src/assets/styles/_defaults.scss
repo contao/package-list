@@ -28,6 +28,8 @@ $font-weight-bold: 600;
   --shadow: #ccbfa2;
   --contao: #f47c00;
 
+  --badge-bg: var(--contao);
+
   --ad-shadow: #{0 1px 5px 1px rgba(0, 0, 0, 0.2)};
 
   --black: #000;
@@ -90,6 +92,8 @@ html[data-color-scheme=dark] {
   --highlight-color: #fff;
 
   --shadow: transparent;
+
+  --badge-bg: var(--border--light);
 
   --ad-shadow: none;
 

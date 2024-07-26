@@ -98,6 +98,12 @@
                 <package-funding class="package-popup__funding" :items="metadata.funding" v-if="metadata.funding"/>
                 <slot name="package-update"/>
                 <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
+                <div v-if="metadata.contaoVersions"><strong>{{ $t('ui.package.contao_versions') }} </strong>
+                    <template v-for="(fragment, i) in metadata.contaoVersions">
+                        <span :key="i" v-if="i === Object.values(metadata.contaoVersions).length - 1">{{ fragment }}</span>
+                        <template v-else>{{ fragment }}, </template>
+                    </template>
+                </div>
                 <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
                 <p class="package-popup__description">{{ metadata.description }}</p>
             </details-content>
@@ -175,6 +181,7 @@
 
             authors: vm => (vm.metadata.authors && vm.metadata.authors.length) ? vm.metadata.authors.filter(a => !!a.name) : null,
             license: vm => vm.metadata.license ? (vm.metadata.license instanceof Array ? vm.metadata.license.join(', ') : vm.metadata.license) : '–',
+            contaoVersions: vm => vm.metadata.contaoVersions ? vm.metadata.contaoVersions : null,
         },
 
         methods: {
