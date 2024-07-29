@@ -34,6 +34,7 @@
     "ui.package.abandoned": "kullanımdan kaldırıldı",
     "ui.package.abandonedText": "Bu paket kullanımdan kaldırıldı ve artık geliştirilmiyor.",
     "ui.package.abandonedReplace": "Bu paket kullanımdan kaldırıldı ve artık geliştirilmiyor. Geliştirici bunun yerine  {replacement} paketinin kullanılmasını öneriyor.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Önceki eklenti bilgileri",
     "ui.package-details.close": "Eklenti bilgilerini kapat",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "sundukları",
     "ui.package-details.linkConflicts": "çakışması",
     "ui.package-details.funding": "Paketin geliştirilmesine destek olun!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Son sürüm",
     "ui.package-details.released": "yayınlanma tarihi",
     "ui.package-details.license": "Lisanslar",

@@ -34,6 +34,7 @@
     "ui.package.abandoned": "porzucony",
     "ui.package.abandonedText": "Ten pakiet jest porzucony i nie jest już wspierany.",
     "ui.package.abandonedReplace": "Ten pakiet jest porzucony i nie jest już wspierany. Autor sugeruje użycie pakietu {replacement} zamiast niego.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Szczegóły poprzedniego rozszerzenia",
     "ui.package-details.close": "Zamknij szczegóły rozszerzenia",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "dostarcza",
     "ui.package-details.linkConflicts": "koliduje",
     "ui.package-details.funding": "Finansuj rozwój pakietu!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Ostatnia wersja",
     "ui.package-details.released": "data wydania",
     "ui.package-details.license": "Licencje",

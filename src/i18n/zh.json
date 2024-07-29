@@ -34,6 +34,7 @@
     "ui.package.abandoned": "放弃",
     "ui.package.abandonedText": "该程序包已放弃不再维护。",
     "ui.package.abandonedReplace": "该程序包已放弃不再维护。作者建议使用 {replacement} 包替代.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "以前的扩展详细信息",
     "ui.package-details.close": "关闭扩展详情",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "提供",
     "ui.package-details.linkConflicts": "冲突",
     "ui.package-details.funding": "Fund package maintenance!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "最新版",
     "ui.package-details.released": "发布于",
     "ui.package-details.license": "许可(s)",

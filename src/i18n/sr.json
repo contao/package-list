@@ -34,6 +34,7 @@
     "ui.package.abandoned": "напуштено",
     "ui.package.abandonedText": "Овај пакет је напуштен и више се не одржава.",
     "ui.package.abandonedReplace": "Овај пакет је напуштен и више се не одржава. Аутор предлаже да користите {replacement} као замену.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Детаљи претходне екстензије",
     "ui.package-details.close": "Затвори детаље екстензије",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "пружа",
     "ui.package-details.linkConflicts": "сукобљава се са",
     "ui.package-details.funding": "Спонзорирајте одржавање пакета!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Последња верзија",
     "ui.package-details.released": "објављено",
     "ui.package-details.license": "Лиценца(е)",

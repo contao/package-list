@@ -34,6 +34,7 @@
     "ui.package.abandoned": "pamests",
     "ui.package.abandonedText": "Šī pakotne ir pamesta un vairs netiek uzturēta.",
     "ui.package.abandonedReplace": "Šī pakotne ir pamesta un vairs netiek uzturēta. Autors iesaka tās vietā izmantot pakotni {replacement}.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Iepriekšējā paplašinājuma informācija",
     "ui.package-details.close": "Aizvērt paplašinājuma informāciju",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "nodrošina",
     "ui.package-details.linkConflicts": "konflikti",
     "ui.package-details.funding": "Finansējiet paketes uzturēšanu!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Jaunākā versija",
     "ui.package-details.released": "izlaists",
     "ui.package-details.license": "Licence(s)",

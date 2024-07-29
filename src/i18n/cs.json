@@ -34,6 +34,7 @@
     "ui.package.abandoned": "nepřijatý",
     "ui.package.abandonedText": "Tento balíček je označený jako nepřijatý a již se dál vyvíjí.",
     "ui.package.abandonedReplace": "Tento balíček je označený jako nepřijatý a již se dál vyvíjí. Autor místo něho doporučuje použít {replacement}. ",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Předešlé podrobné informace k rozšíření",
     "ui.package-details.close": "Zavřít podrobné informace k rozšíření",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "poskytuje",
     "ui.package-details.linkConflicts": "konflikty",
     "ui.package-details.funding": "Nalezen vyvíjený balíček!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Poslední verze",
     "ui.package-details.released": "Zveřejněno",
     "ui.package-details.license": "Licence",

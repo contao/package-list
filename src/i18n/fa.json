@@ -34,6 +34,7 @@
     "ui.package.abandoned": "منع شده",
     "ui.package.abandonedText": "This package is abandoned and no longer maintained.",
     "ui.package.abandonedReplace": "This package is abandoned and no longer maintained. The author suggests using the {replacement} package instead.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "جزئیات افزونه قبلی",
     "ui.package-details.close": "بستن جزئیات افزونه",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "فراهم می‌کند",
     "ui.package-details.linkConflicts": "ناسازگار است",
     "ui.package-details.funding": "Fund package maintenance!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "آخرین نسخه",
     "ui.package-details.released": "منتشر شده در",
     "ui.package-details.license": "مجوز(ها)",

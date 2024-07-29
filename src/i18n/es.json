@@ -34,6 +34,7 @@
     "ui.package.abandoned": "abandonado",
     "ui.package.abandonedText": "Este paquete está abandonado y ya no se mantiene.",
     "ui.package.abandonedReplace": "su paquete es abandonado y ya no se mantiene. El autor sugiere usar el paquete {replacement} en su lugar.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Detalles de extensiones anteriores",
     "ui.package-details.close": "Cerrar detalles de extensión",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "provee",
     "ui.package-details.linkConflicts": "conflictos",
     "ui.package-details.funding": "Mantenimiento del Fund Package!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Última versión",
     "ui.package-details.released": "publicado el",
     "ui.package-details.license": "Licencia(s)",

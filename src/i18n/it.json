@@ -34,6 +34,7 @@
     "ui.package.abandoned": "dismesso",
     "ui.package.abandonedText": "Questo pacchetto è abbandonato e non è più mantenuto.",
     "ui.package.abandonedReplace": "Questo pacchetto è abbandonato e non è più mantenuto. L'autore suggerisce di usare il pacchetto {sostituzione}.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Dettagli estensione precedente",
     "ui.package-details.close": "Chiudi dettagli estensione",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "fornisce",
     "ui.package-details.linkConflicts": "Conflitti",
     "ui.package-details.funding": "Manutenzione del pacchetto!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Ultima versione",
     "ui.package-details.released": "rilasciato il",
     "ui.package-details.license": "Licenza",

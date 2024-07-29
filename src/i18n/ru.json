@@ -34,6 +34,7 @@
     "ui.package.abandoned": "Заброшенный",
     "ui.package.abandonedText": "Этот пакет отмечен как заброшенный и больше не поддерживается.",
     "ui.package.abandonedReplace": "Этот пакет имеет статус заброшенного и больше не поддерживается. Автор предлагает вместо него использовать пакет {replacement}.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Детали предыдущего расширения",
     "ui.package-details.close": "Закрыть детали расширения",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "обеспечивает",
     "ui.package-details.linkConflicts": "конфликты",
     "ui.package-details.funding": "Финансировать дальнейшее развитие!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Последняя версия",
     "ui.package-details.released": "выпуск от",
     "ui.package-details.license": "Лицензия(и)",

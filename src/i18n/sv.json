@@ -34,6 +34,7 @@
     "ui.package.abandoned": "övergiven",
     "ui.package.abandonedText": "Detta paket är övergivet och underhålls inte längre.",
     "ui.package.abandonedReplace": "Detta paket är övergivet och underhålls inte längre. Författaren föreslår att du istället använder paketet {replacement}.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Tidigare tilläggsinformation",
     "ui.package-details.close": "Stäng tilläggsinformation",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "tillhandahåller",
     "ui.package-details.linkConflicts": "konflikter",
     "ui.package-details.funding": "Underhåll av fondpaket!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Senaste versionen",
     "ui.package-details.released": "släppt på",
     "ui.package-details.license": "Licens(er)",
