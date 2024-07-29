@@ -4,7 +4,7 @@
         <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
         <div class="discover-package__details">
             <div class="discover-package__headline-container">
-                <ul class="discover-package__versions" :title="$t('ui.package.contao_versions') + ' ' + data.contaoVersions" :class="{ 'discover-package__versions--fallback': !data.logo }">
+                <ul class="discover-package__versions" :title="`${$t('ui.package.contaoVersion')} ${data.contaoVersions.join(', ')}`" :class="{ 'discover-package__versions--fallback': !data.logo }" v-if="data.contaoVersions">
                     <li class="discover-package__version" v-for="(version, i) in data.contaoVersions" :key="i">{{ version }}</li>
                 </ul>
                 <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }" :title="data.name !== data.title ? data.name : ''">
@@ -151,7 +151,7 @@ export default {
             display: inline-flex;
             justify-content: center;
             padding: 3px 5px;
-            border-radius: 6px;
+            border-radius: 4px;
             line-height: 1;
             min-width: 40px;
             font-size: 13px;
@@ -266,7 +266,7 @@ export default {
 
             &__versions {
                 float: right;
-                margin: 0 0 0 16px;
+                margin: -3px 0 0 16px;
             }
 
             &__headline,
