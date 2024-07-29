@@ -34,6 +34,7 @@
     "ui.package.abandoned": "abandoned",
     "ui.package.abandonedText": "This package is abandoned and no longer maintained.",
     "ui.package.abandonedReplace": "This package is abandoned and no longer maintained. The author suggests using the {replacement} package instead.",
+    "ui.package.contaoVersion": "Available for Contao",
 
     "ui.package-details.previous": "Previous Extension Details",
     "ui.package-details.close": "Close Extension Details",
@@ -49,6 +50,7 @@
     "ui.package-details.linkProvides": "provides",
     "ui.package-details.linkConflicts": "conflicts",
     "ui.package-details.funding": "Fund package maintenance!",
+    "ui.package-details.contaoVersions": "Supported Contao version(s)",
     "ui.package-details.latest": "Latest version",
     "ui.package-details.released": "released on",
     "ui.package-details.license": "License(s)",
