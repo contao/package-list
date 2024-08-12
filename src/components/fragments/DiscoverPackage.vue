@@ -29,7 +29,7 @@
                     <span class="discover-package__count discover-package__count--favers" v-if="data.favers">{{ data.favers | numberFormat }}</span>
                 </p>
                 <div class="discover-package__actions">
-                     <details-button small :name="data.name"/>
+                    <details-button small :name="data.name"/>
                     <slot/>
                 </div>
             </div>
