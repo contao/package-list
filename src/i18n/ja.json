@@ -34,7 +34,7 @@
     "ui.package.abandoned": "放棄",
     "ui.package.abandonedText": "このパッケージは放棄され、もう保守されていません。",
     "ui.package.abandonedReplace": "このパッケージは放棄され、もう保守されていません。代わりに{replacement}パッケージの使用を作者は推奨しています。",
-    "ui.package.contaoVersion": "Available for Contao",
+    "ui.package.contaoVersion": "Contaoで利用可能",
 
     "ui.package-details.previous": "以前の機能拡張の詳細",
     "ui.package-details.close": "機能拡張の詳細を閉じる",
@@ -50,7 +50,7 @@
     "ui.package-details.linkProvides": "提供",
     "ui.package-details.linkConflicts": "競合",
     "ui.package-details.funding": "パッケージの保守に資金を提供!",
-    "ui.package-details.contaoVersions": "Supported Contao version(s)",
+    "ui.package-details.contaoVersions": "サポートしているContaoのバージョン",
     "ui.package-details.latest": "最新版",
     "ui.package-details.released": "リリース日",
     "ui.package-details.license": "ライセンス",
