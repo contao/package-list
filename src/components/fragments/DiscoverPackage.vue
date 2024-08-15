@@ -1,36 +1,40 @@
 <template>
-    <article class="discover-package">
+    <article class="discover-package" :class="(hint || !!$slots.hint) ? 'is--hint' : ''">
+
+        <div class="discover-package__hint" v-if="hint || !!$slots.hint"><slot name="hint"/></div>
         <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
-        <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
-        <div class="discover-package__details">
-            <div class="discover-package__headline-container">
-                <ul class="discover-package__versions" :title="`${$t('ui.package.contaoVersion')} ${data.contaoVersions.join(', ')}`" :class="{ 'discover-package__versions--fallback': !data.logo }" v-if="data.contaoVersions">
-                    <li class="discover-package__version" v-for="(version, i) in data.contaoVersions" :key="i">{{ version }}</li>
-                </ul>
-                <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }" :title="data.name !== data.title ? data.name : ''">
-                    <template v-for="(fragment, i) in title.split('%%')">
+        <div class="discover-package__inside">
+            <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
+            <div class="discover-package__details">
+                <div class="discover-package__headline-container">
+                    <ul class="discover-package__versions" :title="`${$t('ui.package.contaoVersion')} ${data.contaoVersions.join(', ')}`" :class="{ 'discover-package__versions--fallback': !data.logo }" v-if="data.contaoVersions">
+                        <li class="discover-package__version" v-for="(version, i) in data.contaoVersions" :key="i">{{ version }}</li>
+                    </ul>
+                    <h1 class="discover-package__headline" :class="{ 'discover-package__headline--fallback': !data.logo }" :title="data.name !== data.title ? data.name : ''">
+                        <template v-for="(fragment, i) in title.split('%%')">
+                            <em :key="i" v-if="i % 2">{{ fragment }}</em>
+                            <template v-else>{{ fragment }}</template>
+                        </template>
+                    </h1>
+                </div>
+                <p class="discover-package__description" :class="{ 'discover-package__description--fallback': !data.logo }">
+                    <template v-for="(fragment, i) in description.split('%%')">
                         <em :key="i" v-if="i % 2">{{ fragment }}</em>
                         <template v-else>{{ fragment }}</template>
                     </template>
-                </h1>
-            </div>
-            <p class="discover-package__description" :class="{ 'discover-package__description--fallback': !data.logo }">
-                <template v-for="(fragment, i) in description.split('%%')">
-                    <em :key="i" v-if="i % 2">{{ fragment }}</em>
-                    <template v-else>{{ fragment }}</template>
-                </template>
-            </p>
-
-            <div class="discover-package__more">
-                <p class="discover-package__counts">
-                    <span class="discover-package__count discover-package__count--private" :title="$t('ui.package.privateTitle')" v-if="data.private">{{ $t('ui.package.private') }}</span>
-                    <span class="discover-package__count discover-package__count--updated" v-if="data.updated">{{ data.updated | datimFormat(false, 'short') }}</span>
-                    <span class="discover-package__count discover-package__count--downloads" v-if="data.downloads">{{ data.downloads | numberFormat }}</span>
-                    <span class="discover-package__count discover-package__count--favers" v-if="data.favers">{{ data.favers | numberFormat }}</span>
                 </p>
-                <div class="discover-package__actions">
-                    <details-button small :name="data.name"/>
-                    <slot/>
+
+                <div class="discover-package__more">
+                    <p class="discover-package__counts">
+                        <span class="discover-package__count discover-package__count--private" :title="$t('ui.package.privateTitle')" v-if="data.private">{{ $t('ui.package.private') }}</span>
+                        <span class="discover-package__count discover-package__count--updated" v-if="data.updated">{{ data.updated | datimFormat(false, 'short') }}</span>
+                        <span class="discover-package__count discover-package__count--downloads" v-if="data.downloads">{{ data.downloads | numberFormat }}</span>
+                        <span class="discover-package__count discover-package__count--favers" v-if="data.favers">{{ data.favers | numberFormat }}</span>
+                    </p>
+                    <div class="discover-package__actions">
+                        <details-button small :name="data.name"/>
+                        <slot name="actions"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,6 +50,7 @@ export default {
 
         props: {
             data: Object,
+            hint: String,
         },
 
         computed: {
@@ -62,12 +67,51 @@ export default {
     $discover-package-padding: 16px;
 
     .discover-package {
+        display: flex;
+        flex-direction: column;
         position: relative;
         overflow: hidden;
-        padding: $discover-package-padding;
         background: var(--tiles-bg);
         border: 1px solid var(--tiles-bdr);
         border-radius: 14px;
+
+        &.is--hint {
+            border-color: var(--border--light);
+
+            .discover-package__inside > * {
+                opacity: 0.65;
+            }
+        }
+
+        &__hint {
+            position: relative;
+            background: var(--border--light);
+            padding: 8px $discover-package-padding;
+            font-weight: $font-weight-medium;
+            font-size: 12px;
+            line-height: 1.2;
+            //border-radius: 14px 14px 0 0;
+            z-index: 1;
+
+            p a {
+                display: inline-block;
+                padding-right: 10px;
+
+                &:first-child {
+                    margin-left: 10px;
+                }
+
+                &:not(:first-child):before {
+                    padding-right: 10px;
+                    content: "|";
+                }
+            }
+        }
+
+        &__inside {
+            flex-grow: 1;
+            padding: $discover-package-padding;
+        }
 
         &__abandoned {
             display: inline-block;
@@ -231,9 +275,11 @@ export default {
         }
 
         @include screen(600) {
-            text-align: initial;
-            display: flex;
-            padding: 0;
+            &__inside {
+                text-align: initial;
+                display: flex;
+                padding: 0;
+            }
 
             &__icon {
                 width: 130px;
