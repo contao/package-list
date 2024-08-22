@@ -175,7 +175,7 @@ export default {
                     }
                 } catch (err) {
                     // eslint-disable-next-line
-                    console.error('Error fetching metadata for '+name, err);
+                    console.info('No package metadata for '+name, err);
                 }
 
                 if (!data) {
