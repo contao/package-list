@@ -37,13 +37,19 @@
                 }
 
                 if (this.support) {
-                    Object.keys(this.support).forEach((key) => {
-                        const label = this.$te(`ui.package-details.support_${key}`) ? this.$t(`ui.package-details.support_${key}`) : key;
+                    Object.keys(this.support).forEach((type) => {
+                        // TODO: this should use $te(...) (from i18n) but that does not seem to work
+                        const key = `ui.package-details.support_${type}`;
+                        let label = this.$t(`ui.package-details.support_${type}`);
 
-                        if (key === 'email') {
-                            items.push({ label, href: `mailto:${this.support[key]}` });
+                        if (label === key) {
+                            label = type;
+                        }
+
+                        if (type === 'email') {
+                            items.push({ label, href: `mailto:${this.support[type]}` });
                         } else {
-                            items.push({ label, href: this.support[key], target: '_blank' });
+                            items.push({ label, href: this.support[type], target: '_blank' });
                         }
                     });
                 }

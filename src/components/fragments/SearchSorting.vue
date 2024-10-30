@@ -2,12 +2,12 @@
     <section class="package-sorting" @click="open = !open">
         <label class="package-sorting__label">{{ $t('ui.discover.sortBy') }}</label>
         <ul class="package-sorting__group" :class="{ 'package-sorting__group--open': open }">
-            <template v-for="(value, label) in sortOptions">
+            <!-- eslint-disable-next-line -->
+            <template v-for="(value, label) in sortOptions" :key="value">
                 <li
                     class="package-sorting__item"
                     :class="{ 'package-sorting__item--active': sorting === value, 'package-sorting__item--open': open }"
                     :title="$t(`ui.discover.sort${label}Title`)"
-                    :key="value"
                     @click="sortBy(value)"
                 >
                     {{ $t(`ui.discover.sort${label}`) }}

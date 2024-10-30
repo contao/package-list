@@ -1,4 +1,4 @@
-import { Http } from 'vue-resource';
+import axios from 'axios';
 import algoliasearch from 'algoliasearch/lite';
 import { coerce, compare } from 'semver';
 import features from './packages/features';
@@ -93,9 +93,9 @@ export default {
 
                 try {
                     if (data && data.private) {
-                        data = Object.assign({}, (await Http.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data, data || {});
+                        data = Object.assign({}, (await axios.get(`https://contao.github.io/package-metadata/meta/${name}/composer.json`)).data, data || {});
                     } else {
-                        let pkg = (await Http.get(`https://packagist.org/packages/${ name }.json`)).data.package;
+                        let pkg = (await axios.get(`https://packagist.org/packages/${ name }.json`)).data.package;
                         let versionsData = [];
                         let versions;
 
@@ -105,7 +105,7 @@ export default {
                         pkg.dependency = true;
 
                         try {
-                            const versions = (await Http.get(`https://repo.packagist.org/p2/${ name }.json`)).data.packages[name];
+                            const versions = (await axios.get(`https://repo.packagist.org/p2/${ name }.json`)).data.packages[name];
 
                             // Data is minified in Composer 2, see https://github.com/composer/metadata-minifier/
                             let expandedVersion = null;

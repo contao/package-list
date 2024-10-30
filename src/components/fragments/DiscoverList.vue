@@ -16,16 +16,16 @@
         </div>
 
         <div v-else-if="isSearching && results && !Object.keys(results).length" class="package-search__status package-search__status--empty">
-            <i18n tag="p" path="ui.discover.empty" class="package-search__title">
+            <i18n-t keypath="ui.discover.empty" tag="p" class="package-search__title">
                 <template #query><i>{{ query }}</i></template>
-            </i18n>
+            </i18n-t>
         </div>
 
         <template v-else-if="isSearching">
             <search-sorting v-if="!query"/>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in results" :data="item" :key="item.name">
-                    <template #hint><slot name="package-hint" :data="item"/></template>
+                    <template #hint v-if="$slots['package-hint']"><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
                 </discover-package>
             </div>
@@ -40,7 +40,7 @@
             <h2 class="package-search__headline">{{ $t('ui.discover.latestPackages') }}</h2>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in discover.latest" :data="item" :key="item.name">
-                    <template #hint><slot name="package-hint" :data="item"/></template>
+                    <template #hint v-if="$slots['package-hint']"><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
                 </discover-package>
             </div>
@@ -51,7 +51,7 @@
             <h2 class="package-search__headline">{{ $t('ui.discover.faversPackages') }}</h2>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in discover.favers" :data="item" :key="item.name">
-                    <template #hint><slot name="package-hint" :data="item"/></template>
+                    <template #hint v-if="$slots['package-hint']"><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
                 </discover-package>
             </div>
@@ -62,7 +62,7 @@
             <h2 class="package-search__headline">{{ $t('ui.discover.downloadsPackages') }}</h2>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in discover.downloads" :data="item" :key="item.name">
-                    <template #hint><slot name="package-hint" :data="item"/></template>
+                    <template #hint v-if="$slots['package-hint']"><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
                 </discover-package>
             </div>

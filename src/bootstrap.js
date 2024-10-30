@@ -1,5 +1,9 @@
+import { createApp, configureCompat } from 'vue';
 
-export default async function(Vue, App, router, store, i18n) {
+configureCompat({ ATTR_FALSE_VALUE: false });
+configureCompat({ RENDER_FUNCTION: false })
+
+export default async function(App, router, store, i18n) {
     await i18n.init();
 
     if (URLSearchParams !== undefined) {
@@ -15,13 +19,13 @@ export default async function(Vue, App, router, store, i18n) {
         }
     }
 
-    /* eslint-disable no-new */
-    const $vue = new Vue({
-        router,
-        store,
-        i18n: i18n.plugin,
-        render: h => h(App),
+    const app = createApp({
+        ...App,
     });
 
-    $vue.$mount('#app');
+    app.use(router);
+    app.use(store);
+    app.use(i18n.plugin);
+
+    app.mount('#app');
 }

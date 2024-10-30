@@ -1,6 +1,3 @@
-import Vue from 'vue';
-import VueResource from 'vue-resource';
-
 import bootstrap from './bootstrap';
 import router from './router';
 import store from './store';
@@ -9,6 +6,4 @@ import './filters';
 
 import App from './components/App';
 
-Vue.use(VueResource);
-
-bootstrap(Vue, App, router, store, i18n);
+bootstrap(App, router, store, i18n);

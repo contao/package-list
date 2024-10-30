@@ -3,10 +3,10 @@
         <div>
             <span>{{ $t('ui.package-details.funding') }}</span>
             <template v-for="(item, i) in items">
-                <a :href="githubUrl(item)" target="_blank" rel="noreferrer noopener" :key="i" v-if="item.type === 'github'">GitHub</a>
-                <a :href="item.url" target="_blank" rel="noreferrer noopener" :key="i" v-else-if="item.type === 'tidelift'">Tidelift</a>
-                <a :href="item.url" target="_blank" rel="noreferrer noopener" :key="i" v-else-if="item.type === 'patreon'">Patreon</a>
-                <a :href="item.url" target="_blank" rel="noreferrer noopener" :key="i" v-else-if="item.type === 'opencollective'">OpenCollective</a>
+                <template v-if="item.type === 'github'"><a :href="githubUrl(item)" target="_blank" rel="noreferrer noopener" :key="i">GitHub</a></template>
+                <template v-else-if="item.type === 'tidelift'"><a :href="item.url" target="_blank" rel="noreferrer noopener" :key="i">Tidelift</a></template>
+                <template v-else-if="item.type === 'patreon'"><a :href="item.url" target="_blank" rel="noreferrer noopener" :key="i">Patreon</a></template>
+                <template v-else-if="item.type === 'opencollective'"><a :href="item.url" target="_blank" rel="noreferrer noopener" :key="i">OpenCollective</a></template>
                 <a :href="item.url" target="_blank" rel="noreferrer noopener" :key="i" v-else>{{ item.url.replace(/^https?:\/\/(www.)?([^/]+).*$/, '$2') }}</a>
             </template>
         </div>

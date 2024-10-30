@@ -1,15 +1,11 @@
 /* eslint-disable no-param-reassign */
 
-import Vue from 'vue';
-import Vuex from 'vuex';
-
-Vue.use(Vuex);
-
+import { createStore } from 'vuex'
 import algolia from './algolia';
 import modals from './modals';
 import packages from './packages';
 
-const store = new Vuex.Store({
+const store = createStore({
     modules: { algolia, modals, packages },
 });
 

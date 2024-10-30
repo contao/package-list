@@ -1,3 +1,5 @@
+import { markRaw } from "vue";
+
 export default {
     namespaced: true,
 
@@ -28,7 +30,7 @@ export default {
                 modals[priority] = {};
             }
 
-            modals[priority][id] = component;
+            modals[priority][id] = markRaw(component);
 
             state.modals = modals;
         },

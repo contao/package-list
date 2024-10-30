@@ -28,20 +28,20 @@
                     <p class="package-popup__authors" v-if="authors">
                         {{ $t('ui.package-details.authors' )}}
                         <template v-for="(author, key) in authors">
-                            <a class="package-popup__author" :key="key" :href="author.homepage" target="_blank" rel="noreferrer noopener" v-if="author.homepage">{{ author.name }}</a>
+                            <template v-if="author.homepage"><a class="package-popup__author" :key="key" :href="author.homepage" target="_blank" rel="noreferrer noopener">{{ author.name }}</a></template>
                             <span class="package-popup__author" :key="key" v-else>{{ author.name }}</span>
                         </template>
                     </p>
                     <p class="package-popup__statistics">
                         <span class="package-popup__stats package-popup__stats--private" :title="$t('ui.package.privateTitle')" v-if="metadata.private">{{ $t('ui.package.private') }}</span>
-                        <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ metadata.updated | datimFormat(false) }}</span>
-                        <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ metadata.downloads | numberFormat }}</span>
-                        <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ metadata.favers | numberFormat }}</span>
+                        <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ datimFormat(metadata.updated, false) }}</span>
+                        <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ numberFormat(metadata.downloads) }}</span>
+                        <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ numberFormat(metadata.favers) }}</span>
                         <more-links :name="metadata.name" :homepage="metadata.homepage" :support="Object.assign({}, metadata.support)" :metadata="metadata.metadata" :hide-packagist="metadata.private"/>
                     </p>
                 </div>
                 <div class="package-popup__actions">
-                    <slot name="package-actions" v-bind="{ data: metadata }">
+                    <slot v-bind="{ data: metadata }" name="package-actions">
                         <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="metadata.homepage" v-if="metadata && metadata.homepage">{{ $t('ui.package.homepage') }}</a>
                         <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="`https://packagist.org/packages/${data.name}`" v-else-if="!metadata.private">{{ $t('ui.package-details.packagist') }}</a>
                     </slot>
@@ -91,40 +91,42 @@
             <details-content v-show="tab === ''">
                 <div class="package-popup__abandoned" v-if="metadata.abandoned">
                     <template v-if="metadata.abandoned === true">{{ $t('ui.package.abandonedText') }}</template>
-                    <i18n v-else :tag="false" path="ui.package.abandonedReplace">
+                    <i18n-t keypath="ui.package.abandonedReplace" v-else>
                         <template #replacement><router-link :to="{ query: { p: metadata.abandoned } }">{{ metadata.abandoned }}</router-link></template>
-                    </i18n>
+                    </i18n-t>
                 </div>
                 <package-funding class="package-popup__funding" :items="metadata.funding" v-if="metadata.funding"/>
                 <slot name="package-update"/>
                 <p v-if="metadata.contaoVersions"><strong>{{ $t('ui.package-details.contaoVersions') }}:</strong> {{ metadata.contaoVersions.join(', ') }}</p>
-                <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ metadata.latest.time | datimFormat('short', 'long') }})</p>
+                <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ datimFormat(metadata.latest.time, 'short', 'long') }})</p>
                 <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
                 <p class="package-popup__description">{{ metadata.description }}</p>
             </details-content>
             <details-content v-show="tab === 'features'" :links="metadata.features" v-if="metadata.features">
-                <slot name="features-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                <template #actions="{ name }"><slot v-bind="{ name }" name="features-actions"/></template>
             </details-content>
             <details-content v-show="tab === 'suggest'" :links="metadata.suggest">
-                <slot name="suggest-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                <template #actions="{ name }"><slot v-bind="{ name }" name="suggest-actions"/></template>
             </details-content>
             <details-content v-show="tab === 'require'" :links="metadata.require">
-                <slot name="require-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                <template #actions="{ name }"><slot v-bind="{ name }" name="require-actions"/></template>
             </details-content>
             <details-content v-show="tab === 'conflict'" :links="metadata.conflict">
-                <slot name="conflict-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                <template #actions="{ name }"><slot v-bind="{ name }" name="conflict-actions"/></template>
             </details-content>
             <details-content v-show="tab === 'dependents'" :links="dependents" v-if="dependents">
-                <slot name="dependents-actions" v-bind="{ name }" slot="actions" slot-scope="{ name }"/>
+                <template #actions="{ name }"><slot v-bind="{ name }" name="dependents-actions"/></template>
             </details-content>
         </template>
     </popup-overlay>
 </template>
 
 <script>
-    import { mapState, mapGetters, mapMutations } from 'vuex';
+    import { mapMutations } from 'vuex';
     import locales from '../../i18n/locales';
     import metadata from '../../mixins/metadata';
+    import datimFormat from '../../filters/datimFormat'
+    import numberFormat from '../../filters/numberFormat'
 
     import PackageLogo from './PackageLogo';
     import LoadingSpinner from './LoadingSpinner';
@@ -151,13 +153,15 @@
         data: () => ({
             appTitle: '',
             links: [],
+            hasPrevious: false,
         }),
 
         computed: {
-            ...mapState('packages/details', ['current']),
-            ...mapGetters('packages/details', ['hasPrevious']),
+            current () {
+                return this.$route.query.p
+            },
 
-            tab: vm => String(vm.$route.hash).substr(1),
+            tab: vm => String(vm.$route.hash).substring(1),
 
             popupClass() {
                 return {
@@ -165,12 +169,7 @@
                 };
             },
 
-            requireCount: vm => vm.metadata.require ? Object.values(vm.metadata.require).length : 0,
-            featuresCount: vm => vm.metadata.features ? vm.metadata.features.length : 0,
-            suggestCount: vm => vm.metadata.suggest ? Object.values(vm.metadata.suggest).length : 0,
-            conflictCount: vm => vm.metadata.conflict ? Object.values(vm.metadata.conflict).length : 0,
-
-            exists: vm => /*vm.installed[vm.current] || */vm.metadata,
+            exists: vm => vm.metadata,
 
             data: vm => vm.local || { name: vm.current },
 
@@ -180,10 +179,12 @@
         },
 
         methods: {
-            ...mapMutations('packages/details', ['clearCurrent', 'popCurrent']),
+            datimFormat,
+            numberFormat,
+            ...mapMutations('packages/details', ['clearCurrent']),
 
             setTab(name) {
-                this.$router.replace({ query: this.$route.query, hash: name, append: true });
+                this.$router.replace({ query: this.$route.query, hash: `#${name}`, append: true });
             },
 
             updatePage() {
@@ -222,6 +223,7 @@
         watch: {
             current() {
                 this.updatePage();
+                this.hasPrevious = /[?&]p=/.test(window.history.state?.back);
             },
 
             exists(exists) {
@@ -250,7 +252,7 @@
             });
         },
 
-        beforeDestroy() {
+        beforeUnmount() {
             document.title = this.appTitle;
 
             document.head.querySelector('meta[name="description"]').setAttribute('content', '');

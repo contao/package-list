@@ -14,9 +14,8 @@
 </template>
 
 <script>
+    import { defineAsyncComponent } from "vue";
     import { mapGetters } from 'vuex';
-
-    import PackageDetails from './fragments/PackageDetails';
 
     export default {
         data: () => ({
@@ -60,8 +59,12 @@
         },
 
         mounted() {
-            this.$store.dispatch('packages/details/init', { vue: this, component: PackageDetails });
             this.initColorMode();
+
+            this.$store.dispatch('packages/details/init', {
+                vue: this,
+                component: defineAsyncComponent(() => import('./fragments/PackageDetails'))
+            });
         },
     };
 </script>

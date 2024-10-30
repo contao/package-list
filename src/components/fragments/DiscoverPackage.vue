@@ -1,7 +1,7 @@
 <template>
     <article class="discover-package" :class="(hint || !!$slots.hint) ? 'is--hint' : ''">
 
-        <div class="discover-package__hint" v-if="hint || !!$slots.hint"><slot name="hint"/></div>
+        <div class="discover-package__hint" v-if="hint || !!$slots.hint"><slot name="hint">{{ hint }}</slot></div>
         <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
         <div class="discover-package__inside">
             <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
@@ -27,9 +27,9 @@
                 <div class="discover-package__more">
                     <p class="discover-package__counts">
                         <span class="discover-package__count discover-package__count--private" :title="$t('ui.package.privateTitle')" v-if="data.private">{{ $t('ui.package.private') }}</span>
-                        <span class="discover-package__count discover-package__count--updated" v-if="data.updated">{{ data.updated | datimFormat(false, 'short') }}</span>
-                        <span class="discover-package__count discover-package__count--downloads" v-if="data.downloads">{{ data.downloads | numberFormat }}</span>
-                        <span class="discover-package__count discover-package__count--favers" v-if="data.favers">{{ data.favers | numberFormat }}</span>
+                        <span class="discover-package__count discover-package__count--updated" v-if="data.updated">{{ datimFormat(data.updated, false, 'short') }}</span>
+                        <span class="discover-package__count discover-package__count--downloads" v-if="data.downloads">{{ numberFormat(data.downloads) }}</span>
+                        <span class="discover-package__count discover-package__count--favers" v-if="data.favers">{{ numberFormat(data.favers) }}</span>
                     </p>
                     <div class="discover-package__actions">
                         <details-button small :name="data.name"/>
@@ -42,23 +42,30 @@
 </template>
 
 <script>
+import datimFormat from '../../filters/datimFormat'
+import numberFormat from '../../filters/numberFormat'
 import PackageLogo from './PackageLogo';
 import DetailsButton from './DetailsButton';
 
 export default {
-        components: { PackageLogo, DetailsButton },
+    components: { PackageLogo, DetailsButton },
 
-        props: {
-            data: Object,
-            hint: String,
-        },
+    props: {
+        data: Object,
+        hint: String,
+    },
 
-        computed: {
-            title: vm => vm.data._highlightResult ? vm.data._highlightResult.title.value : vm.data.title,
-            description: vm => vm.data._highlightResult ? vm.data._highlightResult.description.value : vm.data.description,
-            abandonedText: vm => vm.data.abandoned === true ? vm.$t('ui.package.abandonedText') : vm.$t('ui.package.abandonedReplace', { replacement: vm.data.abandoned }),
-        },
-    };
+    computed: {
+        title: vm => vm.data._highlightResult ? vm.data._highlightResult.title.value : vm.data.title,
+        description: vm => vm.data._highlightResult ? vm.data._highlightResult.description.value : vm.data.description,
+        abandonedText: vm => vm.data.abandoned === true ? vm.$t('ui.package.abandonedText') : vm.$t('ui.package.abandonedReplace', { replacement: vm.data.abandoned }),
+    },
+
+    methods: {
+        datimFormat,
+        numberFormat,
+    }
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss">

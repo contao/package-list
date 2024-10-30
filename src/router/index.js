@@ -1,17 +1,14 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 import DiscoverRoute from '../components/routes/DiscoverRoute';
 
-Vue.use(Router);
-
-const router = new Router({
-    mode: 'history',
+const router = createRouter({
+    history: createWebHistory(),
     routes: [
         {
             path: '/',
             component: DiscoverRoute,
         },
-        { path: '*', redirect: '/' },
+        { path: '/:pathMatch(.*)*', redirect: '/' },
     ],
 });
 

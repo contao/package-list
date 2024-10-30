@@ -3,9 +3,9 @@
         <slot>
             <div class="package-popup__packagelist" v-if="links">
                 <template v-for="(text, name) in iterableLinks">
-                    <slot name="links" v-bind="{ name, text }">
+                    <slot v-bind="{ name, text }" name="links">
                         <package-link :name="name" :key="name" :text="text">
-                            <slot name="actions" v-bind="{ name }"/>
+                            <slot v-bind="{ name }" name="actions"/>
                         </package-link>
                     </slot>
                 </template>
