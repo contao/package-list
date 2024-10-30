@@ -11,15 +11,6 @@
             colorScheme: 'light',
         }),
 
-        computed: {
-            themeOptions() {
-                return {
-                    light: 'Dark Mode',
-                    dark: 'Light Mode'
-                }
-            },
-        },
-
         methods: {
             prefersDark () {
                 const prefersDark = localStorage.getItem('contao--prefers-dark');
@@ -60,30 +51,29 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/defaults";
+@use "../../assets/styles/defaults";
 
-    .theme-switch {
-        position: relative;
-        display: inline-block;
+.theme-switch {
+    position: relative;
+    display: inline-block;
 
-        button {
-            width: auto;
-            height: auto;
-            padding: 0 0 0 24px;
-            background: transparent;
-            color: var(--text);
-            font-size: 12px;
-            font-weight: $font-weight-normal;
-            line-height: 20px;
-            background: var(--svg--color-scheme) left center no-repeat;
-            background-size: 20px 20px;
-            border: none;
-            cursor: pointer;
+    button {
+        width: auto;
+        height: auto;
+        padding: 0 0 0 24px;
+        background: transparent;
+        color: var(--text);
+        font-size: 12px;
+        font-weight: defaults.$font-weight-normal;
+        line-height: 20px;
+        background: var(--svg--color-scheme) left center no-repeat;
+        background-size: 20px 20px;
+        border: none;
+        cursor: pointer;
 
-            &:hover {
-                color: var(--black);
-            }
+        &:hover {
+            color: var(--black);
         }
     }
-
+}
 </style>

@@ -36,80 +36,80 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/defaults";
+@use "../../assets/styles/defaults";
 
-    .package-sorting {
-        margin: 20px 0 15px;
-        text-align: right;
+.package-sorting {
+    margin: 20px 0 15px;
+    text-align: right;
 
-        &__label {
-            display: inline-block;
-            text-transform: uppercase;
+    &__label {
+        display: inline-block;
+        text-transform: uppercase;
 
-            &:after {
-                content: ":";
-            }
+        &:after {
+            content: ":";
+        }
+    }
+
+    &__group {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0 15px 0 0;
+        list-style-type: none;
+        text-align: left;
+
+        &:after {
+            content: "";
+            position: absolute;
+            top: .8em;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #777;
+        }
+    }
+
+    &__item {
+        display: none;
+        margin: 0 0 0 10px;
+        padding: 3px 0;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+
+        &:hover {
+            color: var(--link);
         }
 
+        &--open {
+            display: inline;
+        }
+
+        &--active {
+            display: inline;
+            color: var(--link);
+            border-bottom: 2px solid var(--link);
+        }
+    }
+
+    @include defaults.screen(600) {
         &__group {
-            position: relative;
-            display: inline-flex;
-            flex-direction: column;
-            margin: 0;
-            padding: 0 15px 0 0;
-            list-style-type: none;
-            text-align: left;
+            flex-direction: row;
+            justify-content: flex-end;
+            padding: 0;
 
             &:after {
-                content: "";
-                position: absolute;
-                top: .8em;
-                right: 0;
-                width: 0;
-                height: 0;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                border-top: 5px solid #777;
+                content: none;
             }
         }
 
         &__item {
-            display: none;
-            margin: 0 0 0 10px;
-            padding: 3px 0;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-
-            &:hover {
-                color: var(--link);
-            }
-
-            &--open {
-                display: inline;
-            }
-
-            &--active {
-                display: inline;
-                color: var(--link);
-                border-bottom: 2px solid var(--link);
-            }
-        }
-
-        @include screen(600) {
-            &__group {
-                flex-direction: row;
-                justify-content: flex-end;
-                padding: 0;
-
-                &:after {
-                    content: none;
-                }
-            }
-
-            &__item {
-                display: inline;
-            }
+            display: inline;
         }
     }
+}
 </style>

@@ -60,17 +60,17 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    .loading-button {
-        position: relative;
+.loading-button {
+    position: relative;
 
-        > .loader {
-            position: absolute;
-            left: calc(50% - 25px / 2);
-            top: calc(50% - 25px / 2);
-        }
-
-        > .loading {
-            visibility: hidden;
-        }
+    > .loader {
+        position: absolute;
+        left: calc(50% - 25px / 2);
+        top: calc(50% - 25px / 2);
     }
+
+    > .loading {
+        visibility: hidden;
+    }
+}
 </style>

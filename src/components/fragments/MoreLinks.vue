@@ -85,39 +85,39 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/defaults";
+@use "../../assets/styles/defaults";
 
-    .link-more {
-        position: relative;
-        display: inline-block;
+.link-more {
+    position: relative;
+    display: inline-block;
 
-        p:empty + & {
-            margin-left: 0;
-        }
+    p:empty + & {
+        margin-left: 0;
+    }
 
-        button {
-            width: auto;
-            height: auto;
-            padding: 0 0 5px;
-            background: transparent;
-            color: var(--link);
-            font-size: 13px;
-            font-weight: $font-weight-normal;
-            line-height: inherit;
-            border: none;
-            cursor: pointer;
+    button {
+        width: auto;
+        height: auto;
+        padding: 0 0 5px;
+        background: transparent;
+        color: var(--link);
+        font-size: 13px;
+        font-weight: defaults.$font-weight-normal;
+        line-height: inherit;
+        border: none;
+        cursor: pointer;
 
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-        &__menu {
-            outline: none;
-        }
-
-        ul {
-            transform: translateX(-50%);
+        &:hover {
+            text-decoration: underline;
         }
     }
+
+    &__menu {
+        outline: none;
+    }
+
+    ul {
+        transform: translateX(-50%);
+    }
+}
 </style>

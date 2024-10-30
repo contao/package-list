@@ -73,133 +73,132 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/defaults";
+@use "../../assets/styles/defaults";
 
-    .fragment-footer {
-        clear: both;
-        width: 250px;
-        margin: 10px auto 0;
-        padding: 15px 0;
-        font-size: 12px;
-        text-align: center;
-        border-top: 1px solid var(--footer-bdr);
+.fragment-footer {
+    clear: both;
+    width: 250px;
+    margin: 10px auto 0;
+    padding: 15px 0;
+    font-size: 12px;
+    text-align: center;
+    border-top: 1px solid var(--footer-bdr);
 
-        &--main {
+    &--main {
+        width: auto;
+        margin-top: 52px !important;
+        padding: 20px 0;
+    }
+
+    &:before {
+        content: "";
+        display: table;
+        clear: both
+    }
+
+    &__settings {
+        margin-top: 10px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    &__language {
+        position: relative;
+        display: inline-block;
+
+        button {
             width: auto;
-            margin-top: 52px !important;
-            padding: 20px 0;
+            height: auto;
+            padding: 0 0 0 25px;
+            background: transparent;
+            color: var(--text);
+            font-size: 12px;
+            font-weight: defaults.$font-weight-normal;
+            line-height: 20px;
+            background: var(--svg--language) left center no-repeat;
+            background-size: 20px 20px;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                color: var(--black);
+            }
         }
 
-        &:before {
-            content: "";
-            display: table;
-            clear: both
+        ul {
+            position: absolute;
+            display: block;
+            width: 350px;
+            left: 50%;
+            bottom: 25px;
+            margin: 0;
+            padding: 3px 3px 0;
+            text-align: left;
+            list-style-type: none;
+            white-space: nowrap;
+            background: var(--form-bg);
+            border: 1px solid var(--tiles-bdr);
+            border-bottom: 2px solid var(--contao);
+            transform: translateX(-50%);
+            z-index: 100;
+
+            &:after {
+                position: absolute;
+                left: 50%;
+                bottom: -6px;
+                width: 0;
+                height: 0;
+                margin-left: -4px;
+                border-style: solid;
+                border-width: 4px 3.5px 0 3.5px;
+                border-color: var(--contao) transparent transparent transparent;
+                content: "";
+            }
         }
 
-        &__settings {
-            margin-top: 10px;
-            display: flex;
-            flex-flow: column;
-            justify-content: center;
-            gap: 10px;
-        }
+        li {
+            float: left;
+            width: 50%;
+            margin: 0 0 3px;
+            padding: 0;
 
-        &__language {
-            position: relative;
-            display: inline-block;
-
-            button {
-                width: auto;
-                height: auto;
-                padding: 0 0 0 25px;
-                background: transparent;
+            a {
+                display: block;
+                margin: 0;
+                padding: 5px;
                 color: var(--text);
-                font-size: 12px;
-                font-weight: $font-weight-normal;
-                line-height: 20px;
-                background: var(--svg--language) left center no-repeat;
-                background-size: 20px 20px;
-                border: none;
                 cursor: pointer;
 
+                &.active {
+                    font-weight: defaults.$font-weight-bold;
+                }
+
+                &.active,
                 &:hover {
-                    color: var(--black);
-                }
-            }
-
-            ul {
-                position: absolute;
-                display: block;
-                width: 350px;
-                left: 50%;
-                bottom: 25px;
-                margin: 0;
-                padding: 3px 3px 0;
-                text-align: left;
-                list-style-type: none;
-                white-space: nowrap;
-                background: var(--form-bg);
-                border: 1px solid var(--tiles-bdr);
-                border-bottom: 2px solid var(--contao);
-                transform: translateX(-50%);
-                z-index: 100;
-
-                &:after {
-                    position: absolute;
-                    left: 50%;
-                    bottom: -6px;
-                    width: 0;
-                    height: 0;
-                    margin-left: -4px;
-                    border-style: solid;
-                    border-width: 4px 3.5px 0 3.5px;
-                    border-color: var(--contao) transparent transparent transparent;
-                    content: "";
-                }
-            }
-
-            li {
-                float: left;
-                width: 50%;
-                margin: 0 0 3px;
-                padding: 0;
-
-                a {
-                    display: block;
-                    margin: 0;
-                    padding: 5px;
                     color: var(--text);
-                    cursor: pointer;
-
-                    &.active {
-                        font-weight: $font-weight-bold;
-                    }
-
-                    &.active,
-                    &:hover {
-                        color: var(--text);
-                        background: var(--focus);
-                        text-decoration: none;
-                    }
+                    background: var(--focus);
+                    text-decoration: none;
                 }
-            }
-        }
-
-        @include screen(960) {
-            &--boxed,
-            &--main {
-                .fragment-footer {
-                    &__settings {
-                        flex-flow: row;
-                        margin-top: 0;
-                    }
-                }
-            }
-
-            &--boxed {
-                width: 840px;
             }
         }
     }
 
+    @include defaults.screen(960) {
+        &--boxed,
+        &--main {
+            .fragment-footer {
+                &__settings {
+                    flex-flow: row;
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &--boxed {
+            width: 840px;
+        }
+    }
+}
 </style>

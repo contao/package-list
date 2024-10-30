@@ -1,4 +1,4 @@
-@import "defaults";
+@use "defaults";
 
 .widget {
     position: relative;
@@ -107,7 +107,7 @@ select {
     border: none;
     background-color: var(--btn);
     color: var(--clr-btn);
-    font-weight: $font-weight-bold;
+    font-weight: defaults.$font-weight-bold;
     line-height: 38px;
     text-decoration: none;
     text-align: center;
@@ -137,7 +137,7 @@ select {
         padding: 0 15px;
         font-size: 13px;
         line-height: 28px;
-        font-weight: $font-weight-normal;
+        font-weight: defaults.$font-weight-normal;
 
         &:before,
         > *:before {

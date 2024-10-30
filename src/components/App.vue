@@ -67,24 +67,24 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../assets/styles/defaults";
-    @import "../assets/styles/layout";
-    @import "../assets/styles/animations";
+@use "sass:meta";
+@include meta.load-css("../assets/styles/layout");
+@include meta.load-css("../assets/styles/animations");
 
-    .view-init {
-        display: table;
-        width: 100%;
-        height: 100%;
+.view-init {
+    display: table;
+    width: 100%;
+    height: 100%;
 
-        &__cell {
-            display: table-cell;
-            font-size: 1.5em;
-            text-align: center;
-            vertical-align: middle;
+    &__cell {
+        display: table-cell;
+        font-size: 1.5em;
+        text-align: center;
+        vertical-align: middle;
 
-            p {
-                margin-top: 2em;
-            }
+        p {
+            margin-top: 2em;
         }
     }
+}
 </style>

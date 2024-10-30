@@ -27,17 +27,17 @@
 </script>
 
 <style lang="scss" scoped>
-    .package-logo {
-        &--fallback {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.package-logo {
+    &--fallback {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+}
 
-    svg {
-        width: 80px;
-        height: 80px;
-        fill: #ccc;
-    }
+svg {
+    width: 80px;
+    height: 80px;
+    fill: #ccc;
+}
 </style>

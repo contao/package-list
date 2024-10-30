@@ -31,44 +31,44 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../../assets/styles/defaults";
+@use "../../assets/styles/defaults";
 
-    .package-funding {
-        padding: 10px 20px 10px 50px;
-        font-weight: $font-weight-medium;
-        font-size: 12px;
-        line-height: 1.8;
-        background: rgba(var(--funding-rgb), .025) url('../../assets/images/funding.svg') 15px 50% no-repeat;
-        background-size: 23px 23px;
-        border: 1px solid rgba(var(--funding-rgb), .5);
-        border-radius: 6px;
+.package-funding {
+    padding: 10px 20px 10px 50px;
+    font-weight: defaults.$font-weight-medium;
+    font-size: 12px;
+    line-height: 1.8;
+    background: rgba(var(--funding-rgb), .025) url('../../assets/images/funding.svg') 15px 50% no-repeat;
+    background-size: 23px 23px;
+    border: 1px solid rgba(var(--funding-rgb), .5);
+    border-radius: 6px;
 
-        > div {
-            overflow: hidden;
+    > div {
+        overflow: hidden;
+    }
+
+    span {
+        margin-right: 15px;
+    }
+
+    a {
+        position: relative;
+        display: inline-block;
+        margin: 0 20px 0 0;
+        padding-left: 16px;
+        color: var(--funding);
+        background: url("../../assets/images/link-funding.svg") 0 50% no-repeat;
+        background-size: 13px 13px;
+
+        &:before {
+            content: "|";
+            position: absolute;
+            left: -12px;
         }
 
-        span {
-            margin-right: 15px;
-        }
-
-        a {
-            position: relative;
-            display: inline-block;
-            margin: 0 20px 0 0;
-            padding-left: 16px;
-            color: var(--funding);
-            background: url("../../assets/images/link-funding.svg") 0 50% no-repeat;
-            background-size: 13px 13px;
-
-            &:before {
-                content: "|";
-                position: absolute;
-                left: -12px;
-            }
-
-            &:nth-child(2):before {
-                content: none;
-            }
+        &:nth-child(2):before {
+            content: none;
         }
     }
+}
 </style>

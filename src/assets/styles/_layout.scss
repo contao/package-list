@@ -1,4 +1,132 @@
-@import "defaults";
+@use "sass:color";
+@use "sass:meta";
+@use "defaults";
+
+// Custom properties
+:root {
+    --text: #535353;
+    --link: #f47c00;
+    --body-bg: #ebe6db;
+    --link-footer: #2a7887;
+
+    --tiles-bg: #fff;
+    --tiles-bdr: #ddd3bc;
+
+    --popup-hl-bg: #f47c00;
+    --popup-bg: #fff;
+    --popup-header: #fff;
+    --popup-overlay-bg: rgba(235,230,219,.35);
+    --tab-content: #f8f9fb;
+
+    --highlight-bg: #ffff00;
+    --highlight-color: #535353;
+
+    --shadow: #ccbfa2;
+    --contao: #f47c00;
+
+    --badge-bg: var(--contao);
+
+    --ad-shadow: #{0 1px 5px 1px rgba(0, 0, 0, 0.2)};
+
+    --black: #000;
+    --funding: #ea4aaa;
+    --funding-rgb: #{color.channel(#ea4aaa, "red", $space: rgb), color.channel(#ea4aaa, "green", $space: rgb), color.channel(#ea4aaa, "blue", $space: rgb)};
+
+    --form-bg: #fff;
+    --border: #cccccc;
+    --border--light: #e9eef1;
+    --focus: #f9f9f9;
+
+    --clr-btn: #fff;
+    --btn: #737373;
+    --btn-active: #{color.adjust(#737373, $lightness: -5%)};
+    --btn-primary: #31a64b;
+    --btn-primary-active: #{color.adjust(#31a64b, $lightness: -5%)};
+    --btn-warning: #db8c41;
+    --btn-warning-active: #{color.adjust(#db8c41, $lightness: -5%)};
+    --btn-alert: #db5041;
+    --btn-alert-active: #{color.adjust(#db5041, $lightness: -5%)};
+    --btn-info: #6a8ca6;
+    --btn-info-active: #{color.adjust(#6a8ca6, $lightness: -5%)};
+    --btn-funding: #ea4aaa;
+    --btn-funding-active: #{color.adjust(#ea4aaa, $lightness: -5%)};
+    --btn-disabled: #ccc;
+
+    --hint-bg: #e8c8bc;
+    --hint-rgb: #{color.channel(#e8c8bc, "red", $space: rgb), color.channel(#e8c8bc, "green", $space: rgb), color.channel(#e8c8bc, "blue", $space: rgb)};
+    --hint-link: #bd2e20;
+
+    --header-bg: #e5dfcf;
+    --header-bdr: #dcd8cc;
+    --footer-bdr: #bbbbbb;
+
+    --svg--link-blank: url(~@/assets/images/link-blank.svg);
+    --svg--private: url(~@/assets/images/private.svg);
+    --svg--updated: url(~@/assets/images/updated.svg);
+    --svg--downloads: url(~@/assets/images/downloads.svg);
+    --svg--favers: url(~@/assets/images/favers.svg);
+    --svg--language: url(~@/assets/images/language.svg);
+    --svg--color-scheme: url(~@/assets/images/color_scheme.svg);
+}
+
+// Dark-mode
+html[data-color-scheme=dark] {
+    --text: #ddd;
+    --link: #f47c00;
+    --body-bg: #0f0f11;
+    --link-footer: #fff;
+
+    --tiles-bg: #212227;
+    --tiles-bdr: #303236;
+
+    --popup-hl-bg: #292c32;
+    --popup-bg: #1b1d21;
+    --popup-overlay-bg: rgba(0,0,0,.35);
+    --tab-content: #212227;
+
+    --highlight-bg: #f47c00;
+    --highlight-color: #fff;
+
+    --shadow: transparent;
+
+    --badge-bg: var(--border--light);
+
+    --ad-shadow: none;
+
+    --btn: #3c3f4c;
+    --btn-active: #25272f;
+
+    --black: #fff;
+
+    --form-bg: #151619;
+    --border: #44464b;
+    --border--light: #2e2e34;
+    --focus: #1e2024;
+
+    --btn-info: #25455f;
+    --btn-info-active: #253846;
+    --btn-disabled: #151517;
+    --opacity-disabled: 0.5;
+
+    --hint-rgb: 57, 9, 20;
+
+    --header-bg: #1b1d21;
+    --header-bdr: #1b1d21;
+    --footer-bdr: #414448;
+
+    --svg--link-blank: url(~@/assets/images/link-blank--dark.svg);
+    --svg--private: url(~@/assets/images/private--dark.svg);
+    --svg--updated: url(~@/assets/images/updated--dark.svg);
+    --svg--downloads: url(~@/assets/images/downloads--dark.svg);
+    --svg--favers: url(~@/assets/images/favers--dark.svg);
+    --svg--language: url(~@/assets/images/language--dark.svg);
+    --svg--color-scheme: url(~@/assets/images/color_scheme--dark.svg);
+
+    #contao-network {
+        background: #292c32 !important;
+        color: #ddd !important;
+    }
+}
 
 html {
     box-sizing: border-box;
@@ -63,16 +191,16 @@ img, svg {
 
 
 body, input, textarea, button {
-    font: $font-weight-normal 14px/1.4 $font-sans-serif;
+    font: defaults.$font-weight-normal 14px/1.4 defaults.$font-sans-serif;
     color: var(--text);;
 }
 
 strong {
-    font-weight: $font-weight-bold;
+    font-weight: defaults.$font-weight-bold;
 }
 
 code {
-    font-family: $font-monospace;
+    font-family: defaults.$font-monospace;
 }
 
 select, input, textarea {
@@ -123,7 +251,7 @@ select, input, textarea {
 h1, h2, h3, h4, h5, h6 {
     font-size: inherit;
     line-height: inherit;
-    font-weight: $font-weight-bold;
+    font-weight: defaults.$font-weight-bold;
     margin: 0;
 }
 
@@ -157,4 +285,4 @@ h1 {
     }
 }
 
-@import "forms";
+@include meta.load-css("forms");

@@ -222,95 +222,94 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/defaults";
+@use "../../assets/styles/defaults";
 
-    .package-search {
-        position: relative;
+.package-search {
+    position: relative;
 
-        &__input {
-            max-width: 400px;
-            margin: 0 20px;
+    &__input {
+        max-width: 400px;
+        margin: 0 20px;
 
-            @include screen(1024) {
-                margin-right: 0;
-            }
-        }
-
-        &__headline {
-            font-size: 18px;
-            font-weight: $font-weight-normal;
-            margin: 30px 0 10px;
-        }
-
-        &__results {
-            display: grid;
-            gap: 20px;
-            margin-bottom: 20px;
-
-            @include screen(1024) {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        &__status {
-            margin: 100px 0;
-            text-align: center;
-            font-size: 20px;
-            line-height: 1.5em;
-
-            &--empty {
-                padding-top: 140px;
-                background: url('../../assets/images/sad.svg') top center no-repeat;
-                background-size: 100px 100px;
-            }
-
-            &--offline {
-                padding-top: 140px;
-                background: url('../../assets/images/offline.svg') top center no-repeat;
-                background-size: 100px 100px;
-            }
-
-            &--loader {
-                .sk-circle {
-                    width: 100px;
-                    height: 100px;
-                    margin: 0 auto 40px;
-                }
-            }
-
-            button {
-                margin-top: 2em;
-            }
-        }
-
-        &__explain {
-            font-size: 16px;
-        }
-
-        &__more {
-            margin: 10px 0 30px;
-            text-align: center;
-
-            &-button {
-                display: inline-block;
-                margin: 0 auto;
-                padding: 0;
-                text-transform: uppercase;
-                background: none;
-                border: none;
-                cursor: pointer;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-
-        &__algolia {
-            display: block;
-            width: 200px;
-            margin: 50px auto 0;
+        @include defaults.screen(1024) {
+            margin-right: 0;
         }
     }
 
+    &__headline {
+        font-size: 18px;
+        font-weight: defaults.$font-weight-normal;
+        margin: 30px 0 10px;
+    }
+
+    &__results {
+        display: grid;
+        gap: 20px;
+        margin-bottom: 20px;
+
+        @include defaults.screen(1024) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__status {
+        margin: 100px 0;
+        text-align: center;
+        font-size: 20px;
+        line-height: 1.5em;
+
+        &--empty {
+            padding-top: 140px;
+            background: url('../../assets/images/sad.svg') top center no-repeat;
+            background-size: 100px 100px;
+        }
+
+        &--offline {
+            padding-top: 140px;
+            background: url('../../assets/images/offline.svg') top center no-repeat;
+            background-size: 100px 100px;
+        }
+
+        &--loader {
+            .sk-circle {
+                width: 100px;
+                height: 100px;
+                margin: 0 auto 40px;
+            }
+        }
+
+        button {
+            margin-top: 2em;
+        }
+    }
+
+    &__explain {
+        font-size: 16px;
+    }
+
+    &__more {
+        margin: 10px 0 30px;
+        text-align: center;
+
+        &-button {
+            display: inline-block;
+            margin: 0 auto;
+            padding: 0;
+            text-transform: uppercase;
+            background: none;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__algolia {
+        display: block;
+        width: 200px;
+        margin: 50px auto 0;
+    }
+}
 </style>

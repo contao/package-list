@@ -32,69 +32,70 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/defaults";
+@use "../../assets/styles/defaults";
 
-    .package-link {
+.package-link {
+    display: flex;
+    column-gap: 8px;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--border--light);
+
+    &:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+
+    &__details {
+        padding: 5px 0;
+        line-height: 18px;
+    }
+
+    &__name {
+        display: inline;
+        font-weight: defaults.$font-weight-bold;
+
+        &:after {
+            content: ": ";
+        }
+    }
+
+    &__text {
+        display: inline;
+    }
+
+    &__actions {
         display: flex;
-        column-gap: 8px;
-        justify-content: space-between;
-        width: 100%;
-        padding-bottom: 4px;
-        margin-bottom: 4px;
-        border-bottom: 1px solid var(--border--light);
+        margin-left: 20px;
+        margin: 0 -4px;
 
-        &:last-child {
-            padding-bottom: 0;
-            margin-bottom: 0;
-            border-bottom: none;
+        > * {
+            margin: 0 4px;
         }
+    }
 
-        &__details {
-            padding: 5px 0;
-            line-height: 18px;
-        }
-
-        &__name {
-            display: inline;
-            font-weight: $font-weight-bold;
-
-            &:after {
-                content: ": ";
+    &--limit {
+        .package-link {
+            &__details {
+                display: flex;
             }
-        }
 
-        &__text {
-            display: inline;
-        }
-
-        &__actions {
-            display: flex;
-            margin-left: 20px;
-            margin: 0 -4px;
-
-            > * {
-                margin: 0 4px;
+            &__name {
+                white-space: nowrap;
             }
-        }
 
-        &--limit {
-            .package-link {
-                &__details {
-                    display: flex;
-                }
-
-                &__name {
-                    white-space: nowrap;
-                }
-
-                &__text {
-                    display: -webkit-box;
-                    overflow: hidden;
-                    -webkit-line-clamp: 1;
-                    -webkit-box-orient: vertical;
-                    padding: 0 10px 0 5px;
-                }
+            &__text {
+                display: -webkit-box;
+                overflow: hidden;
+                line-clamp: 1;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                padding: 0 10px 0 5px;
             }
         }
     }
+}
 </style>

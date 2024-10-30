@@ -30,31 +30,29 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/defaults";
+.search-bar {
+    position: relative;
 
-    .search-bar {
-        position: relative;
-
-        &__input {
-            height: 50px !important;
-            padding-right: 45px !important;
-            border-radius: 50px !important;
-        }
-
-        &__button {
-            position: absolute;
-            top: 0;
-            right: 5px;
-            display: flex;
-            align-items: center;
-            width: 38px;
-            height: 50px;
-            margin: 0;
-            padding: 7px;
-            line-height: 36px;
-            border: none;
-            background: none;
-            outline: none;
-        }
+    &__input {
+        height: 50px !important;
+        padding-right: 45px !important;
+        border-radius: 50px !important;
     }
+
+    &__button {
+        position: absolute;
+        top: 0;
+        right: 5px;
+        display: flex;
+        align-items: center;
+        width: 38px;
+        height: 50px;
+        margin: 0;
+        padding: 7px;
+        line-height: 36px;
+        border: none;
+        background: none;
+        outline: none;
+    }
+}
 </style>

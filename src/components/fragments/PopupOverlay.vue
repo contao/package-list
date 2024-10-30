@@ -25,17 +25,17 @@
 </script>
 
 <style lang="scss">
-    @import "../../assets/styles/defaults";
+@use "../../assets/styles/defaults";
 
-    .popup-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 1000;
-        background: var(--popup-overlay-bg);
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--popup-overlay-bg);
 
-        @include screen(960) {
-            padding: 20px 0;
-            overflow-y: auto;
-        }
+    @include defaults.screen(960) {
+        padding: 20px 0;
+        overflow-y: auto;
     }
+}
 </style>
