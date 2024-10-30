@@ -1,7 +1,4 @@
-import { createApp, configureCompat } from 'vue';
-
-configureCompat({ ATTR_FALSE_VALUE: false });
-configureCompat({ RENDER_FUNCTION: false })
+import { createApp } from 'vue';
 
 export default async function(App, router, store, i18n) {
     await i18n.init();
