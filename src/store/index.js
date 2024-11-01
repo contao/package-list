@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import { createStore } from 'vuex'
 import algolia from './algolia';
 import modals from './modals';
