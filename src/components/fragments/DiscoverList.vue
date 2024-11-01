@@ -25,7 +25,7 @@
             <search-sorting v-if="!query"/>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in results" :data="item" :key="item.name">
-                    <template #hint v-if="$slots['package-hint']"><slot name="package-hint" :data="item"/></template>
+                    <template #hint><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
                 </discover-package>
             </div>
@@ -40,7 +40,7 @@
             <h2 class="package-search__headline">{{ $t('ui.discover.latestPackages') }}</h2>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in discover.latest" :data="item" :key="item.name">
-                    <template #hint v-if="$slots['package-hint']"><slot name="package-hint" :data="item"/></template>
+                    <template #hint><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
                 </discover-package>
             </div>
@@ -51,7 +51,7 @@
             <h2 class="package-search__headline">{{ $t('ui.discover.faversPackages') }}</h2>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in discover.favers" :data="item" :key="item.name">
-                    <template #hint v-if="$slots['package-hint']"><slot name="package-hint" :data="item"/></template>
+                    <template #hint><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
                 </discover-package>
             </div>
@@ -62,7 +62,7 @@
             <h2 class="package-search__headline">{{ $t('ui.discover.downloadsPackages') }}</h2>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in discover.downloads" :data="item" :key="item.name">
-                    <template #hint v-if="$slots['package-hint']"><slot name="package-hint" :data="item"/></template>
+                    <template #hint><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
                 </discover-package>
             </div>

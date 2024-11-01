@@ -157,10 +157,7 @@
         }),
 
         computed: {
-            current () {
-                return this.$route.query.p
-            },
-
+            current: vm => vm.$route.query.p,
             tab: vm => String(vm.$route.hash).substring(1),
 
             popupClass() {

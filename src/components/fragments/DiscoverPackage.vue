@@ -2,8 +2,8 @@
     <article class="discover-package" :class="(hint || !slotEmpty($slots.hint)) ? 'is--hint' : ''">
 
         <div class="discover-package__hint" v-if="hint || !slotEmpty($slots.hint)"><slot name="hint">{{ hint }}</slot></div>
-        <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
         <div class="discover-package__inside">
+            <div class="discover-package__abandoned" :title="abandonedText" v-if="data.abandoned">{{ $t('ui.package.abandoned') }}</div>
             <package-logo class="discover-package__icon" :class="{ 'discover-package__icon--fallback': !data.logo }" :src="data.logo"/>
             <div class="discover-package__details">
                 <div class="discover-package__headline-container">
