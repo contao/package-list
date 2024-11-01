@@ -1,5 +1,11 @@
 @use "defaults";
 
+$icons: (
+    'details',
+    'link',
+    'search',
+) !default;
+
 .widget {
     position: relative;
 
@@ -160,11 +166,6 @@ select {
     }
 
     $iconSelector: '.icon-selector';
-    $icons: (
-        'details',
-        'link',
-        'search',
-    ) !default;
 
     @each $buttonIcon in $icons {
         $iconSelector: "#{$iconSelector}, &--#{$buttonIcon}";

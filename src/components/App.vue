@@ -70,9 +70,9 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-@use "sass:meta";
-@include meta.load-css("../assets/styles/layout");
-@include meta.load-css("../assets/styles/animations");
+@use "../assets/styles/layout";
+@use "../assets/styles/forms";
+@use "../assets/styles/animations";
 
 .view-init {
     display: table;

@@ -1,5 +1,4 @@
 @use "sass:color";
-@use "sass:meta";
 @use "defaults";
 
 // Custom properties
@@ -284,5 +283,3 @@ h1 {
         left: 0;
     }
 }
-
-@include meta.load-css("forms");
