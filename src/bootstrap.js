@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-export default async function(App, router, store, i18n) {
+export default async function(App, i18n, ...plugins) {
     await i18n.init();
 
     if (URLSearchParams !== undefined) {
@@ -20,9 +20,11 @@ export default async function(App, router, store, i18n) {
         ...App,
     });
 
-    app.use(router);
-    app.use(store);
     app.use(i18n.plugin);
+
+    plugins.forEach((plugin) => {
+        app.use(plugin)
+    })
 
     app.mount('#app');
 }
