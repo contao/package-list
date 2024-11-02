@@ -26,5 +26,5 @@ export default async function(App, i18n, ...plugins) {
         app.use(plugin)
     })
 
-    app.mount('#app');
+    app.mount('body');
 }
