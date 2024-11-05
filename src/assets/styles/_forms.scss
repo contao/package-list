@@ -53,6 +53,11 @@ $icons: (
     input:focus + &__error {
         display: block;
     }
+
+    &__description {
+        margin-top: 2px;
+        font-size: 12px;
+    }
 }
 
 input:not([type=checkbox]):not([type=radio]),
@@ -219,6 +224,25 @@ select {
 
     &.disabled {
         pointer-events: none;
+    }
+
+    &--anchor {
+        height: auto;
+        background: none !important;
+        line-height: inherit;
+        font-weight: inherit;
+        color: var(--link);
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline !important;
+        }
+
+        &:disabled,
+        &.disabled {
+            background: none !important;
+        }
     }
 }
 
