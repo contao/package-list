@@ -5,4 +5,4 @@ import i18n from './i18n';
 
 import App from './components/App';
 
-bootstrap(App, i18n, router, store);
+bootstrap(App, i18n, [router, store]);
