@@ -12,7 +12,6 @@ $icons: (
     &__error {
         display: none;
         position: absolute;
-        bottom: -6px;
         left: 0;
         right: 0;
         margin: 0;
@@ -20,13 +19,13 @@ $icons: (
         color: var(--clr-btn);
         background: var(--btn-alert);
         border-radius: 2px;
-        transform: translateY(100%);
+        transform: translateY(6px);
         z-index: 10;
         white-space: pre-line;
 
         &:after, &:before {
             bottom: 100%;
-            left: 50%;
+            left: 30px;
             border: solid transparent;
             content: " ";
             height: 0;
