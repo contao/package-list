@@ -34,7 +34,7 @@
     "ui.package.abandoned": "niet meer ondersteund",
     "ui.package.abandonedText": "Dit pakket wordt niet langer ondersteund en onderhouden.",
     "ui.package.abandonedReplace": "Dit pakket wordt niet langer ondersteund en onderhouden. De auteur stelt voor om in plaats daarvan het {vervangend} pakket te gebruiken.",
-    "ui.package.contaoVersion": "Available for Contao",
+    "ui.package.contaoVersion": "Beschikbaar voor Contao",
 
     "ui.package-details.previous": "Vorige Extensie Details",
     "ui.package-details.close": "Sluit Extensie Details",
@@ -50,7 +50,7 @@
     "ui.package-details.linkProvides": "biedt",
     "ui.package-details.linkConflicts": "conflicten",
     "ui.package-details.funding": "Fund package maintenance!",
-    "ui.package-details.contaoVersions": "Supported Contao version(s)",
+    "ui.package-details.contaoVersions": "Ondersteunde Contao versie(s)",
     "ui.package-details.latest": "Laatste versie",
     "ui.package-details.released": "uitgebracht op",
     "ui.package-details.license": "Licentie(s)",
