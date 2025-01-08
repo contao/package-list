@@ -19,14 +19,14 @@ export default {
                 query.sort = this.sorting;
             }
 
-            this.$router.push({ query, append: true });
+            this.$router.push({ query, append: true }).catch(()=>{});
         },
 
         stopSearch(e) {
             const route = Object.assign({}, this.$route);
             delete route.query;
 
-            this.$router.push(route);
+            this.$router.push(route).catch(()=>{});
 
             if (e && e.target) {
                 e.target.blur();
@@ -34,7 +34,7 @@ export default {
         },
 
         sortBy(sort) {
-            this.$router.push({ query: Object.assign({}, this.$route.query, { sort })});
+            this.$router.push({ query: Object.assign({}, this.$route.query, { sort })}).catch(()=>{});
         },
 
         loadMore(e) {
