@@ -3,7 +3,6 @@
     "description": "The Contao Package List",
     "license": "GPL-3.0+",
     "private": true,
-    "version": "2.0.0",
     "homepage": "https://github.com/contao/package-list",
     "scripts": {
         "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
@@ -59,9 +58,7 @@
         }
     },
     "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not ie <= 8"
+        "defaults"
     ],
-    "packageManager": "yarn@3.4.1+sha512.a333bf9c2557d71f5ba87dd1446cde24bb9c35301ec29dd2baba577b3f9d1ab61348b66a1324de9088c40a996c5b9203794da8bf14cab9fae6a6eccc00cb8078"
+    "packageManager": "npm@10.8.2"
 }
