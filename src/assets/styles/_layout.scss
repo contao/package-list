@@ -70,6 +70,7 @@
 
 // Dark-mode
 html[data-color-scheme=dark] {
+    color-scheme: dark;
     --text: #ddd;
     --link: #f47c00;
     --body-bg: #0f0f11;
