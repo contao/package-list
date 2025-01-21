@@ -49,7 +49,9 @@ $icons: (
 
     select:hover + &__error,
     input:hover + &__error,
-    input:focus + &__error {
+    input:focus + &__error,
+    input:hover + * + &__error,
+    input:focus + * + &__error {
         display: block;
     }
 
