@@ -1,18 +1,9 @@
 import axios from 'axios';
-import algoliasearch from 'algoliasearch/lite';
+import { liteClient } from 'algoliasearch/lite';
 import { coerce, compare } from 'semver';
 import features from './packages/features';
 
-const client = algoliasearch('60DW2LJW0P', '13718a23f4e436f7e7614340bd87d913');
-const indexes = {};
-
-const algolia = (name = 'v3_packages') => {
-    if (!indexes[name]) {
-        indexes[name] = client.initIndex(name);
-    }
-
-    return indexes[name];
-};
+const client = liteClient('60DW2LJW0P', '13718a23f4e436f7e7614340bd87d913');
 
 const randomizeHits = (hits, limit = 6) => {
     const items = Array.from(hits);
@@ -79,13 +70,16 @@ export default {
                 let data = null;
 
                 try {
-                    const content = await algolia().search('', {
-                        filters: `name:"${name}" AND languages:${state.language}`,
-                        hitsPerPage: 1,
-                    });
+                    const content = await client.search([{
+                        indexName: 'v3_packages',
+                        params: {
+                            filters: `name:"${ name }" AND languages:${ state.language }`,
+                            hitsPerPage: 1,
+                        },
+                    }]);
 
-                    if (content.nbHits > 0) {
-                        data = content.hits[0];
+                    if (content.results[0].nbHits > 0) {
+                        data = content.results[0].hits[0];
                     }
                 } catch (err) {
                     // ignore
@@ -217,7 +211,10 @@ export default {
             params.highlightPreTag = '%%';
             params.highlightPostTag = '%%';
 
-            return await algolia(`v3_packages${suffix}`).search('', params);
+            return (await client.search([{
+                indexName: `v3_packages${suffix}`,
+                params,
+            }])).results[0];
         },
 
         async discover({ state, commit }) {
