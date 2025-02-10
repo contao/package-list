@@ -192,7 +192,7 @@ export default {
             return data;
         },
 
-        async findPackages({ state }, params) {
+        async findPackages({ state, dispatch }, params) {
             let suffix = '';
             let filter = 'dependency:false';
 
@@ -211,10 +211,25 @@ export default {
             params.highlightPreTag = '%%';
             params.highlightPostTag = '%%';
 
-            return (await client.search([{
+            const response = (await client.search([{
                 indexName: `v3_packages${suffix}`,
                 params,
             }])).results[0];
+
+            if (response.nbHits > 0) {
+                return response;
+            }
+
+            const pkg = await dispatch('getPackage', params.query);
+
+            if (pkg) {
+                return {
+                    nbHits: 1,
+                    hits: [pkg]
+                }
+            }
+
+            return response;
         },
 
         async discover({ state, commit }) {

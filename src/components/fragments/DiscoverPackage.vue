@@ -57,7 +57,7 @@ export default {
     },
 
     computed: {
-        title: vm => vm.data._highlightResult ? vm.data._highlightResult.title.value : vm.data.title,
+        title: vm => vm.data._highlightResult ? vm.data._highlightResult.title.value : (vm.data.title || vm.data.name),
         description: vm => vm.data._highlightResult ? vm.data._highlightResult.description.value : vm.data.description,
         abandonedText: vm => vm.data.abandoned === true ? vm.$t('ui.package.abandonedText') : vm.$t('ui.package.abandonedReplace', { replacement: vm.data.abandoned }),
     },
