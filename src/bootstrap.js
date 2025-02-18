@@ -12,7 +12,7 @@ export default async function(App, i18n, plugins, install = () => {}) {
             // window.location.search = params.toString();
             const url = new URL(location.pathname, location);
             url.search = params.toString();
-            history.replaceState(null, '', url.toString())
+            history.replaceState(history.state, '', url.toString())
         }
     }
 
