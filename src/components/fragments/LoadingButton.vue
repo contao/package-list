@@ -20,6 +20,8 @@
     export default {
         components: { LoadingSpinner },
 
+        emits: ['click', 'mouseover', 'mouseout'],
+
         props: {
             href: String,
             to: [String, Object],

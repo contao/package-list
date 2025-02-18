@@ -25,6 +25,8 @@
 
 <script>
     export default {
+        emits: ['submit'],
+
         props: {
             fixed: Boolean,
             popupClass: [String, Object],

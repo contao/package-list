@@ -13,6 +13,8 @@
 
 <script>
     export default {
+        emits: ['click'],
+
         props: {
             active: Boolean,
             showEmpty: Boolean,
