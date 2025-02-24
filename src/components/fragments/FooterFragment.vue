@@ -3,9 +3,9 @@
         <div class="fragment-footer__settings">
             <div ref="languages" class="fragment-footer__language">
                 <button :title="$t('ui.app.language')" @click="toggle">{{ languageOptions[currentLanguage] }}</button>
-                <ul class="link-more__menu" ref="menu" v-show="visible" tabindex="-1" @blur="close" @click="close">
+                <ul class="link-more__menu" ref="menu" v-show="visible" tabindex="-1" @focusout="close" @click="close">
                     <li v-for="(label, code) in languageOptions" :key="code">
-                        <a :class="{ active: code === currentLanguage }" @click="updateLanguage(code)" @touchstart.stop="">{{ label }}</a>
+                        <button :class="{ active: code === currentLanguage }" @click="updateLanguage(code)" @touchstart.stop="">{{ label }}</button>
                     </li>
                 </ul>
             </div>
@@ -47,18 +47,18 @@
 
             open() {
                 this.visible = true;
-                window.addEventListener('click', this.closeOutside)
+                setTimeout(() => this.$refs.menu?.focus(), 0);
             },
 
-            close() {
-                this.visible = false;
-                window.removeEventListener('click', this.closeOutside)
-            },
-
-            closeOutside(event) {
-                if (this.$refs.languages && !this.$refs.languages.contains(event.target)) {
-                    this.close();
+            close(event) {
+                if (event && this.$refs.menu?.contains(event.relatedTarget)) {
+                    return;
                 }
+
+                this.$refs.menu.blur();
+                setTimeout(() => {
+                    this.visible = false;
+                }, 100);
             },
 
             toggle() {
@@ -108,7 +108,7 @@
         position: relative;
         display: inline-block;
 
-        button {
+        > button {
             width: auto;
             height: auto;
             padding: 0 0 0 25px;
@@ -141,6 +141,7 @@
             background: var(--form-bg);
             border: 1px solid var(--tiles-bdr);
             border-bottom: 2px solid var(--contao);
+            outline: none;
             transform: translateX(-50%);
             z-index: 100;
 
@@ -164,11 +165,16 @@
             margin: 0 0 3px;
             padding: 0;
 
-            a {
+            button {
                 display: block;
+                width: 100%;
                 margin: 0;
                 padding: 5px;
                 color: var(--text);
+                font-size: inherit;
+                text-align: left;
+                background: none;
+                border: none;
                 cursor: pointer;
 
                 &.active {

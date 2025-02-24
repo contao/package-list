@@ -7,10 +7,11 @@
                 <li
                     class="package-sorting__item"
                     :class="{ 'package-sorting__item--active': sorting === value, 'package-sorting__item--open': open }"
-                    :title="$t(`ui.discover.sort${label}Title`)"
-                    @click="sortBy(value)"
                 >
-                    {{ $t(`ui.discover.sort${label}`) }}
+                    <button
+                        :title="$t(`ui.discover.sort${label}Title`)"
+                        @click="sortBy(value)"
+                    >{{ $t(`ui.discover.sort${label}`) }}</button>
                 </li>
             </template>
         </ul>
@@ -77,8 +78,6 @@
         display: none;
         margin: 0 0 0 10px;
         padding: 3px 0;
-        text-transform: uppercase;
-        cursor: pointer;
         border-bottom: 2px solid transparent;
 
         &:hover {
@@ -93,6 +92,15 @@
             display: inline;
             color: var(--link);
             border-bottom: 2px solid var(--link);
+        }
+
+        button {
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: none;
+            text-transform: uppercase;
+            cursor: pointer;
         }
     }
 

@@ -1,6 +1,9 @@
 <template>
     <ul :class="cssClass">
-        <li v-for="(item, k) in items" :key="k" class="link-menu__item"><a class="link-menu__action" :href="item.href" :target="item.target" @click="event => click(event, item)">{{ item.label }}</a></li>
+        <li v-for="(item, k) in items" :key="k" class="link-menu__item">
+            <a class="link-menu__action" :href="item.href" :target="item.target" @click="event => click(event, item)" v-if="item.href">{{ item.label }}</a>
+            <button class="link-menu__action" @click="event => click(event, item)" v-else>{{ item.label }}</button>
+        </li>
     </ul>
 </template>
 
@@ -159,10 +162,15 @@
 
     &__action {
         display: block;
+        width: calc(100% - 4px);
         margin: 2px;
         border-radius: 5px;
         padding: 8px 16px;
         color: var(--text);
+        font-size: inherit;
+        text-align: center;
+        background: none;
+        border: none;
         cursor: pointer;
 
         &:hover {

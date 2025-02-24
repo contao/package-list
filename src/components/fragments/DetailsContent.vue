@@ -1,5 +1,5 @@
 <template>
-    <div class="package-popup__tabcontent">
+    <div class="package-popup__tabcontent" v-show="active" tabindex="-1">
         <slot>
             <div class="package-popup__packagelist" v-if="links">
                 <template v-for="(text, name) in iterableLinks">
@@ -21,6 +21,7 @@
         components: { PackageLink },
 
         props: {
+            active: Boolean,
             links: [Object, Array],
         },
 
@@ -39,5 +40,11 @@
                 return this.links;
             }
         },
+
+        watch: {
+            active() {
+                setTimeout(() => { this.$el.focus() }, 0);
+            }
+        }
     };
 </script>

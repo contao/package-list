@@ -1,7 +1,7 @@
 <template>
-    <div ref="menu" class="link-more" v-if="linkItems.length">
+    <div class="link-more" v-if="linkItems.length">
         <button @click="toggle">{{ $t('ui.package-details.more') }}</button>
-        <div class="link-more__menu" v-if="visible" tabindex="-1" @click="close">
+        <div ref="menu" class="link-more__menu" v-if="visible" tabindex="-1" @focusout="close" @click="close">
             <link-menu :items="linkItems" color="contao"/>
         </div>
     </div>
@@ -65,18 +65,18 @@
         methods: {
             open() {
                 this.visible = true;
-                window.addEventListener('click', this.closeOutside)
+                setTimeout(() => this.$refs.menu?.focus(), 0);
             },
 
-            close() {
-                this.visible = false;
-                window.removeEventListener('click', this.closeOutside)
-            },
-
-            closeOutside(event) {
-                if (this.$refs.menu && !this.$refs.menu.contains(event.target)) {
-                    this.close();
+            close(event) {
+                if (event && this.$refs.menu?.contains(event.relatedTarget)) {
+                    return;
                 }
+
+                this.$refs.menu.blur();
+                setTimeout(() => {
+                    this.visible = false;
+                }, 100);
             },
 
             toggle() {
