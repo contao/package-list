@@ -45,38 +45,48 @@
     };
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss">
 @use "../../assets/styles/defaults";
-
-img {
-    width: 100%;
-    aspect-ratio: 2; // For aligning images that are slightly smaller e.g. "0.1-Theme"
-}
 
 .ads {
     @include defaults.screen(1200) {
         margin: 59px 0 69px;
     }
-}
 
-.link {
-    padding-top: 5px;
-    text-align: right;
+    .link {
+        padding-top: 5px;
+        text-align: right;
 
-    a {
-        padding-left: 16px;
-        font-size: .8em;
-        color: inherit;
-        background: var(--svg--link-blank) left center no-repeat;
-        background-size: 13px 13px;
+        a {
+            padding-left: 16px;
+            font-size: .8em;
+            color: inherit;
+            background: var(--svg--link-blank) left center no-repeat;
+            background-size: 13px 13px;
+        }
+    }
+
+    .container {
+        position: relative;
+        background: var(--popup-bg);
+        box-shadow: var(--ad-shadow);
+        border-radius: 14px;
+        overflow: hidden;
+
+        a,
+        img {
+            display: block;
+        }
+
+        img {
+            width: 100%;
+            aspect-ratio: 2; // For aligning images that are slightly smaller e.g. "0.1-Theme"
+        }
     }
 }
 
-.container {
-    position: relative;
-    background: var(--popup-bg);
-    box-shadow: var(--ad-shadow);
-    border-radius: 14px;
-    overflow: hidden;
+.vueperslides__arrow:focus-visible {
+    outline: 5px auto Highlight !important;
+    outline: 5px auto -webkit-focus-ring-color !important;
 }
 </style>
