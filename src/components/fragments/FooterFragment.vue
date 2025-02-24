@@ -1,15 +1,8 @@
 <template>
     <footer :class="'fragment-footer' + (display ? (' fragment-footer--'+display) : '')">
         <div class="fragment-footer__settings">
-            <div ref="languages" class="fragment-footer__language">
-                <button :title="$t('ui.app.language')" @click="toggle">{{ languageOptions[currentLanguage] }}</button>
-                <ul class="link-more__menu" ref="menu" v-show="visible" tabindex="-1" @focusout="close" @click="close">
-                    <li v-for="(label, code) in languageOptions" :key="code">
-                        <button :class="{ active: code === currentLanguage }" @click="updateLanguage(code)" @touchstart.stop="">{{ label }}</button>
-                    </li>
-                </ul>
-            </div>
-            <theme-toggle></theme-toggle>
+            <footer-languages :locales="languageOptions" :current="currentLanguage" @change="updateLanguage"/>
+            <theme-toggle/>
         </div>
     </footer>
 </template>
@@ -17,10 +10,11 @@
 <script>
     import i18n from '../../i18n';
     import locales from '../../i18n/locales';
+    import FooterLanguages from './FooterLanguages.vue';
     import ThemeToggle from './ThemeToggle.vue';
 
     export default {
-        components: { ThemeToggle },
+        components: { FooterLanguages, ThemeToggle },
 
         props: {
             display: String,
@@ -43,30 +37,6 @@
         methods: {
             updateLanguage(value) {
                 i18n.switch(value);
-            },
-
-            open() {
-                this.visible = true;
-                setTimeout(() => this.$refs.menu?.focus(), 0);
-            },
-
-            close(event) {
-                if (event && this.$refs.menu?.contains(event.relatedTarget)) {
-                    return;
-                }
-
-                this.$refs.menu.blur();
-                setTimeout(() => {
-                    this.visible = false;
-                }, 100);
-            },
-
-            toggle() {
-                if (this.visible) {
-                    this.close();
-                } else {
-                    this.open();
-                }
             },
         },
     };
@@ -102,93 +72,6 @@
         flex-flow: column;
         justify-content: center;
         gap: 10px;
-    }
-
-    &__language {
-        position: relative;
-        display: inline-block;
-
-        > button {
-            width: auto;
-            height: auto;
-            padding: 0 0 0 25px;
-            background: transparent;
-            color: var(--text);
-            font-size: 12px;
-            font-weight: defaults.$font-weight-normal;
-            line-height: 20px;
-            background: var(--svg--language) left center no-repeat;
-            background-size: 20px 20px;
-            border: none;
-            cursor: pointer;
-
-            &:hover {
-                color: var(--black);
-            }
-        }
-
-        ul {
-            position: absolute;
-            display: block;
-            width: 350px;
-            left: 50%;
-            bottom: 25px;
-            margin: 0;
-            padding: 3px 3px 0;
-            text-align: left;
-            list-style-type: none;
-            white-space: nowrap;
-            background: var(--form-bg);
-            border: 1px solid var(--tiles-bdr);
-            border-bottom: 2px solid var(--contao);
-            outline: none;
-            transform: translateX(-50%);
-            z-index: 100;
-
-            &:after {
-                position: absolute;
-                left: 50%;
-                bottom: -6px;
-                width: 0;
-                height: 0;
-                margin-left: -4px;
-                border-style: solid;
-                border-width: 4px 3.5px 0 3.5px;
-                border-color: var(--contao) transparent transparent transparent;
-                content: "";
-            }
-        }
-
-        li {
-            float: left;
-            width: 50%;
-            margin: 0 0 3px;
-            padding: 0;
-
-            button {
-                display: block;
-                width: 100%;
-                margin: 0;
-                padding: 5px;
-                color: var(--text);
-                font-size: inherit;
-                text-align: left;
-                background: none;
-                border: none;
-                cursor: pointer;
-
-                &.active {
-                    font-weight: defaults.$font-weight-bold;
-                }
-
-                &.active,
-                &:hover {
-                    color: var(--text);
-                    background: var(--focus);
-                    text-decoration: none;
-                }
-            }
-        }
     }
 
     @include defaults.screen(960) {

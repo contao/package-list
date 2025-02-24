@@ -1,8 +1,8 @@
 <template>
-    <ul :class="cssClass">
+    <ul ref="menu" :class="cssClass">
         <li v-for="(item, k) in items" :key="k" class="link-menu__item">
-            <a class="link-menu__action" :href="item.href" :target="item.target" @click="event => click(event, item)" v-if="item.href">{{ item.label }}</a>
-            <button class="link-menu__action" @click="event => click(event, item)" v-else>{{ item.label }}</button>
+            <a class="link-menu__action" :class="{ 'link-menu__action--active': item.active }" :href="item.href" :target="item.target" @click="event => click(event, item)" v-if="item.href">{{ item.label }}</a>
+            <button class="link-menu__action" :class="{ 'link-menu__action--active': item.active }" @click="event => click(event, item)" v-else>{{ item.label }}</button>
         </li>
     </ul>
 </template>
@@ -29,6 +29,18 @@
         },
 
         methods: {
+            focus() {
+                this.$refs.menu?.focus();
+            },
+
+            blur() {
+                this.$refs.menu?.blur();
+            },
+
+            contains(el) {
+                return this.$refs.menu.contains(el);
+            },
+
             click(event, item) {
                 if (item.action) {
                     event.preventDefault();
@@ -40,12 +52,16 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
+@use "../../assets/styles/defaults";
+
 .link-menu {
     position: absolute;
-    display: block;
+    display: grid;
+    grid-template: 1fr / 1fr;
     left: 50%;
+    gap: 2px;
     margin: 0;
-    padding: 0;
+    padding: 2px;
     text-align: center;
     list-style-type: none;
     white-space: nowrap;
@@ -54,6 +70,7 @@
     border-radius: 5px;
     z-index: 100;
     box-shadow: 0 0 1px var(--shadow);
+    outline: none;
 
     &:before {
         position: absolute;
@@ -162,8 +179,7 @@
 
     &__action {
         display: block;
-        width: calc(100% - 4px);
-        margin: 2px;
+        width: 100%;
         border-radius: 5px;
         padding: 8px 16px;
         color: var(--text);
@@ -177,6 +193,11 @@
             color: var(--text);
             background: var(--focus);
             text-decoration: none;
+        }
+
+        &--active {
+            font-weight: defaults.$font-weight-bold;
+            background: var(--focus);
         }
     }
 }
