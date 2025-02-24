@@ -1,128 +1,126 @@
 <template>
-    <focus-trap :active="true" :escape-deactivates="true" @deactivate="clearCurrent()">
-        <popup-overlay :fixed="true" popup-class="package-popup" tabindex="-1" @clear="clearCurrent()">
-            <template #content>
-                <div class="package-popup__headline">
-                    <button class="package-popup__button package-popup__button--previous" :title="$t('ui.package-details.previous')" @click="$router.go(-1)" v-if="hasPrevious">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0z" fill="none"/><path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
-                        </svg>
-                    </button>
-                    {{ data.name }}
-                    <button class="package-popup__button package-popup__button--close" :title="$t('ui.package-details.close')" @click="clearCurrent()">
-                        <svg height="24" viewBox="0 0 24 24" width="24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                            <path d="M0 0h24v24H0z" fill="none"/>
-                        </svg>
-                    </button>
-                </div>
+    <popup-overlay :fixed="true" popup-class="package-popup" tabindex="-1" @clear="clearCurrent()">
+        <template #content>
+            <div class="package-popup__headline">
+                <button class="package-popup__button package-popup__button--previous" :title="$t('ui.package-details.previous')" @click="$router.go(-1)" v-if="hasPrevious">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/><path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
+                    </svg>
+                </button>
+                {{ data.name }}
+                <button class="package-popup__button package-popup__button--close" :title="$t('ui.package-details.close')" @click="clearCurrent()">
+                    <svg height="24" viewBox="0 0 24 24" width="24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                    </svg>
+                </button>
+            </div>
 
-                <div class="package-popup__loader" v-if="!metadata || !metadata.hasOwnProperty('name')">
-                    <loading-spinner horizontal/>
-                    <p>{{ $t('ui.package-details.loading') }}</p>
-                </div>
-                <template v-else>
+            <div class="package-popup__loader" v-if="!metadata || !metadata.hasOwnProperty('name')">
+                <loading-spinner horizontal/>
+                <p>{{ $t('ui.package-details.loading') }}</p>
+            </div>
+            <template v-else>
 
-                    <div class="package-popup__summary">
-                        <package-logo class="package-popup__logo" component-class="package-popup__icon" :src="metadata.logo"/>
-                        <div class="package-popup__text">
-                            <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
-                            <p class="package-popup__authors" v-if="authors">
-                                {{ $t('ui.package-details.authors' )}}
-                                <template v-for="(author, key) in authors">
-                                    <template v-if="author.homepage"><a class="package-popup__author" :key="key" :href="author.homepage" target="_blank" rel="noreferrer noopener">{{ author.name }}</a></template>
-                                    <span class="package-popup__author" :key="key" v-else>{{ author.name }}</span>
-                                </template>
-                            </p>
-                            <p class="package-popup__statistics">
-                                <span class="package-popup__stats package-popup__stats--private" :title="$t('ui.package.privateTitle')" v-if="metadata.private">{{ $t('ui.package.private') }}</span>
-                                <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ datimFormat(metadata.updated, false) }}</span>
-                                <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ numberFormat(metadata.downloads) }}</span>
-                                <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ numberFormat(metadata.favers) }}</span>
-                                <more-links :name="metadata.name" :homepage="metadata.homepage" :support="Object.assign({}, metadata.support)" :metadata="metadata.metadata" :hide-packagist="metadata.private"/>
-                            </p>
-                        </div>
-                        <div class="package-popup__actions">
-                            <slot v-bind="{ data: metadata }" name="package-actions">
-                                <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="metadata.homepage" v-if="metadata && metadata.homepage">{{ $t('ui.package.homepage') }}</a>
-                                <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="`https://packagist.org/packages/${data.name}`" v-else-if="!metadata.private">{{ $t('ui.package-details.packagist') }}</a>
-                            </slot>
-                        </div>
+                <div class="package-popup__summary">
+                    <package-logo class="package-popup__logo" component-class="package-popup__icon" :src="metadata.logo"/>
+                    <div class="package-popup__text">
+                        <h1 class="package-popup__title">{{ metadata.title || data.name }}</h1>
+                        <p class="package-popup__authors" v-if="authors">
+                            {{ $t('ui.package-details.authors' )}}
+                            <template v-for="(author, key) in authors">
+                                <template v-if="author.homepage"><a class="package-popup__author" :key="key" :href="author.homepage" target="_blank" rel="noreferrer noopener">{{ author.name }}</a></template>
+                                <span class="package-popup__author" :key="key" v-else>{{ author.name }}</span>
+                            </template>
+                        </p>
+                        <p class="package-popup__statistics">
+                            <span class="package-popup__stats package-popup__stats--private" :title="$t('ui.package.privateTitle')" v-if="metadata.private">{{ $t('ui.package.private') }}</span>
+                            <span class="package-popup__stats package-popup__stats--updated" v-if="metadata.updated">{{ datimFormat(metadata.updated, false) }}</span>
+                            <span class="package-popup__stats package-popup__stats--downloads" v-if="metadata.downloads > 0">{{ numberFormat(metadata.downloads) }}</span>
+                            <span class="package-popup__stats package-popup__stats--favers" v-if="metadata.favers > 0">{{ numberFormat(metadata.favers) }}</span>
+                            <more-links :name="metadata.name" :homepage="metadata.homepage" :support="Object.assign({}, metadata.support)" :metadata="metadata.metadata" :hide-packagist="metadata.private"/>
+                        </p>
                     </div>
-                    <div class="package-popup__tabs">
-                        <ul class="package-popup__tabs-list">
-                            <details-tab
-                                show-empty
-                                :links="false"
-                                :active="tab === ''"
-                                @click="setTab('')"
-                            >{{ $t('ui.package-details.tabDescription') }}</details-tab>
-                            <details-tab
-                                highlight
-                                :links="metadata.features"
-                                :active="tab === 'features'"
-                                @click="setTab('features')"
-                                v-if="metadata.features"
-                            >{{ $t('ui.package-details.tabFeatures') }}</details-tab>
-                            <details-tab
-                                highlight
-                                :active="tab === 'suggest'"
-                                :links="metadata.suggest"
-                                @click="setTab('suggest')"
-                            >{{ $t('ui.package-details.tabSuggest') }}</details-tab>
-                            <details-tab
-                                show-empty
-                                :active="tab === 'require'"
-                                :links="metadata.require"
-                                @click="setTab('require')"
-                            >{{ $t('ui.package-details.tabRequire') }}</details-tab>
-                            <details-tab
-                                show-empty
-                                :active="tab === 'conflict'"
-                                :links="metadata.conflict"
-                                @click="setTab('conflict')"
-                            >{{ $t('ui.package-details.tabConflict') }}</details-tab>
-                            <details-tab
-                                :active="tab === 'dependents'"
-                                :links="dependents"
-                                @click="setTab('dependents')"
-                                v-if="dependents"
-                            >{{ $t('ui.package-details.tabDependents') }}</details-tab>
-                        </ul>
+                    <div class="package-popup__actions">
+                        <slot v-bind="{ data: metadata }" name="package-actions">
+                            <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="metadata.homepage" v-if="metadata && metadata.homepage">{{ $t('ui.package.homepage') }}</a>
+                            <a class="widget-button widget-button--primary widget-button--link" target="_blank" :href="`https://packagist.org/packages/${data.name}`" v-else-if="!metadata.private">{{ $t('ui.package-details.packagist') }}</a>
+                        </slot>
                     </div>
-                    <details-content :active="tab === ''">
-                        <div class="package-popup__abandoned" v-if="metadata.abandoned">
-                            <template v-if="metadata.abandoned === true">{{ $t('ui.package.abandonedText') }}</template>
-                            <i18n-t keypath="ui.package.abandonedReplace" v-else>
-                                <template #replacement><router-link :to="{ query: { p: metadata.abandoned } }">{{ metadata.abandoned }}</router-link></template>
-                            </i18n-t>
-                        </div>
-                        <package-funding class="package-popup__funding" :items="metadata.funding" v-if="metadata.funding"/>
-                        <slot name="package-update"/>
-                        <p v-if="metadata.contaoVersions"><strong>{{ $t('ui.package-details.contaoVersions') }}:</strong> {{ metadata.contaoVersions.join(', ') }}</p>
-                        <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ datimFormat(metadata.latest.time, 'short', 'long') }})</p>
-                        <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
-                        <p class="package-popup__description">{{ metadata.description }}</p>
-                    </details-content>
-                    <details-content :active="tab === 'features'" :links="metadata.features" v-if="metadata.features">
-                        <template #actions="{ name }"><slot v-bind="{ name }" name="features-actions"/></template>
-                    </details-content>
-                    <details-content :active="tab === 'suggest'" :links="metadata.suggest">
-                        <template #actions="{ name }"><slot v-bind="{ name }" name="suggest-actions"/></template>
-                    </details-content>
-                    <details-content :active="tab === 'require'" :links="metadata.require">
-                        <template #actions="{ name }"><slot v-bind="{ name }" name="require-actions"/></template>
-                    </details-content>
-                    <details-content :active="tab === 'conflict'" :links="metadata.conflict">
-                        <template #actions="{ name }"><slot v-bind="{ name }" name="conflict-actions"/></template>
-                    </details-content>
-                    <details-content :active="tab === 'dependents'" :links="dependents" v-if="dependents">
-                        <template #actions="{ name }"><slot v-bind="{ name }" name="dependents-actions"/></template>
-                    </details-content>
-                </template>
+                </div>
+                <div class="package-popup__tabs">
+                    <ul class="package-popup__tabs-list">
+                        <details-tab
+                            show-empty
+                            :links="false"
+                            :active="tab === ''"
+                            @click="setTab('')"
+                        >{{ $t('ui.package-details.tabDescription') }}</details-tab>
+                        <details-tab
+                            highlight
+                            :links="metadata.features"
+                            :active="tab === 'features'"
+                            @click="setTab('features')"
+                            v-if="metadata.features"
+                        >{{ $t('ui.package-details.tabFeatures') }}</details-tab>
+                        <details-tab
+                            highlight
+                            :active="tab === 'suggest'"
+                            :links="metadata.suggest"
+                            @click="setTab('suggest')"
+                        >{{ $t('ui.package-details.tabSuggest') }}</details-tab>
+                        <details-tab
+                            show-empty
+                            :active="tab === 'require'"
+                            :links="metadata.require"
+                            @click="setTab('require')"
+                        >{{ $t('ui.package-details.tabRequire') }}</details-tab>
+                        <details-tab
+                            show-empty
+                            :active="tab === 'conflict'"
+                            :links="metadata.conflict"
+                            @click="setTab('conflict')"
+                        >{{ $t('ui.package-details.tabConflict') }}</details-tab>
+                        <details-tab
+                            :active="tab === 'dependents'"
+                            :links="dependents"
+                            @click="setTab('dependents')"
+                            v-if="dependents"
+                        >{{ $t('ui.package-details.tabDependents') }}</details-tab>
+                    </ul>
+                </div>
+                <details-content :active="tab === ''">
+                    <div class="package-popup__abandoned" v-if="metadata.abandoned">
+                        <template v-if="metadata.abandoned === true">{{ $t('ui.package.abandonedText') }}</template>
+                        <i18n-t keypath="ui.package.abandonedReplace" v-else>
+                            <template #replacement><router-link :to="{ query: { p: metadata.abandoned } }">{{ metadata.abandoned }}</router-link></template>
+                        </i18n-t>
+                    </div>
+                    <package-funding class="package-popup__funding" :items="metadata.funding" v-if="metadata.funding"/>
+                    <slot name="package-update"/>
+                    <p v-if="metadata.contaoVersions"><strong>{{ $t('ui.package-details.contaoVersions') }}:</strong> {{ metadata.contaoVersions.join(', ') }}</p>
+                    <p v-if="metadata.latest"><strong>{{ $t('ui.package-details.latest') }}:</strong> {{ metadata.latest.version}} ({{ $t('ui.package-details.released') }} {{ datimFormat(metadata.latest.time, 'short', 'long') }})</p>
+                    <p v-if="metadata.license"><strong>{{ $t('ui.package-details.license') }}:</strong> {{ license }}</p>
+                    <p class="package-popup__description">{{ metadata.description }}</p>
+                </details-content>
+                <details-content :active="tab === 'features'" :links="metadata.features" v-if="metadata.features">
+                    <template #actions="{ name }"><slot v-bind="{ name }" name="features-actions"/></template>
+                </details-content>
+                <details-content :active="tab === 'suggest'" :links="metadata.suggest">
+                    <template #actions="{ name }"><slot v-bind="{ name }" name="suggest-actions"/></template>
+                </details-content>
+                <details-content :active="tab === 'require'" :links="metadata.require">
+                    <template #actions="{ name }"><slot v-bind="{ name }" name="require-actions"/></template>
+                </details-content>
+                <details-content :active="tab === 'conflict'" :links="metadata.conflict">
+                    <template #actions="{ name }"><slot v-bind="{ name }" name="conflict-actions"/></template>
+                </details-content>
+                <details-content :active="tab === 'dependents'" :links="dependents" v-if="dependents">
+                    <template #actions="{ name }"><slot v-bind="{ name }" name="dependents-actions"/></template>
+                </details-content>
             </template>
-        </popup-overlay>
-    </focus-trap>
+        </template>
+    </popup-overlay>
 </template>
 
 <script>
@@ -132,7 +130,6 @@
     import datimFormat from '../../filters/datimFormat'
     import numberFormat from '../../filters/numberFormat'
 
-    import { FocusTrap } from 'focus-trap-vue'
     import PackageLogo from './PackageLogo';
     import LoadingSpinner from './LoadingSpinner';
     import MoreLinks from './MoreLinks';
@@ -144,7 +141,7 @@
     export default {
         mixins: [metadata],
 
-        components: { FocusTrap, PopupOverlay, MoreLinks, LoadingSpinner, PackageLogo, PackageFunding, DetailsTab, DetailsContent },
+        components: { PopupOverlay, MoreLinks, LoadingSpinner, PackageLogo, PackageFunding, DetailsTab, DetailsContent },
 
         props: {
             local: {

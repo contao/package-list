@@ -1,30 +1,36 @@
 <template>
-    <div class="popup-overlay" @click="clearCurrent">
-        <div ref="popup" :class="`popup-overlay__popup ${popupClass}`">
-            <slot name="content">
-                <form @submit.prevent="$emit('submit')">
-                    <template v-if="headline || $slots.headline">
-                        <slot name="headline">
-                            <h1
-                                class="popup-overlay__headline"
-                                :class="{ [`popup-overlay__headline--${headlineType}`]: !!headlineType }"
-                            >{{ headline }}</h1>
-                        </slot>
-                    </template>
-                    <div class="popup-overlay__content">
-                        <slot/>
-                    </div>
-                    <div class="popup-overlay__actions" v-if="$slots.actions">
-                        <slot name="actions"/>
-                    </div>
-                </form>
-            </slot>
+    <focus-trap :active="true" :escape-deactivates="true" @deactivate="clearCurrent()">
+        <div class="popup-overlay" @click="clearCurrent">
+            <div ref="popup" :class="`popup-overlay__popup ${popupClass}`">
+                <slot name="content">
+                    <form @submit.prevent="$emit('submit')">
+                        <template v-if="headline || $slots.headline">
+                            <slot name="headline">
+                                <h1
+                                    class="popup-overlay__headline"
+                                    :class="{ [`popup-overlay__headline--${headlineType}`]: !!headlineType }"
+                                >{{ headline }}</h1>
+                            </slot>
+                        </template>
+                        <div class="popup-overlay__content">
+                            <slot/>
+                        </div>
+                        <div class="popup-overlay__actions" v-if="$slots.actions">
+                            <slot name="actions"/>
+                        </div>
+                    </form>
+                </slot>
+            </div>
         </div>
-    </div>
+    </focus-trap>
 </template>
 
 <script>
+    import { FocusTrap } from 'focus-trap-vue'
+
     export default {
+        components: { FocusTrap },
+
         emits: ['submit'],
 
         props: {
@@ -38,7 +44,7 @@
             clearCurrent(event) {
                 // Clicking the details link of a new package removes the button from the DOM,
                 // so the event target would not be in the popup anymore
-                if (this.$refs.popup && !this.$refs.popup.contains(event.target) && document.body.contains(event.target)) {
+                if (!event || (this.$refs.popup && !this.$refs.popup.contains(event.target) && document.body.contains(event.target))) {
                     this.$emit('clear');
                 }
             },
