@@ -608,6 +608,7 @@
         margin-left: -375px;
         height: auto;
         border-radius: 8px;
+        transform: none;
 
         &__headline {
             border-radius: 8px 8px 0 0;
