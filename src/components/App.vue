@@ -7,7 +7,7 @@
             </div>
         </div>
         <template v-else>
-            <router-view :class="hasModal ? 'animate-blur-in' : 'animate-blur-out'"/>
+            <router-view :class="hasModal ? 'animate-blur-in' : 'animate-blur-out'" :inert="hasModal"/>
             <component :is="currentModal" v-if="hasModal"/>
         </template>
     </div>

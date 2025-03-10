@@ -1,5 +1,5 @@
 <template>
-    <div class="layout-main">
+    <div class="layout-main" data-nosnippet>
         <header class="layout-main__header" :class="{ 'layout-main__header--margin': !$slots.subheader }">
             <div class="layout-main__header-inside">
                 <router-link to="/" class="layout-main__logo">
