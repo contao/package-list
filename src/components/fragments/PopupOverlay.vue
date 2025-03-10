@@ -1,7 +1,7 @@
 <template>
-    <focus-trap :active="true" :escape-deactivates="true" @deactivate="clearCurrent()">
+    <focus-trap :active="true" fallback-focus=".popup-overlay__popup" :escape-deactivates="true" @deactivate="clearCurrent()">
         <div class="popup-overlay" @click="clearCurrent">
-            <div ref="popup" :class="`popup-overlay__popup ${popupClass}`">
+            <div ref="popup" class="popup-overlay__popup" :class="{ [popupClass]: !!popupClass }" tabindex="-1">
                 <slot name="content">
                     <form @submit.prevent="$emit('submit')">
                         <template v-if="headline || $slots.headline">
@@ -35,7 +35,7 @@
 
         props: {
             fixed: Boolean,
-            popupClass: [String, Object],
+            popupClass: [String, Object, null],
             headline: String,
             headlineType: String,
         },
