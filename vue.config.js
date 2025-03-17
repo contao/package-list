@@ -4,27 +4,34 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 module.exports = {
     productionSourceMap: false,
 
-    configureWebpack: () => {
-        return {
-            output: {
-                crossOriginLoading: 'anonymous',
-            },
+    configureWebpack: (config) => {
+        // Inject "resolve-url-loader" to fix relative paths of images in SCSS
+        config.module.rules.forEach((rule) => {
+            // noinspection EqualityComparisonWithCoercionJS
+            if (rule.test == '/\\.scss$/') {
+                rule.oneOf.forEach((oneOf) => {
+                    oneOf.use[oneOf.use.length -1].options.sourceMap = true;
+                    oneOf.use.splice(oneOf.use.length - 2, 1, {
+                        loader: 'resolve-url-loader',
+                        options: { sourceMap: false },
+                    });
+                });
+            }
+        });
 
-            plugins: [
-                new SubresourceIntegrityPlugin(),
-                new FaviconsWebpackPlugin({
-                    logo: './src/assets/images/logo.svg',
-                    favicons: {
-                        appName: 'Contao Extensions',
-                        appDescription: 'The official list of extensions for the Contao Open Source CMS.',
-                        background: '#ffffff',
-                        theme_color: '#ffffff',
-                        lang: null,
-                        start_url: '/',
-                    }
-                }),
-            ],
-        };
+        config.output.crossOriginLoading = 'anonymous';
+        config.plugins.push(new SubresourceIntegrityPlugin());
+        config.plugins.push(new FaviconsWebpackPlugin({
+            logo: './src/assets/images/logo.svg',
+            favicons: {
+                appName: 'Contao Extensions',
+                appDescription: 'The official list of extensions for the Contao Open Source CMS.',
+                background: '#ffffff',
+                theme_color: '#ffffff',
+                lang: null,
+                start_url: '/',
+            }
+        }));
     },
 
     chainWebpack: config => {
@@ -35,7 +42,7 @@ module.exports = {
                 __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
             })
             return definitions
-        })
+        });
 
         config
             .module

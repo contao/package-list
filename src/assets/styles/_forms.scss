@@ -177,7 +177,7 @@ select {
         $iconSelector: "#{$iconSelector}, &--#{$buttonIcon}";
 
         &--#{$buttonIcon}:before {
-            background-image: url('../assets/images/button-#{$buttonIcon}.svg');
+            background-image: url('../images/button-#{$buttonIcon}.svg');
         }
     }
 

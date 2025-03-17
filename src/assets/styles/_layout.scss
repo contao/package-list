@@ -60,13 +60,13 @@
     --header-bdr: #dcd8cc;
     --footer-bdr: #bbbbbb;
 
-    --svg--link-blank: url(~@/assets/images/link-blank.svg);
-    --svg--private: url(~@/assets/images/private.svg);
-    --svg--updated: url(~@/assets/images/updated.svg);
-    --svg--downloads: url(~@/assets/images/downloads.svg);
-    --svg--favers: url(~@/assets/images/favers.svg);
-    --svg--language: url(~@/assets/images/language.svg);
-    --svg--color-scheme: url(~@/assets/images/color_scheme.svg);
+    --svg--link-blank: url(../images/link-blank.svg);
+    --svg--private: url(../images/private.svg);
+    --svg--updated: url(../images/updated.svg);
+    --svg--downloads: url(../images/downloads.svg);
+    --svg--favers: url(../images/favers.svg);
+    --svg--language: url(../images/language.svg);
+    --svg--color-scheme: url(../images/color_scheme.svg);
 }
 
 // Dark-mode
@@ -115,13 +115,13 @@ html[data-color-scheme=dark] {
     --header-bdr: #1b1d21;
     --footer-bdr: #414448;
 
-    --svg--link-blank: url(~@/assets/images/link-blank--dark.svg);
-    --svg--private: url(~@/assets/images/private--dark.svg);
-    --svg--updated: url(~@/assets/images/updated--dark.svg);
-    --svg--downloads: url(~@/assets/images/downloads--dark.svg);
-    --svg--favers: url(~@/assets/images/favers--dark.svg);
-    --svg--language: url(~@/assets/images/language--dark.svg);
-    --svg--color-scheme: url(~@/assets/images/color_scheme--dark.svg);
+    --svg--link-blank: url(../images/link-blank--dark.svg);
+    --svg--private: url(../images/private--dark.svg);
+    --svg--updated: url(../images/updated--dark.svg);
+    --svg--downloads: url(../images/downloads--dark.svg);
+    --svg--favers: url(../images/favers--dark.svg);
+    --svg--language: url(../images/language--dark.svg);
+    --svg--color-scheme: url(../images/color_scheme--dark.svg);
 
     #contao-network {
         background: #292c32 !important;
