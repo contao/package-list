@@ -31,7 +31,7 @@
     export default {
         components: { FocusTrap },
 
-        emits: ['submit'],
+        emits: ['submit', 'clear'],
 
         props: {
             fixed: Boolean,
