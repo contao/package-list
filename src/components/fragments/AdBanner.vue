@@ -15,7 +15,7 @@
             >
                 <vueper-slide v-for="ad in ads" :key="ad.objectID">
                     <template #content>
-                        <a href="#" :title="ad.title" @click.stop="setCurrent(ad.package)" v-if="ad.package"><img :src="ad.image" alt=""></a>
+                        <a :href="$router.resolve({ query: { p: ad.package } }).href" :title="ad.title" @click.prevent="setCurrent(ad.package)" v-if="ad.package"><img :src="ad.image" alt=""></a>
                         <a :href="ad.url" :title="ad.title" target="_blank" rel="noreferrer noopener" v-else><img :src="ad.image" alt=""></a>
                     </template>
                 </vueper-slide>
