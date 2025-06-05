@@ -23,6 +23,16 @@
 
         <template v-else-if="isSearching">
             <search-sorting v-if="!query"/>
+            <template v-if="exactHit">
+                <h2 class="package-search__headline">{{ $t('ui.discover.exactHit') }}</h2>
+                <div class="package-search__results">
+                    <discover-package class="package-search__item" :data="exactHit">
+                        <template #hint><slot name="package-hint" :data="exactHit"/></template>
+                        <template #actions><slot name="package-actions" :data="exactHit"/></template>
+                    </discover-package>
+                </div>
+                <h2 class="package-search__headline">{{ $t('ui.discover.results') }}</h2>
+            </template>
             <div class="package-search__results">
                 <discover-package class="package-search__item" v-for="item in results" :data="item" :key="item.name">
                     <template #hint><slot name="package-hint" :data="item"/></template>
@@ -108,6 +118,7 @@
 
             results: null,
             hasMore: false,
+            exactHit: null,
         }),
 
         computed: {
@@ -142,13 +153,18 @@
 
                     if (response.nbHits === 0) {
                         this.results = {};
+                        this.exactHit = null;
                         return;
                     }
 
                     const packages = {};
 
                     response.hits.forEach((pkg) => {
-                        packages[pkg.name] = pkg;
+                        if (params.query === pkg.name) {
+                            this.exactHit = pkg;
+                        } else {
+                            packages[pkg.name] = pkg;
+                        }
                     });
 
                     this.results = packages;
@@ -171,6 +187,7 @@
 
             async openSearch(sort) {
                 this.results = null;
+                this.exactHit = null;
                 await this.sortBy(sort);
             }
         },
@@ -182,6 +199,7 @@
 
             query() {
                 this.results = null;
+                this.exactHit = null;
                 this.searchPackages();
             },
 

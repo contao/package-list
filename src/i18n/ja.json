@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "最新と更新された機能拡張",
     "ui.discover.faversPackages": "最上位のレートの機能拡張",
     "ui.discover.downloadsPackages": "もっともダウンロードされた機能拡張",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "プロジェクトのウェブサイト",
     "ui.package.private": "私的なパッケージ",

@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "Nieuwste en bijgewerkte extensies",
     "ui.discover.faversPackages": "Best beoordeelde extensies",
     "ui.discover.downloadsPackages": "Meest gedownloade extensies",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "Project Website",
     "ui.package.private": "Privépakket",

@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "最新和已更新扩展",
     "ui.discover.faversPackages": "最高评级扩展",
     "ui.discover.downloadsPackages": "下载最多扩展",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "项目网站",
     "ui.package.private": "私有包",

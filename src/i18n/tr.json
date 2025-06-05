@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "Yeni ve güncellenmiş eklentiler",
     "ui.discover.faversPackages": "İyi değerlendirilmiş eklentiler",
     "ui.discover.downloadsPackages": "En çok indirilen eklentiler",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "Proje sitesi",
     "ui.package.private": "Özel paket",

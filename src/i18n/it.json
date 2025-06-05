@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "Estensioni più recenti e aggiornate",
     "ui.discover.faversPackages": "Estensioni più votate",
     "ui.discover.downloadsPackages": "Estensioni più scaricate",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "Sito web del progetto",
     "ui.package.private": "Pacchetto privato",

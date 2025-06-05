@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "Poslední a naposledy zaktualizovaná rozšíření",
     "ui.discover.faversPackages": "Nejlépe hodnocená rozšíření",
     "ui.discover.downloadsPackages": "Nejvíce stahovaná rozšíření",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "Stránka projektu",
     "ui.package.private": "Soukromý balíček",

@@ -216,16 +216,16 @@ export default {
                 params,
             }])).results[0];
 
-            if (response.nbHits > 0) {
-                return response;
-            }
+            if (
+                params.query
+                && new RegExp('^[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9](([_.]|-{1,2})?[a-z0-9]+)*$').test(params.query)
+                && !response.hits.find((p) => p.name === params.query)
+            ) {
+                const pkg = await dispatch('getPackage', params.query);
 
-            const pkg = await dispatch('getPackage', params.query);
-
-            if (pkg) {
-                return {
-                    nbHits: 1,
-                    hits: [pkg]
+                if (pkg) {
+                    response.nbHits++;
+                    response.hits.push(pkg);
                 }
             }
 

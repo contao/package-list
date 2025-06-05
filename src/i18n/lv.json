@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "Jaunākie un atjauninātie paplašinājumi",
     "ui.discover.faversPackages": "Visaugstāk novērtētie paplašinājumi",
     "ui.discover.downloadsPackages": "Visvairāk lejupielādētie paplašinājumi",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "Projekta mājaslapa",
     "ui.package.private": "Privāta pakotne",

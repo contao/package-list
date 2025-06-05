@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "Latest and updated extensions",
     "ui.discover.faversPackages": "افزونه‌های با امتیاز بالا",
     "ui.discover.downloadsPackages": "Most downloaded extensions",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "وب‌سایت پروژه",
     "ui.package.private": "بسته اختصاصی",

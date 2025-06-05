@@ -27,6 +27,8 @@
     "ui.discover.latestPackages": "Последње и ажуриране екстензије",
     "ui.discover.faversPackages": "Најбоље оцењене екстензије",
     "ui.discover.downloadsPackages": "Екстензије са највише преузимања",
+    "ui.discover.exactHit": "Exact query match",
+    "ui.discover.results": "More search results",
 
     "ui.package.homepage": "Вебсајт пројекта",
     "ui.package.private": "Приватни пакети",
