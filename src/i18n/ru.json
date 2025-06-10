@@ -27,8 +27,8 @@
     "ui.discover.latestPackages": "Последние и обновленные расширения",
     "ui.discover.faversPackages": "Расширения с высоким рейтингом",
     "ui.discover.downloadsPackages": "Самые загружаемые расширения",
-    "ui.discover.exactHit": "Exact query match",
-    "ui.discover.results": "More search results",
+    "ui.discover.exactHit": "Точное соответствие запросу",
+    "ui.discover.results": "Больше результатов поиска",
 
     "ui.package.homepage": "Веб-сайт проекта",
     "ui.package.private": "Частный пакет",
