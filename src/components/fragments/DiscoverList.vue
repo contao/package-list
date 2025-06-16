@@ -5,7 +5,7 @@
             <search-input :placeholder="$tc('ui.discover.searchPlaceholder', extensionCount)" class="package-search__input"/>
         </template>
 
-        <loading-spinner v-if="searching && !results" class="package-search__status package-search__status--loader">
+        <loading-spinner v-if="searching && !results && !exactHit" class="package-search__status package-search__status--loader">
             <p class="package-search__title">{{ $t('ui.discover.loading') }}</p>
         </loading-spinner>
 
@@ -15,7 +15,7 @@
             <button class="widget-button widget-button--inline widget-button--update" @click="getOnline">{{ $t('ui.discover.offlineButton') }}</button>
         </div>
 
-        <div v-else-if="isSearching && results && !Object.keys(results).length" class="package-search__status package-search__status--empty">
+        <div v-else-if="isSearching && results && !Object.keys(results).length && !exactHit" class="package-search__status package-search__status--empty">
             <i18n-t keypath="ui.discover.empty" tag="p" class="package-search__title">
                 <template #query><i>{{ query }}</i></template>
             </i18n-t>
@@ -24,16 +24,16 @@
         <template v-else-if="isSearching">
             <search-sorting v-if="!query"/>
             <template v-if="exactHit">
-                <h2 class="package-search__headline">{{ $t('ui.discover.exactHit') }}</h2>
+                <h2 class="package-search__headline" v-if="hasResults">{{ $t('ui.discover.exactHit') }}</h2>
                 <div class="package-search__results">
                     <discover-package class="package-search__item" :data="exactHit">
                         <template #hint><slot name="package-hint" :data="exactHit"/></template>
                         <template #actions><slot name="package-actions" :data="exactHit"/></template>
                     </discover-package>
                 </div>
-                <h2 class="package-search__headline">{{ $t('ui.discover.results') }}</h2>
+                <h2 class="package-search__headline" v-if="hasResults">{{ $t('ui.discover.results') }}</h2>
             </template>
-            <div class="package-search__results">
+            <div class="package-search__results" v-if="hasResults">
                 <discover-package class="package-search__item" v-for="item in results" :data="item" :key="item.name">
                     <template #hint><slot name="package-hint" :data="item"/></template>
                     <template #actions><slot name="package-actions" :data="item"/></template>
@@ -123,6 +123,8 @@
 
         computed: {
             ...mapState('algolia', ['discover']),
+
+            hasResults: (vm) => (vm.results && Object.keys(vm.results).length),
         },
 
         methods: {
