@@ -27,8 +27,8 @@
     "ui.discover.latestPackages": "Senaste och uppdaterade tillägg",
     "ui.discover.faversPackages": "Högst rankade tillägg",
     "ui.discover.downloadsPackages": "Mest nedladdade tillägg",
-    "ui.discover.exactHit": "Exact query match",
-    "ui.discover.results": "More search results",
+    "ui.discover.exactHit": "Exakt matchning av sökfrågan",
+    "ui.discover.results": "Fler sökresultat",
 
     "ui.package.homepage": "Projektets hemsida",
     "ui.package.private": "Privat paket",
