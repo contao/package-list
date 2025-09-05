@@ -456,7 +456,6 @@
         margin-top: 1em;
 
         @include defaults.screen(600) {
-            justify-content: space-between;
             margin: 0 0 0 25px;
             width: 200px;
         }
