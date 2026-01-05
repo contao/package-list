@@ -15,6 +15,10 @@ export default {
                 delete metadata.versions;
             }
 
+            if (metadata && metadata.features) {
+                metadata.features = Object.keys(metadata.features);
+            }
+
             return metadata;
         },
     },
