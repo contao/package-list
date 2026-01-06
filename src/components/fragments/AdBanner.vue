@@ -1,6 +1,6 @@
 <template>
-    <div class="ads">
-        <div class="container" v-if="ads && ads.length > 1">
+    <div class="ads" v-if="ads && ads.length > 1">
+        <div class="container">
             <vueper-slides
                 class="no-shadow"
                 autoplay
