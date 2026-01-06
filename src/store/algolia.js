@@ -93,9 +93,7 @@ export default {
                         let versionsData = [];
                         let versions;
 
-                        // noinspection JSPrimitiveTypeWrapperUsage
                         pkg.downloads = pkg.downloads.total;
-                        // noinspection JSPrimitiveTypeWrapperUsage
                         pkg.dependency = true;
 
                         try {
@@ -224,6 +222,9 @@ export default {
                 const pkg = await dispatch('getPackage', params.query);
 
                 if (pkg) {
+                    // Allow to install package if found by exact name
+                    pkg.dependency = false;
+
                     response.nbHits++;
                     response.hits.push(pkg);
                 }
