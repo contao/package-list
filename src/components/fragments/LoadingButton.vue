@@ -28,6 +28,7 @@
             color: String,
             icon: String,
             inline: Boolean,
+            small: Boolean,
             loading: Boolean,
             disabled: Boolean,
             submit: Boolean,
@@ -38,6 +39,7 @@
                 'loading-button': true,
                 'widget-button': true,
                 'widget-button--inline': vm.inline,
+                'widget-button--small': vm.small,
                 [`widget-button--${vm.color}`]: vm.color,
                 'disabled': vm.link && (vm.loading || vm.disabled),
             }),
@@ -73,6 +75,18 @@
 
     > .loading {
         visibility: hidden;
+    }
+
+    &.widget-button--small {
+        > .loader {
+            left: calc(50% - 20px / 2);
+            top: calc(50% - 20px / 2);
+        }
+
+        .sk-circle {
+            width: 20px;
+            height: 20px;
+        }
     }
 }
 </style>
