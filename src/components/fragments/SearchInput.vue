@@ -21,9 +21,16 @@
             disabled: Boolean,
         },
 
+        data: () => ({
+            debounce: null,
+        }),
+
         methods: {
             searchInput(e) {
-                this.startSearch(e.target.value);
+                clearTimeout(this.debounce);
+                this.debounce = setTimeout(() => {
+                    this.startSearch(e.target.value);
+                }, 300);
             },
         },
     };
