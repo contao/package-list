@@ -28,7 +28,7 @@ const i18n = createI18n();
 const setLocale = (locale) => {
     i18n.global.locale = locale;
     setDatimLocale(locale);
-    store.commit('algolia/setLanguage', locale);
+    store.commit('search/setLanguage', locale);
     document.querySelector('html').setAttribute('lang', locale);
 };
 
@@ -58,7 +58,7 @@ export default {
         window.localStorage.setItem('_locale', locale);
 
         await this.load(locale);
-        await store.dispatch('algolia/discover');
+        await store.dispatch('search/discover');
     },
 
     async load(locale) {

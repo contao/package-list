@@ -45,7 +45,7 @@
                 document.title = this.$t('ui.app.title');
             });
 
-            await this.$store.dispatch('algolia/discover');
+            await this.$store.dispatch('search/discover');
 
             const network = document.createElement('script');
             network.src = 'https://contao.org/files/js/network.min.js';

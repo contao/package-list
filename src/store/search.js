@@ -1,9 +1,6 @@
 import axios from 'axios';
-import { liteClient } from 'algoliasearch/lite';
 import { coerce, compare } from 'semver';
 import features from './packages/features';
-
-const client = liteClient('60DW2LJW0P', '13718a23f4e436f7e7614340bd87d913');
 
 const randomizeHits = (hits, limit = 6) => {
     const items = Array.from(hits);
@@ -18,6 +15,21 @@ const randomizeHits = (hits, limit = 6) => {
 
     return result;
 };
+
+const getApi = async (language, path, params) => {
+    const host = location.hostname === 'localhost' ? 'http://localhost:8000' : 'https://extensions.contao.org';
+
+    if (params) {
+        path = `${path}?${new URLSearchParams(params).toString()}`
+    }
+
+    return await axios.get(`${host}/api.php/${path}`, {
+        headers: {
+            'Accept': 'application/json',
+            'Accept-Language': language,
+        }
+    });
+}
 
 export default {
     namespaced: true,
@@ -70,16 +82,10 @@ export default {
                 let data = null;
 
                 try {
-                    const content = await client.search([{
-                        indexName: 'v3_packages',
-                        params: {
-                            filters: `name:"${ name }" AND languages:${ state.language }`,
-                            hitsPerPage: 1,
-                        },
-                    }]);
+                    const response = await getApi(state.language, `p/${name}`);
 
-                    if (content.results[0].nbHits > 0) {
-                        data = content.results[0].hits[0];
+                    if (response.status === 200) {
+                        data = response.data;
                     }
                 } catch (err) {
                     // ignore
@@ -191,28 +197,14 @@ export default {
         },
 
         async findPackages({ state, dispatch }, params) {
-            let suffix = '';
-            let filter = 'dependency:false';
-
             if (params.sorting) {
-                suffix = params.sorting ? `_${params.sorting}` : '';
-                filter = 'discoverable:true';
+                const sorting = params.sorting;
                 delete params.sorting;
+
+                return (await getApi(state.language, `discover/${sorting}`, params)).data
             }
 
-            if (params.type) {
-                filter = `type:${params.type}`;
-                delete params.type;
-            }
-
-            params.filters = `languages:${state.language} AND ${filter}`;
-            params.highlightPreTag = '%%';
-            params.highlightPostTag = '%%';
-
-            const response = (await client.search([{
-                indexName: `v3_packages${suffix}`,
-                params,
-            }])).results[0];
+            const response = (await getApi(state.language, 'search', params)).data
 
             if (
                 params.query
@@ -225,7 +217,7 @@ export default {
                     // Allow to install package if found by exact name
                     pkg.dependency = false;
 
-                    response.nbHits++;
+                    response.totalHits++;
                     response.hits.push(pkg);
                 }
             }
@@ -235,59 +227,15 @@ export default {
 
         async discover({ state, commit }) {
             try {
-                const d = new Date();
-                const today = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
-                const content = await client.search([
-                    {
-                        indexName: 'v3_packages_latest',
-                        params: {
-                            hitsPerPage: 6,
-                            filters: `languages:${state.language} AND discoverable:true`,
-                        },
-                    },
-                    {
-                        indexName: 'v3_packages_downloads',
-                        params: {
-                            hitsPerPage: 4,
-                            filters: `languages:${state.language} AND discoverable:true`,
-                        },
-                    },
-                    {
-                        indexName: 'v3_packages_favers',
-                        params: {
-                            hitsPerPage: 4,
-                            filters: `languages:${state.language} AND discoverable:true`,
-                        },
-                    },
-                    {
-                        indexName: 'v3_ads',
-                        params: {
-                            hitsPerPage: 6,
-                            filters: `position:primary AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
-                        },
-                    },
-                    {
-                        indexName: 'v3_ads',
-                        params: {
-                            hitsPerPage: 100,
-                            filters: `position:secondary AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
-                        },
-                    },
-                    {
-                        indexName: 'v3_ads',
-                        params: {
-                            hitsPerPage: 100,
-                            filters: `position:subheader AND languages:${state.language} AND published:true AND validFrom <= ${today} AND validTo >= ${today}`,
-                        },
-                    },
-                ]);
+                const content = (await getApi(state.language, 'discover')).data;
 
                 commit('setDiscover', {
-                    latest: content.results[0].hits,
-                    downloads: content.results[1].hits,
-                    favers: content.results[2].hits,
-                    ads: randomizeHits(content.results[3].hits).concat(randomizeHits(content.results[4].hits, 6 - content.results[3].nbHits)),
-                    news: randomizeHits(content.results[5].hits),
+                    total: content.total,
+                    latest: content.latest,
+                    downloads: content.downloads,
+                    favers: content.favers,
+                    ads: randomizeHits(content.ads.primary).concat(randomizeHits(content.ads.secondary, 6 - content.ads.primary.length)),
+                    news: randomizeHits(content.ads.subheader),
                 });
 
             } catch (err) {

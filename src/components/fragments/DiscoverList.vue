@@ -2,7 +2,7 @@
     <component :is="wrapper">
 
         <template #search>
-            <search-input :placeholder="$tc('ui.discover.searchPlaceholder', extensionCount)" class="package-search__input"/>
+            <search-input :placeholder="$tc('ui.discover.searchPlaceholder', discover ? discover.total : 0)" class="package-search__input"/>
         </template>
 
         <loading-spinner v-if="searching && !results && !exactHit" class="package-search__status package-search__status--loader">
@@ -81,8 +81,6 @@
             </div>
         </div>
 
-        <a href="https://www.algolia.com/" target="_blank" class="package-search__algolia"><img src="../../assets/images/search-by-algolia.svg" alt="Algolia | Fast, Reliable and Modern Search and Discovery" width="200"></a>
-
     </component>
 </template>
 
@@ -114,7 +112,6 @@
         data: () => ({
             offline: false,
             searching: false,
-            extensionCount: 0,
 
             results: null,
             hasMore: false,
@@ -122,7 +119,7 @@
         }),
 
         computed: {
-            ...mapState('algolia', ['discover']),
+            ...mapState('search', ['discover']),
 
             hasResults: (vm) => (vm.results && Object.keys(vm.results).length),
         },
@@ -131,6 +128,13 @@
             ...mapMutations('packages/details', ['setCurrent']),
 
             async searchPackages() {
+                if (!this.isSearching) {
+                    this.searching = false;
+                    this.offline = false;
+
+                    return;
+                }
+
                 this.searching = true;
                 this.offline = false;
 
@@ -149,11 +153,11 @@
                         params.sorting = this.sorting;
                     }
 
-                    const response = await this.$store.dispatch('algolia/findPackages', params);
+                    const response = await this.$store.dispatch('search/findPackages', params);
 
-                    this.hasMore = response.nbPages > 1;
+                    this.hasMore = response.totalPages > 1;
 
-                    if (response.nbHits === 0) {
+                    if (response.totalHits === 0) {
                         this.results = {};
                         this.exactHit = null;
                         return;
@@ -172,6 +176,7 @@
                     this.results = packages;
 
                 } catch (err) {
+                    console.log('offline!');
                     this.offline = true;
                 }
 
@@ -182,7 +187,7 @@
                 this.searching = true;
                 this.offline = false;
 
-                await this.$store.dispatch('algolia/discover');
+                await this.$store.dispatch('search/discover');
 
                 this.searching = false;
             },
@@ -229,10 +234,6 @@
             if (this.hideThemes) {
                 params.facetFilters = ['type:-contao-theme'];
             }
-
-            this.$store.dispatch('algolia/findPackages', params).then((result) => {
-                this.extensionCount = result.nbHits;
-            }, () => {});
 
             if (this.isSearching) {
                 this.searchPackages();
@@ -324,12 +325,6 @@
                 text-decoration: underline;
             }
         }
-    }
-
-    &__algolia {
-        display: block;
-        width: 200px;
-        margin: 50px auto 0;
     }
 }
 </style>

@@ -1,0 +1,52 @@
+{
+    "name": "contao/package-index",
+    "description": "This is the package index website for the Contao Open Source CMS.",
+    "homepage": "https://packages.contao.org",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": "8.4.*",
+        "symfony/framework-bundle": "^7.4",
+        "symfony/http-client": "^7.4",
+        "symfony/console": "^7.4",
+        "symfony/dotenv": "^7.4",
+        "composer/metadata-minifier": "^1.0",
+        "composer/semver": "^3.4",
+        "loupe/loupe": "^1.0",
+        "cronitor/cronitor-php": "^1.3"
+    },
+    "require-dev": {
+        "terminal42/code-quality-tools": "dev-main",
+        "deployer/deployer": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Contao\\PackageList\\": "api/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "terminal42/code-quality-tools": true,
+            "symfony/runtime": true,
+            "php-http/discovery": false
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php api/console cache:warmup"
+        ],
+        "post-update-cmd": [
+            "@php api/console cache:warmup"
+        ],
+        "cs-fixer": "@php vendor/terminal42/code-quality-tools/tools/ecs/vendor/bin/ecs check api --config vendor/terminal42/code-quality-tools/tools/ecs/config.php --fix --ansi",
+        "rector": "@php vendor/terminal42/code-quality-tools/tools/rector/vendor/bin/rector process api --config vendor/terminal42/code-quality-tools/tools/rector/config.php --ansi",
+        "phpstan": "@php vendor/terminal42/code-quality-tools/tools/phpstan/vendor/bin/phpstan analyze api --configuration vendor/terminal42/code-quality-tools/tools/phpstan/config.php --ansi",
+        "depcheck": "@php vendor/terminal42/code-quality-tools/tools/composer-dependency-analyser/vendor/bin/composer-dependency-analyser --config vendor/terminal42/code-quality-tools/tools/composer-dependency-analyser/config.php",
+        "code-quality": [
+            "@cs-fixer",
+            "@rector",
+            "@phpstan",
+            "@depcheck"
+        ]
+    }
+}

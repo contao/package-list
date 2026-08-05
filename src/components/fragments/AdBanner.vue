@@ -36,7 +36,7 @@
         components: { VueperSlides, VueperSlide },
 
         computed: {
-            ...mapState('algolia', ['ads']),
+            ...mapState('search', ['ads']),
         },
 
         methods: {
