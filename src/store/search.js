@@ -17,7 +17,7 @@ const randomizeHits = (hits, limit = 6) => {
 };
 
 const getApi = async (language, path, params) => {
-    const host = location.hostname === 'localhost' ? 'http://localhost:8000' : 'https://extensions.contao.org';
+    const host = location.hostname === 'localhost' ? 'http://localhost:8001' : 'https://extensions.contao.org';
 
     if (params) {
         path = `${path}?${new URLSearchParams(params).toString()}`
