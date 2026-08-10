@@ -51,7 +51,7 @@ final class PackageIndex
             }
 
             foreach ($package['runs'] ?? [] as $run) {
-                if ($run['start'] > $today || $run['stop'] < $today) {
+                if ((isset($run['start']) && $run['start'] > $today) || (isset($run['stop']) && $run['stop'] < $today)) {
                     continue;
                 }
 
