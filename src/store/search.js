@@ -36,6 +36,7 @@ export default {
 
     state: {
         language: 'en',
+        themes: null,
         metadata: {},
         discover: null,
         ads: [],
@@ -46,6 +47,10 @@ export default {
         setLanguage(state, language) {
             state.language = language;
             state.metadata = {};
+        },
+
+        setThemes(state, themes) {
+            state.themes = themes;
         },
 
         cache(state, { name, data }) {
@@ -197,6 +202,10 @@ export default {
         },
 
         async findPackages({ state, dispatch }, params) {
+            if (params.themes === undefined && state.themes !== null) {
+                params.themes = state.themes;
+            }
+
             if (params.sorting) {
                 const sorting = params.sorting;
                 delete params.sorting;
@@ -226,8 +235,10 @@ export default {
         },
 
         async discover({ state, commit }) {
+            const params = state.themes !== null ? { themes: state.themes } : {};
+
             try {
-                const content = (await getApi(state.language, 'discover')).data;
+                const content = (await getApi(state.language, 'discover', params)).data;
 
                 commit('setDiscover', {
                     total: content.total,

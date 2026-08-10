@@ -24,18 +24,20 @@ class SearchController
     {
         $language = $request->getLanguages()[0];
 
-        $query = $request->query->getString('query') ?: null;
-        $type = $request->query->getString('type') ?: null;
+        $query = $request->query->getString('query');
+        $themes = $request->query->getString('themes');
         $hitsPerPage = max($request->query->getInt('hitsPerPage'), 10);
 
-        if (!$query) {
+        if ('' === $query) {
             return new Response('Must provide "query"', Response::HTTP_BAD_REQUEST);
         }
 
         $filter = 'languages = '.SearchParameters::escapeFilterValue($language).' AND dependency = false';
 
-        if ($type) {
-            $filter .= ' AND type = '.SearchParameters::escapeFilterValue($type);
+        if ('1' === $themes) {
+            $filter .= " AND type = 'contao-theme'";
+        } elseif ('0' === $themes) {
+            $filter .= " AND type != 'contao-theme'";
         }
 
         $parameters = SearchParameters::create()

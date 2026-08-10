@@ -29,15 +29,20 @@ class DiscoverController
         $this->loupe = $this->packageIndex->getLoupe();
 
         $language = $request->getLanguages()[0];
+        $filter = 'languages = '.SearchParameters::escapeFilterValue($language).' AND discoverable = true';
+
+        if ('0' === $request->query->getString('themes')) {
+            $filter .= " AND type != 'contao-theme'";
+        }
 
         if ($sorting) {
-            $response = new JsonResponse($this->getSorted($language, $sorting, max($request->query->getInt('hitsPerPage'), 10)));
+            $response = new JsonResponse($this->getSorted($sorting, $filter, max($request->query->getInt('hitsPerPage'), 10)));
         } else {
             $response = new JsonResponse([
-                'total' => $this->getTotalExtensions($language),
-                'latest' => $this->getLatest($language),
-                'downloads' => $this->getDownloads($language),
-                'favers' => $this->getFavers($language),
+                'total' => $this->getTotalExtensions($filter),
+                'latest' => $this->getLatest($filter),
+                'downloads' => $this->getDownloads($filter),
+                'favers' => $this->getFavers($filter),
                 'ads' => $this->packageIndex->getAds($language),
             ]);
         }
@@ -51,20 +56,20 @@ class DiscoverController
         return $response;
     }
 
-    private function getTotalExtensions(string $language): int
+    private function getTotalExtensions(string $filter): int
     {
         $parameters = BrowseParameters::create()
-            ->withFilter('languages = '.BrowseParameters::escapeFilterValue($language).' AND discoverable = true')
+            ->withFilter($filter)
             ->withLimit(1)
         ;
 
         return $this->loupe->browse($parameters)->getTotalHits();
     }
 
-    private function getLatest(string $language): array
+    private function getLatest(string $filter): array
     {
         $parameters = SearchParameters::create()
-            ->withFilter('languages = '.SearchParameters::escapeFilterValue($language).' AND discoverable = true')
+            ->withFilter($filter)
             ->withSort(['updated:desc'])
             ->withLimit(6)
         ;
@@ -72,10 +77,10 @@ class DiscoverController
         return $this->loupe->search($parameters)->toArray()['hits'];
     }
 
-    private function getDownloads(string $language): array
+    private function getDownloads(string $filter): array
     {
         $parameters = SearchParameters::create()
-            ->withFilter('languages = '.SearchParameters::escapeFilterValue($language).' AND discoverable = true')
+            ->withFilter($filter)
             ->withSort(['downloads:desc'])
             ->withLimit(4)
         ;
@@ -83,10 +88,10 @@ class DiscoverController
         return $this->loupe->search($parameters)->toArray()['hits'];
     }
 
-    private function getFavers(string $language): array
+    private function getFavers(string $filter): array
     {
         $parameters = SearchParameters::create()
-            ->withFilter('languages = '.SearchParameters::escapeFilterValue($language).' AND discoverable = true')
+            ->withFilter($filter)
             ->withSort(['favers:desc'])
             ->withLimit(4)
         ;
@@ -94,14 +99,14 @@ class DiscoverController
         return $this->loupe->search($parameters)->toArray()['hits'];
     }
 
-    private function getSorted(string $language, string $sorting, int $hitsPerPage): array
+    private function getSorted(string $filter, string $sorting, int $hitsPerPage): array
     {
         if ('latest' === $sorting) {
             $sorting = 'updated';
         }
 
         $parameters = SearchParameters::create()
-            ->withFilter('languages = '.SearchParameters::escapeFilterValue($language).' AND discoverable = true')
+            ->withFilter($filter)
             ->withSort([$sorting.':desc'])
             ->withHitsPerPage($hitsPerPage)
         ;

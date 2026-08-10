@@ -102,10 +102,6 @@
         props: {
             wrapper: {
                 required: true,
-            },
-            hideThemes: {
-                type: Boolean,
-                default: false,
             }
         },
 
@@ -142,10 +138,6 @@
                     const params = {
                         hitsPerPage: 10 * this.pages,
                     };
-
-                    if (this.hideThemes) {
-                        params.facetFilters = ['type:-contao-theme'];
-                    }
 
                     if (this.query) {
                         params.query = this.query;
@@ -223,18 +215,7 @@
             });
         },
 
-        async mounted() {
-            const params = {
-                hitsPerPage: 0,
-                attributesToRetrieve: null,
-                attributesToHighlight: null,
-                analytics: false
-            };
-
-            if (this.hideThemes) {
-                params.facetFilters = ['type:-contao-theme'];
-            }
-
+        mounted() {
             if (this.isSearching) {
                 this.searchPackages();
             }
