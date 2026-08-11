@@ -168,7 +168,6 @@
                     this.results = packages;
 
                 } catch (err) {
-                    console.log('offline!');
                     this.offline = true;
                 }
 

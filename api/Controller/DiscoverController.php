@@ -99,7 +99,7 @@ class DiscoverController
         return $this->loupe->search($parameters)->toArray()['hits'];
     }
 
-    private function getSorted(string $filter, string $sorting, int $hitsPerPage): array
+    private function getSorted(string $sorting, string $filter, int $hitsPerPage): array
     {
         if ('latest' === $sorting) {
             $sorting = 'updated';
