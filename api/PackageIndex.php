@@ -25,6 +25,7 @@ final class PackageIndex
             $this->projectDir.'/var/loupe',
             Configuration::create()
                 ->withPrimaryKey('objectID')
+                ->withMinTokenLengthForPrefixSearch(1)
                 ->withSearchableAttributes(['name', 'keywords', 'title', 'description'])
                 ->withFilterableAttributes(['type', 'name', 'languages', 'dependency', 'discoverable'])
                 ->withSortableAttributes(['abandoned', 'downloads', 'favers', 'updated', 'released'])
