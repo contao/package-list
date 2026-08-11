@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 require __DIR__.'/../vendor/autoload.php';
 
-new Dotenv()->loadEnv(__DIR__.'/../.env', overrideExistingVars: true);
+new Dotenv()->loadEnv(__DIR__.'/../.env', defaultEnv: 'prod', overrideExistingVars: true);
 
 $kernel = new Kernel($_ENV['APP_ENV'] ?? 'prod', 'dev' === ($_ENV['APP_ENV'] ?? 'prod'));
 $request = Request::createFromGlobals();
