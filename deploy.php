@@ -20,7 +20,7 @@ task('deploy:build-assets', function () {
 });
 
 task('deploy:upload', function () {
-    $paths = ['api', 'dist/' => 'public', 'composer.json', 'composer.lock', 'packages.php'];
+    $paths = ['api', 'src', 'dist/' => 'public', 'composer.json', 'composer.lock', 'packages.php'];
 
     foreach ($paths as $source => $target) {
         if (!\is_string($source)) {

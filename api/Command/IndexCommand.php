@@ -18,7 +18,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * @phpstan-import-type PackageData from Package
@@ -53,7 +52,6 @@ class IndexCommand extends Command
         private readonly Packagist $packagist,
         private readonly Factory $packageFactory,
         private readonly MetaDataRepository $metaDataRepository,
-        private readonly HttpClientInterface $httpClient,
         private readonly PackageIndex $loupeFactory,
         private readonly Client $cronitor,
     ) {
@@ -322,9 +320,9 @@ class IndexCommand extends Command
 
     private function initLanguages(): void
     {
-        $response = $this->httpClient->request('GET', 'https://raw.githubusercontent.com/contao/package-list/main/src/i18n/locales.js');
+        $content = file_get_contents(__DIR__.'/../../src/i18n/locales.js');
 
-        preg_match_all('/^[ ]+([a-z]{2}(_[A-Z]{2})?)/m', $response->getContent(), $matches);
+        preg_match_all('/^[ ]+([a-z]{2}(_[A-Z]{2})?)/m', $content, $matches);
 
         self::$languages = $matches[1];
     }
