@@ -70,58 +70,61 @@ class IndexCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->cronitor->job('JATpHH', function () use ($input, $output): int {
-            $dryRun = (bool) $input->getOption('dry-run');
-            $clearIndex = (bool) $input->getOption('clear-index');
-            $updateStats = (bool) $input->getOption('with-stats');
+        return $this->cronitor->job(
+            'JATpHH',
+            function () use ($input, $output): int {
+                $dryRun = (bool) $input->getOption('dry-run');
+                $clearIndex = (bool) $input->getOption('clear-index');
+                $updateStats = (bool) $input->getOption('with-stats');
 
-            $this->loupe = $this->loupeFactory->getLoupe();
-            $this->output = $output;
-            $this->packages = [];
+                $this->loupe = $this->loupeFactory->getLoupe();
+                $this->output = $output;
+                $this->packages = [];
 
-            $this->packagist->setOutput($output);
+                $this->packagist->setOutput($output);
 
-            $this->initLanguages();
+                $this->initLanguages();
 
-            if (!$dryRun) {
-                $this->initIndex($clearIndex);
-            }
-
-            $updateAll = false;
-            $packageNames = $input->getArgument('packages');
-
-            if (empty($packageNames)) {
-                try {
-                    $updateAll = true;
-                    $packageNames = array_unique(array_merge(
-                        $this->packagist->getPackageNames('contao-bundle'),
-                        $this->packagist->getPackageNames('contao-module'),
-                        $this->packagist->getPackageNames('contao-theme'),
-                        $this->packagist->getPackageNames('contao-component'),
-                    ));
-                } catch (\RuntimeException $exception) {
-                    $this->output->writeln($exception->getMessage());
-                    $this->output->writeln('Stopping command to prevent removal of packages on Packagist API error.');
-
-                    return Command::FAILURE;
+                if (!$dryRun) {
+                    $this->initIndex($clearIndex);
                 }
-            }
 
-            $this->collectPackages($packageNames);
+                $updateAll = false;
+                $packageNames = $input->getArgument('packages');
 
-            if ($updateAll) {
-                $this->collectAdditionalPackages();
-            }
+                if (empty($packageNames)) {
+                    try {
+                        $updateAll = true;
+                        $packageNames = array_unique(array_merge(
+                            $this->packagist->getPackageNames('contao-bundle'),
+                            $this->packagist->getPackageNames('contao-module'),
+                            $this->packagist->getPackageNames('contao-theme'),
+                            $this->packagist->getPackageNames('contao-component'),
+                        ));
+                    } catch (\RuntimeException $exception) {
+                        $this->output->writeln($exception->getMessage());
+                        $this->output->writeln('Stopping command to prevent removal of packages on Packagist API error.');
 
-            $this->indexPackages($dryRun, $updateStats);
+                        return Command::FAILURE;
+                    }
+                }
 
-            // If the index was not cleared completely, delete old/removed packages
-            if (!$clearIndex && $updateAll) {
-                $this->deleteRemovedPackages($dryRun);
-            }
+                $this->collectPackages($packageNames);
 
-            return Command::SUCCESS;
-        });
+                if ($updateAll) {
+                    $this->collectAdditionalPackages();
+                }
+
+                $this->indexPackages($dryRun, $updateStats);
+
+                // If the index was not cleared completely, delete old/removed packages
+                if (!$clearIndex && $updateAll) {
+                    $this->deleteRemovedPackages($dryRun);
+                }
+
+                return Command::SUCCESS;
+            },
+        );
     }
 
     private function deleteRemovedPackages(bool $dryRun): void

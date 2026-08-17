@@ -12,10 +12,10 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 /**
  * Loupe instance should not be stored in the container.
  */
-final class PackageIndex
+final readonly class PackageIndex
 {
     public function __construct(
-        #[Autowire(param: 'kernel.project_dir')] private readonly string $projectDir
+        #[Autowire(param: 'kernel.project_dir')] private string $projectDir,
     ) {
     }
 
@@ -29,7 +29,7 @@ final class PackageIndex
                 ->withSearchableAttributes(['name', 'keywords', 'title', 'description'])
                 ->withFilterableAttributes(['type', 'name', 'languages', 'dependency', 'discoverable'])
                 ->withSortableAttributes(['abandoned', 'downloads', 'favers', 'updated', 'released'])
-                ->withLanguages(['en', 'de'])
+                ->withLanguages(['en', 'de']),
         );
     }
 
@@ -41,7 +41,7 @@ final class PackageIndex
      */
     public function getAds(string $language): array
     {
-        $packages = @include($this->projectDir.'/packages.php');
+        $packages = @include $this->projectDir.'/packages.php';
 
         $data = ['primary' => [], 'secondary' => [], 'subheader' => []];
         $today = date('Ymd');

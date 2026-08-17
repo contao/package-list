@@ -13,6 +13,7 @@ use Symfony\Component\HttpClient\CachingHttpClient;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\inline_service;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
