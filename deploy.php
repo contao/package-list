@@ -19,6 +19,48 @@ task('deploy:build-assets', function () {
     runLocally('npm run build');
 });
 
+task('deploy:validate-packages', function () {
+    if (!file_exists(__DIR__.'/packages.php')) {
+        info('Skipping package validation – packages.php not found.');
+        return;
+    }
+
+    $validate = null;
+    $packages = include(__DIR__.'/packages.php');
+    $checkImage = static function (array|null $data) {
+        return !$data || !isset($data['image']) || file_exists(__DIR__.'/public'.parse_url($data['image'] ?? null)['path']);
+    };
+    $validate = static function (array|null $data) use ($checkImage, &$validate) {
+        if (!$data) {
+            return true;
+        }
+
+        if (!$checkImage($data)) {
+            return false;
+        }
+
+        foreach (($data['languages'] ?? []) as $language) {
+            if (!$validate($language)) {
+                return false;
+            }
+        }
+
+        foreach (($data['runs'] ?? []) as $run) {
+            if (!$validate($run)) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    foreach ($packages as $k => $package) {
+        if (!$validate($package)) {
+            throw new \RuntimeException(sprintf('Package "%s" seems to have an invalid image.', $package['package'] ?? $package['url'] ?? $k));
+        }
+    }
+});
+
 task('deploy:upload', function () {
     $paths = ['api', 'src', 'dist/' => 'public', 'composer.json', 'composer.lock', 'packages.php'];
 
@@ -37,6 +79,7 @@ task('deploy:upload', function () {
 });
 
 task('deploy', [
+    'deploy:validate-packages',
     'deploy:build-assets',
     'deploy:info',
     'deploy:setup',

@@ -52,7 +52,11 @@ final readonly class PackageIndex
             }
 
             foreach ($package['runs'] ?? [] as $run) {
-                if ((isset($run['start']) && $run['start'] > $today) || (isset($run['stop']) && $run['stop'] < $today)) {
+                if (
+                    !($run['published'] ?? true)
+                    || (isset($run['start']) && $run['start'] > $today)
+                    || (isset($run['stop']) && $run['stop'] < $today)
+                ) {
                     continue;
                 }
 
