@@ -22,7 +22,7 @@ class PackageController
 
     public function __invoke(Request $request, string $name): Response
     {
-        $language = $request->getLanguages()[0];
+        $language = $request->getLocale();
 
         $parameters = BrowseParameters::create()
             ->withFilter('languages = '.BrowseParameters::escapeFilterValue($language).' AND name = '.BrowseParameters::escapeFilterValue($name))

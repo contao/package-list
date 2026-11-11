@@ -28,7 +28,7 @@ class DiscoverController
     {
         $this->loupe = $this->packageIndex->getLoupe();
 
-        $language = $request->getLanguages()[0];
+        $language = $request->getLocale();
         $filter = 'languages = '.SearchParameters::escapeFilterValue($language).' AND discoverable = true';
 
         if ('0' === $request->query->getString('themes')) {

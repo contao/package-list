@@ -22,7 +22,7 @@ class SearchController
 
     public function __invoke(Request $request): Response
     {
-        $language = $request->getLanguages()[0];
+        $language = $request->getLocale();
 
         $query = $request->query->getString('query');
         $themes = $request->query->getString('themes');
