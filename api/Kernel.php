@@ -7,15 +7,9 @@ namespace Contao\PackageList;
 use Cronitor\Client;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\HttpClient\CachingHttpClient;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\inline_service;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 class Kernel extends BaseKernel
 {
@@ -29,6 +23,18 @@ class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerConfigurator $container): void
     {
+        $container->extension('framework', [
+            'secret' => '%env(APP_SECRET)%',
+            'http_client' => [
+                'default_options' => [
+                    'timeout' => 10,
+                    'max_duration' => 60,
+                    'retry_failed' => ['max_retries' => 3],
+                    'caching' => true,
+                ],
+            ],
+        ]);
+
         $services = $container->services();
         $services
             ->load('Contao\\PackageList\\', __DIR__.'/*')
@@ -39,15 +45,6 @@ class Kernel extends BaseKernel
         $services
             ->set(Client::class)
             ->args([$_ENV['CRONITOR_API_KEY'] ?? ''])
-        ;
-
-        $services
-            ->set(HttpClientInterface::class, CachingHttpClient::class)
-            ->args([
-                service('http_client'),
-                inline_service(FilesystemTagAwareAdapter::class),
-                [/* 'trace_level' => 'full' */],
-            ])
         ;
     }
 
