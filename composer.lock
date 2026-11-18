@@ -204,16 +204,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "4.5.1",
+            "version": "4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "b2815456989aa41964ee66d7ab47b7885264acf3"
+                "reference": "1b56fbfb22704712786fea81ff4bb156fcc6427e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/b2815456989aa41964ee66d7ab47b7885264acf3",
-                "reference": "b2815456989aa41964ee66d7ab47b7885264acf3",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b56fbfb22704712786fea81ff4bb156fcc6427e",
+                "reference": "1b56fbfb22704712786fea81ff4bb156fcc6427e",
                 "shasum": ""
             },
             "require": {
@@ -233,7 +233,8 @@
                 "slevomat/coding-standard": "8.31.1",
                 "squizlabs/php_codesniffer": "4.0.4",
                 "symfony/cache": "^6.3.8|^7.0|^8.0",
-                "symfony/console": "^5.4|^6.3|^7.0|^8.0"
+                "symfony/console": "^5.4|^6.3|^7.0|^8.0",
+                "symfony/service-contracts": "^2.2 || ^3.0"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
@@ -290,7 +291,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/4.5.1"
+                "source": "https://github.com/doctrine/dbal/tree/4.6.0"
             },
             "funding": [
                 {
@@ -306,8 +307,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-10T09:21:59+00:00",
-            "published-time": "2026-11-10T09:33:50+00:00"
+            "time": "2026-11-14T18:08:09+00:00",
+            "published-time": "2026-11-14T18:18:19+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -491,16 +492,16 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "0b190145eaa1a7e01d0295b572f13100711de329"
+                "reference": "c59ecc9d5ce5ac4aed53d65bc6b966919ca4d702"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/0b190145eaa1a7e01d0295b572f13100711de329",
-                "reference": "0b190145eaa1a7e01d0295b572f13100711de329",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/c59ecc9d5ce5ac4aed53d65bc6b966919ca4d702",
+                "reference": "c59ecc9d5ce5ac4aed53d65bc6b966919ca4d702",
                 "shasum": ""
             },
             "require": {
@@ -546,7 +547,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/1.1.6"
+                "source": "https://github.com/loupe-php/loupe/tree/1.1.7"
             },
             "funding": [
                 {
@@ -554,8 +555,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-17T06:57:04+00:00",
-            "published-time": "2026-10-17T06:59:17+00:00"
+            "time": "2026-11-13T13:34:55+00:00",
+            "published-time": "2026-11-13T13:35:29+00:00"
         },
         {
             "name": "loupe/matcher",
@@ -2919,16 +2920,16 @@
         },
         {
             "name": "symfony/polyfill-php85",
-            "version": "v1.43.0",
+            "version": "v1.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php85.git",
-                "reference": "86a42cbcc07adc331481a5ab310a4024bfc227f6"
+                "reference": "94c794cb5ba51784bc259f11e9f128593297d8dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/86a42cbcc07adc331481a5ab310a4024bfc227f6",
-                "reference": "86a42cbcc07adc331481a5ab310a4024bfc227f6",
+                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/94c794cb5ba51784bc259f11e9f128593297d8dc",
+                "reference": "94c794cb5ba51784bc259f11e9f128593297d8dc",
                 "shasum": ""
             },
             "require": {
@@ -2975,7 +2976,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php85/tree/v1.43.0"
+                "source": "https://github.com/symfony/polyfill-php85/tree/v1.44.0"
             },
             "funding": [
                 {
@@ -2995,8 +2996,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-25T15:46:47+00:00",
-            "published-time": "2026-09-30T10:23:32+00:00"
+            "time": "2026-10-30T15:20:09+00:00",
+            "published-time": "2026-11-15T14:20:22+00:00"
         },
         {
             "name": "symfony/routing",
@@ -3788,12 +3789,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/terminal42/code-quality-tools.git",
-                "reference": "41ad4c84a24bd0dbeead47389a532df28a5686e0"
+                "reference": "fd2bacb3cfba0bc78b6172d203c6fcfb53db069f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/terminal42/code-quality-tools/zipball/41ad4c84a24bd0dbeead47389a532df28a5686e0",
-                "reference": "41ad4c84a24bd0dbeead47389a532df28a5686e0",
+                "url": "https://api.github.com/repos/terminal42/code-quality-tools/zipball/fd2bacb3cfba0bc78b6172d203c6fcfb53db069f",
+                "reference": "fd2bacb3cfba0bc78b6172d203c6fcfb53db069f",
                 "shasum": ""
             },
             "require": {
@@ -3848,8 +3849,8 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-11-07T20:34:55+00:00",
-            "published-time": "2026-11-07T20:35:03+00:00"
+            "time": "2026-11-13T11:44:20+00:00",
+            "published-time": "2026-11-13T11:44:36+00:00"
         }
     ],
     "aliases": [],
